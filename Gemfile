@@ -21,6 +21,14 @@ gem 'coffee-rails', '~> 4.0.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
+# Use Ember.js for frontend javascript
+gem 'ember-rails'
+gem 'ember-source', '~>1.5'
+gem 'ember-data-source', '1.0.0.beta.7'
+
+# Use emblem for javascript templates
+gem 'emblem-rails'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
@@ -33,7 +41,7 @@ end
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development

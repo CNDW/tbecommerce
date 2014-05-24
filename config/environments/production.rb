@@ -77,4 +77,10 @@ Tbecommerce::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  config.ember.variant = :production
+
+  config.ember.ember_path = 'lib/assets/javascripts/trash_bags'
+
+  config.handlebars.templates_root = 'trash_bags/templates'
 end
