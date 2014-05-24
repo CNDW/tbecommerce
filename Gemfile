@@ -20,6 +20,7 @@ gem 'coffee-rails', '~> 4.0.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'turbolinks'
 
 # Use Ember.js for frontend javascript
 gem 'ember-rails'
@@ -42,6 +43,7 @@ end
 
 # Use unicorn as the app server
 gem 'unicorn'
+gem 'unicorn-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
@@ -52,3 +54,8 @@ gem 'unicorn'
 gem 'spree', '2.2.2'
 gem 'spree_gateway', :git => 'https://github.com/spree/spree_gateway.git', :branch => '2-2-stable'
 gem 'spree_auth_devise', :git => 'https://github.com/spree/spree_auth_devise.git', :branch => '2-2-stable'
+
+group :development, :test do
+	gem 'better_errors'
+	gem 'binding_of_caller'
+end
