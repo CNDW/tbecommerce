@@ -59,7 +59,7 @@ Tbecommerce::Application.configure do
 
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-  config.assets.precompile += %w( trash_bags/application.js )
+  config.assets.precompile += %w( trashbags/application.js )
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -80,7 +80,7 @@ Tbecommerce::Application.configure do
 
   config.ember.variant = :production
 
-  config.ember.ember_path = 'lib/assets/javascripts/trash_bags'
+  config.ember.ember_path = 'lib/assets/javascripts/trashbags'
 
-  config.handlebars.templates_root = 'trash_bags/templates'
+  config.handlebars.templates_root = 'trashbags/templates'
 end

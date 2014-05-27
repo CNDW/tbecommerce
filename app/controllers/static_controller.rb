@@ -1,6 +1,6 @@
 class StaticController < ApplicationController
 	layout false
 
-	def ember_shop
+	def trashbags
 	end
 end
