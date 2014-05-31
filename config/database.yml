@@ -54,7 +54,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: root
+  database: rails
   pool: 5
-  username: root
+  username: rails
   password:
