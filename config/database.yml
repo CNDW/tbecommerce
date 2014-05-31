@@ -54,7 +54,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: trashbags
+  database: root
   pool: 5
-  username: rails_dev
+  username: root
   password:

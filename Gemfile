@@ -44,9 +44,6 @@ end
 gem 'unicorn'
 gem 'unicorn-rails'
 
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
@@ -57,4 +54,6 @@ gem 'spree_auth_devise', :git => 'https://github.com/spree/spree_auth_devise.git
 group :development, :test do
 	gem 'better_errors'
 	gem 'binding_of_caller'
+	gem 'capistrano'
+	gem 'capistrano-ext'
 end
