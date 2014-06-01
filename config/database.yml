@@ -52,6 +52,7 @@ test:
   password:
 
 production:
+  host: localhost
   adapter: postgresql
   encoding: unicode
   database: rails
