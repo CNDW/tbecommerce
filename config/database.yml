@@ -52,10 +52,10 @@ test:
   password:
 
 production:
-  host: localhost
   adapter: postgresql
   encoding: unicode
   database: rails
   pool: 5
   username: rails
   password:
+  host: localhost

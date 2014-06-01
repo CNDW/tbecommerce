@@ -17,7 +17,10 @@
 set :stage, :production
 
 # Replace 127.0.0.1 with your server's IP address!
-server 'trash.travispeterson.us', user: 'rails', roles: %w{web app}
+server 'trash.travispeterson.us:4132', user: 'rails', roles: %w{web app}, ssh_options: {
+  keys: %w(/home/rails/.ssh/id_rsa),
+  auth_methods: %w(publickey)
+}
 
 # you can set custom ssh options
 # it's possible to pass any option but you need to keep in mind that net/ssh understand limited list of options
