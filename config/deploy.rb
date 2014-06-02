@@ -35,21 +35,88 @@
 # set :keep_releases, 5
 
 set :application, 'tbecommerce'
-set :repo_url, 'git@github.com:CNDW/tbecommerce.git'
+set :deploy_user, 'spree'
 
-set :deploy_to, '/home/rails/tbecommerce'
+set :use_sudo, false
+
+set :scm, :git
+set :repo_url, 'git@github.com:CNDW/tbecommerce.git'
 
 set :linked_files, %w{config/database.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
-namespace :deploy do
+# what specs should be run before deployment is allowed to
+# continue, see lib/capistrano/tasks/run_tests.cap
+set :tests, []
 
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      execute :touch, release_path.join('tmp/restart.txt')
-    end
+set(:config_files, %w(
+  nginx.conf
+  database.example.yml
+  log_rotation
+  monit
+  unicorn.rb
+  unicorn_init.sh
+))
+
+set(:executable_config_files, %w(
+  unicorn_init.sh
+))
+
+set(:symlinks, [
+  {
+    source: "nginx.conf",
+    link: "/etc/nginx/sites-enabled/#{fetch(:full_app_name)}"
+  },
+  {
+    source: "log_rotation",
+   link: "/etc/logrotate.d/#{fetch(:full_app_name)}"
+  },
+  {
+    source: "monit",
+    link: "/etc/monit/conf.d/#{fetch(:full_app_name)}.conf"
+  }
+])
+namespace :unicorn do
+  desc "Zero-downtime restart of Unicorn"
+  task :restart, except: { no_release: true } do
+    run "kill -s USR2 `cat /tmp/unicorn.tbecommerce.pid`"
   end
 
-  after :finishing, 'deploy:cleanup'
+  desc "Start unicorn"
+  task :start, except: { no_release: true } do
+    run "cd #{current_path} ; bundle exec unicorn_rails -c config/unicorn.rb -D"
+  end
+
+  desc "Stop unicorn"
+  task :stop, except: { no_release: true } do
+    run "kill -s QUIT `cat /tmp/unicorn.tbecommerce.pid`"
+  end
 end
+
+namespace :deploy do
+  # make sure we're deploying what we think we're deploying
+  before :deploy, "deploy:check_revision"
+  # only allow a deploy with passing tests to deployed
+  before :deploy, "deploy:run_tests"
+  # compile assets locally then rsync
+  after 'deploy:symlink:shared', 'deploy:compile_assets_locally'
+  after :finishing, 'deploy:cleanup'
+
+  # remove the default nginx configuration as it will tend
+  # to conflict with our configs.
+  before 'deploy:setup_config', 'nginx:remove_default_vhost'
+
+  # reload nginx to it will pick up any modified vhosts from
+  # setup_config
+  after 'deploy:setup_config', 'nginx:reload'
+
+  # Restart monit so it will pick up any monit configurations
+  # we've added
+  after 'deploy:setup_config', 'monit:restart'
+
+  # As of Capistrano 3.1, the `deploy:restart` task is not called
+  # automatically.
+  after 'deploy:publishing', 'deploy:restart'
+end
+
+after "deploy:restart", "unicorn:restart"

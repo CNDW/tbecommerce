@@ -1,10 +1,10 @@
 require 'capistrano/setup'
 require 'capistrano/deploy'
+require 'capistrano/rvm'
 require 'capistrano/bundler'
 require 'capistrano/rails'
-require 'capistrano/rvm'
-set :rvm_type, :user
-set :rvm_ruby_version, '2.0.0-p451'
+require 'capistrano/rails/migrations'
+require 'capistrano/rails/assets'
 
 # Load DSL and Setup Up Stages
 
@@ -25,7 +25,7 @@ set :rvm_ruby_version, '2.0.0-p451'
 # require 'capistrano/chruby'
 # require 'capistrano/bundler'
 # require 'capistrano/rails/assets'
-# require 'capistrano/rails/migrations'
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
 Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }
+Dir.glob('lib/capistrano/**/*.rb').each { |r| import r }
