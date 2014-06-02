@@ -69,23 +69,23 @@ set(:symlinks, [
   },
   {
     source: "log_rotation",
-   link: "/etc/logrotate.d/#{fetch(:application)}"
+    link: "/etc/logrotate.d/#{fetch(:application)}"
   }
 ])
 namespace :unicorn do
   desc "Zero-downtime restart of Unicorn"
-  task :restart, except: { no_release: true } do
-    run "kill -s USR2 `cat /tmp/unicorn.tbecommerce.pid`"
+  task :restart do
+    "kill -s USR2 `cat /tmp/unicorn.tbecommerce.pid`"
   end
 
   desc "Start unicorn"
-  task :start, except: { no_release: true } do
-    run "cd #{current_path} ; bundle exec unicorn_rails -c config/unicorn.rb -D"
+  task :start do
+    "cd #{current_path} ; bundle exec unicorn_rails -c config/unicorn.rb -D"
   end
 
   desc "Stop unicorn"
-  task :stop, except: { no_release: true } do
-    run "kill -s QUIT `cat /tmp/unicorn.tbecommerce.pid`"
+  task :stop do
+    "kill -s QUIT `cat /tmp/unicorn.tbecommerce.pid`"
   end
 end
 
@@ -105,10 +105,6 @@ namespace :deploy do
   # reload nginx to it will pick up any modified vhosts from
   # setup_config
   after 'deploy:setup_config', 'nginx:reload'
-
-  # As of Capistrano 3.1, the `deploy:restart` task is not called
-  # automatically.
-  after 'deploy:publishing', 'deploy:restart'
 end
 
 after "deploy:restart", "unicorn:restart"
