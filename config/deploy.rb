@@ -65,15 +65,11 @@ set(:executable_config_files, %w(
 set(:symlinks, [
   {
     source: "nginx.conf",
-    link: "/etc/nginx/sites-enabled/#{fetch(:full_app_name)}"
+    link: "/etc/nginx/nginx.conf"
   },
   {
     source: "log_rotation",
-   link: "/etc/logrotate.d/#{fetch(:full_app_name)}"
-  },
-  {
-    source: "monit",
-    link: "/etc/monit/conf.d/#{fetch(:full_app_name)}.conf"
+   link: "/etc/logrotate.d/#{fetch(:application)}"
   }
 ])
 namespace :unicorn do
@@ -109,10 +105,6 @@ namespace :deploy do
   # reload nginx to it will pick up any modified vhosts from
   # setup_config
   after 'deploy:setup_config', 'nginx:reload'
-
-  # Restart monit so it will pick up any monit configurations
-  # we've added
-  after 'deploy:setup_config', 'monit:restart'
 
   # As of Capistrano 3.1, the `deploy:restart` task is not called
   # automatically.
