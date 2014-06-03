@@ -1,0 +1,25 @@
+namespace :deploy do
+  task :unicorn_restart do
+	  desc "Zero-downtime restart of Unicorn"
+    on roles(:web) do
+	    execute "kill -s USR2 `cat /tmp/unicorn.tbecommerce.pid`"
+	  end
+  end
+
+  task :unicorn_start do
+	  desc "Start unicorn"
+  	on roles(:web) do
+  		execute <<-EOCOMMAND
+			  (cd #{release_path}
+			   RAILS_ENV=production bundle exec unicorn_rails -c config/unicorn.rb -D;)
+			EOCOMMAND
+    end
+  end
+
+  task :unicorn_stop do
+	  desc "Stop unicorn"
+	  on roles(:web) do
+	    execute "kill -s QUIT `cat /tmp/unicorn.tbecommerce.pid`"
+	  end
+  end
+end

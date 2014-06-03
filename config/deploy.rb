@@ -53,13 +53,7 @@ set(:config_files, %w(
   nginx.conf
   database.example.yml
   log_rotation
-  monit
   unicorn.rb
-  unicorn_init.sh
-))
-
-set(:executable_config_files, %w(
-  unicorn_init.sh
 ))
 
 set(:symlinks, [
@@ -72,22 +66,8 @@ set(:symlinks, [
     link: "/etc/logrotate.d/#{fetch(:application)}"
   }
 ])
-namespace :unicorn do
-  desc "Zero-downtime restart of Unicorn"
-  task :restart do
-    "kill -s USR2 `cat /tmp/unicorn.tbecommerce.pid`"
-  end
 
-  desc "Start unicorn"
-  task :start do
-    "cd #{current_path} ; bundle exec unicorn_rails -c config/unicorn.rb -D"
-  end
-
-  desc "Stop unicorn"
-  task :stop do
-    "kill -s QUIT `cat /tmp/unicorn.tbecommerce.pid`"
-  end
-end
+set :linked_dirs, %w{public/spree}
 
 namespace :deploy do
   # make sure we're deploying what we think we're deploying
@@ -97,14 +77,6 @@ namespace :deploy do
   # compile assets locally then rsync
   after 'deploy:symlink:shared', 'deploy:compile_assets_locally'
   after :finishing, 'deploy:cleanup'
-
-  # remove the default nginx configuration as it will tend
-  # to conflict with our configs.
-  before 'deploy:setup_config', 'nginx:remove_default_vhost'
-
-  # reload nginx to it will pick up any modified vhosts from
-  # setup_config
-  after 'deploy:setup_config', 'nginx:reload'
+  after :finished, 'deploy:unicorn_restart'
 end
 
-after "deploy:restart", "unicorn:restart"
