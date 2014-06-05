@@ -21,6 +21,4 @@
 
 # Ignore private info file
 .info
-bin/rake
-bin/rails
 *.yml
