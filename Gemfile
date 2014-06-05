@@ -51,13 +51,11 @@ gem 'spree', '2.2.2'
 gem 'spree_gateway', :git => 'https://github.com/spree/spree_gateway.git', :branch => '2-2-stable'
 gem 'spree_auth_devise', :git => 'https://github.com/spree/spree_auth_devise.git', :branch => '2-2-stable'
 
-gem 'unicorn'
-gem 'unicorn-rails'
-
 group :development, :test do
 	gem 'better_errors'
 	gem 'binding_of_caller'
 end
 
 group :production do
+	gem 'unicorn'
 end
