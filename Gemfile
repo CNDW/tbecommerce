@@ -47,7 +47,10 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'spree', '2.2.2'
+gem 'spree_api', '2.2.2'
+gem 'spree_backend', '2.2.2'
+gem 'spree_cmd', '2.2.2'
+gem 'spree_core', '2.2.2'
 gem 'spree_gateway', :git => 'https://github.com/spree/spree_gateway.git', :branch => '2-2-stable'
 gem 'spree_auth_devise', :git => 'https://github.com/spree/spree_auth_devise.git', :branch => '2-2-stable'
 
@@ -59,3 +62,4 @@ end
 group :production do
 	gem 'unicorn'
 end
+gem 'spree', '2.2.2'
