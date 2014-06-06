@@ -1,0 +1,2 @@
+div.fluid-row
+	= gallery-feed classNames='col-xs-12' tagName='div'

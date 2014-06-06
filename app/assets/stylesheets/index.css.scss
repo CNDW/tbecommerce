@@ -1,0 +1,104 @@
+.parallax {	
+  font-family: 'Capture it';
+  margin: 0;
+  text-align: center;
+  font-size: 9vmax;
+  line-height: 80%;
+  color: rgb(40, 40, 40);
+}
+.parallax-content {
+}
+.slide-transition {
+	color: #333333;
+	height: 200px;
+	margin: 0 auto;
+	overflow: visible;
+	padding: 0;
+	font-size: 4vmax;
+}
+
+#slide1 {
+	background: url('splash2.jpg') 50% 0% no-repeat fixed;
+	background-size: cover;
+	padding-top: 15%;
+	min-height: 700px;
+}
+#transition1 {
+	background-color: white;
+	img {
+		width: 40%;    
+		bottom: 0;
+    left: 0;
+    position: absolute;
+	}
+	p { 
+    padding: 20px 10% 0 50%;
+    line-height: 4vmax;
+	}
+}
+
+#slide2 {
+	background: url('splash1.jpg') 50% 0% no-repeat fixed;
+	background-size: cover;
+	padding-top: 0px;
+	min-height: 700px;
+}
+#transition2 {
+	background-color: white;
+	img {
+		width: 40%;    
+		bottom: 0;
+    right: 0;
+    position: absolute;
+	}
+	p { 
+    padding: 20px 50% 0 10%;
+    line-height: 4vmax;
+	}
+}
+#slide3 {
+	background: url('splash3.jpg') 50% 0% no-repeat fixed;
+	background-size: cover;
+	padding-top: 0px;
+	min-height: 700px;
+}
+#transition3 {
+	background-color: white;
+	img {
+		width: 30%;    
+		bottom: 0;
+    left: 0;
+    position: absolute;
+	}
+	p { 
+    padding: 50px 10% 0 40%;
+    line-height: 4vmax;
+	}
+}
+#slide4 {
+	background: url('splash4.jpg') 50% 0% no-repeat fixed;
+	background-size: cover;
+	padding-top: 0px;
+	min-height: 700px;
+}
+
+#transition4 {
+	background-color: white;
+	img {
+		width: 50%;    
+		bottom: 0;
+    right: 0;
+    position: absolute;
+	}
+	p { 
+    padding: 20px 60% 0 10%;
+    line-height: 4vmax;
+	}
+}
+
+#slide5 {
+	background: url('splash5.jpg') 50% 0% no-repeat fixed;
+	background-size: cover;
+	padding-top: 0px;
+	min-height: 700px;
+}

@@ -43,7 +43,7 @@ set :scm, :git
 set :repo_url, 'git@github.com:CNDW/tbecommerce.git'
 
 set :linked_files, %w{config/database.yml}
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/spree}
 
 # what specs should be run before deployment is allowed to
 # continue, see lib/capistrano/tasks/run_tests.cap
@@ -66,8 +66,6 @@ set(:symlinks, [
     link: "/etc/logrotate.d/#{fetch(:application)}"
   }
 ])
-
-set :linked_dirs, %w{public/spree}
 
 namespace :deploy do
   # make sure we're deploying what we think we're deploying

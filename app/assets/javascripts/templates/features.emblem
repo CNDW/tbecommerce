@@ -1,0 +1,9 @@
+modal-dialogue
+	div.modal-content
+		div.modal-header
+			button.close type='button' aria-hidden='true'
+			h4.modal-title Bag Standard Features
+		div.modal-body
+			ul.list-group
+				each feature in features
+					li.list-group-item = feature.name

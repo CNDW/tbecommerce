@@ -1,0 +1,8 @@
+partial "components/svg/messengerbag-detail"
+div.fluid-row
+	div.btn-group.btn-group.justified
+		=color-dropdown buttonTarget=".primary" rule="fill" buttonTitle="primary"
+		=color-dropdown buttonTarget=".secondary" rule="fill" buttonTitle="secondary"
+		=color-dropdown buttonTarget=".tertiary" rule="fill" buttonTitle="tertiary"
+		=color-dropdown buttonTarget=".liner" rule="fill" buttonTitle="liner"
+		=color-dropdown buttonTarget=".stitching" rule="stroke" buttonTitle="stitching"

@@ -1,0 +1,7 @@
+button{action 'toggleMenu'} class="btn btn-default dropdown-toggle"
+	|{{buttonTitle}} <span class='caret'></span>
+ul.dropdown-menu
+	li{action 'changeColor' buttonTarget rule 'blue'} Blue 
+	li{action 'changeColor' buttonTarget rule 'red'} Red
+	li{action 'changeColor' buttonTarget rule 'green'} Green
+	li{action 'changeColor' buttonTarget rule 'purple'} Purple

@@ -1,1 +1,148 @@
 @import "bootstrap";
+@font-face {
+  font-family: 'Capture it';
+  src: url('/assets/capture_it-webfont.eot' + "?#iefix") format('embedded-opentype'),
+       url('/assets/capture_it-webfont.woff') format('woff'), 
+       url('/assets/capture_it-webfont.ttf')  format('truetype'),
+       url('/assets/capture_it-webfont.svg' + "#CaptureIt") format('svg');
+}
+// make all images responsive by default
+img {
+  @extend .img-responsive;
+  margin: 0 auto;
+  }
+// Custom class bootstrap extensions
+.navbar-brand {
+  font-size: inherit;
+  }
+.nav-logo-text {
+  @extend .navbar-brand;
+}
+.navbar-main {
+  @extend .navbar;
+  @extend .navbar-inverse;
+  @extend .navbar-fixed-top;
+  font-family: 'Capture it';
+}
+.nav-main {
+  @extend .nav;
+  @extend .navbar-nav;
+}
+#nav-main-lg {
+  @extend .visible-lg;
+}
+#nav-main-md {
+  @extend .visible-md;
+}
+#nav-main-sm {
+  @extend .visible-sm;
+}
+#nav-main-xs {
+  @extend .visible-xs;
+}
+
+// Store
+.col-main-catalogue {
+  @extend .col-lg-8;
+  @extend .col-xs-12;
+}
+.col-nav-catalogue {
+  @extend .col-lg-2;
+  @extend .col-lg-offset-1;
+  @extend .col-xs-12;
+}
+.col-item-carousel {
+  @extend .col-xs-12;
+  @extend .col-md-12;
+}
+.col-item-details {
+  @extend .col-xs-12;
+  @extend .col-sm-12;
+  @extend .col-md-8;
+}
+
+.col-custom-display {
+  @extend .col-lg-6;
+  @extend .col-sm-6;
+  @extend .col-xs-12;
+  @extend .jumbotron;
+}
+.col-custom-details {
+  @extend .col-lg-6;
+  @extend .col-sm-6;
+  @extend .col-xs-12;
+}
+.col-detail-thumb {
+  @extend .col-xs-12;
+  @extend .col-sm-6;
+  @extend .col-md-4;
+}
+
+.col-small {
+  @extend .col-sm-2;
+}
+.col-medium {
+  @extend .col-sm-4;
+}
+.col-large {
+  @extend .col-sm-8;
+}
+.col-full {
+  @extend .col-sm-12;
+}
+
+.parallax {
+  @extend .row;
+}
+.parallax-content {
+  @extend .col-lg-12;
+}
+.slide-transition {
+  @extend .col-lg-12;
+}
+.nav-catalogue-tabs {
+  @extend .nav;
+  @extend .nav-tabs;
+}
+.nav-catalogue {
+  @extend .list-group;
+}
+
+// THESE ARE EXAMPLES YOU CAN MODIFY
+// create your own classes
+// to make views framework-neutral
+.column {
+  @extend .col-md-6;
+  @extend .text-center;
+  }
+.form {
+  @extend .col-md-6;
+  }
+.form-centered {
+  @extend .col-md-6;
+  @extend .text-center;
+  }
+.submit {
+  @extend .btn;
+  @extend .btn-primary;
+  @extend .btn-lg;
+  }
+.fluid-row {
+  @extend .row;
+  @extend .clearfix;
+  margin: 0;
+}
+.panel-model-stats {
+  @extend .panel-body;
+}
+.modal {
+  display: block;
+}
+// apply styles to HTML elements
+// to make views framework-neutral
+main {
+  }
+section {
+  @extend .row;
+  margin-top: 20px;
+  }

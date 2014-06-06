@@ -1,5 +1,12 @@
-h2 Products
-each
-	= name
-	= description
-	= price
+div.fluid-row
+	div.col-nav-catalogue
+		ul.nav-catalogue
+			each 
+				li.list-group-item
+					h2.nav-catalogue-head {{name}}
+					each type in productTypes
+						product-nav products=type.products type=type
+		outlet productStats
+	div.col-main-catalogue
+		outlet productType
+		outlet
