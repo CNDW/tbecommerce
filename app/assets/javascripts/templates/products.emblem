@@ -1,0 +1,5 @@
+h2 Products
+each
+	= name
+	= description
+	= price

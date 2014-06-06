@@ -79,8 +79,4 @@ Tbecommerce::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   config.ember.variant = :production
-
-  config.ember.ember_path = 'lib/assets/javascripts/trashbags'
-
-  config.handlebars.templates_root = 'trashbags/templates'
 end

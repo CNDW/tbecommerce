@@ -28,8 +28,4 @@ Tbecommerce::Application.configure do
   config.assets.debug = true
 
   config.ember.variant = :development
-
-  config.ember.ember_path = 'lib/assets/javascripts/trashbags'
-
-  config.handlebars.templates_root = 'trashbags/templates'
 end
