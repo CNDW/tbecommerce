@@ -18,7 +18,7 @@
 }
 
 #slide1 {
-	background: url('splash2.jpg') 50% 0% no-repeat fixed;
+	background: asset-url('splash2.jpg') 50% 0% no-repeat fixed;
 	background-size: cover;
 	padding-top: 15%;
 	min-height: 700px;
@@ -38,7 +38,7 @@
 }
 
 #slide2 {
-	background: url('splash1.jpg') 50% 0% no-repeat fixed;
+	background: asset-url('splash1.jpg') 50% 0% no-repeat fixed;
 	background-size: cover;
 	padding-top: 0px;
 	min-height: 700px;
@@ -57,7 +57,7 @@
 	}
 }
 #slide3 {
-	background: url('splash3.jpg') 50% 0% no-repeat fixed;
+	background: asset-url('splash3.jpg') 50% 0% no-repeat fixed;
 	background-size: cover;
 	padding-top: 0px;
 	min-height: 700px;
@@ -76,7 +76,7 @@
 	}
 }
 #slide4 {
-	background: url('splash4.jpg') 50% 0% no-repeat fixed;
+	background: asset-url('splash4.jpg') 50% 0% no-repeat fixed;
 	background-size: cover;
 	padding-top: 0px;
 	min-height: 700px;
@@ -97,7 +97,7 @@
 }
 
 #slide5 {
-	background: url('splash5.jpg') 50% 0% no-repeat fixed;
+	background: asset-url('splash5.jpg') 50% 0% no-repeat fixed;
 	background-size: cover;
 	padding-top: 0px;
 	min-height: 700px;

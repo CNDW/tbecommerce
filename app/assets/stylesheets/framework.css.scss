@@ -1,10 +1,10 @@
 @import "bootstrap";
 @font-face {
   font-family: 'Capture it';
-  src: url("<%= asset_path('capture_it-webfont.eot') %>" + "?#iefix") format('embedded-opentype'),
-       url("<%= asset_path('capture_it-webfont.woff') %>") format('woff'), 
-       url("<%= asset_path('capture_it-webfont.ttf') %>")  format('truetype'),
-       url("<%= asset_path('capture_it-webfont.svg') %>" + "#CaptureIt") format('svg');
+  src: url(asset-path('capture_it-webfont.eot') + "?#iefix") format('embedded-opentype'),
+       url(asset-path('capture_it-webfont.woff')) format('woff'), 
+       url(asset-path('capture_it-webfont.ttf'))  format('truetype'),
+       url(asset-path('capture_it-webfont.svg') + "#CaptureIt") format('svg');
 }
 // make all images responsive by default
 img {
