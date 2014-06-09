@@ -63,7 +63,7 @@ main {
 }
 .application-view {
   margin: 42px 0 0 0;
-  background: url('splash2.jpg') 50% 0% no-repeat fixed;
+  background: asset-url('splash2.jpg') 50% 0% no-repeat fixed;
   background-size: cover;
   background-clip: none;
 }
