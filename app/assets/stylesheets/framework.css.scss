@@ -2,10 +2,10 @@ $icon-font-path: "/";
 @import "bootstrap";
 @font-face {
   font-family: 'Capture it';
-  src: asset-url('/assets/capture_it-webfont.eot' + "?#iefix") format('embedded-opentype'),
-       asset-url('/assets/capture_it-webfont.woff') format('woff'), 
-       asset-url('/assets/capture_it-webfont.ttf')  format('truetype'),
-       asset-url('/assets/capture_it-webfont.svg' + "#CaptureIt") format('svg');
+  src: asset-url('capture_it-webfont.eot' + "?#iefix") format('embedded-opentype'),
+       asset-url('capture_it-webfont.woff') format('woff'), 
+       asset-url('capture_it-webfont.ttf')  format('truetype'),
+       asset-url('capture_it-webfont.svg' + "#CaptureIt") format('svg');
 }
 // make all images responsive by default
 img {
