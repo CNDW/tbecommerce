@@ -17,9 +17,9 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: tbecommerce_development
+  database: spree
   pool: 5
-  username: rails_dev
+  username: spree
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
