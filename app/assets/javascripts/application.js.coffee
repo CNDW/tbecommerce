@@ -13,6 +13,7 @@
 #= require_tree ./components
 #= require_tree ./templates
 #= require_tree ./routes
+#= require_tree ./serializers
 #= require ./router
 
 # for more details see: http://emberjs.com/guides/application/

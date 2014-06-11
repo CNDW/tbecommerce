@@ -8,5 +8,9 @@ div.fluid-row
 						product-nav products=type.products type=type
 		outlet productStats
 	div.col-main-catalogue
-		outlet productType
 		outlet
+		each 
+			= name
+			br
+			each productProperty in productProperties
+				= propertyName

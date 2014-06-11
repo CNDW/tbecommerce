@@ -6,4 +6,4 @@ Trashbags.Product = DS.Model.extend
   category: DS.attr('string')
   slug: DS.attr('string')
  	displayPrice: DS.attr('string')
- 	productProperties: DS.hasMany('product_property')
+ 	productProperties: DS.hasMany('product_property', {async: true})
