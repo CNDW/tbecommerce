@@ -12,5 +12,5 @@ div.fluid-row
 		each 
 			= name
 			br
-			each productProperty in productProperties
-				= propertyName
+			each productProperties
+				= property_name

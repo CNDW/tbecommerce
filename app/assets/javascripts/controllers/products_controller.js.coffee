@@ -1,0 +1,1 @@
+Trashbags.ProductsController = Em.ArrayController.extend()

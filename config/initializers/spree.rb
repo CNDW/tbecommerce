@@ -9,6 +9,7 @@ Spree.config do |config|
   # Example:
   # Uncomment to override the default site name.
   # config.site_name = "Spree Demo Site"
+  config.whitelisted_parameters=[:product_category, :product_subcategory]
 end
 
 Spree.user_class = "Spree::User"
