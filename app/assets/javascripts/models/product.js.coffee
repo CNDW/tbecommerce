@@ -7,3 +7,5 @@ Trashbags.Product = DS.Model.extend
   slug: DS.attr('string')
  	displayPrice: DS.attr('string')
  	productProperties: DS.hasMany('product_property', {async: true})
+ 	category: Em.computed.alias('product_category')
+ 	type: Em.computed.alias('product_subcategory')

@@ -9,8 +9,7 @@ div.fluid-row
 		outlet productStats
 	div.col-main-catalogue
 		outlet
-		each 
-			= name
-			br
-			each productProperties
-				= property_name
+		each products in productsByCategory
+			each products
+				= name
+				<br>
