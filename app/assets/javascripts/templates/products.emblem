@@ -12,4 +12,3 @@ div.fluid-row
 		each products in productsByCategory
 			each products
 				= name
-				<br>
