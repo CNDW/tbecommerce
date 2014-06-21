@@ -1,2 +1,2 @@
-div.fluid-row
-	= gallery-feed classNames='col-xs-12' tagName='div'
+div.row
+	= gallery-feed classNames='col-xs-12 col-md-10 col-md-offset-1' tagName='div'

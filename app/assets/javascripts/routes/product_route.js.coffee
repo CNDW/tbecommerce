@@ -4,8 +4,8 @@ Trashbags.ProductRoute = Em.Route.extend
 	renderTemplate: ->
 		@render('product/stats', {
 			outlet: 'productStats'
-			into: 'product_types'
+			into: 'products'
 			})
 		@render('product',
-			into: 'product_types'
+			into: 'products'
 			)
