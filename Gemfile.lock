@@ -54,6 +54,14 @@ GIT
       spree_core (= 2.2.3.beta)
 
 GIT
+  remote: git://github.com/stefansenk/spree-blogging-spree.git
+  revision: 6926c1b43782ca5ea2bd783a58e2712196a1556b
+  specs:
+    spree_blogging_spree (0.4.0)
+      acts-as-taggable-on (~> 2.4.1)
+      spree_core (~> 2.2.0)
+
+GIT
   remote: https://github.com/spree/spree_auth_devise.git
   revision: 4959656be98742249f85879207a606e05d622cc6
   branch: 2-2-stable
@@ -106,6 +114,8 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
+    acts-as-taggable-on (2.4.1)
+      rails (>= 3, < 5)
     acts_as_list (0.3.0)
       activerecord (>= 3.0)
     arel (4.0.2)
@@ -345,5 +355,6 @@ DEPENDENCIES
   sdoc
   spree!
   spree_auth_devise!
+  spree_blogging_spree!
   uglifier (>= 1.3.0)
   unicorn
