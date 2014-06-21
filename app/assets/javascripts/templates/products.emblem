@@ -1,14 +1,18 @@
 div.fluid-row
 	div.col-nav-catalogue
 		ul.nav-catalogue
-			each 
-				li.list-group-item
-					h2.nav-catalogue-head {{name}}
-					each type in productTypes
-						product-nav products=type.products type=type
+			li.list-group-item
+				h2.nav-catalogue-head Bags
+				each bagTypes
+					product-nav products=products type=name
+			li.list-group-item
+				h2.nav-catalogue-head Apparel
+				each apparelTypes
+					product-nav products=products type=name
+			li.list-group-item
+				h2.nav-catalogue-head Utility
+				each utilityTypes
+					product-nav products=products type=name
 		outlet productStats
 	div.col-main-catalogue
 		outlet
-		each products in productsByCategory
-			each products
-				= name
