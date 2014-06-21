@@ -145,6 +145,11 @@ img {
 .modal {
   display: block;
 }
+
+.about {
+  @extend .well;
+  @extend .col-xs-12;
+}
 // apply styles to HTML elements
 // to make views framework-neutral
 main {
