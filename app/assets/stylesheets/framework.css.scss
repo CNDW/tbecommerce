@@ -146,8 +146,14 @@ img {
   display: block;
 }
 
+// About
+
 .about {
   @extend .well;
+  @extend .col-xs-12;
+}
+
+.blog {
   @extend .col-xs-12;
 }
 // apply styles to HTML elements

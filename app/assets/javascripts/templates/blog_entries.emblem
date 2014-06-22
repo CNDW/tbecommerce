@@ -1,0 +1,6 @@
+div.blog.col-md-8.col-md-offset-1#blog-container
+	ul#blog-entries
+		each
+			render "blog_entry" this
+	
+div.blog.col-md-2

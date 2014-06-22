@@ -3,7 +3,7 @@
 Trashbags.Router.map ()->
   @route 'custom_shop', path: '/custom'
   @route 'gallery'
-  @route 'blog'
+  @resource 'blog_entries', path: '/blog'
   @route 'about'
   @resource 'products', path: '/catalogue', ->
   	@resource 'product', path: '/:product_id'
