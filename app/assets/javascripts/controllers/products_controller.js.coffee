@@ -1,15 +1,6 @@
 Trashbags.ProductsController = Em.ArrayController.extend
-	categories: (->
-		@get('content').mapBy('product_category').uniq()
-		).property()
-	productsByCategory: (->
-		bags = @get('content').filterBy('product_category', 'bag')
-		apparel = @get('content').filterBy('product_category', 'apparel')
-		utility = @get('content').filterBy('product_category', 'utility')
-		return [bags, apparel, utility]
-		).property('categories')
 	bagTypes: (->
-		products = @get('productsByCategory')[0].sortBy('price')
+		products = @get('content').filterBy('product_category', 'bag').sortBy('price')
 		types = products.mapBy('type').uniq().map (item, index, object)->
 			val = {}
 			val.name = item.capitalize()
@@ -17,7 +8,7 @@ Trashbags.ProductsController = Em.ArrayController.extend
 			return val
 		).property('productsByCategory')
 	apparelTypes: (->
-		products = @get('productsByCategory')[1].sortBy('price')
+		products = @get('content').filterBy('product_category', 'apparel').sortBy('price')
 		types = products.mapBy('type').uniq().map (item, index, object)->
 			val = {}
 			val.name = item.capitalize()
@@ -25,7 +16,7 @@ Trashbags.ProductsController = Em.ArrayController.extend
 			return val
 		).property('productsByCategory')
 	utilityTypes: (->
-		products = @get('productsByCategory')[2].sortBy('price')
+		products = @get('content').filterBy('product_category', 'utility').sortBy('price')
 		types = products.mapBy('type').uniq().map (item, index, object)->
 			val = {}
 			val.name = item.capitalize()
