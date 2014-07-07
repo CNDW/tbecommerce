@@ -1,7 +1,7 @@
 div.col-item-carousel.carousel.slide.well#product-carousel
 	div.carousel-inner
 		each image in images
-			div.carousel-img.item
+			div.carousel-img.item.active
 				img src=image.large_url alt="loading"
 detail-thumbnail action="openModal" modalName="features" model=product
 	img src="<%= asset_path('trashlogo.jpg') %>" alt="loading..."
