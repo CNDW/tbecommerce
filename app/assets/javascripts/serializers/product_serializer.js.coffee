@@ -5,8 +5,10 @@ forEach = Ember.EnumerableUtils.forEach
 underscore = Ember.String.underscore
 
 Trashbags.ProductSerializer = DS.RESTSerializer.extend DS.EmbeddedRecordsMixin,
-	attrs: 
+	attrs:
 		productProperties: embedded: 'always'
+		images: embedded: 'always'
+
 	extractMeta: (store, type, payload)->
 		metadata = {}
 		Em.$.each payload, (key, value)->

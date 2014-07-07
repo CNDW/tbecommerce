@@ -181,7 +181,7 @@ GEM
       warden (~> 1.2.3)
     devise-encryptable (0.1.2)
       devise (>= 2.1.0)
-    ember-data-source (1.0.0.beta.7)
+    ember-data-source (1.0.0.beta.8)
       ember-source
     ember-rails (0.15.0)
       active_model_serializers
@@ -343,7 +343,7 @@ DEPENDENCIES
   capistrano-rails (~> 1.1.1)
   capistrano-rvm
   coffee-rails (~> 4.0.0)
-  ember-data-source (= 1.0.0.beta.7)
+  ember-data-source (= 1.0.0.beta.8)
   ember-rails
   ember-source (~> 1.5)
   emblem-rails

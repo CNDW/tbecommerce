@@ -28,7 +28,7 @@ gem 'jquery-rails'
 # Use Ember.js for frontend javascript
 gem 'ember-rails'
 gem 'ember-source', '~>1.5'
-gem 'ember-data-source', '1.0.0.beta.7'
+gem 'ember-data-source', '1.0.0.beta.8'
 
 # Use emblem for javascript templates
 gem 'emblem-rails'

@@ -1,11 +1,8 @@
-div.col-item-carousel.carousel.slide.well data-ride="carousel" id="carousel-catalogue-item"
+div.col-item-carousel.carousel.slide.well#product-carousel
 	div.carousel-inner
-		div.carousel-img.item.active
-			img src="{{unbound image.largeUrl}}" alt="loading"
-		div.carousel-img.item
-			img src="<%= asset_path('bage2.jpg') %>" alt="loading"
-		div.carousel-img.item
-			img src="<%= asset_path('bage3.jpg') %>" alt="loading"
+		each image in images
+			div.carousel-img.item
+				img src=image.large_url alt="loading"
 detail-thumbnail action="openModal" modalName="features" model=product
 	img src="<%= asset_path('trashlogo.jpg') %>" alt="loading..."
 	div.detail-caption

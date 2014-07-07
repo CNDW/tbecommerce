@@ -4,7 +4,6 @@
 #= require ember
 #= require ember-data
 #= require pongstagr.am
-#= require bootstrap
 #= require_self
 #= require ./store
 #= require_tree ./models
