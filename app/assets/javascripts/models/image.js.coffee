@@ -9,6 +9,9 @@ Trashbags.Image = DS.Model.extend
   small_url: DS.attr 'string'
   product_url: DS.attr 'string'
   large_url: DS.attr 'string'
+  carousel_large_url: DS.attr 'string'
+  carousel_medium_url: DS.attr 'string'
+  carousel_small_url: DS.attr 'string'
   product_type: Em.computed 'product', ->
     @get('product.type')
   product: DS.belongsTo 'product', async: true

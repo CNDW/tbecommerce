@@ -2,18 +2,22 @@
 @font-face {
   font-family: 'Capture it';
   src: asset-url('capture_it-webfont.eot' + "?#iefix") format('embedded-opentype'),
-       asset-url('capture_it-webfont.woff') format('woff'), 
+       asset-url('capture_it-webfont.woff') format('woff'),
        asset-url('capture_it-webfont.ttf')  format('truetype'),
        asset-url('capture_it-webfont.svg' + "#CaptureIt") format('svg');
 }
 @font-face {
   font-family: 'Glyphicons Halflings';
   src: asset-url('glyphicons-halflings-regular.eot' + "?#iefix") format('embedded-opentype'),
-    asset-url('glyphicons-halflings-regular.woff') format('woff'), 
+    asset-url('glyphicons-halflings-regular.woff') format('woff'),
     asset-url('glyphicons-halflings-regular.ttf')  format('truetype'),
     asset-url('glyphicons-halflings-regular.svg' + "#glyphicons_halflingsregular") format('svg');
 }
 // make all images responsive by default
+.row {
+  overflow: hidden;
+}
+
 img {
   @extend .img-responsive;
   margin: 0 auto;

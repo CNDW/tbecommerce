@@ -3,6 +3,3 @@ render 'carouselImage' activeSlide
 ul.catalogue-indicators
   each thumbnails
     carousel-thumbnail mini_url=mini_url index=index activeIndex=activeIndex action='setSlide'
-
-button.btn.btn-primary{action 'nextSlide'}
-button.btn.btn-default{action 'previousSlide'}

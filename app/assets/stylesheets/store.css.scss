@@ -8,6 +8,7 @@
   padding: 0;
   .carousel-inner {
     padding: 0 10% 5% 10%;
+    height: 600px;
     .carousel-img {
       img {
         width: 100%;
@@ -46,6 +47,8 @@
 .col-nav-catalogue {
   background-color: black;
   padding: 10px 0 0 0;
+  margin-bottom: -99999px;
+  padding-bottom: 99999px;
 }
 .nav-catalogue {
   background-color: black;
