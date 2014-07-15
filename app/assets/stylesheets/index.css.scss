@@ -1,10 +1,11 @@
-.parallax {	
+.parallax {
   font-family: 'Capture it';
   margin: 0;
   text-align: center;
   font-size: 9vmax;
   line-height: 80%;
   color: rgb(40, 40, 40);
+  overflow: visible;
 }
 .parallax-content {
 }
@@ -26,12 +27,12 @@
 #transition1 {
 	background-color: white;
 	img {
-		width: 40%;    
+		width: 40%;
 		bottom: 0;
     left: 0;
     position: absolute;
 	}
-	p { 
+	p {
     padding: 20px 10% 0 50%;
     line-height: 4vmax;
 	}
@@ -46,12 +47,12 @@
 #transition2 {
 	background-color: white;
 	img {
-		width: 40%;    
+		width: 40%;
 		bottom: 0;
     right: 0;
     position: absolute;
 	}
-	p { 
+	p {
     padding: 20px 50% 0 10%;
     line-height: 4vmax;
 	}
@@ -65,12 +66,12 @@
 #transition3 {
 	background-color: white;
 	img {
-		width: 30%;    
+		width: 30%;
 		bottom: 0;
     left: 0;
     position: absolute;
 	}
-	p { 
+	p {
     padding: 50px 10% 0 40%;
     line-height: 4vmax;
 	}
@@ -85,12 +86,12 @@
 #transition4 {
 	background-color: white;
 	img {
-		width: 50%;    
+		width: 50%;
 		bottom: 0;
     right: 0;
     position: absolute;
 	}
-	p { 
+	p {
     padding: 20px 60% 0 10%;
     line-height: 4vmax;
 	}

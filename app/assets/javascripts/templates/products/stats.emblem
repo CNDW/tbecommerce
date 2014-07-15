@@ -1,7 +1,3 @@
 div.panel-model-stats
-	h5 Measurements
-	p {{measurements}}<br>
-	h5 Carrying Capacity
-	p {{capacity}}<br>
 	h5 Starting at
-	p ${{price}}
+	p {{content.displayPrice}}
