@@ -1,4 +1,5 @@
-Deface::Override.new(virtual_path: 'spree/admin/products/_form',
+Deface::Override.new(
+	virtual_path: 'spree/admin/products/_form',
 	name: "add_category_and_type_to_product_edit",
 	insert_bottom: '[data-hook="admin_product_form_left"]',
 	:original => '6f929b54e86880a8efae973aa89fc766a8a8e39c',
@@ -13,4 +14,5 @@ Deface::Override.new(virtual_path: 'spree/admin/products/_form',
 			<%= f.error_message_on :product_subcategory %>
 			<%= f.text_field :product_subcategory, class: 'fullwidth' %>
 		<% end %>
-")
+	"
+)
