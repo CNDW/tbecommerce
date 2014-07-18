@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140717015557) do
+ActiveRecord::Schema.define(version: 20140718001056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -199,6 +199,8 @@ ActiveRecord::Schema.define(version: 20140717015557) do
     t.integer  "position",                 default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "description"
+    t.boolean  "required"
   end
 
   create_table "spree_option_types_prototypes", id: false, force: true do |t|
@@ -213,6 +215,12 @@ ActiveRecord::Schema.define(version: 20140717015557) do
     t.integer  "option_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "option_image_file_name"
+    t.string   "option_image_content_type"
+    t.integer  "option_image_file_size"
+    t.datetime "option_image_updated_at"
+    t.text     "description"
+    t.decimal  "price",                     precision: 8, scale: 2
   end
 
   add_index "spree_option_values", ["option_type_id"], name: "index_spree_option_values_on_option_type_id", using: :btree

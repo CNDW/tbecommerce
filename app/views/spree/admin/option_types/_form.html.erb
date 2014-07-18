@@ -1,0 +1,33 @@
+<div data-hook="admin_option_type_form_fields" class="align-center row">
+  <div class="alpha four columns">
+    <%= f.field_container :name do %>
+      <%= f.label :name, Spree.t(:name) %> <span class="required">*</span><br />
+      <%= f.text_field :name, :class => "fullwidth" %>
+      <%= f.error_message_on :name %>
+    <% end %>
+  </div>
+
+  <div class="alpha four columns">
+    <%= f.field_container :presentation do %>
+      <%= f.label :presentation, Spree.t(:presentation) %> <span class="required">*</span><br />
+      <%= f.text_field :presentation, :class => "fullwidth" %>
+      <%= f.error_message_on :presentation %>
+    <% end %>
+  </div>
+
+  <div class="alpha seven columns">
+    <%= f.field_container :description do %>
+      <%= f.label :description, Spree.t(:description) %><br />
+      <%= f.text_area :description, :class => "fullwidth" %>
+      <%= f.error_message_on :description %>
+    <% end %>
+  </div>
+
+  <div class="omega one columns">
+    <%= f.field_container :required do %>
+      <%= f.label :required, Spree.t(:required) %><br />
+      <%= f.check_box :required, :class => "fullwidth" %>
+      <%= f.error_message_on :required %>
+    <% end %>
+  </div>
+</div>

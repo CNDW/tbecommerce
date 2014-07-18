@@ -16,4 +16,8 @@ Spree::Api::ApiHelpers.product_attributes.concat([:product_category, :product_su
 
 Spree::Api::ApiHelpers.product_property_attributes.concat([:description, :thumb_url, :medium_url, :large_url])
 
+Spree::Api::ApiHelpers.option_value_attributes.concat([:description, :thumb_url, :medium_url, :large_url, :price])
+
+Spree::Api::ApiHelpers.option_type_attributes.concat([:description, :required])
+
 Spree.user_class = "Spree::User"

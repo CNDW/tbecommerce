@@ -4,6 +4,6 @@ class AddPropertyImageColumnToProductProperties < ActiveRecord::Migration
   end
 
   def self.down
-    add_attachment :spree_product_properties, :property_image
+    remove_attachment :spree_product_properties, :property_image
   end
 end
