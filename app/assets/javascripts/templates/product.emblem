@@ -1,3 +1,10 @@
 render 'carousel' images
 p
 	=content.description
+each content.productProperties
+  detail-thumbnail model=this
+    img{bind-attr src=medium_url} alt="loading..."
+    div.detail-caption
+      h3 {{property_name}}
+      p.well {{description}}
+    p Click for more!
