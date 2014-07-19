@@ -8,6 +8,7 @@ Trashbags.ProductSerializer = DS.RESTSerializer.extend DS.EmbeddedRecordsMixin,
 	attrs:
 		productProperties: embedded: 'always'
 		images: embedded: 'always'
+		optionTypes: embedded: 'always'
 
 	extractMeta: (store, type, payload)->
 		metadata = {}

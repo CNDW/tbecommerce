@@ -8,3 +8,11 @@ each content.productProperties
       h3 {{property_name}}
       p.well {{description}}
     p Click for more!
+
+each content.optionTypes
+  detail-thumbnail model=this
+    img{bind-attr src=medium_url} alt="loading..."
+    div.detail-caption
+      h3 {{name}}
+      p.well {{description}}
+    p Click for more!
