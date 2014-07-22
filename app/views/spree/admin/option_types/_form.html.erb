@@ -1,5 +1,5 @@
 <div data-hook="admin_option_type_form_fields" class="align-center row">
-  <div class="alpha four columns">
+  <div class="alpha eight columns">
     <%= f.field_container :name do %>
       <%= f.label :name, Spree.t(:name) %> <span class="required">*</span><br />
       <%= f.text_field :name, :class => "fullwidth" %>
@@ -7,7 +7,7 @@
     <% end %>
   </div>
 
-  <div class="alpha four columns">
+  <div class="omega eight columns">
     <%= f.field_container :presentation do %>
       <%= f.label :presentation, Spree.t(:presentation) %> <span class="required">*</span><br />
       <%= f.text_field :presentation, :class => "fullwidth" %>
@@ -15,7 +15,10 @@
     <% end %>
   </div>
 
-  <div class="alpha seven columns">
+</div>
+
+<div data-hook="admin_option_type_form_fields" class="align-center row">
+  <div class="alpha eight columns">
     <%= f.field_container :description do %>
       <%= f.label :description, Spree.t(:description) %><br />
       <%= f.text_area :description, :class => "fullwidth" %>
@@ -23,11 +26,19 @@
     <% end %>
   </div>
 
-  <div class="omega one columns">
+  <div class="omega two columns">
     <%= f.field_container :required do %>
       <%= f.label :required, Spree.t(:required) %><br />
       <%= f.check_box :required, :class => "fullwidth" %>
       <%= f.error_message_on :required %>
+    <% end %>
+  </div>
+
+  <div class="omega two columns">
+    <%= f.field_container :catalogue do %>
+      <%= f.label :catalogue, Spree.t(:catalogue) %><br />
+      <%= f.check_box :catalogue, :class => "fullwidth" %>
+      <%= f.error_message_on :catalogue %>
     <% end %>
   </div>
 </div>

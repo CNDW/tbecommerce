@@ -1,6 +1,7 @@
 Trashbags.Product = DS.Model.extend
   name: DS.attr 'string'
   description: DS.attr 'string'
+  specs: DS.attr 'string'
   price: DS.attr 'number'
   product_category: DS.attr 'string'
   product_subcategory: DS.attr 'string'

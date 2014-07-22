@@ -10,14 +10,14 @@ Spree.config do |config|
   # Uncomment to override the default site name.
   # config.site_name = "Spree Demo Site"
 end
-Spree::PermittedAttributes.product_attributes.concat([:product_category, :product_subcategory])
+Spree::PermittedAttributes.product_attributes.concat([:product_category, :product_subcategory, :specs])
 
-Spree::Api::ApiHelpers.product_attributes.concat([:product_category, :product_subcategory])
+Spree::Api::ApiHelpers.product_attributes.concat([:product_category, :product_subcategory, :specs])
 
 Spree::Api::ApiHelpers.product_property_attributes.concat([:description, :thumb_url, :medium_url, :large_url])
 
 Spree::Api::ApiHelpers.option_value_attributes.concat([:description, :thumb_url, :medium_url, :large_url, :price])
 
-Spree::Api::ApiHelpers.option_type_attributes.concat([:description, :required])
+Spree::Api::ApiHelpers.option_type_attributes.concat([:description, :required, :catalogue])
 
 Spree.user_class = "Spree::User"

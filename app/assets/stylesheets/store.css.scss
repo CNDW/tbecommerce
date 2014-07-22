@@ -38,11 +38,12 @@
     font-size: 90%;
   }
 }
-.feature-list {
-  .list-group-item {
-    font-size: 130%;
-    padding-top: 4px;
-    padding-bottom: 4px;
+.list-group-item {
+  font-size: 130%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  ul {
+    cursor: pointer;
   }
 }
 .col-nav-catalogue {

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140718001056) do
+ActiveRecord::Schema.define(version: 20140722010004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -201,6 +201,7 @@ ActiveRecord::Schema.define(version: 20140718001056) do
     t.datetime "updated_at"
     t.text     "description"
     t.boolean  "required"
+    t.boolean  "catalogue"
   end
 
   create_table "spree_option_types_prototypes", id: false, force: true do |t|
@@ -377,6 +378,7 @@ ActiveRecord::Schema.define(version: 20140718001056) do
     t.datetime "updated_at"
     t.string   "product_category"
     t.string   "product_subcategory"
+    t.text     "specs"
   end
 
   add_index "spree_products", ["available_on"], name: "index_spree_products_on_available_on", using: :btree
