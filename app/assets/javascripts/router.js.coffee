@@ -7,4 +7,3 @@ Trashbags.Router.map ()->
   @route 'about'
   @resource 'products', path: '/catalogue', ->
   	@resource 'product', path: '/:product_id'
-

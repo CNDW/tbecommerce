@@ -2,6 +2,7 @@
 #= require handlebars
 #= require ember
 #= require ember-data
+#= require localstorage_adapter
 #= require pongstagr.am
 #= require_self
 #= require ./store
