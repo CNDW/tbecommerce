@@ -5,5 +5,6 @@ Trashbags.Router.map ()->
   @route 'gallery'
   @resource 'blog_entries', path: '/blog'
   @route 'about'
+  @route 'cart'
   @resource 'products', path: '/catalogue', ->
   	@resource 'product', path: '/:product_id'

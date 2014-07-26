@@ -1,0 +1,1 @@
+Trashbags.CustomShopController = Trashbags.ProductsController.extend()

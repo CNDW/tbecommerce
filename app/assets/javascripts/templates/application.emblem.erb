@@ -19,9 +19,10 @@ nav.navbar-main role="navigation"
 				link-to 'blog_entries' tagName='li' classNames='nav-link-main' |Blog
 				link-to 'about' tagName='li' classNames='nav-link-main' |ABOUT
 
-			link-to 'index' tagName='a' classNames='hidden-xs nav-link-main' id='cart-button'
+			link-to 'cart' tagName='a' classNames='hidden-xs nav-link-main' id='cart-button'
 				span.glyphicon.glyphicon-shopping-cart
 
 main
 	outlet
 	outlet modal
+	outlet cart

@@ -1,3 +1,4 @@
 div.panel-model-stats
-	h5 Starting at
-	p {{content.displayPrice}}
+  p {{content.specs}}
+  h5 Starting at
+  p {{content.displayPrice}}
