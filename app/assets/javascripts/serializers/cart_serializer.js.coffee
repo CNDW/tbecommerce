@@ -1,1 +1,0 @@
-Trashbags.CartSerializer = DS.LSSerializer.extend()

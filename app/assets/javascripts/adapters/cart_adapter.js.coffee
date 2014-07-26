@@ -1,1 +1,0 @@
-Trashbags.CartAdapter = DS.LSAdapter.extend()
