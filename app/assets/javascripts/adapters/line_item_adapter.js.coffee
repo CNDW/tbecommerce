@@ -1,0 +1,1 @@
+Trashbags.LineItemAdapter = DS.LSAdapter.extend()

@@ -47,6 +47,7 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 gem 'posix-spawn'
+gem 'oink'
 
 gem 'spree', github: 'spree/spree', branch: '2-2-stable'
 gem 'spree_auth_devise', :git => 'https://github.com/spree/spree_auth_devise.git', :branch => '2-2-stable'

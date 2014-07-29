@@ -1,0 +1,1 @@
+Trashbags.LineItemSerializer = DS.LSSerializer.extend()
