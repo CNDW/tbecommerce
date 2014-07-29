@@ -1,3 +1,1 @@
-Trashbags.CustomShopRoute = Em.Route.extend
-  model: ->
-    @store.find('product')
+Trashbags.CustomShopRoute = Em.Route.extend()

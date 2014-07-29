@@ -7,3 +7,7 @@ Trashbags.ProductController = Em.Controller.extend
   images: (->
     @content.get('images')
     ).property('content')
+  propertyImages: (->
+    images = @content.get('productProperties').getEach('medium_url')
+    images.slice(0, 4)
+    ).property('content')

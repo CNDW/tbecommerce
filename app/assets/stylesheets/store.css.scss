@@ -8,8 +8,11 @@
   padding: 0;
   .carousel-inner {
     padding: 0 10% 5% 10%;
-    height: 600px;
+    height: 700px;
     .carousel-img {
+      display: inline-block;
+      height: 700px;
+      width: 700px;
       img {
         width: 100%;
       }
@@ -121,5 +124,17 @@
     margin: 0 auto;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+}
+.property-img {
+  img {
+    height: 150px;
+  }
+}
+.property-list-description {
+  ul {
+    padding-left: 30%;
+    list-style: initial;
+    text-align: left;
   }
 }

@@ -1,2 +1,3 @@
-Trashbags.LineItem = DS.Model.extend
-  cart: DS.belongsTo 'cart'
+Trashbags.LineItem = DS.Model.extend()
+
+Trashbags.CustomShop = DS.Model.extend()
