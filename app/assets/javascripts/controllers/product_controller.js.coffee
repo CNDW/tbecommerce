@@ -3,12 +3,12 @@ Trashbags.ProductController = Em.Controller.extend
   imagesByType: Em.computed.alias 'controllers.products.imagesByType'
   typeImages: (->
     @imagesByType[@get('model.type')]
-    ).property('model')
+    ).property('content')
   images: (->
     @content.get('images')
-    ).property('model')
+    ).property('content')
   propertyImages: (->
     images = @get('content.productProperties').getEach('medium_url')
     images.slice(0, 4)
-    ).property('this')
+    ).property('content')
   catalogueOptions: Em.computed.filterBy 'content.optionTypes', 'catalogue'
