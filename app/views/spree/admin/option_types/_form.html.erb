@@ -41,4 +41,15 @@
       <%= f.error_message_on :catalogue %>
     <% end %>
   </div>
+
+  <div class="omega four columns">
+    <%= f.field_container :option_type_image do %>
+      <% if f.object.option_type_image.exists? %>
+        <%= image_tag f.object.option_type_image.url :thumb %><br>
+      <% else %>
+        <%= Spree.t(:no_images_found) %><br>
+      <% end %>
+      <%= f.file_field :option_type_image %>
+    <% end %>
+  </div>
 </div>
