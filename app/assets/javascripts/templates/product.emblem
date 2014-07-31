@@ -2,27 +2,24 @@ render 'carousel' images
 div.col-lg-12
   div.col-lg-8.col-lg-offset-2
     p
-    	=content.description
-div.col-lg-5.property-list-description.well
-  h3
-    |Each {{content.name}} Comes with these standards!
-  ul
-    each property in content.productProperties
-      li {{property.property_name}}
-div.col-lg-7.well
-  each propertyImages
-    div.col-lg-6.property-img
-      img{bind-attr src=this}
+      =content.description
+div.row.fluid.well
+  div.col-lg-5.list-description
+    h4
+      |Each {{content.name}} Comes with these standards!
+    ul
+      each property in content.productProperties
+        li {{property.property_name}}
+  div.col-lg-7
+    each propertyImages
+      div.col-lg-6.property-img
+        img{bind-attr src=this}
 
-div.col-lg-5
-  debugger
-  view Ember.Select content=catalogueOptions optionValuePath="content.id" optionLabelPath="content.presentation" selection=selectedOption
-div.col-lg-7
-div.col-lg-5
-/ each content.optionTypes
-/   detail-thumbnail model=this
-/     img{bind-attr src=medium_url} alt="loading..."
-/     div.detail-caption
-/       h3 {{name}}
-/       p.well {{description}}
-/     p Click for more!
+div.row.fluid.padding-bottom
+  div.col-lg-5.list-description
+    h4
+      |Fully customizable with extra options
+    view Ember.Select content=catalogueOptions optionValuePath="content.id" optionLabelPath="content.presentation" selection=selectedOption
+    =selectedOption.description
+  div.col-lg-7
+    =selectedOption

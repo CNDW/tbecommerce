@@ -6,4 +6,4 @@ Trashbags.OptionType = DS.Model.extend
   required: DS.attr('boolean')
   catalogue: DS.attr('boolean')
 
-  values: DS.hasMany('option_value', async: true)
+  values: DS.hasMany('option_value')

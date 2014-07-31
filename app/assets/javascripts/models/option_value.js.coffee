@@ -5,4 +5,4 @@ Trashbags.OptionValue = DS.Model.extend
   medium_url: DS.attr('string')
   large_url: DS.attr('string')
 
-  type: DS.belongsTo('option_type', async: true)
+  type: DS.belongsTo('option_type')
