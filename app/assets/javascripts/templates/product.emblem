@@ -11,12 +11,12 @@ div.col-lg-5.property-list-description.well
       li {{property.property_name}}
 div.col-lg-7.well
   each propertyImages
-    =debugger
     div.col-lg-6.property-img
       img{bind-attr src=this}
 
 div.col-lg-5
-  view Ember.Select content=name
+  debugger
+  view Ember.Select content=catalogueOptions optionValuePath="content.id" optionLabelPath="content.presentation" selection=selectedOption
 div.col-lg-7
 div.col-lg-5
 / each content.optionTypes

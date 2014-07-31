@@ -11,3 +11,4 @@ Trashbags.ProductController = Em.Controller.extend
     images = @get('content.productProperties').getEach('medium_url')
     images.slice(0, 4)
     ).property('this')
+  catalogueOptions: Em.computed.filterBy 'content.optionTypes', 'catalogue'
