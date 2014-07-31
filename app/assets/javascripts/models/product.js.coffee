@@ -10,6 +10,6 @@ Trashbags.Product = DS.Model.extend
   category: Em.computed.alias 'product_category'
   type: Em.computed.alias 'product_subcategory'
 
-  productProperties: DS.hasMany 'product_property', async: true
+  productProperties: DS.hasMany 'product_property'
   images: DS.hasMany 'images'
   optionTypes: DS.hasMany 'option_type'

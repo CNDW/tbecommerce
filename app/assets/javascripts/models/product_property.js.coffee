@@ -1,5 +1,5 @@
 Trashbags.ProductProperty = DS.Model.extend
-  product: DS.belongsTo('product', {async: true})
+  product: DS.belongsTo('product')
   value: DS.attr('string')
   property_name: DS.attr('string')
   description: DS.attr('string')

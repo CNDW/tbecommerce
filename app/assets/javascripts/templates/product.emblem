@@ -10,10 +10,10 @@ div.col-lg-5.property-list-description.well
     each property in content.productProperties
       li {{property.property_name}}
 div.col-lg-7.well
-  = propertyImages
-  each property in content.productProperties
+  each propertyImages
+    =debugger
     div.col-lg-6.property-img
-      img{bind-attr src=property.medium_url}
+      img{bind-attr src=this}
 
 div.col-lg-5
   view Ember.Select content=name
