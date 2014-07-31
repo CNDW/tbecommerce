@@ -22,4 +22,4 @@ div.row.fluid.padding-bottom
     view Ember.Select content=catalogueOptions optionValuePath="content.id" optionLabelPath="content.presentation" selection=selectedOption
     =selectedOption.description
   div.col-lg-7
-    =selectedOption
+    img{bind-attr src=selectedOption.large_url}
