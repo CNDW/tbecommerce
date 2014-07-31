@@ -12,8 +12,6 @@ Spree.config do |config|
 end
 Spree::PermittedAttributes.product_attributes.concat([:product_category, :product_subcategory, :specs])
 
-Spree::PermittedAttributes.option_type_attributes.concat([:option_type_image])
-
 Spree::Api::ApiHelpers.product_attributes.concat([:product_category, :product_subcategory, :specs])
 
 Spree::Api::ApiHelpers.product_property_attributes.concat([:description, :thumb_url, :medium_url, :large_url])
