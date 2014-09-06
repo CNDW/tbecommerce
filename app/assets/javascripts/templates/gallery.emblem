@@ -1,4 +1,0 @@
-div.row
-  div.col-main-body
-    img.gallery src="assets/gallery.png" alt="loading..." width="100%"
-    button.btn.btn-black load more
