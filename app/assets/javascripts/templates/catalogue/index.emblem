@@ -1,0 +1,108 @@
+div.catalogue-row
+  div.col-main-body.catalogue-section-title
+    h3.upcase Bags
+div.catalogue-row
+  div.col-main-body
+    div.catalogue-section-title
+      span.upcase hip packs
+    div.catalogue-tiles.col-sm-12.no-padding
+      link-to 'bag' tagName='div' classNames='item-tile col-sm-3'
+        img.img-responsive src="assets/cataloguetile.png" alt="loading..."
+        h3.capitalize bag name
+        span.price $185
+        span.gray.capitalize short bag description
+      link-to 'bag' tagName='div' classNames='item-tile col-sm-3'
+        img.img-responsive src="assets/cataloguetile.png" alt="loading..."
+        h3.capitalize bag name
+        span.price $185
+        span.gray.capitalize short bag description
+      link-to 'bag' tagName='div' classNames='item-tile col-sm-3'
+        img.img-responsive src="assets/cataloguetile.png" alt="loading..."
+        h3.capitalize bag name
+        span.price $185
+        span.gray.capitalize short bag description
+div.catalogue-row
+  div.col-main-body
+    div.catalogue-section-title
+      span.upcase messenger bags
+    div.catalogue-tiles.col-sm-12.no-padding
+      link-to 'bag' tagName='div' classNames='item-tile col-sm-3'
+        img.img-responsive src="assets/cataloguetile.png" alt="loading..."
+        h3.capitalize bag name
+        span.price $185
+        span.gray.capitalize short bag description
+      link-to 'bag' tagName='div' classNames='item-tile col-sm-3'
+        img.img-responsive src="assets/cataloguetile.png" alt="loading..."
+        h3.capitalize bag name
+        span.price $185
+        span.gray.capitalize short bag description
+      link-to 'bag' tagName='div' classNames='item-tile col-sm-3'
+        img.img-responsive src="assets/cataloguetile.png" alt="loading..."
+        h3.capitalize bag name
+        span.price $185
+        span.gray.capitalize short bag description
+div.catalogue-row
+  div.col-main-body
+    div.catalogue-section-title
+      span.upcase rolltop backpacks
+    div.catalogue-tiles.col-sm-12.no-padding
+      link-to 'bag' tagName='div' classNames='item-tile col-sm-3'
+        img.img-responsive src="assets/cataloguetile.png" alt="loading..."
+        h3.capitalize bag name
+        span.price $185
+        span.gray.capitalize short bag description
+      link-to 'bag' tagName='div' classNames='item-tile col-sm-3'
+        img.img-responsive src="assets/cataloguetile.png" alt="loading..."
+        h3.capitalize bag name
+        span.price $185
+        span.gray.capitalize short bag description
+      link-to 'bag' tagName='div' classNames='item-tile col-sm-3'
+        img.img-responsive src="assets/cataloguetile.png" alt="loading..."
+        h3.capitalize bag name
+        span.price $185
+        span.gray.capitalize short bag description
+      link-to 'bag' tagName='div' classNames='item-tile col-sm-3'
+        img.img-responsive src="assets/cataloguetile.png" alt="loading..."
+        h3.capitalize bag name
+        span.price $185
+        span.gray.capitalize short bag description
+div.catalogue-row
+  div.col-main-body
+    div.catalogue-section-title
+      span.upcase flap backpacks
+    div.catalogue-tiles.col-sm-12.no-padding
+      link-to 'bag' tagName='div' classNames='item-tile col-sm-3'
+        img.img-responsive src="assets/cataloguetile.png" alt="loading..."
+        h3.capitalize bag name
+        span.price $185
+        span.gray.capitalize short bag description
+      link-to 'bag' tagName='div' classNames='item-tile col-sm-3'
+        img.img-responsive src="assets/cataloguetile.png" alt="loading..."
+        h3.capitalize bag name
+        span.price $185
+        span.gray.capitalize short bag description
+      link-to 'bag' tagName='div' classNames='item-tile col-sm-3'
+        img.img-responsive src="assets/cataloguetile.png" alt="loading..."
+        h3.capitalize bag name
+        span.price $185
+        span.gray.capitalize short bag description
+      link-to 'bag' tagName='div' classNames='item-tile col-sm-3'
+        img.img-responsive src="assets/cataloguetile.png" alt="loading..."
+        h3.capitalize bag name
+        span.price $185
+        span.gray.capitalize short bag description
+div.catalogue-row
+  div.col-main-body
+    div.catalogue-section-title
+      span.upcase flight box
+    div.catalogue-tiles.col-sm-12.no-padding
+      link-to 'bag' tagName='div' classNames='item-tile col-sm-3'
+        img.img-responsive src="assets/cataloguetile.png" alt="loading..."
+        h3.capitalize bag name
+        span.price $185
+        span.gray.capitalize short bag description
+      link-to 'bag' tagName='div' classNames='item-tile col-sm-3'
+        img.img-responsive src="assets/cataloguetile.png" alt="loading..."
+        h3.capitalize bag name
+        span.price $185
+        span.gray.capitalize short bag description

@@ -1,10 +1,20 @@
-# For more information see: http://emberjs.com/guides/routing/
+App.Router = Ember.Router.extend()
 
-Trashbags.Router.map ()->
-  @route 'custom_shop', path: '/custom'
+App.Router.map ->
+  @route 'application'
+  @route 'blog'
   @route 'gallery'
-  @resource 'blog_entries', path: '/blog'
   @route 'about'
+  @resource 'catalogue', ->
+    @route 'index', path: '/bags'
+  @route 'bag'
+  @resource 'custom', ->
+    @resource 'custom.index', path: '/item', ->
+      @route 'index'
+      @route 'item'
+    @route 'features'
+    @route 'extras'
+    @route 'colors'
+  @route 'instock'
+  @route 'instockitem'
   @route 'cart'
-  @resource 'products', path: '/catalogue', ->
-  	@resource 'product', path: '/:product_id'

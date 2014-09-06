@@ -1,5 +1,0 @@
-render 'carouselImage' activeSlide
-
-ul.catalogue-indicators
-  each thumbnails
-    carousel-thumbnail mini_url=mini_url index=index activeIndex=activeIndex action='setSlide'

@@ -1,2 +1,4 @@
 div.row
-	= gallery-feed classNames='col-xs-12 col-md-10 col-md-offset-1' tagName='div'
+  div.col-main-body
+    img.gallery src="assets/gallery.png" alt="loading..." width="100%"
+    button.btn.btn-black load more

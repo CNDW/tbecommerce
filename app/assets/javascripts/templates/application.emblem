@@ -1,0 +1,58 @@
+div.header.row
+  div.logo.col-sm-2.col-sm-offset-2
+    link-to 'index' tagName='div'
+      img src="assets/logo.png"
+  ul.top-navs.col-sm-7
+    li
+      link-to 'catalogue' classNames='top-nav'
+        |catalogue
+      ul.catalogue-nav
+        link-to 'catalogue.index' tagName='li'
+          |bags
+        link-to 'catalogue.index' tagName='li'
+          |apparel
+        link-to 'catalogue.index' tagName='li'
+          |utility
+    li
+      link-to 'instock' classNames='top-nav'
+        |in stock
+    li
+      link-to 'custom' classNames='top-nav'
+        |custom shop
+    li
+      link-to 'gallery' classNames='top-nav'
+        |gallery
+    li
+      link-to 'blog' classNames='top-nav'
+        |blog
+    li
+      link-to 'about' classNames='top-nav'
+        |about
+    li
+      link-to 'cart'
+        span.glyphicon.glyphicon-shopping-cart
+
+outlet
+
+div.footer.row
+  ul.bottom-navs
+    li
+      span.trash-icon
+    li
+      span catalogue
+    li
+      span in stock
+    li
+      span custom shop
+    li
+      span gallery
+    li
+      span blog
+    li
+      span about
+    li
+      span.twitter-icon
+    li
+      span.facebook-icon
+    li
+      span.instagram-icon

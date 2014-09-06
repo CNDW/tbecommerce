@@ -1,0 +1,18 @@
+div.col-main-body
+  div.row.bottom-border
+    div.catalogue-tile.col-sm-3
+      img.img-responsive src="assets/cataloguetile.png" alt="loading..."
+      h3.capitalize bag name
+      span.price $185
+      span.gray.capitalize Short bag description
+    div.catalogue-tile.col-sm-3
+      img.img-responsive src="assets/cataloguetile.png" alt="loading..."
+      h3.capitalize bag name
+      span.price $185
+      span.gray.capitalize Short bag description
+  div.row-line-item
+    div.col-sm-3.line-item
+      div.head
+        span.capitalize shopping cart
+      img.img-responsive src="assets/custom1.png" alt="loading..."
+      div.checkout

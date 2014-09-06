@@ -1,0 +1,15 @@
+div.stock-row
+  div.col-main-body.stock-item
+    div.col-sm-8.stock-images
+      div.stock-image
+        img src="assets/instock.png" alt="loading..."
+      div.stock-image-thumbs
+        img src="assets/instock1.png" alt="loading..."
+        img src="assets/instock2.png" alt="loading..."
+        img src="assets/instock3.png" alt="loading..."
+    div.col-sm-4.stock-item-details
+      h3 Wastebasket
+      p Hip Pouch w Outer Pocket. Adjustable U Lock Belt. RealTree with Black. Doggie Bag. Black Stitch. Purple liner
+      h3 $60
+      button.btn.btn-black add to cart
+      h4.upcase view in catalogue

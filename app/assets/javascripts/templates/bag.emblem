@@ -1,0 +1,66 @@
+div.row
+  div.catalogue-item-section
+    div.catalogue-item-carousel
+      div.catalogue-item-image
+        img src="assets/catalogueitem.png" alt="loading..."
+      div.catalogue-item-thumbs
+        div.thumb
+          img src="assets/catalogueitem.png" alt="loading..."
+        div.thumb
+          img src="assets/catalogueitem.png" alt="loading..."
+        div.thumb
+          img src="assets/catalogueitem.png" alt="loading..."
+        div.thumb
+          img src="assets/catalogueitem.png" alt="loading..."
+        div.thumb
+          img src="assets/catalogueitem.png" alt="loading..."
+        div.thumb
+          img src="assets/catalogueitem.png" alt="loading..."
+        div.thumb
+          img src="assets/catalogueitem.png" alt="loading..."
+        div.thumb
+          img src="assets/catalogueitem.png" alt="loading..."
+        div.thumb
+          img src="assets/catalogueitem.png" alt="loading..."
+    div.catalogue-item-description
+      div.description-column
+        h3.upcase garbage barge
+        p The Garbage Barge was the first backpack ever made in the Trash catalogue. It's been through a ton of revisions over years and years of testing, and this model is the standard all the other backpacks are based off of. It's a great courier work bag, able to drop in file boxes, no problem. It's cushioned straps and back padding mean that you'll be riding in comfort, and it's external pockets give you plenty of organization in addition to the cavernous interior.
+        p It is a favorite of food delivery couriers who need to be able to handle huge tickets to make the $, and cargo / package delivery riders appreciate the size and versatility. It's also a favorite of students and professionals that need to haul equipment around on a daily basis--- film, photography, art supplies? The Garbage Barge has your back, literally. Or cram it full of everything you need for your vacation and shove it in the overhead compartment. With the Garbage Barge, you can pretty much do it all.
+        button.btn.btn-black custom order
+        button.btn.btn-black in stock
+  div.catalogue-item-section
+    div.item-detail-col
+      div.detail-column
+        p
+          b $335
+        p.gray 14" W x 12" D x 22" H
+        p.gray 3,696 cu in
+    div.item-detail-col
+      div.detail-column
+        p
+          b.upcase materials
+          span.icon-up.right
+    div.item-detail-col
+      div.detail-column
+        p
+          b.upcase customization options
+          span.icon-down.right
+        ul.detail-list
+          li option item
+          li option item
+          li option item
+          li option item
+          li option item
+          li option item
+          li option item
+          li option item
+          li option item
+          li option item
+          li option item
+          li option item
+          li option item
+          li option item
+          li option item
+          li option item
+          li option item

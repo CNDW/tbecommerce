@@ -1,0 +1,83 @@
+div.col-main-body
+  div.col-sm-5
+    div.col-sm-11.custom-field-section
+      div.custom-selection-header
+        span.custom-selection-icon.darkgray
+        span.custom-selection-title primary color
+        span.icon-down.right
+    div.col-sm-11.custom-field-section
+      div.custom-selection-header
+        span.custom-selection-icon.green
+        span.custom-selection-title secondary color
+        span.icon-up.right
+      div.custom-selection-field
+        div.selection-header kelly green
+        div.selection-fields
+          img.img-responsive src="assets/customswatches.png" alt="loading..."
+    div.col-sm-11.custom-field-section
+      div.custom-selection-header
+        span.custom-selection-icon.empty
+        span.custom-selection-title trim color
+        span.icon-down.right
+    div.col-sm-11.custom-field-section
+      div.custom-selection-header
+        span.custom-selection-icon.empty
+        span.custom-selection-title stitching color
+        span.icon-down.right
+    div.col-sm-11.custom-field-section
+      div.custom-selection-header
+        span.custom-selection-icon.empty
+        span.custom-selection-title liner color
+        span.icon-down.right
+    div.col-sm-11.custom-field-section
+      div.custom-selection-header
+        span.custom-selection-icon.empty
+        span.custom-selection-title velcro color
+        span.icon-down.right
+    div.col-sm-11.custom-field-section
+      div.custom-selection-header
+        span.custom-selection-icon.empty
+        span.custom-selection-title buckle color
+        span.icon-down.right
+    div.col-sm-11.custom-field-section
+      div.custom-selection-header
+        span.custom-selection-title including custom art?
+        span.right
+          input type='checkbox'
+    div.col-sm-11.custom-field-section
+      div.custom-selection-header
+        span.custom-selection-title custom art directions
+        span.icon-up.right
+      div.custom-selection-field
+        div.selection-fields
+          textarea placeholder='Custom art notes...'
+    div.col-sm-11.custom-field-footer
+      div.footer-info
+        span.capitalize dumpster
+        span.price $185
+      button.btn.btn-black continue to features    >
+
+  div.col-sm-7.centered
+    div.col-sm-12
+      img.img-responsive src="assets/custom1.png" alt="loading..."
+    div.col-sm-4.col-sm-offset-2.no-padding
+      img.img-responsive src="assets/custom2.png" alt="loading..."
+    div.col-sm-4.no-padding
+      img.img-responsive src="assets/custom3.png" alt="loading..."
+
+div.col-main-body
+  div.item-detail-col
+    div.detail-column
+      div.detail-header
+        span description
+        span.icon-down.right
+  div.item-detail-col
+    div.detail-column
+      div.detail-header
+        span specs
+        span.icon-down.right
+  div.item-detail-col
+    div.detail-column
+      div.detail-header
+        span materials
+        span.icon-down.right

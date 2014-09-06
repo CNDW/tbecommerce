@@ -1,0 +1,88 @@
+div.stock-row
+  div.col-main-body.stock-section
+    h3 bags in stock
+    link-to 'instockitem' tagName='div' classNames='col-sm-4 stock-tile'
+      div.tile-img
+        img.img-responsive src="assets/trans1.png" alt="loading..."
+      div.tile-info
+        h4 bag name
+        p this is a small bag description, with color and extra options included
+        div.stock-price
+          span.price $260
+          button.btn.btn-black add to cart
+    link-to 'instockitem' tagName='div' classNames='col-sm-4 stock-tile'
+      div.tile-img
+        img.img-responsive src="assets/trans1.png" alt="loading..."
+      div.tile-info
+        h4 bag name
+        p this is a small bag description, with color and extra options included
+        div.stock-price
+          span.price $260
+          button.btn.btn-black add to cart
+    link-to 'instockitem' tagName='div' classNames='col-sm-4 stock-tile'
+      div.tile-img
+        img.img-responsive src="assets/trans1.png" alt="loading..."
+      div.tile-info
+        h4 bag name
+        p this is a small bag description, with color and extra options included
+        div.stock-price
+          span.price $260
+          button.btn.btn-black add to cart
+    link-to 'instockitem' tagName='div' classNames='col-sm-4 stock-tile'
+      div.tile-img
+        img.img-responsive src="assets/trans1.png" alt="loading..."
+      div.tile-info
+        h4 bag name
+        p this is a small bag description, with color and extra options included
+        div.stock-price
+          span.price $260
+          button.btn.btn-black add to cart
+    link-to 'instockitem' tagName='div' classNames='col-sm-4 stock-tile'
+      div.tile-img
+        img.img-responsive src="assets/trans1.png" alt="loading..."
+      div.tile-info
+        h4 bag name
+        p this is a small bag description, with color and extra options included
+        div.stock-price
+          span.price $260
+          button.btn.btn-black add to cart
+    link-to 'instockitem' tagName='div' classNames='col-sm-4 stock-tile'
+      div.tile-img
+        img.img-responsive src="assets/trans1.png" alt="loading..."
+      div.tile-info
+        h4 bag name
+        p this is a small bag description, with color and extra options included
+        div.stock-price
+          span.price $260
+          button.btn.btn-black add to cart
+div.stock-row
+  div.col-main-body.stock-section
+    h3 accessories in stock
+    link-to 'instockitem' tagName='div' classNames='col-sm-4 stock-tile'
+      div.tile-img
+        img.img-responsive src="assets/trans1.png" alt="loading..."
+      div.tile-info
+        h4 bag name
+        p this is a small bag description, with color and extra options included
+        div.stock-price
+          span.price $260
+          button.btn.btn-black add to cart
+    link-to 'instockitem' tagName='div' classNames='col-sm-4 stock-tile'
+      div.tile-img
+        img.img-responsive src="assets/trans1.png" alt="loading..."
+      div.tile-info
+        h4 bag name
+        p this is a small bag description, with color and extra options included
+        div.stock-price
+          span.price $260
+          button.btn.btn-black add to cart
+div.stock-row
+  div.col-main-body.stock-section
+    div.pages
+      span viewing 1 to 6
+      span.gray 6 total
+    div.stock-link
+      span
+        |That's what we have in stock. visit the
+        button.btn.btn-black custom shop
+        | for more options

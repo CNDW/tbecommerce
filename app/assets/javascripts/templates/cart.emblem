@@ -1,1 +1,35 @@
-h1 Shopping!
+div.row-page-title.bottom-border
+  div.col-main-body.no-margin
+    div.page-title
+      span.upcase shopping cart
+div.row
+  div.col-main-body
+    div.row-line-item.bottom-border.text-medium
+      div.col-sm-7
+        span.upcase item
+      div.col-sm-2
+        span.upcase quantity
+      div.col-sm-2
+        span.upcase price
+      div.col-sm-1
+        span.upcase remove
+    div.row-line-item.bottom-border
+      div.col-sm-7.line-item
+        div.head
+          span.capitalize custom dumpster
+          button.btn.btn-black edit
+        div.col-sm-3
+          img.img-responsive src="assets/custom1.png" alt="loading..."
+      div.col-sm-2
+        span.capitalize 1
+      div.col-sm-2
+        span.capitalize $215
+      div.col-sm-1
+        span.icon-x
+    div.row-line-item.text-medium
+      div.col-sm-7.line-item
+        div.checkout
+          span.upcase subtotal
+          span.price $215
+        div.checkout
+          button.btn.btn-black checkout

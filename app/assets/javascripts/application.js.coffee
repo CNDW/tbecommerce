@@ -17,7 +17,7 @@
 #= require ./router
 
 # for more details see: http://emberjs.com/guides/application/
-window.Trashbags = Ember.Application.create(
+window.App = Ember.Application.create(
   LOG_ACTIVE_GENERATION: true
   LOG_MODULE_RESOLVER: true
   LOG_TRANSITIONS: true

@@ -10,12 +10,6 @@
  *
  *= require_self
  *= require yuireset
- *= require framework
  *= require pongstagr.am
- *= require scaffolds
- *= require navbar
- *= require index
- *= require store
- *= require custom_shop
- *= require blog
+ *= require framework
  */
