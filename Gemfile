@@ -27,8 +27,8 @@ gem 'jquery-rails'
 
 # Use Ember.js for frontend javascript
 gem 'ember-rails'
-gem 'ember-source', '~>1.5'
-gem 'ember-data-source', '1.0.0.beta.8'
+gem 'ember-source', '~>1.7'
+gem 'ember-data-source', '1.0.0.beta.9'
 
 # Use emblem for javascript templates
 gem 'emblem-rails'
@@ -51,7 +51,6 @@ gem 'oink'
 
 gem 'spree', github: 'spree/spree', branch: '2-2-stable'
 gem 'spree_auth_devise', :git => 'https://github.com/spree/spree_auth_devise.git', :branch => '2-2-stable'
-gem 'spree_blogging_spree', github: 'stefansenk/spree-blogging-spree'
 
 group :development, :test do
 	gem 'better_errors'
