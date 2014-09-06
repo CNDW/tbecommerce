@@ -1,3 +1,2 @@
-# Trashbags.LineItem = DS.Model.extend()
-
-# Trashbags.CustomShop = DS.Model.extend()
+App.LineItem = DS.Model.extend
+  product: DS.attr 'string'

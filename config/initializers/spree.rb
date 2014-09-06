@@ -10,6 +10,9 @@ Spree.config do |config|
   # Uncomment to override the default site name.
   # config.site_name = "Spree Demo Site"
 end
+
+Spree::Api::Config[:requires_authentication] = false
+
 Spree::PermittedAttributes.product_attributes.concat([:product_category, :product_subcategory, :specs])
 
 Spree::Api::ApiHelpers.product_attributes.concat([:product_category, :product_subcategory, :specs])
