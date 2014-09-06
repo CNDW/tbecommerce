@@ -1,1 +1,1 @@
-Trashbags.Cart = DS.Model.extend()
+# Trashbags.Cart = DS.Model.extend()

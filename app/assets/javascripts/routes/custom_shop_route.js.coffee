@@ -1,1 +1,1 @@
-Trashbags.CustomShopRoute = Em.Route.extend()
+# Trashbags.CustomShopRoute = Em.Route.extend()

@@ -1,1 +1,1 @@
-Trashbags.LineItemsRoute = Em.Route.extend()
+# Trashbags.LineItemsRoute = Em.Route.extend()

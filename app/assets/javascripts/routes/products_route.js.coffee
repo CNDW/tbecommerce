@@ -1,3 +1,3 @@
-Trashbags.ProductsRoute = Em.Route.extend
-	model: ->
-		@store.find('product')
+# Trashbags.ProductsRoute = Em.Route.extend
+# 	model: ->
+# 		@store.find('product')

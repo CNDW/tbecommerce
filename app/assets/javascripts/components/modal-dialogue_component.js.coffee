@@ -1,4 +1,4 @@
-Trashbags.ModalDialogueComponent = Em.Component.extend
-	actions:
-		close: ->
-			@sendAction()
+# Trashbags.ModalDialogueComponent = Em.Component.extend
+# 	actions:
+# 		close: ->
+# 			@sendAction()
