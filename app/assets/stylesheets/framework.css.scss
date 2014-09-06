@@ -63,25 +63,25 @@ html, body {
   padding: 0;
 }
 .icon-up {
-  background: url('icon-up.png') 50% 50% no-repeat;
+  background: asset-url('icon-up.png') 50% 50% no-repeat;
   width: 18px;
   height: 12px;
   display: inline-block;
 }
 .icon-down {
-  background: url('icon-down.png') 50% 50% no-repeat;
+  background: asset-url('icon-down.png') 50% 50% no-repeat;
   width: 18px;
   height: 12px;
   display: inline-block;
 }
 .icon-info {
-  background: url('icon-info.png') 50% 50% no-repeat;
+  background: asset-url('icon-info.png') 50% 50% no-repeat;
   width: 20px;
   height: 20px;
   display: inline-block;
 }
 .icon-x {
-  background: url('icon-x.png') 50% 50% no-repeat;
+  background: asset-url('icon-x.png') 50% 50% no-repeat;
   width: 16px;
   height: 16px;
   display: inline-block;
@@ -152,19 +152,19 @@ Parallax
   padding: 0;
   overflow: hidden;
   &.slide-1 {
-    background: url('andy1.jpg') 50% 50% no-repeat fixed;
+    background: asset-url('andy1.jpg') 50% 50% no-repeat fixed;
     background-size: cover;
   }
   &.slide-2 {
-    background: url('andy2.png') 50% 50% no-repeat fixed;
+    background: asset-url('andy2.png') 50% 50% no-repeat fixed;
     background-size: cover;
   }
   &.slide-3 {
-    background: url('andy3.png') 50% 50% no-repeat fixed;
+    background: asset-url('andy3.png') 50% 50% no-repeat fixed;
     background-size: cover;
   }
   &.slide-4 {
-    background: url('andy4.png') 50% 50% no-repeat fixed;
+    background: asset-url('andy4.png') 50% 50% no-repeat fixed;
     background-size: cover;
   }
 }
@@ -201,7 +201,7 @@ Parallax
       margin-left: -300px;
     }
     .transition-img {
-      background: url('trans1.png') no-repeat;
+      background: asset-url('trans1.png') no-repeat;
       background-size: cover;
       top: -140px;
     }
@@ -212,7 +212,7 @@ Parallax
       width: 100%;
     }
     .transition-img {
-      background: url('trans2.png') no-repeat;
+      background: asset-url('trans2.png') no-repeat;
       background-size: cover;
       top: -183px;
       margin-left: -340px;
@@ -225,7 +225,7 @@ Parallax
     .transition-img {
       height: 240px;
       width: 320px;
-      background: url('trans3.png') no-repeat;
+      background: asset-url('trans3.png') no-repeat;
       background-size: cover;
       top: -111px;
       margin-left: 30px;
@@ -736,7 +736,7 @@ ul.top-navs {
   }
 }
 span.trash-icon {
-  background: url("trashicon.png") transparent no-repeat 50% 50%;
+  background: asset-url("trashicon.png") transparent no-repeat 50% 50%;
   display: inline-block;
   height: 41px;
   width: 35px;
@@ -744,7 +744,7 @@ span.trash-icon {
   top: 14px;
 }
 span.twitter-icon {
-  background: url("twittericon.png") transparent no-repeat 50% 50%;
+  background: asset-url("twittericon.png") transparent no-repeat 50% 50%;
   display: inline-block;
   height: 35px;
   width: 35px;
@@ -753,7 +753,7 @@ span.twitter-icon {
   margin-right: 20px;
 }
 span.facebook-icon {
-  background: url("facebookicon.png") transparent no-repeat 50% 50%;
+  background: asset-url("facebookicon.png") transparent no-repeat 50% 50%;
   display: inline-block;
   height: 35px;
   width: 35px;
@@ -762,7 +762,7 @@ span.facebook-icon {
   margin-right: 20px;
 }
 span.instagram-icon {
-  background: url("instagramicon.png") transparent no-repeat 50% 50%;
+  background: asset-url("instagramicon.png") transparent no-repeat 50% 50%;
   display: inline-block;
   height: 35px;
   width: 35px;
