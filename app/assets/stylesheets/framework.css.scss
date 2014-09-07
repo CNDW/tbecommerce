@@ -260,6 +260,8 @@ ul.top-navs {
     margin-right: 0;
   }
   li {
+    z-index: 5;
+    cursor: pointer;
     height: 90px;
     padding-top: 30px;
     a.top-nav {
@@ -279,10 +281,15 @@ ul.top-navs {
     &.active + .catalogue-nav {
       display: block;
       list-style: none;
-      padding-left: 15px;
       li {
-        padding: 8px 0 0 0;
+        background-color: white;
+        padding: 4px 0 4px 0;
         height: auto;
+        padding-left: 15px;
+        &.active, &:hover, &:active, &:focus {
+          color: white;
+          background-color: black;
+        }
       }
     }
   }

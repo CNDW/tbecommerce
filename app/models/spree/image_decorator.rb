@@ -7,9 +7,9 @@ module Spree
       self.id
     end
     self.attachment_definitions[:attachment][:styles].merge!(
-      carousel_large: '1200x1200>',
-      carousel_medium: '1000x1000>',
-      carousel_small: '800x800>'
-    )
+      web_large: '1274x980>',
+      web_medium: '637x490>',
+      web_small: '390x300>',
+      web_thumb: '130x100>' )
   end
 end

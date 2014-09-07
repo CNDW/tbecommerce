@@ -4,30 +4,30 @@ div.header.row
       img src="<%= asset_path('logo.png') %>"
   ul.top-navs.col-sm-7
     li
-      link-to 'catalogue' classNames='top-nav'
+      a.top-nav{bind-attr class="catalogueActive:active"} click='toggleCatalogue'
         |catalogue
       ul.catalogue-nav
         link-to 'catalogue.index' tagName='li'
-          |bags
+          span click='deactivateCatalogue' bags
         link-to 'catalogue.index' tagName='li'
-          |apparel
+          span click='deactivateCatalogue' apparel
         link-to 'catalogue.index' tagName='li'
-          |utility
+          span click='deactivateCatalogue' utility
     li
       link-to 'instock' classNames='top-nav'
-        |in stock
+        span click='deactivateCatalogue' in stock
     li
       link-to 'custom' classNames='top-nav'
-        |custom shop
+        span click='deactivateCatalogue' custom shop
     li
       link-to 'gallery' classNames='top-nav'
-        |gallery
+        span click='deactivateCatalogue' gallery
     li
       link-to 'blog' classNames='top-nav'
-        |blog
+        span click='deactivateCatalogue' blog
     li
       link-to 'about' classNames='top-nav'
-        |about
+        span click='deactivateCatalogue' about
     li
       link-to 'cart'
         span.glyphicon.glyphicon-shopping-cart
