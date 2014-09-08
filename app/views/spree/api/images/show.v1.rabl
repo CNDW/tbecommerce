@@ -1,6 +1,6 @@
 object @image
-attributes *image_attributes
-attributes :viewable_type, :viewable_id
-Spree::Image.attachment_definitions[:attachment][:styles].each do |k,v|
-  node("#{k}_url") { |i| i.attachment.url(k) }
-end
+attributes :id, :position, :alt
+node("small_url") { |i| i.attachment.url("web_small") }
+node("large_url") { |i| i.attachment.url("web_large") }
+node("medium_url") { |i| i.attachment.url("web_medium") }
+node("thumb_url") { |i| i.attachment.url("web_thumb") }

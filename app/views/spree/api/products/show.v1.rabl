@@ -1,6 +1,7 @@
 object @product
 cache [I18n.locale, current_currency, root_object]
 attributes *product_attributes
+attributes :product_category, :product_subcategory, :specs
 node(:display_price) { |p| p.display_price.to_s }
 node(:has_variants) { |p| p.has_variants? }
 

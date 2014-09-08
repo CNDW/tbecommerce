@@ -6,4 +6,4 @@ App.ApplicationStore = DS.Store.extend({
 })
 
 App.ApplicationAdapter = DS.RESTAdapter.extend
-	namespace: 'api'
+  namespace: 'api'
