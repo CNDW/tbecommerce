@@ -9,7 +9,6 @@ App.ApplicationSerializer = DS.ActiveModelSerializer.extend DS.EmbeddedRecordsMi
     productProperties: embedded: 'always'
     images: embedded: 'always'
     optionTypes: embedded: 'always'
-
   extractMeta: (store, type, payload)->
     metadata = {}
     Em.$.each payload, (key, value)->
@@ -17,4 +16,3 @@ App.ApplicationSerializer = DS.ActiveModelSerializer.extend DS.EmbeddedRecordsMi
         metadata[key] = value
         delete payload[key]
     store.metaForType(type, metadata)
-

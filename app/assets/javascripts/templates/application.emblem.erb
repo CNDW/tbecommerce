@@ -7,11 +7,11 @@ div.header.row
       a.top-nav{bind-attr class="catalogueActive:active"} click='toggleCatalogue'
         |catalogue
       ul.catalogue-nav
-        link-to 'catalogue.index' tagName='li'
+        link-to 'catalogue.bags' tagName='li'
           span click='deactivateCatalogue' bags
-        link-to 'catalogue.index' tagName='li'
+        link-to 'catalogue.apparel' tagName='li'
           span click='deactivateCatalogue' apparel
-        link-to 'catalogue.index' tagName='li'
+        link-to 'catalogue.utility' tagName='li'
           span click='deactivateCatalogue' utility
     li
       link-to 'instock' classNames='top-nav'

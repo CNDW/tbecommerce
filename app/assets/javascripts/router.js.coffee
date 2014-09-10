@@ -6,7 +6,11 @@ App.Router.map ->
   @route 'gallery'
   @route 'about'
   @resource 'catalogue', ->
-    @route 'index', path: '/bags'
+    @resource 'products', ->
+      @resource 'product'
+    @resource 'catalogue.bags', path: '/bags'
+    @resource 'catalogue.apparel', path: '/apparel'
+    @resource 'catalogue.utility', path: '/utility'
   @route 'bag'
   @resource 'custom', ->
     @resource 'custom.index', path: '/item', ->
