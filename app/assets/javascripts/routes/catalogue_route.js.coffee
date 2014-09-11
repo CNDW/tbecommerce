@@ -3,10 +3,20 @@ App.CatalogueRoute = Em.Route.extend
     @store.find 'product'
 
 App.CatalogueIndexRoute = Em.Route.extend
-  redirect: ->
-    @transitionTo 'bags'
+  model: ->
+    @store.find 'product'
+  setupController: (controller, model)->
+    controller.set 'model', model
+    model.mapBy('type').uniq().forEach (item)->
+      item_name = item
+      this[0].set item, this[1].store.filter 'product', (product)->
+        x = product.get 'type'
+        x == item_name
+    , [controller, model]
+  renderTemplate: (controller)->
+    @render 'catalogue/index', controller: controller
 
-App.CatalogueBagsRoute = Em.Route.extend
+App.CatalogueBagsRoute = App.CatalogueIndexRoute.extend
   model: ->
     model = @store.filter 'product', (product)->
       x = product.get 'product_category'
@@ -14,7 +24,7 @@ App.CatalogueBagsRoute = Em.Route.extend
   renderTemplate: (controller)->
     @render 'catalogue/index', controller: controller
 
-App.CatalogueApparelRoute = Em.Route.extend
+App.CatalogueApparelRoute = App.CatalogueIndexRoute.extend
   model: ->
     model = @store.filter 'product', (product)->
       x = product.get 'product_category'
@@ -22,7 +32,7 @@ App.CatalogueApparelRoute = Em.Route.extend
   renderTemplate: (controller)->
     @render 'catalogue/index', controller: controller
 
-App.CatalogueUtilityRoute = Em.Route.extend
+App.CatalogueUtilityRoute = App.CatalogueIndexRoute.extend
   model: ->
     model = @store.filter 'product', (product)->
       x = product.get 'product_category'
