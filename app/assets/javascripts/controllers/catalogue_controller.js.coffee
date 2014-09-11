@@ -2,7 +2,7 @@ App.CatalogueIndexController = Em.ArrayController.extend
   types: (->
     @get('model').mapBy('type').uniq().map (item)->
       {name: item, items: @get item}
-    , @
+    , this
   ).property('model')
   category: 'catalogue'
 

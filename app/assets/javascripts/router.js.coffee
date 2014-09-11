@@ -6,8 +6,6 @@ App.Router.map ->
   @route 'gallery'
   @route 'about'
   @resource 'catalogue', ->
-    @resource 'products', ->
-      @resource 'product'
     @resource 'catalogue.bags', path: '/bags'
     @resource 'catalogue.apparel', path: '/apparel'
     @resource 'catalogue.utility', path: '/utility'
@@ -22,3 +20,4 @@ App.Router.map ->
   @route 'instock'
   @route 'instockitem'
   @route 'cart'
+  @resource 'product', path: '/product/:product_id'
