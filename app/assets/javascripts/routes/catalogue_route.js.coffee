@@ -20,7 +20,7 @@ App.CatalogueBagsRoute = App.CatalogueIndexRoute.extend
   model: ->
     model = @store.filter 'product', (product)->
       x = product.get 'product_category'
-      x == 'bag'
+      x is 'bag'
   renderTemplate: (controller)->
     @render 'catalogue/index', controller: controller
 
@@ -28,7 +28,7 @@ App.CatalogueApparelRoute = App.CatalogueIndexRoute.extend
   model: ->
     model = @store.filter 'product', (product)->
       x = product.get 'product_category'
-      x == 'apparel'
+      x is 'apparel'
   renderTemplate: (controller)->
     @render 'catalogue/index', controller: controller
 
@@ -36,6 +36,6 @@ App.CatalogueUtilityRoute = App.CatalogueIndexRoute.extend
   model: ->
     model = @store.filter 'product', (product)->
       x = product.get 'product_category'
-      x == 'utility'
+      x is 'utility'
   renderTemplate: (controller)->
     @render 'catalogue/index', controller: controller
