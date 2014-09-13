@@ -4,7 +4,6 @@ App.CustomIndexRoute = Em.Route.extend
   setupController: (controller, model)->
     @_super controller, model
     Em.RSVP.hash(
-      products: @store.find('product')
       controller: controller
       categories: [
         {name: 'bag', types: [], models: @store.filter 'product', (product)->
@@ -20,8 +19,6 @@ App.CustomIndexRoute = Em.Route.extend
           category is 'utility'
         }
       ]
-      store: @store
-      catalogue: []
     ).then (data)->
       data.categories.forEach (category)->
         category.types = category.models.mapBy('type').uniq().map (type)->
@@ -29,4 +26,4 @@ App.CustomIndexRoute = Em.Route.extend
         category.types.forEach (type)->
           type.items = @models.filterBy 'type', type.name
         , category
-      data.controller.set 'catalogue', data.categories
+      data.controller.set 'categories', data.categories

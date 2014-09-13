@@ -1,18 +1,15 @@
 div.col-main-body
   div.col-sm-5
-    each types
+    each categories
       div.col-sm-11.custom-field-section.active
         div.custom-selection-header
           span.custom-selection-title {{name}}
           span.icon-up.right
-        each items
+        each types
           div.custom-selection-field
             div.selection-category
-              span.category-title hip packs
-              link-to 'custom.index.item' tagName='div' classNames='selection-option'
-                span Waste Bin
-              link-to 'custom.index.item' tagName='div' classNames='selection-option'
-                span Wastebasket
-              link-to 'custom.index.item' tagName='div' classNames='selection-option'
-                span Wastebasket II
+              span.category-title {{name}}
+              each items
+                link-to 'custom.index.item' tagName='div' classNames='selection-option'
+                  span {{name}}
   outlet
