@@ -12,8 +12,9 @@ App.Product = DS.Model.extend
   tagline: DS.attr 'string'
 
   catalogue_image: (->
-    first_image = @get('images').content[0]
-    first_image.get('medium_url')
+    content = @get('images').content
+    return '' if content.length is 0
+    content[0].get('medium_url')
   ).property('images')
 
   productProperties: DS.hasMany 'product_property'
