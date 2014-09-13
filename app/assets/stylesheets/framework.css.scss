@@ -517,21 +517,21 @@ ul.top-navs {
   }
 }
 
-.custom-field-section {
-  border-top: $border-line;
-  padding: 5px 0 20px 0;
+.custom-selection-header {
   cursor: pointer;
-  .section-content {
-    display: none;
-  }
+  padding: 5px 0 15px 0;
+  border-top: $border-line;
   .toggle-menu-icon {
     background: asset-url('icon-up.png') 50% 50% no-repeat;
+  }
+  & + .section-content {
+    display: none;
   }
   &.active {
     .toggle-menu-icon {
       background: asset-url('icon-down.png') 50% 50% no-repeat;
     }
-    & > .section-content {
+    & + .section-content {
       display: block;
     }
   }
@@ -541,9 +541,7 @@ ul.top-navs {
       color: $text-dark;
     }
   }
-}
-.custom-selection-header {
-  margin-bottom: 15px;
+
 }
 .custom-selection-icon {
   display: inline-block;
@@ -574,6 +572,7 @@ ul.top-navs {
     margin-bottom: 20px;
   }
   .selection-option {
+    cursor: pointer;
     font-size: 14px;
     padding-left: 10px;
     span {

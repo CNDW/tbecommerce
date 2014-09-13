@@ -11,6 +11,11 @@ App.Product = DS.Model.extend
   product_type: Em.computed.alias 'product_subcategory'
   tagline: DS.attr 'string'
 
+  catalogue_image: (->
+    first_image = @get('images').content[0]
+    first_image.get('medium_url')
+  ).property('images')
+
   productProperties: DS.hasMany 'product_property'
   images: DS.hasMany 'image'
   optionTypes: DS.hasMany 'option_type'
