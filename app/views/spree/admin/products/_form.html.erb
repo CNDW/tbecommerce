@@ -32,6 +32,14 @@
         <%= f.error_message_on :specs %>
       <% end %>
     </div>
+
+    <div data-hook="admin_product_form_tagline">
+      <%= f.field_container :tagline do %>
+        <%= f.label :tagline, Spree.t(:tagline) %>
+        <%= f.text_area :tagline, {:rows => "#{unless @product.has_variants? then '2' else '2' end}", :class => 'fullwidth'} %>
+        <%= f.error_message_on :tagline %>
+      <% end %>
+    </div>
   </div>
 
   <div class="right four columns omega" data-hook="admin_product_form_right">

@@ -9,6 +9,7 @@ App.Product = DS.Model.extend
   displayPrice: DS.attr 'string'
   category: Em.computed.alias 'product_category'
   type: Em.computed.alias 'product_subcategory'
+  tagline: DS.attr 'string'
 
   productProperties: DS.hasMany 'product_property'
   images: DS.hasMany 'image'

@@ -12,4 +12,5 @@ div.col-main-body
               each items
                 link-to 'custom.index.item' tagName='div' classNames='selection-option'
                   span {{name}}
-  outlet
+  div.col-sm-7
+    render 'custom-item' model
