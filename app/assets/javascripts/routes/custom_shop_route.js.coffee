@@ -28,7 +28,14 @@ App.CustomShopRoute = Em.Route.extend
 
 App.CustomIndexRoute = App.CustomShopRoute.extend
   model: (params)->
-    @store.createRecord 'custom-item'
+    @store.find('custom-item').then (data)->
+      if (data.content.length is 0)
+        item = data.store.createRecord 'custom-item'
+        item.save()
+      else
+        item = data.content[0]
+      return item
+
     # @store.find('custom-item').then (data)->
     #   return data
   actions:

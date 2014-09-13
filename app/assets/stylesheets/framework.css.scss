@@ -70,6 +70,11 @@ html, body {
 .no-padding {
   padding: 0;
 }
+.toggle-menu-icon{
+  width: 18px;
+  height: 12px;
+  display: inline-block;
+}
 .icon-up {
   background: asset-url('icon-up.png') 50% 50% no-repeat;
   width: 18px;
@@ -516,6 +521,20 @@ ul.top-navs {
   border-top: $border-line;
   padding: 5px 0 20px 0;
   cursor: pointer;
+  .section-content {
+    display: none;
+  }
+  .toggle-menu-icon {
+    background: asset-url('icon-up.png') 50% 50% no-repeat;
+  }
+  &.active {
+    .toggle-menu-icon {
+      background: asset-url('icon-down.png') 50% 50% no-repeat;
+    }
+    & > .section-content {
+      display: block;
+    }
+  }
   &.active, &:hover, &:active, &:focus {
     border-top: $border-line-active;
     .custom-selection-title {
