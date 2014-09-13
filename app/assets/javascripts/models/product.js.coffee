@@ -8,7 +8,7 @@ App.Product = DS.Model.extend
   slug: DS.attr 'string'
   displayPrice: DS.attr 'string'
   category: Em.computed.alias 'product_category'
-  type: Em.computed.alias 'product_subcategory'
+  product_type: Em.computed.alias 'product_subcategory'
   tagline: DS.attr 'string'
 
   productProperties: DS.hasMany 'product_property'

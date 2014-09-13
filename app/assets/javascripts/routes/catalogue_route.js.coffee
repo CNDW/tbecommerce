@@ -7,10 +7,10 @@ App.CatalogueIndexRoute = Em.Route.extend
     @store.find 'product'
   setupController: (controller, model)->
     controller.set 'model', model
-    model.mapBy('type').uniq().forEach (item)->
+    model.mapBy('product_type').uniq().forEach (item)->
       item_name = item
       this[0].set item, this[1].store.filter 'product', (product)->
-        x = product.get 'type'
+        x = product.get 'product_type'
         x == item_name
     , [controller, model]
   renderTemplate: (controller)->

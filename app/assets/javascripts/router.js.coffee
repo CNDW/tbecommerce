@@ -11,9 +11,7 @@ App.Router.map ->
     @resource 'catalogue.utility', path: '/utility'
   @route 'bag'
   @resource 'custom', ->
-    @resource 'custom.index', path: '/item', ->
-      @route 'index'
-      @route 'item'
+    @route 'index', path: '/product',
     @route 'features'
     @route 'extras'
     @route 'colors'
