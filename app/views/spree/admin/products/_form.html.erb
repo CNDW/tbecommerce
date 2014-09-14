@@ -165,6 +165,13 @@
         <%= f.hidden_field :option_type_ids, :value => @product.option_type_ids.join(',') %>
       <% end %>
     </div>
+
+    <div data-hook="admin_product_form_color_types">
+      <%= f.field_container :color_types do %>
+        <%= f.label :color_type_ids, Spree.t(:color_types) %>
+        <%= f.hidden_field :color_type_ids, :value => @product.color_type_ids.join(',') %>
+      <% end %>
+    </div>
   </div>
 
   <div data-hook="admin_product_form_meta" class="alpha omega twelve columns">

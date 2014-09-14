@@ -44,7 +44,7 @@
 </table>
 <% else %>
   <div class="alpha twelve columns no-objects-found">
-    <%= Spree.t(:no_resource_found, resource: I18n.t(:other, scope: 'activerecord.models.spree/color_type')) %>,
+    <%= Spree.t(:no_resource_found, resource: 'Color Types') %>,
     <%= link_to Spree.t(:add_one), spree.new_admin_color_type_path %>!
   </div>
 <% end %>

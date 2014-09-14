@@ -1,0 +1,42 @@
+$(document).ready(function () {
+  Spree.routes.color_type_search = Spree.pathFor('api/color_types');
+  'use strict';
+
+  if ($('#product_color_type_ids').length > 0) {
+    $('#product_color_type_ids').select2({
+      placeholder: 'Choose a color type',
+      multiple: true,
+      initSelection: function (element, callback) {
+        var url = Spree.url(Spree.routes.color_type_search, {
+          ids: element.val()
+        });
+        return $.getJSON(url, null, function (data) {
+          return callback(data);
+        });
+      },
+      ajax: {
+        url: Spree.routes.color_type_search,
+        quietMillis: 200,
+        datatype: 'json',
+        data: function (term) {
+          return {
+            q: {
+              name_cont: term
+            }
+          };
+        },
+        results: function (data) {
+          return {
+            results: data
+          };
+        }
+      },
+      formatResult: function (color_type) {
+        return color_type.presentation + ' (' + color_type.name + ')';
+      },
+      formatSelection: function (color_type) {
+        return color_type.presentation + ' (' + color_type.name + ')';
+      }
+    });
+  }
+});

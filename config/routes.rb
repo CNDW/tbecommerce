@@ -70,6 +70,8 @@ Spree::Core::Engine.routes.draw do
     get '/products/bag' => 'products#bag_catalogue'
     get '/products/apparel' => 'products#apparel_catalogue'
     get '/products/utility' => 'products#utility_catalogue'
+    get '/color_types(.:format)' => 'color_types#index', :as => :color_types, :constraints => {:format=>"json"}
+
     # get '/blog/tag/:tag' => 'blog_entries#tag', :as => :blog_tag
     # get '/blog/category/:category' => 'blog_entries#category', :as => :blog_category
     # get '/blog/author/:author' => 'blog_entries#author', :as => :blog_author
