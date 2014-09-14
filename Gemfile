@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.8'
+gem 'rails', '4.1.4'
 
 # Use postgresql as the database for Active Record
 gem 'pg'
@@ -23,7 +23,7 @@ gem 'capistrano-rails', '~> 1.1.1'
 gem 'capistrano-rvm'
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 3.1.2'
 
 # Use Ember.js for frontend javascript
 gem 'ember-rails'
@@ -49,8 +49,8 @@ end
 gem 'posix-spawn'
 gem 'oink'
 
-gem 'spree', github: 'spree/spree', branch: '2-2-stable'
-gem 'spree_auth_devise', :git => 'https://github.com/spree/spree_auth_devise.git', :branch => '2-2-stable'
+gem 'spree', github: 'spree/spree', branch: '2-3-stable'
+gem 'spree_auth_devise', :git => 'https://github.com/spree/spree_auth_devise.git', :branch => '2-3-stable'
 
 group :development, :test do
 	gem 'better_errors'

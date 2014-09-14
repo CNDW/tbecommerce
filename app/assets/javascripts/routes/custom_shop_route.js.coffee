@@ -1,4 +1,19 @@
 App.CustomShopRoute = Em.Route.extend
+  shop_steps: ['custom.index', 'custom.colors', 'custom.features', 'custom.extras']
+  model: (params)->
+    @store.find('custom-item').then (data)->
+      if (data.content.length is 0)
+        item = data.store.createRecord 'custom-item'
+        item.save()
+      else
+        item = data.content[0]
+      return item
+
+  afterModel: (model, transition)->
+    @transitionTo @shop_steps[model.get 'stepIndex'] if @step_number > model.get 'stepIndex'
+
+App.CustomIndexRoute = App.CustomShopRoute.extend
+  step_number: 0
   setupController: (controller, model)->
     @_super controller, model
     Em.RSVP.hash(
@@ -25,25 +40,18 @@ App.CustomShopRoute = Em.Route.extend
           type.items = @models.filterBy 'product_type', type.name
         , category
       data.controller.set 'categories', data.categories
-
-App.CustomIndexRoute = App.CustomShopRoute.extend
-  model: (params)->
-    @store.find('custom-item').then (data)->
-      if (data.content.length is 0)
-        item = data.store.createRecord 'custom-item'
-        item.save()
-      else
-        item = data.content[0]
-      return item
-
-    # @store.find('custom-item').then (data)->
-    #   return data
   actions:
     setCustomProduct: (product)->
       custom_item = @modelFor 'custom.index'
       custom_item.set 'product', product
       custom_item.save()
 
-App.CustomFeaturesRoute = App.CustomShopRoute.extend()
-App.CustomExtrasRoute = App.CustomShopRoute.extend()
-App.CustomColorsRoute = App.CustomShopRoute.extend()
+App.CustomColorsRoute = App.CustomShopRoute.extend
+  step_number: 1
+  setupController: (controller, model)->
+    @_super controller, model
+
+App.CustomFeaturesRoute = App.CustomShopRoute.extend
+  step_number: 2
+App.CustomExtrasRoute = App.CustomShopRoute.extend
+  step_number: 3

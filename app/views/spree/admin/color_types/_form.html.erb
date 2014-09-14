@@ -43,13 +43,13 @@
   </div>
 
   <div class="omega four columns">
-    <%= f.field_container :option_type_image do %>
-      <% if f.object.option_type_image.exists? %>
-        <%= image_tag f.object.option_type_image.url :web_thumb %><br>
+    <%= f.field_container :color_type_image do %>
+      <% if f.object.color_type_image.exists? %>
+        <%= image_tag f.object.color_type_image.url :web_thumb %><br>
       <% else %>
         <%= Spree.t(:no_images_found) %><br>
       <% end %>
-      <%= f.file_field :option_type_image %>
+      <%= f.file_field :color_type_image %>
     <% end %>
   </div>
 </div>

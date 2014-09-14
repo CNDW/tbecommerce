@@ -1,8 +1,9 @@
 App.OptionValue = DS.Model.extend
-  price: DS.attr('number')
-  description: DS.attr('string')
-  thumb_url: DS.attr('string')
-  medium_url: DS.attr('string')
-  large_url: DS.attr('string')
+  name: DS.attr 'string'
+  price: DS.attr 'number', {defaultValue: 0}
+  description: DS.attr 'string'
+  thumb_url: DS.attr 'string'
+  medium_url: DS.attr 'string'
+  large_url: DS.attr 'string'
 
-  type: DS.belongsTo('option_type')
+  optionType: DS.belongsTo 'option_type'

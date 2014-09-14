@@ -9,6 +9,7 @@ App.ProductSerializer = DS.ActiveModelSerializer.extend DS.EmbeddedRecordsMixin,
     productProperties: embedded: 'always'
     images: embedded: 'always'
     optionTypes: embedded: 'always'
+
   extractMeta: (store, type, payload)->
     metadata = {}
     Em.$.each payload, (key, value)->
@@ -19,3 +20,7 @@ App.ProductSerializer = DS.ActiveModelSerializer.extend DS.EmbeddedRecordsMixin,
 
 App.ProductAdapter = DS.RESTAdapter.extend
   namespace: 'api'
+
+App.OptionTypeSerializer = DS.ActiveModelSerializer.extend DS.EmbeddedRecordsMixin,
+  attrs:
+    optionValues: embedded: 'always'

@@ -78,5 +78,16 @@ Spree::Core::Engine.routes.draw do
     #   :constraints => {:year => /(19|20)\d{2}/, :month => /[01]?\d/, :day => /[0-3]?\d/}
     # get '/blog/feed' => 'blog_entries#feed', :as => :blog_feed, :format => :rss
   end
-end
+  post '/admin/color_types/update_positions(.:format)' => 'admin/color_types#update_positions', :as => :update_positions_admin_color_types
+  post '/admin/color_types/update_values_positions(.:format)' => 'admin/color_types#update_values_positions', :as => :update_values_positions_admin_color_types
+  get '/admin/color_types(.:format)' => 'admin/color_types#index', :as => :admin_color_types
+  post '/admin/color_types(.:format)' => 'admin/color_types#create'
+  get '/admin/color_types/new(.:format)' => 'admin/color_types#new', :as => :new_admin_color_type
+  get '/admin/color_types/:id/edit(.:format)' => 'admin/color_types#edit', :as => :edit_admin_color_type
+  get '/admin/color_types/:id(.:format)' => 'admin/color_types#show', :as => :admin_color_type
+  patch '/admin/color_types/:id(.:format)' => 'admin/color_types#update'
+  put '/admin/color_types/:id(.:format)' => 'admin/color_types#update'
+  delete '/admin/color_types/:id(.:format)' => 'admin/color_types#destroy'
+  delete '/admin/color_values/:id(.:format)' => 'admin/color_values#destroy', :as => :admin_color_value
 
+end

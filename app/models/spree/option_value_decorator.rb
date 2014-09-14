@@ -5,7 +5,7 @@ module Spree
       web_medium: '637x490>',
       web_small: '390x300>',
       web_thumb: '130x100>' },
-      default_style: :medium,
+      default_style: :web_medium,
       url: '/spree/option_values/:id/:style/:basename.:extension',
       path: ':rails_root/public/spree/option_values/:id/:style/:basename.:extension',
       convert_options: { all: '-strip -auto-orient -colorspace sRGB' }
