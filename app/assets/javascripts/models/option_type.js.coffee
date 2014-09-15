@@ -1,4 +1,4 @@
-App.OptionType = DS.Model.extend
+App.ProductOptionType = DS.Model.extend
   name: DS.attr 'string'
   presentation: DS.attr 'string'
   position: DS.attr 'number'
@@ -9,4 +9,10 @@ App.OptionType = DS.Model.extend
   medium_url: DS.attr 'string'
   large_url: DS.attr 'string'
 
+App.OptionType = App.ProductOptionType.extend
+
   optionValues: DS.hasMany 'option_value'
+
+App.ColorType = App.ProductOptionType.extend
+
+  colorValues: DS.hasMany 'color_value'

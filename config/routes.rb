@@ -66,11 +66,10 @@ Tbecommerce::Application.routes.draw do
 end
 
 Spree::Core::Engine.routes.draw do
-  namespace :api do
-    get '/products/bag' => 'products#bag_catalogue'
-    get '/products/apparel' => 'products#apparel_catalogue'
-    get '/products/utility' => 'products#utility_catalogue'
-    get '/color_types(.:format)' => 'color_types#index', :as => :color_types, :constraints => {:format=>"json"}
+  namespace :api, defaults: { format: 'json' } do
+    resources :color_types do
+      resources :color_values
+    end
 
     # get '/blog/tag/:tag' => 'blog_entries#tag', :as => :blog_tag
     # get '/blog/category/:category' => 'blog_entries#category', :as => :blog_category
@@ -80,16 +79,17 @@ Spree::Core::Engine.routes.draw do
     #   :constraints => {:year => /(19|20)\d{2}/, :month => /[01]?\d/, :day => /[0-3]?\d/}
     # get '/blog/feed' => 'blog_entries#feed', :as => :blog_feed, :format => :rss
   end
-  post '/admin/color_types/update_positions(.:format)' => 'admin/color_types#update_positions', :as => :update_positions_admin_color_types
-  post '/admin/color_types/update_values_positions(.:format)' => 'admin/color_types#update_values_positions', :as => :update_values_positions_admin_color_types
-  get '/admin/color_types(.:format)' => 'admin/color_types#index', :as => :admin_color_types
-  post '/admin/color_types(.:format)' => 'admin/color_types#create'
-  get '/admin/color_types/new(.:format)' => 'admin/color_types#new', :as => :new_admin_color_type
-  get '/admin/color_types/:id/edit(.:format)' => 'admin/color_types#edit', :as => :edit_admin_color_type
-  get '/admin/color_types/:id(.:format)' => 'admin/color_types#show', :as => :admin_color_type
-  patch '/admin/color_types/:id(.:format)' => 'admin/color_types#update'
-  put '/admin/color_types/:id(.:format)' => 'admin/color_types#update'
-  delete '/admin/color_types/:id(.:format)' => 'admin/color_types#destroy'
-  delete '/admin/color_values/:id(.:format)' => 'admin/color_values#destroy', :as => :admin_color_value
+
+  namespace :admin do
+    resources :color_types do
+      collection do
+        post :update_positions
+        post :update_values_positions
+      end
+    end
+    delete '/color_values/:id', :to => "color_values#destroy", :as => :color_value
+  end
 
 end
+
+

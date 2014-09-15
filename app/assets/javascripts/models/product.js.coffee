@@ -20,3 +20,4 @@ App.Product = DS.Model.extend
   productProperties: DS.hasMany 'product_property'
   images: DS.hasMany 'image'
   optionTypes: DS.hasMany 'option_type'
+  colorTypes: DS.hasMany 'color_type'

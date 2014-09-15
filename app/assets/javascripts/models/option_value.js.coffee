@@ -1,4 +1,4 @@
-App.OptionValue = DS.Model.extend
+App.ProductOptionValue = DS.Model.extend
   name: DS.attr 'string'
   price: DS.attr 'number', {defaultValue: 0}
   description: DS.attr 'string'
@@ -6,4 +6,8 @@ App.OptionValue = DS.Model.extend
   medium_url: DS.attr 'string'
   large_url: DS.attr 'string'
 
+App.OptionValue = App.ProductOptionValue.extend
   optionType: DS.belongsTo 'option_type'
+
+App.ColorValue = App.ProductOptionValue.extend
+  colorType: DS.belongsTo 'color_type'

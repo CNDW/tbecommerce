@@ -9,6 +9,7 @@ App.ProductSerializer = DS.ActiveModelSerializer.extend DS.EmbeddedRecordsMixin,
     productProperties: embedded: 'always'
     images: embedded: 'always'
     optionTypes: embedded: 'always'
+    colorTypes: embedded: 'always'
 
   extractMeta: (store, type, payload)->
     metadata = {}
@@ -24,3 +25,7 @@ App.ProductAdapter = DS.RESTAdapter.extend
 App.OptionTypeSerializer = DS.ActiveModelSerializer.extend DS.EmbeddedRecordsMixin,
   attrs:
     optionValues: embedded: 'always'
+
+App.ColorTypeSerializer = DS.ActiveModelSerializer.extend DS.EmbeddedRecordsMixin,
+  attrs:
+    colorValues: embedded: 'always'
