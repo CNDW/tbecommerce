@@ -50,6 +50,7 @@ App.CustomColorsRoute = App.CustomShopRoute.extend
   step_number: 1
   setupController: (controller, model)->
     @_super controller, model
+    controller.set 'colors', model.get 'product.colorTypes'
 
 App.CustomFeaturesRoute = App.CustomShopRoute.extend
   step_number: 2

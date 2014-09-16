@@ -10,9 +10,7 @@ App.ProductOptionType = DS.Model.extend
   large_url: DS.attr 'string'
 
 App.OptionType = App.ProductOptionType.extend
-
   optionValues: DS.hasMany 'option_value'
 
 App.ColorType = App.ProductOptionType.extend
-
   colorValues: DS.hasMany 'color_value'

@@ -1,15 +1,17 @@
 div.col-main-body
   div.col-sm-5
-    each optionTypes
+    each color in colors
       div.col-sm-11.custom-field-section
         toggle-menu classNames='custom-selection-header'
           span.custom-selection-icon.empty
-          span.custom-selection-title {{presentation}}
+          span.custom-selection-title {{color.presentation}}
           span.toggle-menu-icon.right
         div.section-content
           div.custom-selection-field
-          each optionValues
-            debugger
+            div.selection-header kelly green
+            div.color-swatch-field
+              each option in color.colorValues
+                img.color-swatch src=option.thumb_url
 
     div.col-sm-11.custom-field-section
       div.custom-selection-header
