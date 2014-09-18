@@ -1,7 +1,6 @@
 module Spree
   module Admin
     ProductsController.class_eval do
-
       def update
         if params[:product][:taxon_ids].present?
           params[:product][:taxon_ids] = params[:product][:taxon_ids].split(',')

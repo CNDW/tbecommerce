@@ -366,6 +366,9 @@ ul.top-navs {
   @extend .col-sm-10;
   @extend .col-sm-offset-1;
   margin-top: 30px;
+  &:last-of-type {
+    margin-bottom: 30px;
+  }
 }
 .catalogue-item-description {
   @extend .col-sm-4;
@@ -639,7 +642,7 @@ ul.top-navs {
   }
 }
 .color-swatch-field {
-  margin: -4px;
+  margin: -4px -4px 20px;
 }
 
 .color-swatch {

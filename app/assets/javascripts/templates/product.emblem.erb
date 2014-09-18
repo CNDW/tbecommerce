@@ -1,27 +1,8 @@
 div.row
   div.catalogue-item-section
     div.catalogue-item-carousel
-      div.catalogue-item-image
-        img src="<%= asset_path('catalogueitem.png') %>" alt="loading..."
-      div.catalogue-item-thumbs
-        div.thumb
-          img src="<%= asset_path('catalogueitem.png') %>" alt="loading..."
-        div.thumb
-          img src="<%= asset_path('catalogueitem.png') %>" alt="loading..."
-        div.thumb
-          img src="<%= asset_path('catalogueitem.png') %>" alt="loading..."
-        div.thumb
-          img src="<%= asset_path('catalogueitem.png') %>" alt="loading..."
-        div.thumb
-          img src="<%= asset_path('catalogueitem.png') %>" alt="loading..."
-        div.thumb
-          img src="<%= asset_path('catalogueitem.png') %>" alt="loading..."
-        div.thumb
-          img src="<%= asset_path('catalogueitem.png') %>" alt="loading..."
-        div.thumb
-          img src="<%= asset_path('catalogueitem.png') %>" alt="loading..."
-        div.thumb
-          img src="<%= asset_path('catalogueitem.png') %>" alt="loading..."
+      render "carousel" model.images
+
     div.catalogue-item-description
       div.description-column
         h3.upcase {{model.name}}
@@ -35,15 +16,15 @@ div.row
           b ${{model.price}}
         p.gray {{model.specs}}
     div.item-detail-col
-      div.detail-column
-        p
-          b.upcase materials
-          span.icon-up.right
+      toggle-menu classNames='custom-selection-header'
+        span.custom-selection-title materials
+        span.toggle-menu-icon.right
+      div.section-content
     div.item-detail-col
-      div.detail-column
-        p
-          b.upcase customization options
-          span.icon-down.right
+      toggle-menu classNames='custom-selection-header'
+        span.custom-selection-title customization options
+        span.toggle-menu-icon.right
+      div.section-content
         ul.detail-list
           li option item
           li option item

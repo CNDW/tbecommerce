@@ -11,7 +11,7 @@ div.col-main-body
             div.selection-header kelly green
             div.color-swatch-field
               each option in color.colorValues
-                img.color-swatch src=option.thumb_url
+                img.color-swatch src=option.thumb_url click='foo'
 
     div.col-sm-11.custom-field-section
       div.custom-selection-header
@@ -31,11 +31,12 @@ div.col-main-body
 
   div.col-sm-7.centered
     div.col-sm-12
-      img.img-responsive src="<%= asset_path('custom1.png') %>" alt="loading..."
-    div.col-sm-4.col-sm-offset-2.no-padding
-      img.img-responsive src="<%= asset_path('custom2.png') %>" alt="loading..."
-    div.col-sm-4.no-padding
-      img.img-responsive src="<%= asset_path('custom3.png') %>" alt="loading..."
+      partial 'tmp-svg'
+    / div.col-sm-4.col-sm-offset-2.no-padding
+    /   img.img-responsive src="<%= asset_path('custom2.png') %>" alt="loading..."
+    / div.col-sm-4.no-padding
+    /   img.img-responsive src="<%= asset_path('custom3.png') %>" alt="loading..."
+
 
 div.col-main-body
   div.item-detail-col
