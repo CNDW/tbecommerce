@@ -14,3 +14,6 @@ App.OptionType = App.ProductOptionType.extend
 
 App.ColorType = App.ProductOptionType.extend
   colorValues: DS.hasMany 'color_value'
+  unselected: Em.computed.empty 'selectedColor'
+  selectedThumb: Em.computed.alias 'selectedColor.thumb_url'
+  selectedName: Em.computed.alias 'selectedColor.presentation'

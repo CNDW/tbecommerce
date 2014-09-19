@@ -651,6 +651,11 @@ ul.top-navs {
   margin: 4px;
   display: inline-block;
   background-color: green;
+  &.active {
+    margin: 0;
+    height: 44px;
+    width: 44px;
+  }
 }
 //--------------------------------------------
 // Gallery

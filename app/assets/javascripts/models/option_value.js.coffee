@@ -6,6 +6,7 @@ App.ProductOptionValue = DS.Model.extend
   medium_url: DS.attr 'string'
   large_url: DS.attr 'string'
   presentation: DS.attr 'string'
+  position: DS.attr 'number'
 
 App.OptionValue = App.ProductOptionValue.extend
   optionType: DS.belongsTo 'option_type'

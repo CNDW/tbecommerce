@@ -3,15 +3,18 @@ div.col-main-body
     each color in colors
       div.col-sm-11.custom-field-section
         toggle-menu classNames='custom-selection-header'
-          span.custom-selection-icon.empty
+          if color.unselected
+            span.custom-selection-icon.empty
+          else
+            img.custom-selection-icon{bind-attr src=color.selectedThumb}
           span.custom-selection-title {{color.presentation}}
           span.toggle-menu-icon.right
         div.section-content
           div.custom-selection-field
-            div.selection-header kelly green
+            div.selection-header {{color.selectedName}}
             div.color-swatch-field
               each option in color.colorValues
-                img.color-swatch src=option.thumb_url click='foo'
+                color-swatch image=option.thumb_url swatch=option action='selectColor' color=color
 
     div.col-sm-11.custom-field-section
       div.custom-selection-header
@@ -31,12 +34,7 @@ div.col-main-body
 
   div.col-sm-7.centered
     div.col-sm-12
-      partial 'tmp-svg'
-    / div.col-sm-4.col-sm-offset-2.no-padding
-    /   img.img-responsive src="<%= asset_path('custom2.png') %>" alt="loading..."
-    / div.col-sm-4.no-padding
-    /   img.img-responsive src="<%= asset_path('custom3.png') %>" alt="loading..."
-
+      render 'custom-item' model
 
 div.col-main-body
   div.item-detail-col
