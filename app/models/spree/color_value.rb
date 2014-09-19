@@ -1,8 +1,8 @@
 module Spree
   class ColorValue < Spree::Base
-    has_many :color_types_values, dependent: :destroy, inverse_of: :color_value
-    has_many :color_type, class_name: 'Spree::ColorType', through: :color_types_values
-    acts_as_list scope: :color_value
+    has_many :color_type_color_values, dependent: :destroy, inverse_of: :color_value
+    has_many :color_type, through: :color_type_color_values
+
     has_and_belongs_to_many :variants, join_table: 'spree_color_values_variants', class_name: "Spree::Variant"
 
     validates :name, :presentation, presence: true
@@ -10,10 +10,10 @@ module Spree
     after_touch :touch_all_variants
 
     has_attached_file :color_image,
-      styles: { web_large: '1274x980>',
-      web_medium: '637x490>',
-      web_small: '390x300>',
-      web_thumb: '130x100>' },
+      styles: { web_large: '800x800>',
+      web_medium: '600x600>',
+      web_small: '200x200>',
+      web_thumb: '64x64>' },
       default_style: :web_medium,
       url: '/spree/color_values/:id/:style/:basename.:extension',
       path: ':rails_root/public/spree/color_values/:id/:style/:basename.:extension',

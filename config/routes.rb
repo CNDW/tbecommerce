@@ -87,7 +87,7 @@ Spree::Core::Engine.routes.draw do
         post :update_values_positions
       end
     end
-    delete '/color_values/:id', :to => "color_values#destroy", :as => :color_value
+    resources :color_values
   end
 
 end

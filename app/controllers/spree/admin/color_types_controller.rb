@@ -1,7 +1,6 @@
 module Spree
   module Admin
     class ColorTypesController < ResourceController
-      before_action :setup_new_color_value, only: :edit
 
       def update_values_positions
         params[:positions].each do |id, index|
