@@ -11,20 +11,13 @@ div.col-main-body
           span.toggle-menu-icon.right
         div.section-content
           div.custom-selection-field
-            div.selection-header {{color.selectedName}}
+            if color.unselected
+              div.selection-header select a color
+            else
+              div.selection-header {{color.selectedName}}
             div.color-swatch-field
               each option in color.colorValues
                 color-swatch image=option.thumb_url swatch=option action='selectColor' color=color
-
-    div.col-sm-11.custom-field-section
-      div.custom-selection-header
-        span.custom-selection-icon.green
-        span.custom-selection-title secondary color
-        span.icon-up.right
-      div.custom-selection-field
-        div.selection-header kelly green
-        div.selection-fields
-          img.img-responsive src="<%= asset_path('customswatches.png') %>" alt="loading..."
 
     div.col-sm-11.custom-field-footer
       div.footer-info
