@@ -1,6 +1,7 @@
 module Spree
   class ColorType < Spree::Base
-    has_many :color_values, -> { order(:position) }, dependent: :destroy, inverse_of: :color_type
+    has_many :color_types_values, dependent: :destroy, inverse_of: :color_type
+    has_many :color_values, -> { order(:position) }, through: :color_types_values
     has_many :product_color_types, dependent: :destroy, inverse_of: :color_type
     has_many :products, through: :product_color_types
     # has_and_belongs_to_many :prototypes, join_table: 'spree_color_types_prototypes'

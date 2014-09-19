@@ -1,7 +1,8 @@
 module Spree
   class ColorValue < Spree::Base
-    belongs_to :color_type, class_name: 'Spree::ColorType', touch: true, inverse_of: :color_values
-    acts_as_list scope: :color_type
+    has_many :color_types_values, dependent: :destroy, inverse_of: :color_value
+    has_many :color_type, class_name: 'Spree::ColorType', through: :color_types_values
+    acts_as_list scope: :color_value
     has_and_belongs_to_many :variants, join_table: 'spree_color_values_variants', class_name: "Spree::Variant"
 
     validates :name, :presentation, presence: true
