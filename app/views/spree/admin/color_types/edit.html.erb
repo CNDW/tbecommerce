@@ -6,11 +6,6 @@
 
 <% content_for :page_actions do %>
   <li>
-    <span id="new_add_color_value" data-hook>
-      <%= link_to_add_fields Spree.t(:add_color_value), "tbody#color_values", :class => 'button fa fa-plus' %>
-    </span>
-  </li>
-  <li>
     <%= button_link_to Spree.t(:back_to_color_types_list), spree.admin_color_types_path, :icon => 'arrow-left' %>
   </li>
 <% end %>

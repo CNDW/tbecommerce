@@ -70,6 +70,7 @@ Spree::Core::Engine.routes.draw do
     resources :color_types do
       resources :color_values
     end
+    resources :color_values
 
     # get '/blog/tag/:tag' => 'blog_entries#tag', :as => :blog_tag
     # get '/blog/category/:category' => 'blog_entries#category', :as => :blog_category

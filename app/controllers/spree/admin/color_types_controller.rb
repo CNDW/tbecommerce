@@ -2,6 +2,8 @@ module Spree
   module Admin
     class ColorTypesController < ResourceController
 
+      update.before :update_color_values
+
       def update_values_positions
         params[:positions].each do |id, index|
           ColorValue.where(:id => id).update_all(:position => index)
@@ -12,6 +14,10 @@ module Spree
           format.js { render :text => 'Ok' }
         end
       end
+
+        # if params[:product][:option_type_ids].present?
+        #   params[:product][:option_type_ids] = params[:product][:option_type_ids].split(',')
+        # end
 
       protected
 
@@ -24,6 +30,14 @@ module Spree
         end
 
       private
+        def update_color_values
+          puts params
+          if params[:color_type][:color_value_ids].present?
+            params[:color_type][:color_value_ids] = params[:color_type][:color_value_ids].split(',')
+          end
+          puts params
+        end
+
         def load_product
           @product = Product.find_by_param!(params[:product_id])
         end

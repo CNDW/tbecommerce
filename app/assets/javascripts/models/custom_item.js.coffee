@@ -1,8 +1,8 @@
-DS.RawTransform = DS.Transform.extend
-  deserialize: (serialized)->
-    serialized
-  serialze: (deserialized)->
-    deserialized
+# DS.RawTransform = DS.Transform.extend
+#   deserialize: (serialized)->
+#     serialized
+#   serialze: (deserialized)->
+#     deserialized
 
 App.CustomItem = DS.Model.extend
   name: DS.attr 'string', {defaultValue: 'custom item'}
@@ -25,7 +25,7 @@ App.CustomItem = DS.Model.extend
   ).property('completedSteps')
 
   product: DS.belongsTo 'product'
-  colors: DS.attr 'raw'
+  # colors: DS.attr 'raw'
 
 App.CustomItemAdapter = DS.LSAdapter.extend()
 App.CustomItemSerializer = DS.LSSerializer.extend()
