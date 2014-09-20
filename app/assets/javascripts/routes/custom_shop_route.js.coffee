@@ -1,7 +1,7 @@
 App.CustomShopRoute = Em.Route.extend
   shop_steps: ['custom.index', 'custom.colors', 'custom.features', 'custom.extras']
   model: (params)->
-    @store.find('custom-item').then (data)->
+    @store.find('custom_item').then (data)->
       if (data.content.length is 0)
         item = data.store.createRecord 'custom-item'
         item.save()
@@ -40,17 +40,12 @@ App.CustomIndexRoute = App.CustomShopRoute.extend
           type.items = @models.filterBy 'product_type', type.name
         , category
       data.controller.set 'categories', data.categories
-  actions:
-    setCustomProduct: (product)->
-      custom_item = @modelFor 'custom.index'
-      custom_item.set 'product', product
-      custom_item.save()
 
 App.CustomColorsRoute = App.CustomShopRoute.extend
   step_number: 1
   setupController: (controller, model)->
     @_super controller, model
-    controller.set 'colors', model.get 'product.colorTypes'
+    controller.set 'colors', model.get 'colorOptions'
 
 App.CustomFeaturesRoute = App.CustomShopRoute.extend
   step_number: 2

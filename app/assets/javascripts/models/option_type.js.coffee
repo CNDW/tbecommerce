@@ -2,6 +2,9 @@ App.ProductOptionType = DS.Model.extend
   name: DS.attr 'string'
   presentation: DS.attr 'string'
   position: DS.attr 'number'
+
+App.OptionType = App.ProductOptionType.extend
+  optionValues: DS.hasMany 'option_value'
   description: DS.attr 'string'
   required: DS.attr 'boolean'
   catalogue: DS.attr 'boolean'
@@ -9,11 +12,6 @@ App.ProductOptionType = DS.Model.extend
   medium_url: DS.attr 'string'
   large_url: DS.attr 'string'
 
-App.OptionType = App.ProductOptionType.extend
-  optionValues: DS.hasMany 'option_value'
-
 App.ColorType = App.ProductOptionType.extend
+  selector: DS.attr 'string'
   colorValues: DS.hasMany 'color_value'
-  unselected: Em.computed.empty 'selectedColor'
-  selectedThumb: Em.computed.alias 'selectedColor.thumb_url'
-  selectedName: Em.computed.alias 'selectedColor.presentation'

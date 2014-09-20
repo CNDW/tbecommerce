@@ -19,4 +19,3 @@ App.Router.map ->
   @route 'instockitem'
   @route 'cart'
   @resource 'product', path: '/product/:product_id'
-  @resource 'custom-item'

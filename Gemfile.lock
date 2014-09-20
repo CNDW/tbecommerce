@@ -1,29 +1,29 @@
 GIT
   remote: git://github.com/spree/spree.git
-  revision: 1b94062e1535c82b456ce23b29db2acb57f6b3dc
+  revision: 6c8b39f20de537749e22f295c2b8889688ab87d3
   branch: 2-3-stable
   specs:
-    spree (2.3.3.beta)
-      spree_api (= 2.3.3.beta)
-      spree_backend (= 2.3.3.beta)
-      spree_cmd (= 2.3.3.beta)
-      spree_core (= 2.3.3.beta)
-      spree_frontend (= 2.3.3.beta)
-      spree_sample (= 2.3.3.beta)
-    spree_api (2.3.3.beta)
+    spree (2.3.4.beta)
+      spree_api (= 2.3.4.beta)
+      spree_backend (= 2.3.4.beta)
+      spree_cmd (= 2.3.4.beta)
+      spree_core (= 2.3.4.beta)
+      spree_frontend (= 2.3.4.beta)
+      spree_sample (= 2.3.4.beta)
+    spree_api (2.3.4.beta)
       rabl (~> 0.9.4.pre1)
-      spree_core (= 2.3.3.beta)
+      spree_core (= 2.3.4.beta)
       versioncake (~> 2.3.1)
-    spree_backend (2.3.3.beta)
+    spree_backend (2.3.4.beta)
       jquery-rails (~> 3.1.2)
       jquery-ui-rails (~> 4.1.0)
       select2-rails (~> 3.5.0)
-      spree_api (= 2.3.3.beta)
-      spree_core (= 2.3.3.beta)
-    spree_cmd (2.3.3.beta)
+      spree_api (= 2.3.4.beta)
+      spree_core (= 2.3.4.beta)
+    spree_cmd (2.3.4.beta)
       thor (~> 0.14)
-    spree_core (2.3.3.beta)
-      activemerchant (~> 1.43.1)
+    spree_core (2.3.4.beta)
+      activemerchant (~> 1.44.1)
       acts_as_list (= 0.3.0)
       awesome_nested_set (~> 3.0.0.rc.3)
       aws-sdk (= 1.27.0)
@@ -36,7 +36,6 @@ GIT
       httparty (~> 0.11)
       json (~> 1.7)
       kaminari (~> 0.15.0)
-      mail (~> 2.5.4)
       monetize
       paperclip (~> 4.2.0)
       paranoia (~> 2.0)
@@ -45,14 +44,14 @@ GIT
       state_machine (= 1.2.0)
       stringex (~> 1.5.1)
       truncate_html (= 0.9.2)
-    spree_frontend (2.3.3.beta)
+    spree_frontend (2.3.4.beta)
       canonical-rails (~> 0.0.4)
       jquery-rails (~> 3.1.2)
-      spree_api (= 2.3.3.beta)
-      spree_core (= 2.3.3.beta)
+      spree_api (= 2.3.4.beta)
+      spree_core (= 2.3.4.beta)
       stringex (~> 1.5.1)
-    spree_sample (2.3.3.beta)
-      spree_core (= 2.3.3.beta)
+    spree_sample (2.3.4.beta)
+      spree_core (= 2.3.4.beta)
 
 GIT
   remote: https://github.com/spree/spree_auth_devise.git
@@ -88,14 +87,14 @@ GEM
     active_utils (2.2.3)
       activesupport (>= 2.3.11)
       i18n
-    activemerchant (1.43.3)
-      active_utils (~> 2.0, >= 2.0.1)
-      activesupport (>= 2.3.14, < 5.0.0)
+    activemerchant (1.44.1)
+      active_utils (~> 2.2.0)
+      activesupport (>= 3.2.14, < 5.0.0)
       builder (>= 2.1.2, < 4.0.0)
-      i18n (~> 0.5)
+      i18n (>= 0.6.9)
       json (~> 1.7)
-      money (< 7.0.0)
       nokogiri (~> 1.4)
+      offsite_payments (~> 2.0.0)
     activemodel (4.1.4)
       activesupport (= 4.1.4)
       builder (~> 3.1)
@@ -177,7 +176,7 @@ GEM
       warden (~> 1.2.3)
     devise-encryptable (0.1.2)
       devise (>= 2.1.0)
-    ember-data-source (1.0.0.beta.9)
+    ember-data-source (1.0.0.beta.10)
       ember-source
     ember-rails (0.15.0)
       active_model_serializers
@@ -188,7 +187,7 @@ GEM
       handlebars-source (> 1.0.0)
       jquery-rails (>= 1.0.17)
       railties (>= 3.1)
-    ember-source (1.7.0)
+    ember-source (1.7.0.beta.5)
       handlebars-source (~> 1.0)
     emblem-rails (0.2.1)
       barber-emblem (~> 0.1.1)
@@ -239,6 +238,14 @@ GEM
     net-ssh (2.9.1)
     nokogiri (1.6.3.1)
       mini_portile (= 0.6.0)
+    offsite_payments (2.0.1)
+      active_utils (~> 2.2.0)
+      activesupport (>= 3.2.14, < 5.0.0)
+      builder (>= 2.1.2, < 4.0.0)
+      i18n (~> 0.5)
+      json (~> 1.7)
+      money (< 7.0.0)
+      nokogiri (~> 1.4)
     oink (0.10.1)
       activerecord
       hodel_3000_compliant_logger
@@ -316,82 +323,6 @@ GEM
     tilt (1.4.1)
     treetop (1.4.15)
       polyglot
-      polyglot
-      polyglot
-      polyglot
-      polyglot
-      polyglot
-      polyglot
-      polyglot
-      polyglot
-      polyglot
-      polyglot
-      polyglot
-      polyglot
-      polyglot
-      polyglot
-      polyglot
-      polyglot
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
-      polyglot (>= 0.3.1)
       polyglot (>= 0.3.1)
     truncate_html (0.9.2)
     tzinfo (1.2.2)
@@ -423,9 +354,9 @@ DEPENDENCIES
   capistrano-rails (~> 1.1.1)
   capistrano-rvm
   coffee-rails (~> 4.0.0)
-  ember-data-source (= 1.0.0.beta.9)
+  ember-data-source (= 1.0.0.beta.10)
   ember-rails
-  ember-source (~> 1.7)
+  ember-source (= 1.7.0.beta.5)
   emblem-rails
   jbuilder (~> 1.2)
   jquery-rails (~> 3.1.2)

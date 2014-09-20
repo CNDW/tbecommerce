@@ -23,11 +23,16 @@
   .tertiary{fill:white;}
   .liner{fill:white;}
   .stitching{stroke:black;}
+  {{#each model.colors}}
+  {{/each}}
 </style>
-<pattern patternUnits="userSpaceOnUse" id="woodland-camo" style="overflow:visible;" width="200px" height="114px">
-  <image xlink:href='/spree/color_values/1/web_thumb/neonpink.jpg?1410729234' x="0" y="0" width="200px" height="114px" />
-</pattern>
-
+<defs>
+{{#each model.patterns}}
+  <pattern {{bind-attr id=name}} patternUnits="userSpaceOnUse" style="overflow:visible;" width="200px" height="200px">
+    <image {{bind-attr xlink:href=url}} x="0" y="0" width="200px" height="200px" />
+  </pattern>
+{{/each}}
+</defs>
 <polygon class="st0" points="649.2,433.3 653.3,444.7 653.3,447 657,455 674.8,449.5 671.3,437.3 667.8,437.2 662.7,427.2 "/>
 <path class="st1 primary" d="M137.5,479.5l9.1,5.3c0,0,10.4,10.8,24.4,15s33.3-1.8,44.3-3.5s44.8-4.7,60.2-6c15.3-1.3,58.9-9.3,81.8-11.2
   c22.9-1.8,56.1-5,76.6-6.2s84.8-10.7,92.2-10.8s49.7-2.8,64.3-4c14.7-1.2,40-3.2,45.2-3.2c0,0,1.1-0.2,2.3,0.6

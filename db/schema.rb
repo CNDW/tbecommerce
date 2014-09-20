@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140919120332) do
+ActiveRecord::Schema.define(version: 20140920140806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,18 +116,12 @@ ActiveRecord::Schema.define(version: 20140919120332) do
   add_index "spree_color_type_color_values", ["color_type_id", "color_value_id"], name: "index_color_types_values_on_color_type_id_and_color_value_id", using: :btree
 
   create_table "spree_color_types", force: true do |t|
-    t.string   "name",                          limit: 100
-    t.string   "presentation",                  limit: 100
-    t.integer  "position",                                  default: 0, null: false
+    t.string   "name",         limit: 100
+    t.string   "presentation", limit: 100
+    t.integer  "position",                 default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "description"
-    t.boolean  "required"
-    t.boolean  "catalogue"
-    t.string   "color_type_image_file_name"
-    t.string   "color_type_image_content_type"
-    t.integer  "color_type_image_file_size"
-    t.datetime "color_type_image_updated_at"
+    t.string   "selector"
   end
 
   create_table "spree_color_values", force: true do |t|
