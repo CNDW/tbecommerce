@@ -4,7 +4,7 @@ App.CustomItem = DS.Model.extend
   noSelectedColors: Em.computed.empty 'selectedColors'
   colorOptions: Em.computed.alias 'product.colorTypes'
 
-  selectedColors: DS.hasMany 'selected_color'
+  selectedColors: DS.hasMany 'selected_color', async: true
 
   completedSteps: (->
     first = !@get('noProduct')
@@ -28,12 +28,12 @@ App.CustomItem = DS.Model.extend
       @store.find 'product', @get 'product_id'
     else
       null
-    ).property('product_id')
+  ).property('product_id')
 
   #- Properties for mapping SVG data
   availableColors: (->
     @store.find 'color_value'
-    ).property()
+  ).property()
   patterns: Em.computed.map 'availableColors', (color)->
     {url: color.get('small_url'), name: "#{color.get('name')}-pattern"}
 

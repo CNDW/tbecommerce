@@ -13,4 +13,10 @@ App.CustomIndexController = Em.Controller.extend
           product_id: product.get 'id'
         @model.save()
 
-App.CustomColorsController = Em.Controller.extend()
+
+App.CustomColorsController = Em.Controller.extend
+  actions:
+    selectColor: (color, selection)->
+      selection.set 'colorValue_id', color.get 'id'
+      selection.save()
+      $(".#{selection.get('selector')}").css('fill', "url(##{color.get('name')}-pattern)")

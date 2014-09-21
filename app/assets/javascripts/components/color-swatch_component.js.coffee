@@ -6,4 +6,4 @@ App.ColorSwatchComponent = Em.Component.extend
     @get('selection.colorValue_id') is @get('color.id')
     ).property('selection.colorValue_id')
   click: ->
-    @sendAction('action', @get('color'))
+    @sendAction('action', @get('color'), @get('selection'))
