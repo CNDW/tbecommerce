@@ -3,7 +3,7 @@ App.CustomShopRoute = Em.Route.extend
   model: (params)->
     @store.find('custom_item').then (data)->
       if (data.content.length is 0)
-        item = data.store.createRecord 'custom-item'
+        item = data.store.createRecord 'custom_item'
         item.save()
       else
         item = data.content[0]
@@ -43,9 +43,22 @@ App.CustomIndexRoute = App.CustomShopRoute.extend
 
 App.CustomColorsRoute = App.CustomShopRoute.extend
   step_number: 1
+
   setupController: (controller, model)->
     @_super controller, model
-    controller.set 'colors', model.get 'colorOptions'
+    Em.RSVP.hash(
+      colorOptions: model.get('colorOptions')
+      selectedColors: model.get('selectedColors')
+      store: @store
+    ).then (data)->
+      data.colorOptions.forEach (colorOption)->
+        colorType_id = colorOption.get 'id'
+        if not @selectedColors.anyBy('colorType_id', colorType_id)
+          new_selection = @store.createRecord 'selected_color',
+            colorType_id: colorType_id
+          @selectedColors.addRecord new_selection
+          @selectedColors.save()
+      , data
 
 App.CustomFeaturesRoute = App.CustomShopRoute.extend
   step_number: 2

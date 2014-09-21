@@ -643,13 +643,14 @@ ul.top-navs {
 }
 .color-swatch-field {
   margin: -4px -4px 20px;
+  float: left;
 }
 
 .color-swatch {
   height: 36px;
   width: 36px;
   margin: 4px;
-  display: inline-block;
+  float: left;
   background-color: green;
   &.active {
     margin: 0;

@@ -3,7 +3,7 @@ App.ColorSwatchComponent = Em.Component.extend
   classNames: 'color-swatch'
   layout: Ember.Handlebars.compile "<img class='img-responsive' {{bind-attr src='image'}}/>{{yield}}"
   isSelected: (->
-    @get('color.selectedColor.id') is @get('swatch.id')
-    ).property('color.selectedColor')
+    @get('selection.colorValue_id') is @get('color.id')
+    ).property('selection.colorValue_id')
   click: ->
-    @sendAction('action', @get('swatch'), @get('color'))
+    @sendAction('action', @get('color'))

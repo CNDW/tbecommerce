@@ -1,23 +1,7 @@
 div.col-main-body
   div.col-sm-5
-    each color in colors
-      div.col-sm-11.custom-field-section
-        toggle-menu classNames='custom-selection-header'
-          if color.unselected
-            span.custom-selection-icon.empty
-          else
-            img.custom-selection-icon{bind-attr src=color.selectedThumb}
-          span.custom-selection-title {{color.presentation}}
-          span.toggle-menu-icon.right
-        div.section-content
-          div.custom-selection-field
-            if color.unselected
-              div.selection-header select a color
-            else
-              div.selection-header {{color.selectedName}}
-            div.color-swatch-field
-              each option in color.colorValues
-                color-swatch image=option.thumb_url swatch=option action='selectColor' color=color
+    each selection in model.selectedColors
+      render 'selected-color' selection
 
     div.col-sm-11.custom-field-footer
       div.footer-info

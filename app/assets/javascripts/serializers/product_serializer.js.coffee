@@ -40,6 +40,8 @@ App.ColorValueSerializer = DS.ActiveModelSerializer.extend
     {"colorValues": payload}
 
 App.CustomItemAdapter = DS.LSAdapter.extend()
-App.CustomItemSerializer = DS.JSONSerializer.extend()
+App.CustomItemSerializer = DS.JSONSerializer.extend DS.EmbeddedRecordsMixin,
+  attrs:
+    selectedColors: embedded: 'always'
 App.SelectedColorAdapter = DS.LSAdapter.extend()
 App.SelectedColorSerializer = DS.JSONSerializer.extend()
