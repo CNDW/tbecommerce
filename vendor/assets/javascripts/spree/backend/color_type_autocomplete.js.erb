@@ -43,9 +43,26 @@ $(document).ready(function () {
 $(document).ready(function () {
   Spree.routes.color_values_search = Spree.pathFor('api/color_values');
   'use strict';
+  var color_values_search = {
+    url: Spree.routes.color_values_search,
+    quietMillis: 200,
+    datatype: 'json',
+    data: function (term) {
+      return {
+        q: {
+          name_cont: term
+        }
+      };
+    },
+    results: function (data) {
+      return {
+        results: data
+      };
+    }
+  };
 
   if ($('#color_type_color_value_ids').length > 0) {
-    $('#color_type_color_value_ids').select2({
+    var ctcv_s2 = {
       placeholder: 'Choose a color value',
       multiple: true,
       initSelection: function (element, callback) {
@@ -56,29 +73,30 @@ $(document).ready(function () {
           return callback(data);
         });
       },
-      ajax: {
-        url: Spree.routes.color_values_search,
-        quietMillis: 200,
-        datatype: 'json',
-        data: function (term) {
-          return {
-            q: {
-              name_cont: term
-            }
-          };
-        },
-        results: function (data) {
-          return {
-            results: data
-          };
-        }
-      },
+      ajax: color_values_search,
       formatResult: function (color_type) {
         return color_type.presentation + ' (' + color_type.name + ')';
       },
       formatSelection: function (color_type) {
         return color_type.presentation + ' (' + color_type.name + ')';
       }
-    });
+    };
+    $('#color_type_color_value_ids').select2(ctcv_s2);
   }
+  $('[name="add-all-colors"]').on('click', function(e){
+    e.preventDefault();
+    $.ajax(color_values_search).success(function(data){
+      values = ''
+      $.each(data, function(index, val){
+        if (index === 0) {
+          values = '' + val.id;
+        } else {
+          values = values + ',' + val.id
+        }
+      });
+      $('#color_type_color_value_ids').val(values);
+      $('#color_type_color_value_ids').select2('destroy')
+      $('#color_type_color_value_ids').select2(ctcv_s2);
+    });
+  });
 });

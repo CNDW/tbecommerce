@@ -6,22 +6,6 @@ App.CustomItem = DS.Model.extend
 
   selectedColors: DS.hasMany 'selected_color', async: true
 
-  completedSteps: (->
-    first = !@get('noProduct')
-    second = false
-    third = true
-    steps = [first, second, third]
-  ).property('noProduct')
-
-  stepIndex: (->
-    index = 0
-    @get('completedSteps').every (completed, step)->
-      if (completed)
-        index = step + 1
-        return false
-    return index
-  ).property('completedSteps')
-
   product_id: DS.attr 'number'
   product: (->
     if @get('product_id')
@@ -39,10 +23,12 @@ App.CustomItem = DS.Model.extend
 
 
 App.SelectedColor = DS.Model.extend
-  selectedColorName: Em.computed.alias 'colorValue.name'
+  name: DS.attr 'string'
   title: Em.computed.alias 'colorType.presentation'
   swatch: Em.computed.alias 'colorValue.small_url'
-  selector: Em.computed.alias 'colorType.selector'
+  selector: (->
+    @get('colorType.selector')
+  ).property()
   colors: Em.computed.alias 'colorType.colorValues'
 
   isUnselected: Em.computed.empty 'colorValue_id'

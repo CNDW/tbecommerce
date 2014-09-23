@@ -1,13 +1,6 @@
 App.CustomShopRoute = Em.Route.extend
   shop_steps: ['custom.index', 'custom.colors', 'custom.features', 'custom.extras']
-  model: (params)->
-    @store.find('custom_item').then (data)->
-      if (data.content.length is 0)
-        item = data.store.createRecord 'custom_item'
-        item.save()
-      else
-        item = data.content[0]
-      return item
+
 
   afterModel: (model, transition)->
     @transitionTo @shop_steps[model.get 'stepIndex'] if @step_number > model.get 'stepIndex'

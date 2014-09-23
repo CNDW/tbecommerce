@@ -1,14 +1,21 @@
 div.custom-shop-navbar
   div.col-sm-10.col-sm-offset-1
     ul.custom-shop-navs
-      link-to 'custom.index' tagName='li'
+      li class=isStepOne:active click="transitionStep 1"
         a Item
-      link-to 'custom.colors' tagName='li'
+      li class=isStepTwo:active click="transitionStep 2"
         a Colors & Fit
-      link-to 'custom.features' tagName='li'
+      li class=isStepThree:active click="transitionStep 3"
         a Features
-      link-to 'custom.extras' tagName='li'
+      li class=isStepFour:active click="transitionStep 4"
         a Extras
 
 div.row
-  outlet
+  if isStepOne
+    partial 'custom/index'
+  if isStepTwo
+    partial 'custom/colors'
+  if isStepThree
+    partial 'custom/features'
+  if isStepFour
+    partial 'custom/extras'

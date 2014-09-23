@@ -10,11 +10,7 @@ App.Router.map ->
     @resource 'catalogue.apparel', path: '/apparel'
     @resource 'catalogue.utility', path: '/utility'
   @route 'bag'
-  @resource 'custom', ->
-    @route 'index', path: '/product',
-    @route 'features'
-    @route 'extras'
-    @route 'colors'
+  @route 'custom'
   @route 'instock'
   @route 'instockitem'
   @route 'cart'

@@ -24,6 +24,7 @@
           <%= f.label :color_value_ids, Spree.t(:colors) %>
           <%= f.hidden_field :color_value_ids, :value => @color_type.color_value_ids.join(',') %>
         <% end %>
+        <button class="fa fa-refresh button" name="add-all-colors">Add all available colors</button>
       </div>
     </div>
 

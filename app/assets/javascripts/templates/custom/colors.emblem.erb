@@ -1,6 +1,6 @@
 div.col-main-body
   div.col-sm-5
-    each selection in model.selectedColors
+    each selection in selectedColors
       render 'selected-color' selection
 
     div.col-sm-11.custom-field-footer
@@ -11,7 +11,7 @@ div.col-main-body
 
   div.col-sm-7.centered
     div.col-sm-12
-      render 'custom-item' model
+      partial 'custom-item'
 
 div.col-main-body
   div.item-detail-col
