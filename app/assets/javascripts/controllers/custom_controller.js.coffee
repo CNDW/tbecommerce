@@ -1,13 +1,16 @@
 App.CustomController = Em.ObjectController.extend
   product: Em.computed.alias 'model.product'
   noProduct: Em.computed.alias 'model.noProduct'
-  selectedColors: []
+  selectedColors: Em.A()
+  categories: Em.A()
+  colors: Em.A()
+  options: Em.A()
   builderStep: 1
   isStepOne: Em.computed.equal 'builderStep', 1
   isStepTwo: Em.computed.equal 'builderStep', 2
   isStepThree: Em.computed.equal 'builderStep', 3
   isStepFour: Em.computed.equal 'builderStep', 4
-  fills: []
+  fills: Em.A()
 
   setFills: ()->
     fills = @get('selectedColors').map (color)->

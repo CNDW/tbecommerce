@@ -10,8 +10,6 @@ App.CustomItem = DS.Model.extend
   product: (->
     if @get('product_id')
       @store.find 'product', @get 'product_id'
-    else
-      null
   ).property('product_id')
 
   #- Properties for mapping SVG data
@@ -45,4 +43,10 @@ App.SelectedColor = DS.Model.extend
     if @get 'colorValue_id'
       @store.find 'color_value', @get 'colorValue_id'
   ).property('colorValue_id')
+
+  optionValue_id: DS.attr 'number'
+  optionValue: (->
+    if @get 'optionValue_id'
+      @store.find 'option_value', @get 'optionValue_id'
+  ).property('optionValue_id')
 

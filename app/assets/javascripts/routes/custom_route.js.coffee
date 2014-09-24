@@ -53,6 +53,13 @@ App.CustomRoute = Em.Route.extend
       , this
       @controller.set 'selectedColors', selectedColors
       @controller.setFills()
+      options = Em.A()
+      product.get('optionTypes').forEach (optionType)->
+        optionType.get('optionValues').forEach (value)->
+          @pushObject(value)
+        , this
+      , options
+      @controller.set 'options', options
 
     selectColor: (color, selection)->
       selection.set 'colorValue_id', color.get('id')
