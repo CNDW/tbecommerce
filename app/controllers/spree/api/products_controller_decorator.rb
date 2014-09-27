@@ -5,6 +5,9 @@ module Spree::Api
         @products = product_scope.where(:id => params[:ids].split(","))
       else
         @products = product_scope.ransack(params[:q]).result
+        @color_types = Spree::ColorType.accessible_by(current_ability, :read).load.ransack().result
+        @color_values = Spree::ColorValue.accessible_by(current_ability, :read).load.ransack().result
+        @option_types = Spree::OptionType.accessible_by(current_ability, :read).load.ransack().result
       end
 
       @products = @products.distinct
