@@ -27,10 +27,6 @@ module Spree
         end
       end
 
-      def product_includes
-        [ :option_types, :color_types, variants: variants_associations, master: variants_associations ]
-      end
-
       protected
         def load_data
           @taxons = Taxon.order(:name)

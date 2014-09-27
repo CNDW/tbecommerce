@@ -12,5 +12,9 @@ module Spree::Api
       headers['Surrogate-Control'] = "max-age=#{15.minutes}"
       respond_with(@products)
     end
+
+    def product_includes
+      [ :option_types, :color_types, variants: variants_associations, master: variants_associations ]
+    end
   end
 end
