@@ -4,7 +4,7 @@ module Spree::Api
       if params[:ids]
         @products = product_scope.where(:id => params[:ids].split(","))
       else
-        @products = product_scope.ransack(params[:q]).result
+        @products = Spree::Product.all()
       end
 
       @products = @products.distinct
