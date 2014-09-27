@@ -7,6 +7,9 @@ module Spree
         else
           @color_types = Spree::ColorType.accessible_by(current_ability, :read).load.ransack(params[:q]).result
         end
+
+        expires_in 15.minutes, :public => true
+        headers['Surrogate-Control'] = "max-age=#{15.minutes}"
         respond_with(@color_types)
       end
 
