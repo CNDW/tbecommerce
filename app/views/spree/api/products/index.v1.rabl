@@ -11,3 +11,6 @@ end
 child(@option_types => :option_type) do
   extends "spree/api/option_types/show"
 end
+child(@properties => :property) do
+  extends "spree/api/properties/show"
+end

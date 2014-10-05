@@ -5,9 +5,10 @@ module Spree::Api
         @products = product_scope.where(:id => params[:ids].split(","))
       else
         @products = product_scope.ransack(params[:q]).result
-        @color_types = Spree::ColorType.accessible_by(current_ability, :read).load.ransack().result
-        @color_values = Spree::ColorValue.accessible_by(current_ability, :read).load.ransack().result
-        @option_types = Spree::OptionType.accessible_by(current_ability, :read).load.ransack().result
+        @color_types = Spree::ColorType.accessible_by(current_ability, :read).load.ransack(params[:q]).result.includes(:color_values)
+        @color_values = Spree::ColorValue.accessible_by(current_ability, :read).load.ransack(params[:q]).result
+        @option_types = Spree::OptionType.accessible_by(current_ability, :read).load.ransack(params[:q]).result.includes(:option_values)
+        @properties = Spree::Property.accessible_by(current_ability, :read).load.ransack(params[:q]).result.includes(:products)
       end
 
       @products = @products.distinct
@@ -17,7 +18,11 @@ module Spree::Api
     end
 
     def product_includes
-      [ :option_types, :color_types, variants: variants_associations, master: variants_associations ]
+      [ :properties, :option_types, :color_types, :taxons, master: variants_associations ]
+    end
+
+    def variants_associations
+      [{ option_values: :option_type }, :default_price, :images]
     end
   end
 end

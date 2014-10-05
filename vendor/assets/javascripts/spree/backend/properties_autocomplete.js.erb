@@ -1,0 +1,42 @@
+$(document).ready(function () {
+  Spree.routes.property_search = Spree.pathFor('api/properties');
+  'use strict';
+
+  if ($('#product_property_ids').length > 0) {
+    $('#product_property_ids').select2({
+      placeholder: 'Choose a property',
+      multiple: true,
+      initSelection: function (element, callback) {
+        var url = Spree.url(Spree.routes.property_search, {
+          ids: element.val()
+        });
+        return $.getJSON(url, null, function (data) {
+          return callback(data.properties);
+        });
+      },
+      ajax: {
+        url: Spree.routes.property_search,
+        quietMillis: 200,
+        datatype: 'json',
+        data: function (term) {
+          return {
+            q: {
+              name_cont: term
+            }
+          };
+        },
+        results: function (data) {
+          return {
+            results: data.properties
+          };
+        }
+      },
+      formatResult: function (property) {
+        return property.presentation + ' (' + property.name + ')';
+      },
+      formatSelection: function (property) {
+        return property.presentation + ' (' + property.name + ')';
+      }
+    });
+  }
+});

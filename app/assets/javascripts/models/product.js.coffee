@@ -17,7 +17,7 @@ App.Product = DS.Model.extend
     content[0].get('medium_url')
   ).property('images')
 
-  productProperties: DS.hasMany 'product_property'
+  properties: DS.hasMany 'property'
   images: DS.hasMany 'image'
   optionTypes: DS.hasMany 'option_type'
   colorTypes: DS.hasMany 'color_type'

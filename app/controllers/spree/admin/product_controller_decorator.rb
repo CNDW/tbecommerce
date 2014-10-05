@@ -11,6 +11,9 @@ module Spree
         if params[:product][:color_type_ids].present?
           params[:product][:color_type_ids] = params[:product][:color_type_ids].split(',')
         end
+        if params[:product][:property_ids].present?
+          params[:product][:property_ids] = params[:product][:property_ids].split(',')
+        end
         invoke_callbacks(:update, :before)
         if @object.update_attributes(permitted_resource_params)
           invoke_callbacks(:update, :after)

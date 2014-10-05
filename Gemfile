@@ -53,6 +53,7 @@ gem 'spree', github: 'spree/spree', branch: '2-3-stable'
 gem 'spree_auth_devise', :git => 'https://github.com/spree/spree_auth_devise.git', :branch => '2-3-stable'
 
 group :development, :test do
+  gem 'bullet'
 	gem 'better_errors'
 	gem 'binding_of_caller'
 end
