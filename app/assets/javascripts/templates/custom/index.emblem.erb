@@ -1,18 +1,18 @@
 div.col-main-body
   div.col-sm-5
-    each categories
+    each category in categories
       div.col-sm-11.custom-field-section
         toggle-menu classNames='custom-selection-header'
-          span.custom-selection-title {{name}}
+          span.custom-selection-title {{category.name}}
           span.toggle-menu-icon.right
         div.section-content
-          each types
+          each type in category.types
             div.custom-selection-field
               div.selection-category
-                span.category-title {{name}}
-                each items
-                  div.selection-option click="setCustomProduct this bubbles=false"
-                    span {{name}}
+                span.category-title {{type.name}}
+                each item in type.items
+                  selection-option item=item action='setCustomProduct' custom_item=this
+                    span {{item.name}}
   div.col-sm-7.centered
     div.col-sm-12
       partial 'custom-item'
