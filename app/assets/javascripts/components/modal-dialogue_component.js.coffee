@@ -1,0 +1,1 @@
+App.ModalDialogueComponent = Em.Component.extend()

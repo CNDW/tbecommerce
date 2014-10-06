@@ -17,29 +17,13 @@ div.row
         p.gray {{model.specs}}
     div.item-detail-col
       toggle-menu classNames='custom-selection-header'
-        span.custom-selection-title materials
+        span.custom-selection-title standards
         span.toggle-menu-icon.right
       div.section-content
+        render 'properties' model.properties
     div.item-detail-col
       toggle-menu classNames='custom-selection-header'
         span.custom-selection-title customization options
         span.toggle-menu-icon.right
       div.section-content
-        ul.detail-list
-          li option item
-          li option item
-          li option item
-          li option item
-          li option item
-          li option item
-          li option item
-          li option item
-          li option item
-          li option item
-          li option item
-          li option item
-          li option item
-          li option item
-          li option item
-          li option item
-          li option item
+        render 'properties' model.optionTypes

@@ -1,0 +1,13 @@
+modal-dialogue action='closeModal'
+  div.modal
+    div.modal-dialog
+      div.modal-content
+        div.modal-header
+          button.close{action 'closeModal'} type="button"
+            span aria-hidden="true" &times;
+            span.sr-only Close
+          h4 {{model.name}}
+        div.modal-body
+          p {{model.description}}
+        div.modal-footer
+          button.btn.btn-default{action 'closeModal'} Close

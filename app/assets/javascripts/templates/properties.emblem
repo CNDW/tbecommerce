@@ -1,0 +1,3 @@
+ul
+  each property in model
+    li.capitalize click="openModal 'property' property" {{property.name}}
