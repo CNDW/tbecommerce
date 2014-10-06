@@ -6,10 +6,26 @@ App.CustomItem = DS.Model.extend
 
   selectedColors: DS.hasMany 'selected_color', async: true
 
+  price: (->
+    @get 'product.price'
+  ).property('product_id')
+
   product_id: DS.attr 'number'
   product: (->
     if @get('product_id')
       @store.find 'product', @get 'product_id'
+  ).property('product_id')
+
+  properties: (->
+    @get 'product.properties'
+  ).property('product_id')
+
+  description: (->
+    @get 'product.description'
+  ).property('product_id')
+
+  specs: (->
+    @get 'product.specs'
   ).property('product_id')
 
   #- Properties for mapping SVG data

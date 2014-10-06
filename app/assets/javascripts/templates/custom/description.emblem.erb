@@ -1,0 +1,20 @@
+div.col-main-body
+  div.item-detail-col
+    toggle-menu classNames='custom-selection-header'
+      span.custom-selection-title specs
+      span.toggle-menu-icon.right
+    div.section-content
+      partial 'product/specs'
+  div.item-detail-col
+    toggle-menu classNames='custom-selection-header'
+      span.custom-selection-title description
+      span.toggle-menu-icon.right
+    div.section-content
+      p {{model.description}}
+  div.item-detail-col
+    toggle-menu classNames='custom-selection-header'
+      span.custom-selection-title standards
+      span.toggle-menu-icon.right
+    div.section-content
+      ul
+        render 'properties' model.properties

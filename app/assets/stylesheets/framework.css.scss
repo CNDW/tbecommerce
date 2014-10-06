@@ -41,6 +41,21 @@ Shame
   display: block;
   margin: 0 -15px;
 }
+.modal-content {
+  padding: 15px;
+}
+.modal-overlay {
+  position: fixed;
+  height: auto;
+  width: 100%;
+  z-index: 1000;
+  background: #000;
+  opacity: 0.9;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
 
 /*============================================
 Main body elements
@@ -154,6 +169,12 @@ html, body {
   margin-bottom: 50px;
   &.no-margin {
     margin-bottom: 0;
+  }
+}
+.interactable {
+  cursor: pointer;
+  &.active, &:hover, &:active, &:focus {
+    background-color: $line-color-light;
   }
 }
 /*============================================
@@ -555,12 +576,6 @@ ul.top-navs {
   height: 12px;
   width: 12px;
   margin-right: 10px;
-  &.green {
-    background-color: green;
-  }
-  &.darkgray {
-    background-color: darkgray;
-  }
   &.empty {
     border: $border-line;
   }
@@ -579,14 +594,11 @@ ul.top-navs {
     margin-bottom: 20px;
   }
   .selection-option {
-    cursor: pointer;
+    @extend .interactable;
     font-size: 14px;
     padding-left: 10px;
     span {
       text-transform: capitalize;
-    }
-    &.active, &:hover, &:active, &:focus {
-      background-color: $line-color-light;
     }
   }
   .category-title {

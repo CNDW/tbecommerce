@@ -12,18 +12,19 @@ div.row
   div.catalogue-item-section
     div.item-detail-col
       div.detail-column
-        p
-          b ${{model.price}}
-        p.gray {{model.specs}}
+        partial 'product/specs'
     div.item-detail-col
       toggle-menu classNames='custom-selection-header'
         span.custom-selection-title standards
         span.toggle-menu-icon.right
       div.section-content
-        render 'properties' model.properties
+        ul
+          render 'properties' model.properties
     div.item-detail-col
       toggle-menu classNames='custom-selection-header'
         span.custom-selection-title customization options
         span.toggle-menu-icon.right
       div.section-content
-        render 'properties' model.optionTypes
+        ul
+          each optionType in model.optionTypes
+            render 'properties' optionType.optionValues
