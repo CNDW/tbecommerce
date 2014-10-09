@@ -25,41 +25,59 @@ App.CustomRoute = Em.Route.extend
           category is 'utility'
         }
       ]
-      colors: @store.find 'color_value'
+      colors: @store.all 'color_value'
     ).then (data)->
       data.categories.forEach (category)->
         category.types = category.models.mapBy('product_type').uniq().map (type)->
           {name: type}
         category.types.forEach (type)->
           type.items = @models.filterBy 'product_type', type.name
+          prices = type.items.mapBy 'price'
+          type.averagePrice = 0
+          prices.forEach (price)->
+            type.averagePrice += price
+          type.averagePrice = type.averagePrice / prices.length
+          type.items = type.items.sortBy 'price'
         , category
+        category.types.sortBy 'averagePrice'
       data.controller.set 'categories', data.categories
       data.controller.set 'colors', data.colors
 
   actions:
     setCustomProduct: (product)->
-      @modelFor('custom').set('product_id', product.get('id'))
+      customItem = @modelFor('custom')
+      @store.unloadAll('selected_color')
+      @store.unloadAll('custom_option')
+      customItem.set('product_id', product.get('id'))
+
       colorTypes = product.get('colorTypes')
-      colorSelections = @controller.get('selectedColors')
-      if colorSelections
-        colorSelections.forEach (selection)->
-          @store.unloadRecord selection
-        , this
       selectedColors = colorTypes.map (colorType)->
         selection = @store.createRecord 'selected_color',
           colorType_id: colorType.get 'id'
         selection.get 'colorType'
+        selection.set('customItem', customItem)
         return selection
       , this
+
       @controller.set 'selectedColors', selectedColors
       @controller.setFills()
-      options = Em.A()
+
+      customOptions = []
+      options = []
       product.get('optionTypes').forEach (optionType)->
-        optionType.get('optionValues').forEach (value)->
-          @pushObject(value)
+        values = optionType.get('optionValues').map (value)->
+          selection = @store.createRecord 'custom_option',
+            optionValue_id: value.get 'id'
+          options.push(selection.get 'optionValue')
+          return selection
         , this
-      , options
+        customOptions = customOptions.concat(values)
+      , this
+      customItem.get('customOptions').pushObjects(customOptions)
+
       @controller.set 'options', options
+
+      customItem.save()
 
     selectColor: (color, selection)->
       selection.set 'colorValue_id', color.get('id')

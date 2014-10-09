@@ -1,7 +1,6 @@
 App.CustomShopRoute = Em.Route.extend
   shop_steps: ['custom.index', 'custom.colors', 'custom.features', 'custom.extras']
 
-
   afterModel: (model, transition)->
     @transitionTo @shop_steps[model.get 'stepIndex'] if @step_number > model.get 'stepIndex'
 
