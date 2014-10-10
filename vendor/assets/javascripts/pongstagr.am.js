@@ -1,10 +1,10 @@
-/*! ========================================================================== 
- * pongstagr.am v3.0.4 jQuery Plugin | http://pongstr.github.io/pongstagr.am/ 
- * =========================================================================== 
- * Copyright (c) 2014 Pongstr Ordillo. Licensed under MIT License. 
+/*! ==========================================================================
+ * pongstagr.am v3.0.4 jQuery Plugin | http://pongstr.github.io/pongstagr.am/
+ * ===========================================================================
+ * Copyright (c) 2014 Pongstr Ordillo. Licensed under MIT License.
  * =========================================================================== */
 
-+function ($) { "use strict"; 
++function ($) { "use strict";
 
   var Pongstgrm = function (element, options) {
     this.element  = element
@@ -55,7 +55,7 @@
           _load += '  </button>'
           _load += '</div>'
 
-      options.insert !== 'before' ? 
+      options.insert !== 'before' ?
         $(options.target).after (_load) :
         $(options.target).before(_load)
 
@@ -99,13 +99,13 @@
             _thumbnail += '     <img id="'+ options.dflt.show + '-' + options.data.id +'-thmb" src="'+ options.data.thumbnail +'" alt="'+ options.data.caption +'">'
             _thumbnail += '   </a>'
 
-          options.data.type === 'video' ? 
+          options.data.type === 'video' ?
             _thumbnail += '<span class="type"><i class="'+ options.dflt.videoicon +'"></i></span>': ""
 
           options.data.likes !== false ?
             _thumbnail += '<span class="likes"><i class="'+ options.dflt.likeicon +'"></i>&nbsp; '+ options.data.likes_count+'</span>': ""
 
-          options.data.comments !== false ? 
+          options.data.comments !== false ?
             _thumbnail += '<span class="comments"><i class="'+ options.dflt.commenticon +'"></i>&nbsp; '+ options.data.comments_count+'</span>': ""
             _thumbnail += ' </div>'
             _thumbnail += '</div>'
@@ -135,9 +135,9 @@
             modal += '<div class="media-column">'
 
           options.data.type !== 'video' ?
-            modal += image : 
+            modal += image :
           navigator.userAgent.match(/webkit/i) || navigator.userAgent.match(/(iPod|iPhone|iPad)/) ?
-            modal += video : 
+            modal += video :
             modal += alert + image
 
             modal += '</div>'
@@ -249,7 +249,7 @@
       , rcount  = '?count=' +  options.count + '&access_token=' + options.accessToken
 
     function paginate (option) {
-      (option.url === undefined || option.url === null) ? 
+      (option.url === undefined || option.url === null) ?
         $('[data-paginate='+ option.show +']').on('click', function (e) {
             $(this)
               .removeClass()
@@ -261,9 +261,9 @@
         $('[data-paginate='+ option.show +']').on('click', function (e) {
           e.preventDefault()
 
-          ajaxdata({ 
+          ajaxdata({
               url: option.url
-            , opt: option.opt 
+            , opt: option.opt
           })
 
           $(this).unbind(e)
@@ -284,7 +284,7 @@
                 , type:           b.type
                 , video:          b.videos && b.videos.standard_resolution.url
                 , image:          b.images.standard_resolution.url
-                , caption:        b.caption && b.caption.text 
+                , caption:        b.caption && b.caption.text
                 , username:       b.user.username
                 , timestamp:      created
                 , thumbnail:      b.images.low_resolution.url
@@ -330,14 +330,14 @@
           url      : option.url
         , cache    : true
         , method   : 'GET'
-        , dataType : 'jsonp' 
+        , dataType : 'jsonp'
         , success  : function(data){
             option.opt.show !== 'profile' ?
               media   (data.data, option.opt) :
               profile (data.data, option.opt)
 
             option.opt.show !== 'profile' &&
-              paginate ({ 
+              paginate ({
                   show: option.opt.show
                 , url:  data.pagination.next_url
                 , opt: option.opt
@@ -431,7 +431,7 @@
 
 
   // PONGSTAGR.AM DEFAULT OPTIONS
-  // =============================  
+  // =============================
   $.fn.pongstgrm.defaults = Pongstgrm.options
 
 }(window.jQuery);

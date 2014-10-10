@@ -75,7 +75,7 @@ App.CustomRoute = Em.Route.extend
       , this
       customItem.get('customOptions').pushObjects(customOptions)
 
-      @controller.set 'options', options
+      @controller.set 'options', customOptions
 
       customItem.save()
 

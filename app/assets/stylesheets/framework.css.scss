@@ -41,8 +41,11 @@ Shame
   display: block;
   margin: 0 -15px;
 }
+.modal-dialog.small {
+  width: 600px;
+}
 .modal-content {
-  padding: 15px;
+  padding: 25px;
 }
 .modal-overlay {
   position: fixed;
@@ -55,6 +58,9 @@ Shame
   left: 0;
   right: 0;
   bottom: 0;
+}
+.modal-backdrop.in {
+  opacity: 0.9;
 }
 
 /*============================================
@@ -111,6 +117,7 @@ html, body {
   width: 20px;
   height: 20px;
   display: inline-block;
+  border-radius: 100%;
 }
 .icon-x {
   background: asset-url('icon-x.png') 50% 50% no-repeat;

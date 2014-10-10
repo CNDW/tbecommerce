@@ -7,7 +7,7 @@ div.col-main-body
             span.name {{option.name}}
             input.right type='checkbox'
             span.price.right ${{option.price}}
-            span.icon-info.right
+            span.icon-info.right.interactable click="openModal 'property' option"
       div.custom-selection-field
         div.selection-fields
           textarea placeholder='Notes...'

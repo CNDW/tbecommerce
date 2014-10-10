@@ -4,6 +4,8 @@
 #= require ember-data
 #= require localstorage_adapter
 #= require ember-handlebars-svg
+#= require bootstrap/modal
+#= require bootstrap/transition
 #= require pongstagr.am
 #= require_self
 #= require ./store

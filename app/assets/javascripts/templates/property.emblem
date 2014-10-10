@@ -1,11 +1,11 @@
-div.modal
-  div.modal-dialog
+div.modal.fade.in
+  div.modal-dialog.small
     div.modal-content
       div.modal-header
         button.close{action 'closeModal'} type="button"
           span aria-hidden="true" &times;
           span.sr-only Close
-        h4 {{model.presentation}}
+        h4.capitalize {{model.presentation}}
       div.modal-body
         img.img-responsive{bind-attr src=model.large_url}
         p {{model.description}}

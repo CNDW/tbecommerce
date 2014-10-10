@@ -1,7 +1,7 @@
-/*! ========================================================================== 
- * pongstagr.am v3.0.4 jQuery Plugin | http://pongstr.github.io/pongstagr.am/ 
- * =========================================================================== 
- * Copyright (c) 2014 Pongstr Ordillo. Licensed under MIT License. 
+/*! ==========================================================================
+ * pongstagr.am v3.0.4 jQuery Plugin | http://pongstr.github.io/pongstagr.am/
+ * ===========================================================================
+ * Copyright (c) 2014 Pongstr Ordillo. Licensed under MIT License.
  * =========================================================================== */
 
 @mixin transition($transition...) {
@@ -233,7 +233,7 @@
 .modal-body > .close {
   position: absolute;
   top: -25px;
-  right: 0;
+  right: -20px;
   color: #fff;
   text-shadow: 0 1px 1px #000;
   opacity: 0.5;
