@@ -9,13 +9,7 @@
       var key = relationship.key;
       var payloadKey = this.keyForRelationship ? this.keyForRelationship(key, "hasMany") : key;
 
-      /*
-      ======================================================
-      * This is currently broken with ember data 1.0 beta 7
-      * Currently WIP and unused functionality by myself
-      * Commenting out for now
-      ======================================================
-      var relationshipType = DS.RelationshipChange.determineRelationshipType(record.constructor, relationship);
+      var relationshipType = record.constructor.determineRelationshipType(relationship);
 
       if (relationshipType === 'manyToNone' ||
           relationshipType === 'manyToMany' ||
@@ -23,7 +17,6 @@
         json[payloadKey] = record.get(key).mapBy('id');
         // TODO support for polymorphic manyToNone and manyToMany relationships
       }
-      */
     },
 
     /**

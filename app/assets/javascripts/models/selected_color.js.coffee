@@ -1,7 +1,7 @@
 App.SelectedColor = DS.Model.extend
   name: DS.attr 'string'
   title: Em.computed.alias 'colorType.presentation'
-  swatch: Em.computed.alias 'colorValue.small_url'
+  swatch: DS.attr 'string'
   selector: (->
     @get('colorType.selector')
   ).property()
@@ -22,3 +22,11 @@ App.SelectedColor = DS.Model.extend
     if @get 'colorValue_id'
       @store.find 'color_value', @get 'colorValue_id'
   ).property('colorValue_id')
+
+  #- Helper methods
+  setColor: (colorValue)->
+    @set 'colorValue_id', colorValue.get('id')
+    @set 'name', colorValue.get('name')
+    @set 'swatch', colorValue.get('small_url')
+    @save()
+

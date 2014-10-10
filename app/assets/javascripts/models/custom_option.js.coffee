@@ -1,6 +1,6 @@
 App.CustomOption = DS.Model.extend
   customItem: DS.belongsTo 'custom_item'
-  selected: DS.attr 'boolean'
+  selected: DS.attr 'boolean', defaultValue: false
 
   name: Em.computed.alias 'optionValue.name'
   description: Em.computed.alias 'optionValue.description'

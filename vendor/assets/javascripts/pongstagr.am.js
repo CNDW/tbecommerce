@@ -32,7 +32,7 @@
     // HTML OPTIONS
     // ===========================
     , preload:          "spinner"
-    , button:           "btn btn-success pull-right"
+    , button:           "btn btn-black pull-left"
     , buttontext:       "Load more"
     , column:           "col-xs-12 col-sm-3 col-md-3 col-lg-3"
     , likeicon:         "glyphicon glyphicon-heart"

@@ -1,12 +1,18 @@
 App.CustomRoute = Em.Route.extend
-  model: (params)->
-    @store.find('custom_item').then (data)->
-      if (data.content.length is 0)
-        item = data.store.createRecord 'custom_item'
-        item.save()
-      else
-        item = data.content[0]
-      return item
+  model: ->
+    store = @store
+    model = {}
+    store.find('selected_color')
+    store.find('custom_option')
+    store.find('custom_item', {inShop: true}).then (data)->
+      if (data.content.length)
+        model = data.content[0]
+    , (reason)->
+      item = store.createRecord 'custom_item',
+          inShop: true
+      item.save()
+      model = item
+
   setupController: (controller, model)->
     @_super controller, model
     Em.RSVP.hash(
@@ -26,6 +32,7 @@ App.CustomRoute = Em.Route.extend
         }
       ]
       colors: @store.all 'color_value'
+      self: this
     ).then (data)->
       data.categories.forEach (category)->
         category.types = category.models.mapBy('product_type').uniq().map (type)->
@@ -40,48 +47,30 @@ App.CustomRoute = Em.Route.extend
           type.items = type.items.sortBy 'price'
         , category
         category.types.sortBy 'averagePrice'
-      data.controller.set 'categories', data.categories
-      data.controller.set 'colors', data.colors
+      controller.set 'categories', data.categories
+      controller.set 'colors', data.colors
+      data.self.setupCustomItem()
 
   actions:
     setCustomProduct: (product)->
       customItem = @modelFor('custom')
-      @store.unloadAll('selected_color')
-      @store.unloadAll('custom_option')
       customItem.set('product_id', product.get('id'))
-
-      colorTypes = product.get('colorTypes')
-      selectedColors = colorTypes.map (colorType)->
-        selection = @store.createRecord 'selected_color',
-          colorType_id: colorType.get 'id'
-        selection.get 'colorType'
-        selection.set('customItem', customItem)
-        return selection
-      , this
-
-      @controller.set 'selectedColors', selectedColors
-      @controller.setFills()
-
-      customOptions = []
-      options = []
-      product.get('optionTypes').forEach (optionType)->
-        values = optionType.get('optionValues').map (value)->
-          selection = @store.createRecord 'custom_option',
-            optionValue_id: value.get 'id'
-          options.push(selection.get 'optionValue')
-          return selection
-        , this
-        customOptions = customOptions.concat(values)
-      , this
-      customItem.get('customOptions').pushObjects(customOptions)
-
-      @controller.set 'options', customOptions
-
-      customItem.save()
+      customItem.unloadRelationships()
+      customItem.reloadOptions(product)
+      @setupCustomItem()
 
     selectColor: (color, selection)->
-      selection.set 'colorValue_id', color.get('id')
-      selection.set 'name', color.get('name')
+      selection.setColor(color)
       @controller.setFills()
       return selection
+
+#-------------------------------------------
+# private
+#-------------------------------------------
+  setupCustomItem: ->
+    customItem = @modelFor('custom')
+    return if customItem.get('noProduct')
+    @controller.set 'selectedColors', customItem.get('selectedColors')
+    @controller.set 'options', customItem.get('customOptions')
+
 

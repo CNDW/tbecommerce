@@ -5,7 +5,7 @@ div.col-main-body
         each option in options
           div.custom-features-line
             span.name {{option.name}}
-            input.right type='checkbox'
+            =input class='right' type='checkbox' checked=option.selected
             span.price.right ${{option.price}}
             span.icon-info.right.interactable click="openModal 'property' option"
       div.custom-selection-field
