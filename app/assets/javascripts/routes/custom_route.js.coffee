@@ -2,8 +2,6 @@ App.CustomRoute = Em.Route.extend
   model: ->
     store = @store
     model = {}
-    store.find('selected_color')
-    store.find('custom_option')
     store.find('custom_item', {inShop: true}).then (data)->
       if (data.content.length)
         model = data.content[0]
@@ -32,6 +30,8 @@ App.CustomRoute = Em.Route.extend
         }
       ]
       colors: @store.all 'color_value'
+      featured: @store.filter 'product', (record)->
+        record.get 'featured'
     ).then (data)->
       data.categories.forEach (category)->
         category.types = category.models.mapBy('product_type').uniq().map (type)->
@@ -48,6 +48,8 @@ App.CustomRoute = Em.Route.extend
         category.types.sortBy 'averagePrice'
       controller.set 'categories', data.categories
       controller.set 'colors', data.colors
+      controller.set 'featuredItems', data.featured
+
 
   afterModel: (model, transition)->
     return if model.get('noProduct')

@@ -1,6 +1,12 @@
 App.ApplicationRoute = Em.Route.extend
   model: ->
-    @store.find 'product'
+    store = @store
+    products: @store.find('product').then ->
+      Em.RSVP.hash
+        customOptions: store.find 'custom_option'
+        customItems: store.find 'custom_item'
+        selectedColors: store.find 'selected_color'
+        lineItems: store.find 'line_item'
 
   actions:
     openModal: (template, model)->

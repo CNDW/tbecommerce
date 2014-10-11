@@ -3,6 +3,7 @@ App.Product = DS.Model.extend
   description: DS.attr 'string'
   specs: DS.attr 'string'
   price: DS.attr 'number'
+  featured: DS.attr 'boolean'
   product_category: DS.attr 'string'
   product_subcategory: DS.attr 'string'
   slug: DS.attr 'string'

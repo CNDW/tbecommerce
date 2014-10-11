@@ -149,6 +149,11 @@
       <%= f.error_message_on :product_subcategory %>
       <%= f.text_field :product_subcategory, class: 'fullwidth' %>
     <% end %>
+    <%= f.field_container :featured do %>
+      <%= f.label :featured, Spree.t(:featured) %>
+      <%= f.error_message_on :featured %>
+      <%= f.check_box :featured %>
+    <% end %>
   </div>
 
   <div class="twelve columns alpha omega">

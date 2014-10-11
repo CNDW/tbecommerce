@@ -7,6 +7,7 @@ App.CustomController = Em.ObjectController.extend
   categories: Em.A()
   colors: Em.A()
   options: Em.A()
+  featuredItems: Em.A()
   builderStep: 1
   isStepOne: Em.computed.equal 'builderStep', 1
   isStepTwo: Em.computed.equal 'builderStep', 2

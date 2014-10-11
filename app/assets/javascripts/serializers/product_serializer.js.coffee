@@ -26,14 +26,14 @@ App.ColorValueSerializer = DS.ActiveModelSerializer.extend
     {"colorValues": payload}
 
 App.CustomItemAdapter = DS.LSAdapter.extend
-  namespace: 'TB-CustomItem'
+  namespace: 'TrashBags'
 App.CustomItemSerializer = DS.LSSerializer.extend()
 App.SelectedColorAdapter = DS.LSAdapter.extend
-  namespace: 'TB-SelectedColor'
+  namespace: 'TrashBags'
 App.SelectedColorSerializer = DS.LSSerializer.extend()
 App.CustomOptionAdapter = DS.LSAdapter.extend
-  namespace: 'TB-CustomOption'
+  namespace: 'TrashBags'
 App.CustomOptionSerializer = DS.LSSerializer.extend()
 App.LineItemAdapter = DS.LSAdapter.extend
-  namespace: 'TB-LineItem'
+  namespace: 'TrashBags'
 App.LineItemSerializer = DS.LSSerializer.extend()
