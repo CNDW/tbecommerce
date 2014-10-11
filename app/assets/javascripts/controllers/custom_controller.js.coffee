@@ -2,6 +2,7 @@ App.CustomController = Em.ObjectController.extend
   product: Em.computed.alias 'model.product'
   noProduct: Em.computed.alias 'model.noProduct'
   price: Em.computed.alias 'model.price'
+
   selectedColors: Em.A()
   categories: Em.A()
   colors: Em.A()
