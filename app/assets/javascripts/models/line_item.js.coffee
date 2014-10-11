@@ -1,2 +1,3 @@
 App.LineItem = DS.Model.extend
-  product: DS.attr 'string'
+  product: DS.belongsTo 'product'
+  customItem: DS.belongsTo 'custom_item'

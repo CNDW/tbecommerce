@@ -34,3 +34,6 @@ App.SelectedColorSerializer = DS.LSSerializer.extend()
 App.CustomOptionAdapter = DS.LSAdapter.extend
   namespace: 'TB-CustomOption'
 App.CustomOptionSerializer = DS.LSSerializer.extend()
+App.LineItemAdapter = DS.LSAdapter.extend
+  namespace: 'TB-LineItem'
+App.LineItemSerializer = DS.LSSerializer.extend()
