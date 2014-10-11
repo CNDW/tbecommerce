@@ -1,6 +1,7 @@
 App.CustomItem = DS.Model.extend
   name: DS.attr 'string', defaultValue: 'custom item'
   inShop: DS.attr 'boolean', defaultValue: false
+  inCart: DS.attr 'boolean', defaultValue: false
   noProduct: Em.computed.empty 'product_id'
   noSelectedColors: Em.computed.empty 'selectedColors'
   colorOptions: Em.computed.alias 'product.colorTypes'
@@ -20,6 +21,7 @@ App.CustomItem = DS.Model.extend
     if @get 'product_id'
       @store.find('product', @get('product_id')).then (product)=>
         @set 'product', product
+        @set 'name', product.get('name')
         @recalculatePrice()
         @save()
   ).observes('product_id').on('init')
