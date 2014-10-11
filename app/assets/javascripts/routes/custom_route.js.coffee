@@ -32,7 +32,6 @@ App.CustomRoute = Em.Route.extend
         }
       ]
       colors: @store.all 'color_value'
-      self: this
     ).then (data)->
       data.categories.forEach (category)->
         category.types = category.models.mapBy('product_type').uniq().map (type)->
@@ -49,7 +48,14 @@ App.CustomRoute = Em.Route.extend
         category.types.sortBy 'averagePrice'
       controller.set 'categories', data.categories
       controller.set 'colors', data.colors
-      data.self.setupCustomItem()
+
+  afterModel: (model, transition)->
+    return if model.get('noProduct')
+    controller = @controllerFor('custom')
+    controller.set 'selectedColors', model.get('selectedColors.content')
+    controller.set 'options', model.get('customOptions.content')
+    controller.setFills()
+
 
   actions:
     setCustomProduct: (product)->
@@ -66,7 +72,6 @@ App.CustomRoute = Em.Route.extend
 #-------------------------------------------
   setupCustomItem: ->
     customItem = @modelFor('custom')
-    return if customItem.get('noProduct')
     @controller.set 'selectedColors', customItem.get('selectedColors.content')
     @controller.set 'options', customItem.get('customOptions.content')
     @controller.setFills()

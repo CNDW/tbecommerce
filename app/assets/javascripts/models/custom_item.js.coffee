@@ -1,7 +1,7 @@
 App.CustomItem = DS.Model.extend
   name: DS.attr 'string', defaultValue: 'custom item'
   inShop: DS.attr 'boolean', defaultValue: false
-  noProduct: Em.computed.empty 'product'
+  noProduct: Em.computed.empty 'product_id'
   noSelectedColors: Em.computed.empty 'selectedColors'
   colorOptions: Em.computed.alias 'product.colorTypes'
 
@@ -13,26 +13,28 @@ App.CustomItem = DS.Model.extend
   basePrice: (->
     base_price = @get 'product.price'
     @set 'price', base_price
-  ).observes('product')
+  ).observes('product_id')
 
   product_id: DS.attr 'number'
   setProduct: (->
-    @store.find('product', @get 'product_id').then (product)=>
-      @set 'product', product
-      @recalculatePrice()
+    if @get 'product_id'
+      @store.find('product', @get('product_id')).then (product)=>
+        @set 'product', product
+        @recalculatePrice()
+        @save()
   ).observes('product_id').on('init')
 
   properties: (->
     @get 'product.properties'
-  ).property('product')
+  ).property('product_id')
 
   description: (->
     @get 'product.description'
-  ).property('product')
+  ).property('product_id')
 
   specs: (->
     @get 'product.specs'
-  ).property('product')
+  ).property('product_id')
 
   #- Properties for mapping SVG data
   availableColors: (->
