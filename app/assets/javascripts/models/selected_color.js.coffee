@@ -2,9 +2,7 @@ App.SelectedColor = DS.Model.extend
   name: DS.attr 'string'
   title: Em.computed.alias 'colorType.presentation'
   swatch: DS.attr 'string'
-  selector: (->
-    @get('colorType.selector')
-  ).property()
+  selector: DS.attr 'string'
   colors: Em.computed.alias 'colorType.colorValues'
   customItem: DS.belongsTo 'custom_item'
 
@@ -28,5 +26,6 @@ App.SelectedColor = DS.Model.extend
     @set 'colorValue_id', colorValue.get('id')
     @set 'name', colorValue.get('name')
     @set 'swatch', colorValue.get('small_url')
+    @set 'selector', @get('colorType.selector')
     @save()
 

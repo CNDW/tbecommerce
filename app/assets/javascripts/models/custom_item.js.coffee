@@ -8,27 +8,31 @@ App.CustomItem = DS.Model.extend
   selectedColors: DS.hasMany 'selected_color'
   customOptions: DS.hasMany 'custom_option'
 
-  price: (->
-    @get 'product.price'
-  ).property('product_id')
+  price: DS.attr 'number'
+
+  basePrice: (->
+    base_price = @get 'product.price'
+    @set 'price', base_price
+  ).observes('product')
 
   product_id: DS.attr 'number'
-  product: (->
-    if @get('product_id')
-      @store.find 'product', @get 'product_id'
-  ).property('product_id')
+  setProduct: (->
+    @store.find('product', @get 'product_id').then (product)=>
+      @set 'product', product
+      @recalculatePrice()
+  ).observes('product_id').on('init')
 
   properties: (->
     @get 'product.properties'
-  ).property('product_id')
+  ).property('product')
 
   description: (->
     @get 'product.description'
-  ).property('product_id')
+  ).property('product')
 
   specs: (->
     @get 'product.specs'
-  ).property('product_id')
+  ).property('product')
 
   #- Properties for mapping SVG data
   availableColors: (->
@@ -38,6 +42,12 @@ App.CustomItem = DS.Model.extend
     {url: color.get('small_url'), name: "#{color.get('name')}-pattern"}
 
   #- Helper methods
+  recalculatePrice: ->
+    base = @get 'product.price'
+    @get('customOptions').filterBy('selected', true).forEach (option)->
+      base += option.get 'price'
+    @set 'price', base
+
   reloadOptions: (product)->
     @unloadRelationships()
     @populateColorRelationship(product)
@@ -67,8 +77,8 @@ App.CustomItem = DS.Model.extend
         record = self.store.createRecord 'custom_option',
           optionValue_id: optionValue.get 'id'
           customItem: self
+          selected: no
+          price: optionValue.get 'price'
         record.save().then ->
           customOptions.addObject(record)
     @save()
-
-

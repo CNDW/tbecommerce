@@ -55,14 +55,11 @@ App.CustomRoute = Em.Route.extend
     setCustomProduct: (product)->
       customItem = @modelFor('custom')
       customItem.set('product_id', product.get('id'))
+      customItem.set('price', product.get('price'))
       customItem.unloadRelationships()
       customItem.reloadOptions(product)
       @setupCustomItem()
 
-    selectColor: (color, selection)->
-      selection.setColor(color)
-      @controller.setFills()
-      return selection
 
 #-------------------------------------------
 # private
@@ -70,7 +67,8 @@ App.CustomRoute = Em.Route.extend
   setupCustomItem: ->
     customItem = @modelFor('custom')
     return if customItem.get('noProduct')
-    @controller.set 'selectedColors', customItem.get('selectedColors')
-    @controller.set 'options', customItem.get('customOptions')
+    @controller.set 'selectedColors', customItem.get('selectedColors.content')
+    @controller.set 'options', customItem.get('customOptions.content')
+    @controller.setFills()
 
 

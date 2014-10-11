@@ -1,6 +1,7 @@
 App.CustomController = Em.ObjectController.extend
   product: Em.computed.alias 'model.product'
   noProduct: Em.computed.alias 'model.noProduct'
+  price: Em.computed.alias 'model.price'
   selectedColors: Em.A()
   categories: Em.A()
   colors: Em.A()
@@ -27,3 +28,13 @@ App.CustomController = Em.ObjectController.extend
       console.log "tansitionStep: #{targetStep}"
       return if targetStep is @get('builderStep')
       @set 'builderStep', targetStep
+      return false
+
+    selectColor: (color, selection)->
+      selection.setColor(color)
+      @setFills()
+      return false
+
+    clickOption: (selection)->
+      selection.toggleProperty('selected')
+      return false

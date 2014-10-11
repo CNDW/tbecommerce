@@ -1,11 +1,16 @@
 App.CustomOption = DS.Model.extend
   customItem: DS.belongsTo 'custom_item'
-  selected: DS.attr 'boolean', defaultValue: false
+  selected: DS.attr 'boolean'
 
   name: Em.computed.alias 'optionValue.name'
   description: Em.computed.alias 'optionValue.description'
-  price: Em.computed.alias 'optionValue.price'
+  price: DS.attr 'number'
   presentation: Em.computed.alias 'optionValue.presentation'
+
+  saveOnChange: (->
+    @get('customItem').recalculatePrice()
+    @save()
+  ).observes('selected')
 
   optionValue_id: DS.attr 'number'
   optionValue: (->
