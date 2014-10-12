@@ -1,8 +1,8 @@
 div.outlet-head-1
-  span featured items
-each item in featuredItems
-  div.item-tile.col-sm-6 click="setCustomProduct item"
-    img.img-responsive src=item.catalogue_image
-    h3.capitalize {{item.name}}
-    span.price ${{item.price}}
-    span.gray.capitalize {{item.tagline}}
+  span.capitalize featured items
+each featuredItem in featuredItems
+  div.item-tile.col-sm-6 click="setCustomProduct featuredItem"
+    img.img-responsive src=featuredItem.catalogue_image
+    h3.capitalize {{featuredItem.name}}
+    span.price ${{featuredItem.price}}
+    span.gray.capitalize {{featuredItem.tagline}}

@@ -8,8 +8,12 @@ App.Product = DS.Model.extend
   product_subcategory: DS.attr 'string'
   slug: DS.attr 'string'
   displayPrice: DS.attr 'string'
-  category: Em.computed.alias 'product_category'
-  product_type: Em.computed.alias 'product_subcategory'
+  category: (->
+    @get 'product_category'
+  ).property()
+  product_type: (->
+    @get 'product_subcategory'
+  ).property()
   tagline: DS.attr 'string'
 
   catalogue_image: (->

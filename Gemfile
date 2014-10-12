@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.4'
+gem 'rails', '4.1.6'
 
 # Use postgresql as the database for Active Record
 gem 'pg'
@@ -27,7 +27,7 @@ gem 'jquery-rails', '~> 3.1.2'
 
 # Use Ember.js for frontend javascript
 gem 'ember-rails'
-gem 'ember-source', '1.7.0.beta.5'
+gem 'ember-source', '1.7.0'
 gem 'ember-data-source', '1.0.0.beta.10'
 
 # Use emblem for javascript templates
