@@ -6,25 +6,20 @@ App.CustomItem = DS.Model.extend
   noSelectedColors: Em.computed.empty 'selectedColors'
   colorOptions: Em.computed.alias 'product.colorTypes'
 
-  selectedColors: DS.hasMany 'selected_color'
-  customOptions: DS.hasMany 'custom_option'
+  selectedColors: DS.hasMany 'selected_color', async: true
+  customOptions: DS.hasMany 'custom_option', async: true
+  lineItem: DS.belongsTo 'line_item', async: true
 
   price: DS.attr 'number'
 
   basePrice: (->
-    base_price = @get 'product.price'
-    @set 'price', base_price
-  ).observes('product_id')
+    @recalculatePrice()
+  ).observes('product_id').on('init')
 
   product_id: DS.attr 'number'
-  setProduct: (->
-    if @get 'product_id'
-      @store.find('product', @get('product_id')).then (product)=>
-        @set 'product', product
-        @set 'name', product.get('name')
-        @recalculatePrice()
-        @save()
-  ).observes('product_id').on('init')
+  product: (->
+    @store.getById('product', @get('product_id')) if @get 'product_id'
+  ).property('product_id')
 
   properties: (->
     @get 'product.properties'
@@ -40,7 +35,7 @@ App.CustomItem = DS.Model.extend
 
   #- Properties for mapping SVG data
   availableColors: (->
-    @store.find 'color_value'
+    @store.all 'color_value'
   ).property()
   patterns: Em.computed.map 'availableColors', (color)->
     {url: color.get('small_url'), name: "#{color.get('name')}-pattern"}

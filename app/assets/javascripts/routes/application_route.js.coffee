@@ -1,7 +1,7 @@
 App.ApplicationRoute = Em.Route.extend
   model: ->
     store = @store
-    products: @store.find('product').then ->
+    products = @store.find('product').then ->
       Em.RSVP.hash
         customOptions: store.find 'custom_option'
         customItems: store.find 'custom_item'

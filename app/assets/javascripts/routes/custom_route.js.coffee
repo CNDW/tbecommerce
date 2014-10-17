@@ -52,11 +52,13 @@ App.CustomRoute = Em.Route.extend
       controller.set 'featuredItems', data.featured
 
   afterModel: (model, transition)->
-    return if model.get('noProduct')
     controller = @controllerFor('custom')
-    controller.set 'selectedColors', model.get('selectedColors.content')
-    controller.set 'options', model.get('customOptions.content')
-    controller.setFills()
+    if model.get('noProduct')
+      controller.set 'builderStep', 1
+    else
+      controller.set 'selectedColors', model.get('selectedColors.content')
+      controller.set 'options', model.get('customOptions.content')
+      controller.setFills()
 
 
   actions:

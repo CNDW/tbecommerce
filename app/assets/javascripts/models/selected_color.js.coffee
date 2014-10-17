@@ -12,13 +12,13 @@ App.SelectedColor = DS.Model.extend
   colorType_id: DS.attr 'number'
   colorType: (->
     if @get 'colorType_id'
-      @store.find 'color_type', @get 'colorType_id'
+      @store.getById 'color_type', @get 'colorType_id'
   ).property('colorType_id')
 
   colorValue_id: DS.attr 'number'
   colorValue: (->
     if @get 'colorValue_id'
-      @store.find 'color_value', @get 'colorValue_id'
+      @store.getById 'color_value', @get 'colorValue_id'
   ).property('colorValue_id')
 
   #- Helper methods

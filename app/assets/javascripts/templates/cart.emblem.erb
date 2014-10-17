@@ -14,18 +14,19 @@ div.row
       div.col-sm-1
         span.upcase remove
 
-    each lineItem in model
+    each model
       div.row-line-item.bottom-border
         div.col-sm-7.line-item
           div.head
-            span.capitalize custom {{lineItem.name}}
+            span.capitalize custom {{name}}
             button.btn.btn-black edit
           div.col-sm-3
-            img.img-responsive src="<%= asset_path('custom1.png') %>" alt="loading..."
+            render 'custom_item' customItem
+            / item-mockup item=customItem selectedColors=customItem.selectedColors
         div.col-sm-2
           span.capitalize 1
         div.col-sm-2
-          span.capitalize ${{lineItem.price}}
+          span.capitalize ${{price}}
         div.col-sm-1
           span.icon-x.interactable click="removeFromCart lineItem"
     div.row-line-item.text-medium
