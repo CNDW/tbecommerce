@@ -1,4 +1,2 @@
-object false
-child(@color_values => :color_value) do
-  extends "spree/api/color_values/show"
-end
+collection @color_values
+extends "spree/api/color_values/show"
