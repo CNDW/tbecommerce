@@ -6,9 +6,9 @@ App.CustomItem = DS.Model.extend
   noSelectedColors: Em.computed.empty 'selectedColors'
   colorOptions: Em.computed.alias 'product.colorTypes'
 
-  selectedColors: DS.hasMany 'selected_color', async: true
-  customOptions: DS.hasMany 'custom_option', async: true
-  lineItem: DS.belongsTo 'line_item', async: true
+  selectedColors: DS.hasMany 'selected_color'
+  customOptions: DS.hasMany 'custom_option'
+  lineItem: DS.belongsTo 'line_item'
 
   price: DS.attr 'number'
 
@@ -47,19 +47,21 @@ App.CustomItem = DS.Model.extend
       base += option.get 'price'
     @set 'price', base
 
-  reloadOptions: (product)->
-    @unloadRelationships()
+  loadOptions: (product)->
     @populateColorRelationship(product)
     @populateOptionRelationship(product)
 
   unloadRelationships: ->
-    [@get('selectedColors.content'), @get('customOptions.content')].forEach (relationship)->
-      relationship.forEach (record)->
+    self = this
+    [@get('selectedColors'), @get('customOptions')].forEach (relationship)->
+      relationship.content.forEach (record)->
+        relationship.removeObject(record)
+        self.save()
         record.destroyRecord()
 
   populateColorRelationship: (product)->
     self = this
-    colorTypes = product.get 'colorTypes'
+    colorTypes = product.get('colorTypes')
     colorTypes.forEach (colorType)->
       record = self.store.createRecord 'selectedColor',
         colorType_id: colorType.get 'id'

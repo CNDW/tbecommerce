@@ -1,6 +1,6 @@
 App.LineItem = DS.Model.extend
-  product: DS.belongsTo 'product', async: true
-  customItem: DS.belongsTo 'custom_item', async: true
+  product: DS.belongsTo 'product'
+  customItem: DS.belongsTo 'custom_item'
   name: Em.computed.alias 'customItem.name'
   price: Em.computed.alias 'customItem.price'
 

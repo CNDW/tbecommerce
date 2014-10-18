@@ -67,7 +67,7 @@ App.CustomRoute = Em.Route.extend
       customItem.set('product_id', product.get('id'))
       customItem.set('price', product.get('price'))
       customItem.unloadRelationships()
-      customItem.reloadOptions(product)
+      customItem.loadOptions(product)
       @setupCustomItem()
 
 
