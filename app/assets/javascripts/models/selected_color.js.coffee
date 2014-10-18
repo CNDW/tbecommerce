@@ -4,7 +4,6 @@ App.SelectedColor = DS.Model.extend
   swatch: DS.attr 'string'
   selector: DS.attr 'string'
   colors: Em.computed.alias 'colorType.colorValues'
-  customItem: DS.belongsTo 'custom_item'
 
   isUnselected: Em.computed.empty 'colorValue_id'
 

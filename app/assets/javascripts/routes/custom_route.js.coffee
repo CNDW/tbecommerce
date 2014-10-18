@@ -2,37 +2,29 @@ App.CustomRoute = Em.Route.extend
   model: ->
     store = @store
     model = {}
-    store.find('product')
-    store.find('custom_item', {inShop: true}).then (data)->
-      if (data.content.length)
-        model = data.content[0]
-    , (reason)->
+    items = store.all('custom_item').filterBy('inShop', true);
+    if (items.get 'length')
+      model = items[0]
+    else
       item = store.createRecord 'custom_item',
-          inShop: true
-      item.save()
+        inShop: true
       model = item
 
   setupController: (controller, model)->
     @_super controller, model
+    products = @store.all('product')
     Em.RSVP.hash(
       controller: controller
       categories: [
-        {name: 'bag', types: [], models: @store.filter 'product', (product)->
-          category = product.get 'category'
-          category is 'bag'
+        {name: 'bag', types: [], models: products.filterBy('category', 'bag')
         }
-        {name: 'apparel', types: [], models: @store.filter 'product', (product)->
-          category = product.get 'category'
-          category is 'apparel'
+        {name: 'apparel', types: [], models: products.filterBy('category', 'apparel')
         }
-        {name: 'utility', types: [], models: @store.filter 'product', (product)->
-          category = product.get 'category'
-          category is 'utility'
+        {name: 'utility', types: [], models: products.filterBy('category', 'utility')
         }
       ]
       colors: @store.all 'color_value'
-      featured: @store.filter 'product', (product)->
-        product.get 'featured'
+      featured: products.filterBy('featured', true)
     ).then (data)->
       data.categories.forEach (category)->
         category.types = category.models.mapBy('product_type').uniq().map (type)->
@@ -56,8 +48,8 @@ App.CustomRoute = Em.Route.extend
     if model.get('noProduct')
       controller.set 'builderStep', 1
     else
-      controller.set 'selectedColors', model.get('selectedColors.content')
-      controller.set 'options', model.get('customOptions.content')
+      controller.set 'selectedColors', model.get('selectedColors')
+      controller.set 'options', model.get('customOptions')
       controller.setFills()
 
 
@@ -65,9 +57,7 @@ App.CustomRoute = Em.Route.extend
     setCustomProduct: (product)->
       customItem = @modelFor('custom')
       customItem.set('product_id', product.get('id'))
-      customItem.set('price', product.get('price'))
-      customItem.unloadRelationships()
-      customItem.loadOptions(product)
+      customItem.reloadRelationships()
       @setupCustomItem()
 
 
@@ -76,8 +66,8 @@ App.CustomRoute = Em.Route.extend
 #-------------------------------------------
   setupCustomItem: ->
     customItem = @modelFor('custom')
-    @controller.set 'selectedColors', customItem.get('selectedColors.content')
-    @controller.set 'options', customItem.get('customOptions.content')
+    @controller.set 'selectedColors', customItem.get('selectedColors')
+    @controller.set 'options', customItem.get('customOptions')
     @controller.setFills()
 
 

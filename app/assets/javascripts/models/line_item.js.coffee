@@ -5,5 +5,8 @@ App.LineItem = DS.Model.extend
   price: Em.computed.alias 'customItem.price'
 
   remove: ->
-    @get('customItem').set('inCart', no)
+    customItem = @get('customItem')
+    customItem.set('lineItem', null)
+    customItem.set('inCart', no)
+    customItem.save()
     @destroyRecord()

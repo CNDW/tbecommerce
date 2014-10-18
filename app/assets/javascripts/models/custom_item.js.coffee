@@ -43,21 +43,28 @@ App.CustomItem = DS.Model.extend
   #- Helper methods
   recalculatePrice: ->
     base = @get 'product.price'
-    @get('customOptions').filterBy('selected', true).forEach (option)->
+    selected = @get('customOptions').filter (option)->
+      option.get('selected') is true
+    selected.forEach (option)->
       base += option.get 'price'
     @set 'price', base
 
-  loadOptions: (product)->
+  loadOptions: ()->
+    product = @get 'product'
     @populateColorRelationship(product)
     @populateOptionRelationship(product)
 
-  unloadRelationships: ->
+  reloadRelationships: ->
     self = this
     [@get('selectedColors'), @get('customOptions')].forEach (relationship)->
-      relationship.content.forEach (record)->
-        relationship.removeObject(record)
-        self.save()
-        record.destroyRecord()
+      items = relationship.content.toArray()
+      items.forEach (record)->
+        relationship.removeRecord(record)
+        record.unloadRecord()
+        record.destroy()
+      relationship.save()
+    @loadOptions()
+    @save()
 
   populateColorRelationship: (product)->
     self = this
@@ -65,10 +72,7 @@ App.CustomItem = DS.Model.extend
     colorTypes.forEach (colorType)->
       record = self.store.createRecord 'selectedColor',
         colorType_id: colorType.get 'id'
-        customItem: self
-      record.save().then ->
-        self.get('selectedColors').addObject(record)
-    @save()
+      self.get('selectedColors').addRecord(record)
 
   populateOptionRelationship: (product)->
     self = this
@@ -77,9 +81,7 @@ App.CustomItem = DS.Model.extend
       optionType.get('optionValues').forEach (optionValue)->
         record = self.store.createRecord 'custom_option',
           optionValue_id: optionValue.get 'id'
-          customItem: self
           selected: no
+          customItem: self
           price: optionValue.get 'price'
-        record.save().then ->
-          customOptions.addObject(record)
-    @save()
+        customOptions.addRecord(record)
