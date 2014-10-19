@@ -13,19 +13,24 @@ App.CustomRoute = Em.Route.extend
   setupController: (controller, model)->
     @_super controller, model
     products = @store.all('product')
-    Em.RSVP.hash(
+    Em.RSVP.hash
       controller: controller
       categories: [
-        {name: 'bag', types: [], models: products.filterBy('category', 'bag')
-        }
-        {name: 'apparel', types: [], models: products.filterBy('category', 'apparel')
-        }
-        {name: 'utility', types: [], models: products.filterBy('category', 'utility')
-        }
+        name: 'bag'
+        types: []
+        models: products.filterBy 'category', 'bag'
+      ,
+        name: 'apparel'
+        types: []
+        models: products.filterBy 'category', 'apparel'
+      ,
+        name: 'utility'
+        types: []
+        models: products.filterBy 'category', 'utility'
       ]
       colors: @store.all 'color_value'
       featured: products.filterBy('featured', true)
-    ).then (data)->
+    .then (data)->
       data.categories.forEach (category)->
         category.types = category.models.mapBy('product_type').uniq().map (type)->
           {name: type}

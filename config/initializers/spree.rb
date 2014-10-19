@@ -11,6 +11,8 @@ Spree.config do |config|
   # config.site_name = "Spree Demo Site"
 end
 
+Spree::Auth::Config[:registration_step] = false
+
 Spree::Api::Config[:requires_authentication] = false
 
 Spree::Api::ApiHelpers.product_attributes.concat([:product_category, :product_subcategory, :specs])

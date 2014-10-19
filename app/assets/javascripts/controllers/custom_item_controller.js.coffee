@@ -1,4 +1,9 @@
 App.CustomItemController = Em.ObjectController.extend
+  needs: ['custom']
+  featuredItems: Em.computed.alias 'controllers.custom.featuredItems'
+  element_id: (->
+    "custom-item-#{this.get('model.id')}"
+  ).property('model.id')
   fills: (->
     colors = @get 'model.selectedColors'
     colors.map (color)->

@@ -2,6 +2,7 @@ App.CustomItem = DS.Model.extend
   name: DS.attr 'string', defaultValue: 'custom item'
   inShop: DS.attr 'boolean', defaultValue: false
   inCart: DS.attr 'boolean', defaultValue: false
+
   noProduct: Em.computed.empty 'product_id'
   noSelectedColors: Em.computed.empty 'selectedColors'
   colorOptions: Em.computed.alias 'product.colorTypes'
@@ -12,11 +13,27 @@ App.CustomItem = DS.Model.extend
 
   price: DS.attr 'number'
 
+  isComplete: (->
+    @get('completedStep') > 1
+  ).property('completedStep')
+
+  completedStep: (->
+    step = 0
+    step += 1 unless @get('noProduct')
+    selectedColors = @get 'selectedColors'
+    color_length = selectedColors.get 'length'
+    if (color_length > 0)
+      selectedColors.forEach (color)->
+        color_length -= 1 if color.get('selected')
+      step += 1 if color_length is 0
+    return step
+  ).property('product_id', 'selectedColors.@each.selected')
+
   basePrice: (->
     @recalculatePrice()
   ).observes('product_id').on('init')
 
-  product_id: DS.attr 'number'
+  product_id: DS.attr 'number', defaultValue: null
   product: (->
     @store.getById('product', @get('product_id')) if @get 'product_id'
   ).property('product_id')
@@ -63,16 +80,20 @@ App.CustomItem = DS.Model.extend
         record.unloadRecord()
         record.destroy()
       relationship.save()
-    @loadOptions()
     @save()
+    @loadOptions()
 
   populateColorRelationship: (product)->
     self = this
+    selectedColors = @get('selectedColors')
     colorTypes = product.get('colorTypes')
     colorTypes.forEach (colorType)->
       record = self.store.createRecord 'selectedColor',
         colorType_id: colorType.get 'id'
-      self.get('selectedColors').addRecord(record)
+        customItem: self
+      selectedColors.addRecord(record)
+      record.save()
+    @save()
 
   populateOptionRelationship: (product)->
     self = this
@@ -85,3 +106,5 @@ App.CustomItem = DS.Model.extend
           customItem: self
           price: optionValue.get 'price'
         customOptions.addRecord(record)
+        record.save()
+    @save()

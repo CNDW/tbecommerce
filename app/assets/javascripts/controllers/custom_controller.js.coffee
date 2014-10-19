@@ -27,8 +27,9 @@ App.CustomController = Em.ObjectController.extend
 
   actions:
     transitionStep: (targetStep)->
+      if (@get('model.completedStep') < targetStep - 1) or (targetStep is @get('builderStep'))
+        return
       console.log "tansitionStep: #{targetStep}"
-      return if targetStep is @get('builderStep')
       @set 'builderStep', targetStep
       return false
 

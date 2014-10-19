@@ -7,6 +7,7 @@ App.ApplicationRoute = Em.Route.extend
         customItems: store.find 'custom_item'
         selectedColors: store.find 'selected_color'
         lineItems: store.find 'line_item'
+        orders: store.find 'order'
 
   actions:
     openModal: (template, model)->

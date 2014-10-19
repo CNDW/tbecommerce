@@ -15,7 +15,7 @@ div.col-main-body
                     span {{item.name}}
   div.col-sm-7.centered
     div.col-sm-12
-      partial 'custom-item'
+      render 'custom-item' model
 
 unless noProduct
   partial 'custom/description'

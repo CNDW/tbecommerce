@@ -8,6 +8,7 @@ App.Product = DS.Model.extend
   product_subcategory: DS.attr 'string'
   slug: DS.attr 'string'
   displayPrice: DS.attr 'string'
+  master_variant_id: DS.attr 'number'
   category: (->
     @get 'product_category'
   ).property()
