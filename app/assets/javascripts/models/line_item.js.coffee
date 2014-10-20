@@ -4,7 +4,7 @@ App.LineItem = DS.Model.extend
   order: DS.belongsTo 'order'
   state: (->
     return 'cart' if @get('order') is null
-    return @get('order.state')
+    @get('order.state')
   ).property('order')
   inOrder: (->
     @get('order') != null
