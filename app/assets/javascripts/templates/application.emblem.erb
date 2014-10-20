@@ -31,7 +31,11 @@ div.header.row
         span click='deactivateCatalogue' about
     li
       link-to 'cart'
-        span.glyphicon.glyphicon-shopping-cart
+        unless cartOrder.isEmpty
+          span.shopping-cart-counter {{cartOrder.length}}
+          span.glyphicon.glyphicon-shopping-cart
+        else
+          span.glyphicon.glyphicon-shopping-cart.empty
 
 outlet
 

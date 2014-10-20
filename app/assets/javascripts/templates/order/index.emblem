@@ -1,0 +1,8 @@
+div.col-main-body.bottom-border
+  h4.upcase shipping address
+  partial 'partials/address-form'
+div.col-main-body.bottom-border
+  h4.upcase billing address
+  partial 'partials/address-form'
+div.col-main-body
+  button.btn.btn-black continue

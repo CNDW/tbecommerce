@@ -9,6 +9,19 @@ App.ApplicationRoute = Em.Route.extend
         lineItems: store.find 'line_item'
         orders: store.find 'order'
 
+  setupController: (controller, model)->
+    controller.set('cartOrder', @getCartOrder())
+
+  getCartOrder: ->
+    orders = @store.all('order').filterBy('state', 'cart')
+    if (orders.get('length') > 0)
+      order = orders.shiftObject()
+      orders.setEach('state', 'precart')
+    else
+      order = @store.createRecord 'order'
+      order.save()
+    return order
+
   actions:
     openModal: (template, model)->
       @render template,
@@ -23,15 +36,16 @@ App.ApplicationRoute = Em.Route.extend
 
     addToCart: (item)->
       if item.get 'inCart'
+        item.save()
         @transitionTo 'cart'
         return
-      product = item.get 'product'
+      order = @controllerFor('application').get('cartOrder')
       record = @store.createRecord 'line_item',
-        product: product,
+        product: item.get('product'),
         customItem: item
+        order: order
       record.save()
-      item.set 'inCart', true
-      item.set 'inShop', false
+      order.addLineItem(record)
       item.save()
       @transitionTo 'cart'
 
@@ -39,11 +53,8 @@ App.ApplicationRoute = Em.Route.extend
       lineItem.remove()
       @transitionTo 'cart'
 
-    checkout: (cartContents)->
-      record = @store.createRecord 'order', ->
-        line_items: cartContents
-      record.save()
-      cartContents.forEach (line_item)->
-        line_item.set 'order', record
-        line_item.save()
+    checkout: (order)->
+      order.set 'state', 'address'
+      order.save()
+      @transitionTo 'order', order
 

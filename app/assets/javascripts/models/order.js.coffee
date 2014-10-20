@@ -9,7 +9,10 @@ App.Order = DS.Model.extend
   ship_total: DS.attr 'number'
   included_tax_total: DS.attr 'number'
   additional_tax_total: DS.attr 'number'
-  state: DS.attr 'string', defaultValue: 'cart'
+  state: DS.attr 'string', defaultValue: 'precart'
+
+  length: Em.computed.alias 'line_items.length'
+  isEmpty: Em.computed.empty 'line_items'
 
   created: (->
     @get('token') != null
@@ -18,9 +21,20 @@ App.Order = DS.Model.extend
   line_items: DS.hasMany 'line_items'
 
   didCreate: ->
-    if @get('token') is null
-      @createOrder()
+    # if @get('token') is null
+    #   @createOrder()
 
+  addLineItem: (item)->
+    @get('line_items').addRecord(item)
+    @save()
+
+  removeLineItem: (item)->
+    @get('line_items').removeRecord(item)
+    @save()
+
+#=====================================================
+# API communcation
+#=====================================================
   createOrder: ->
     return if @get 'created'
     self = this

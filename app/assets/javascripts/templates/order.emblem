@@ -1,0 +1,12 @@
+div.row-page-title.bottom-border.no-margin
+  div.col-main-body.no-margin
+    span.page-title checkout
+    ol.checkout-nav
+      link-to 'order.index' model classNames='interactable upcase' tagName='li'
+        span addresses
+      li
+        span >
+      link-to 'order.payment' model classNames='interactable upcase' tagName='li'
+        span shipping & payment
+div.row
+  outlet

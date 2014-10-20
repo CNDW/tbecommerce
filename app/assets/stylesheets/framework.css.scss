@@ -165,6 +165,9 @@ html, body {
   color: $text-dark;
   font-size: $title-text-size;
   margin-bottom: 70px;
+  &.no-margin {
+    margin-bottom: 0;
+  }
   .page-title {
     text-transform: uppercase;
     margin-bottom: 5px;
@@ -334,8 +337,14 @@ ul.top-navs {
 
 .glyphicon-shopping-cart {
   font-size: 1.3em;
-  color: lightgray;
+  color: $text-medium;
   margin-top: -6px;
+  &.empty {
+    color: $text-light;
+  }
+}
+.shopping-cart-counter {
+  color: $text-medium;
 }
 
 .logo {
@@ -363,6 +372,7 @@ ul.top-navs {
     display: inline-block;
     line-height: 42px;
     padding: 0 10px 0 10px;
+    text-transform: uppercase;
   }
 }
 .item-tile {
@@ -616,23 +626,33 @@ ul.top-navs {
     text-transform: uppercase;
     margin: 10px 0 20px 0;
   }
-  .selection-fields {
-    margin: 10px 0 20px 0;
-    textarea {
-      background-color: $well-color;
-      border-style: none;
-      min-width: 100%;
-      min-height: 100px;
-      padding: 10px;
-      &::-moz-placeholder {
-        font-style: italic;
-      }
-      &:-ms-input-placeholder {
-        font-style: italic;
-      }
-      &::-webkit-input-placeholder {
-        font-style: italic;
-      }
+}
+.selection-fields {
+  margin: 10px 0 20px 0;
+  .field {
+    height: 30px;
+  }
+  .field-label {
+    color: $text-medium;
+    text-transform: capitalize;
+  }
+  input{
+    float: right;
+  }
+  textarea {
+    background-color: $well-color;
+    border-style: none;
+    min-width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    &::-moz-placeholder {
+      font-style: italic;
+    }
+    &:-ms-input-placeholder {
+      font-style: italic;
+    }
+    &::-webkit-input-placeholder {
+      font-style: italic;
     }
   }
 }
@@ -756,7 +776,19 @@ ul.top-navs {
 //--------------------------------------------
 // Checkout
 //--------------------------------------------
-
+.checkout-nav {
+  font-size: 18px;
+  color: $text-light;
+  display: inline;
+  margin-left: 40px;
+  li {
+    margin-left: 10px;
+    display: inline-block;
+    &.active {
+      color: $text-dark;
+    }
+  }
+}
 .row-line-item{
   @extend .row;
   font-size: 20px;

@@ -1,7 +1,12 @@
 App.CustomItem = DS.Model.extend
   name: DS.attr 'string', defaultValue: 'custom item'
   inShop: DS.attr 'boolean', defaultValue: false
-  inCart: DS.attr 'boolean', defaultValue: false
+  inCart: Em.computed.equal 'state', 'cart'
+
+  state: (->
+    return 'precart' if @get('lineItem') == null
+    return @get('lineItem.state')
+  ).property('lineItem')
 
   noProduct: Em.computed.empty 'product_id'
   noSelectedColors: Em.computed.empty 'selectedColors'
@@ -57,11 +62,14 @@ App.CustomItem = DS.Model.extend
   patterns: Em.computed.map 'availableColors', (color)->
     {url: color.get('small_url'), name: "#{color.get('name')}-pattern"}
 
+  removeLineItem: ->
+    @set('lineItem', null)
+    @save()
+
   #- Helper methods
   recalculatePrice: ->
     base = @get 'product.price'
-    selected = @get('customOptions').filter (option)->
-      option.get('selected') is true
+    selected = @get('customOptions').filterBy 'selected', true
     selected.forEach (option)->
       base += option.get 'price'
     @set 'price', base

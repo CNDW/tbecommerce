@@ -1,7 +1,7 @@
-App.CartController = Em.ArrayController.extend
+App.CartController = Em.ObjectController.extend
   subtotal: (->
     base = 0
-    @model.forEach (line_item)->
+    @model.get('line_items').forEach (line_item)->
       base += line_item.get('price')
     return base
   ).property('model.length')

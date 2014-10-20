@@ -3,7 +3,7 @@ App.LineItem = DS.Model.extend
   customItem: DS.belongsTo 'custom_item'
   order: DS.belongsTo 'order'
   state: (->
-    return 'cart' if @get('order') is null
+    return 'precart' if @get('order') is null
     @get('order.state')
   ).property('order')
   inOrder: (->
@@ -19,8 +19,6 @@ App.LineItem = DS.Model.extend
   isComplete: Em.computed.alias 'customItem.isComplete'
 
   remove: ->
-    customItem = @get('customItem')
-    customItem.set('lineItem', null)
-    customItem.set('inCart', no)
-    customItem.save()
+    @get('customItem').removeLineItem()
+    @get('order').removeLineItem()
     @destroyRecord()
