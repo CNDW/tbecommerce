@@ -39,3 +39,11 @@ App.ApplicationRoute = Em.Route.extend
       lineItem.remove()
       @transitionTo 'cart'
 
+    checkout: (cartContents)->
+      record = @store.createRecord 'order', ->
+        line_items: cartContents
+      record.save()
+      cartContents.forEach (line_item)->
+        line_item.set 'order', record
+        line_item.save()
+
