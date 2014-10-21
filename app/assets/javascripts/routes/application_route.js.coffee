@@ -10,7 +10,8 @@ App.ApplicationRoute = Em.Route.extend
         orders: store.find 'order'
 
   setupController: (controller, model)->
-    controller.set('cartOrder', @getCartOrder())
+    cart = @modelFor('cart')
+    controller.set('cartOrder', cart)
 
   getCartOrder: ->
     orders = @store.all('order').filterBy('state', 'cart')
@@ -18,7 +19,8 @@ App.ApplicationRoute = Em.Route.extend
       order = orders.shiftObject()
       orders.setEach('state', 'precart')
     else
-      order = @store.createRecord 'order'
+      order = @store.createRecord 'order',
+        state: 'cart'
       order.save()
     return order
 
@@ -36,16 +38,18 @@ App.ApplicationRoute = Em.Route.extend
 
     addToCart: (item)->
       if item.get 'inCart'
+        item.set('inShop', false)
         item.save()
         @transitionTo 'cart'
         return
-      order = @controllerFor('application').get('cartOrder')
+      order = @getCartOrder()
       record = @store.createRecord 'line_item',
         product: item.get('product'),
         customItem: item
         order: order
       record.save()
       order.addLineItem(record)
+      item.set('inShop', false)
       item.save()
       @transitionTo 'cart'
 
