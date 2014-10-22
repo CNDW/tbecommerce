@@ -3,6 +3,8 @@ App.CustomItem = DS.Model.extend
   inShop: DS.attr 'boolean', defaultValue: false
   inCart: Em.computed.equal 'state', 'cart'
 
+  variant_id: Em.computed.alias 'product.master_variant_id'
+
   state: (->
     return 'precart' if @get('lineItem') == null
     return @get('lineItem.state')

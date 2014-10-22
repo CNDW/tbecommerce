@@ -49,7 +49,7 @@ end
 gem 'posix-spawn'
 gem 'oink'
 
-gem 'spree', github: 'spree/spree', branch: '2-3-stable'
+gem 'spree', '2.3.4'
 gem 'spree_auth_devise', :git => 'https://github.com/spree/spree_auth_devise.git', :branch => '2-3-stable'
 
 group :development, :test do

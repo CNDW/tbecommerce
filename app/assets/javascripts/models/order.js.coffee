@@ -38,6 +38,7 @@ App.Order = DS.Model.extend
     else
       return @addrAttrs('bill_')
   ).property()
+  order_id: DS.attr 'number'
   email: DS.attr 'string'
   email_confirm: DS.attr 'string'
   special_instructions: DS.attr 'string'
@@ -53,9 +54,7 @@ App.Order = DS.Model.extend
   length: Em.computed.alias 'line_items.length'
   isEmpty: Em.computed.empty 'line_items'
 
-  created: (->
-    @get('token') != null
-  ).property('token')
+  created: DS.attr 'boolean', defaultValue: false
 
   line_items: DS.hasMany 'line_items'
 
@@ -64,12 +63,36 @@ App.Order = DS.Model.extend
       @createOrder()
 
   addLineItem: (item)->
-    @get('line_items').addRecord(item)
-    @save()
+    self = this
+    return new Promise (resolve, reject)->
+      $.ajax "api/orders/#{self.get('number')}/line_items",
+        type: "POST"
+        datatype: 'json'
+        data:
+          order_token: self.get('token')
+          line_item: variant_id: item.get('variant_id')
+        success: (data)->
+          self.get('line_items').addRecord(item)
+          item.set('line_item_id', data.id)
+          item.save()
+          self.save()
+          resolve(self)
+        error: ->
+          reject(arguments)
 
   removeLineItem: (item)->
-    @get('line_items').removeRecord(item)
-    @save()
+    self = this
+    return new Promise (resolve, reject)->
+      $.ajax "api/orders/#{self.get('number')}/line_items/#{item.get('line_item_id')}",
+        type: 'DELETE'
+        datatype: 'json'
+        success: ->
+          self.get('line_items').removeRecord(item)
+          self.save()
+          item.remove()
+          resolve(self)
+        error: ->
+          reject(arguments)
 
 #=====================================================
 # API communcation
@@ -79,37 +102,60 @@ App.Order = DS.Model.extend
     self = this
     $.post 'api/orders', {}, (payload, status, xhr)->
       self.eachAttribute (name, meta)->
-        self.set name, payload[name]
+        if name == 'order_id'
+          self.set 'order_id', payload.id
+        else
+          self.set name, payload[name]
+      self.set('created', true)
       self.save()
 
   updateAddresses: ->
-    data = @serializeAddresses()
-    $.ajax "api/checkouts/#{@get('number')}.json",
+    $.ajax "api/checkouts/#{@get('number')}",
       type: "PUT"
-      data: {order_token: @get('token')}
-      contents: @serializeAddresses()
+      datatype: 'json'
+      data:
+        order_token: @get('token')
+        order:
+          @serializeAddresses()
       success: ->
         debugger
+      error: ->
+        debugger
+
+  updateLineItems: ->
+    order_token = @get('token')
+    order_id = @get('order_id')
+    @get('line_items').forEach (line_item)->
+      if line_item.get('isDirty')
+        $.ajax "api/orders/#{order_id}/line_items",
+          type: "POST"
+          dataType: "json"
+          data:
+            order:
+              order_token: order_token
+            line_item:
+              variant_id: line_item.get('variant_id')
 
   addrAttrs: (type)->
     attrs =
-      firstname: @get 'firstname'
-      lastname: @get 'lastname'
-      address1: @get 'address1'
-      address2: @get 'address2'
-      city: @get 'city'
-      email: @get 'email'
-      phone: @get 'phone'
-      zipcode: @get 'zipcode'
-      state_id: @get 'state_id'
-      country_id: @get 'country_id'
+      firstname: @get "#{type}firstname"
+      lastname: @get "#{type}lastname"
+      address1: @get "#{type}address1"
+      address2: @get "#{type}address2"
+      city: @get "#{type}city"
+      email: @get "#{type}email"
+      phone: @get "#{type}phone"
+      zipcode: @get "#{type}zipcode"
+      state_id: 29#@get "#{type}state_id"
+      country_id: 49#@get "#{type}country_id"
 
+  serializeLineItems: ->
+    payload = {}
 
   serializeAddresses: ->
     payload =
-      order:
-        ship_address_attributes: @get('ship_address')
-        bill_address_attributes: @get('bill_address')
+      ship_address_attributes: @get('ship_address')
+      bill_address_attributes: @get('bill_address')
 
 
 

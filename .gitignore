@@ -23,3 +23,5 @@
 .info
 *.yml
 /config/secret_token.rb
+
+script.rb

@@ -2,6 +2,9 @@ App.LineItem = DS.Model.extend
   product: DS.belongsTo 'product'
   customItem: DS.belongsTo 'custom_item'
   order: DS.belongsTo 'order'
+  variant_id: Em.computed.alias 'customItem.variant_id'
+  line_item_id: DS.attr 'number'
+  isDirty: DS.attr 'boolean', defaultValue: true
   state: (->
     return 'precart' if @get('order') is null
     @get('order.state')
@@ -20,5 +23,5 @@ App.LineItem = DS.Model.extend
 
   remove: ->
     @get('customItem').removeLineItem()
-    @get('order').removeLineItem()
+    @set('order', null)
     @destroyRecord()
