@@ -24,6 +24,7 @@ gem 'capistrano-rvm'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails', '~> 3.1.2'
+gem 'select2-rails', '3.5.9.1'
 
 # Use Ember.js for frontend javascript
 gem 'ember-rails'

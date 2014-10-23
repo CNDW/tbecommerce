@@ -14,3 +14,6 @@ end
 child(@properties => :property) do
   extends "spree/api/properties/show"
 end
+child(@countries => :country) do
+  extends "spree/api/countries/show"
+end

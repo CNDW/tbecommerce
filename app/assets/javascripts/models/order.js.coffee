@@ -11,7 +11,20 @@ App.Order = DS.Model.extend
   ship_phone: DS.attr 'string'
   ship_state_name: DS.attr 'string'
   ship_alternative_phone: DS.attr 'string'
-  ship_country: DS.attr 'string'
+  ship_country_id: DS.attr 'number'
+  ship_country: (->
+    @store.getById 'country', @get 'ship_country_id'
+  ).property('ship_country_id')
+  ship_country_name: (->
+    @get('ship_country.name')
+  ).property('ship_country_id')
+  ship_state_id: DS.attr 'number'
+  ship_state: (->
+    @store.getById 'state', @get 'ship_state_id'
+  ).property('ship_state_id')
+  ship_state_name: (->
+    @get('ship_state.name')
+  ).property('ship_state_id')
 
   bill_firstname: DS.attr 'string'
   bill_lastname: DS.attr 'string'
@@ -24,7 +37,20 @@ App.Order = DS.Model.extend
   bill_phone: DS.attr 'string'
   bill_state_name: DS.attr 'string'
   bill_alternative_phone: DS.attr 'string'
-  bill_country: DS.attr 'string'
+  bill_country_id: DS.attr 'number'
+  bill_country: (->
+    @store.getById 'country', @get 'bill_country_id'
+  ).property('bill_country_id')
+  bill_country_name: (->
+    @get('bill_country.name')
+  ).property('bill_country_id')
+  bill_state_id: DS.attr 'number'
+  bill_state: (->
+    @store.getById 'state', @get 'bill_state_id'
+  ).property('bill_state_id')
+  bill_state_name: (->
+    @get('bill_state.name')
+  ).property('bill_state_id')
 
   useShippingAddress: DS.attr 'boolean', defaultValue: no
 

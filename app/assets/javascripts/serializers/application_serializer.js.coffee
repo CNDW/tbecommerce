@@ -25,6 +25,10 @@ App.ColorValueSerializer = DS.ActiveModelSerializer.extend
   normalizePayload: (payload)->
     {"colorValues": payload}
 
+App.CountrySerializer = DS.ActiveModelSerializer.extend DS.EmbeddedRecordsMixin,
+  attrs:
+    states: embedded: 'always'
+
 App.CustomItemAdapter = DS.LSAdapter.extend
   namespace: 'TrashBags'
 App.CustomItemSerializer = DS.LSSerializer.extend()

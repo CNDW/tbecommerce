@@ -31,7 +31,7 @@ div.col-main-body.bottom-border
       text-field value=model.ship_zipcode focus-out='acceptChanges'
     div.field
       span.field-label country
-      text-field value=model.ship_country focus-out='acceptChanges'
+      dropdown-selection list=countries model=model target_attr='ship_country_id'
 div.col-main-body.bottom-border
   h4.upcase billing address
   div.billing-checkbox

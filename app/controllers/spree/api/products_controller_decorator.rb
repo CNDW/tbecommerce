@@ -9,6 +9,7 @@ module Spree::Api
         @color_values = Spree::ColorValue.accessible_by(current_ability, :read).load.ransack(params[:q]).result
         @option_types = Spree::OptionType.accessible_by(current_ability, :read).load.ransack(params[:q]).result.includes(:option_values)
         @properties = Spree::Property.accessible_by(current_ability, :read).load.ransack(params[:q]).result.includes(:products)
+        @countries = Spree::Country.accessible_by(current_ability, :read).load.ransack(params[:q]).result.includes(:states).order('name ASC')
       end
 
       @products = @products.distinct

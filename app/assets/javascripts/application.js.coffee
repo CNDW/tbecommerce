@@ -7,6 +7,7 @@
 #= require bootstrap/modal
 #= require bootstrap/transition
 #= require pongstagr.am
+#= require select2
 #= require_self
 #= require ./store
 #= require_tree ./mixins
