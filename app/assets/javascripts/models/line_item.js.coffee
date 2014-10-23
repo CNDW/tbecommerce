@@ -5,6 +5,7 @@ App.LineItem = DS.Model.extend
   variant_id: Em.computed.alias 'customItem.variant_id'
   line_item_id: DS.attr 'number'
   isDirty: DS.attr 'boolean', defaultValue: true
+  custom_item_hash: Em.computed.alias 'customItem.custom_item_hash'
   state: (->
     return 'precart' if @get('order') is null
     @get('order.state')

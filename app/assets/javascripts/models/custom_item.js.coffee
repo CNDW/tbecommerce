@@ -57,6 +57,28 @@ App.CustomItem = DS.Model.extend
     @get 'product.specs'
   ).property('product_id')
 
+  #-Serialization for the custom number ID
+  custom_item_hash: (->
+    [
+      @getCustomSegment()
+      @getColorSegment()
+      @getOptionSegment()
+    ].join('e')
+  ).property('product_id', 'selectedColors.@each.colorValue_id', 'customOptions.@each.optionValue_id')
+
+  getCustomSegment: ->
+    "pvi#{@get('variant_id')}"
+
+  getColorSegment: ->
+    segment = @get('selectedColors').map (selection)->
+      "i#{selection.get('colorType_id')}s#{selection.get('colorValue_id')}"
+    "ct#{segment.join('')}"
+
+  getOptionSegment: ->
+    segment = @get('customOptions').map (option)->
+      "i#{option.get('optionValue_id')}"
+    "ov#{segment.join('')}"
+
   #- Properties for mapping SVG data
   availableColors: (->
     @store.all 'color_value'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141012205045) do
+ActiveRecord::Schema.define(version: 20141023012004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -234,8 +234,10 @@ ActiveRecord::Schema.define(version: 20141012205045) do
     t.decimal  "promo_total",          precision: 10, scale: 2, default: 0.0
     t.decimal  "included_tax_total",   precision: 10, scale: 2, default: 0.0, null: false
     t.decimal  "pre_tax_amount",       precision: 8,  scale: 2, default: 0.0
+    t.string   "custom_item_hash"
   end
 
+  add_index "spree_line_items", ["custom_item_hash"], name: "index_custom_item_hash_online_items", using: :btree
   add_index "spree_line_items", ["order_id"], name: "index_spree_line_items_on_order_id", using: :btree
   add_index "spree_line_items", ["tax_category_id"], name: "index_spree_line_items_on_tax_category_id", using: :btree
   add_index "spree_line_items", ["variant_id"], name: "index_spree_line_items_on_variant_id", using: :btree
