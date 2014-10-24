@@ -1,24 +1,24 @@
 App.Order = DS.Model.extend
   #address info
-  ship_firstname: DS.attr 'string'
-  ship_lastname: DS.attr 'string'
-  ship_address1: DS.attr 'string'
-  ship_address2: DS.attr 'string'
+  ship_firstname: DS.attr 'string', defaultValue: null
+  ship_lastname: DS.attr 'string', defaultValue: null
+  ship_address1: DS.attr 'string', defaultValue: null
+  ship_address2: DS.attr 'string', defaultValue: null
   ship_email: Em.computed.alias 'email'
   ship_email_confirm: Em.computed.alias 'email_confirm'
-  ship_city: DS.attr 'string'
-  ship_zipcode: DS.attr 'string'
-  ship_phone: DS.attr 'string'
-  ship_state_name: DS.attr 'string'
-  ship_alternative_phone: DS.attr 'string'
-  ship_country_id: DS.attr 'number'
+  ship_city: DS.attr 'string', defaultValue: null
+  ship_zipcode: DS.attr 'string', defaultValue: null
+  ship_phone: DS.attr 'string', defaultValue: null
+  ship_state_name: DS.attr 'string', defaultValue: null
+  ship_alternative_phone: DS.attr 'string', defaultValue: null
+  ship_country_id: DS.attr 'number', defaultValue: null
   ship_country: (->
     @store.getById 'country', @get 'ship_country_id'
   ).property('ship_country_id')
   ship_country_name: (->
     @get('ship_country.name')
   ).property('ship_country_id')
-  ship_state_id: DS.attr 'number'
+  ship_state_id: DS.attr 'number', defaultValue: null
   ship_state: (->
     @store.getById 'state', @get 'ship_state_id'
   ).property('ship_state_id')
@@ -29,25 +29,25 @@ App.Order = DS.Model.extend
     @get('ship_country.states_required')
   ).property('ship_country_id')
 
-  bill_firstname: DS.attr 'string'
-  bill_lastname: DS.attr 'string'
-  bill_address1: DS.attr 'string'
-  bill_address2: DS.attr 'string'
-  bill_email: DS.attr 'string'
-  bill_email_confirm: DS.attr 'string'
-  bill_city: DS.attr 'string'
-  bill_zipcode: DS.attr 'string'
-  bill_phone: DS.attr 'string'
-  bill_state_name: DS.attr 'string'
-  bill_alternative_phone: DS.attr 'string'
-  bill_country_id: DS.attr 'number'
+  bill_firstname: DS.attr 'string', defaultValue: null
+  bill_lastname: DS.attr 'string', defaultValue: null
+  bill_address1: DS.attr 'string', defaultValue: null
+  bill_address2: DS.attr 'string', defaultValue: null
+  bill_email: DS.attr 'string', defaultValue: null
+  bill_email_confirm: DS.attr 'string', defaultValue: null
+  bill_city: DS.attr 'string', defaultValue: null
+  bill_zipcode: DS.attr 'string', defaultValue: null
+  bill_phone: DS.attr 'string', defaultValue: null
+  bill_state_name: DS.attr 'string', defaultValue: null
+  bill_alternative_phone: DS.attr 'string', defaultValue: null
+  bill_country_id: DS.attr 'number', defaultValue: null
   bill_country: (->
     @store.getById 'country', @get 'bill_country_id'
   ).property('bill_country_id')
   bill_country_name: (->
     @get('bill_country.name')
   ).property('bill_country_id')
-  bill_state_id: DS.attr 'number'
+  bill_state_id: DS.attr 'number', defaultValue: null
   bill_state: (->
     @store.getById 'state', @get 'bill_state_id'
   ).property('bill_state_id')
@@ -61,20 +61,12 @@ App.Order = DS.Model.extend
   useShippingAddress: DS.attr 'boolean', defaultValue: no
 
   #order info
-  ship_address: (->
-    @addrAttrs('ship_')
-  ).property()
-  bill_address: (->
-    if @get('useShippingAddress')
-      return @addrAttrs('ship_')
-    else
-      return @addrAttrs('bill_')
-  ).property()
+
   order_id: DS.attr 'number'
-  email: DS.attr 'string'
-  email_confirm: DS.attr 'string'
-  special_instructions: DS.attr 'string'
-  number: DS.attr 'string'
+  email: DS.attr 'string', defaultValue: null
+  email_confirm: DS.attr 'string', defaultValue: null
+  special_instructions: DS.attr 'string', defaultValue: null
+  number: DS.attr 'string', defaultValue: null
   token: DS.attr 'string', defaultValue: null
   total: DS.attr 'number'
   item_total: DS.attr 'number'
@@ -86,9 +78,21 @@ App.Order = DS.Model.extend
   length: Em.computed.alias 'line_items.length'
   isEmpty: Em.computed.empty 'line_items'
 
-  created: DS.attr 'boolean', defaultValue: false
+  created: DS.attr 'boolean', defaultValue: no
+  completed: DS.attr 'boolean', defaultValue: no
 
   line_items: DS.hasMany 'line_items'
+  isDirty: DS.attr 'boolean', defaultValue: no
+
+  checkoutSteps: [
+    'address'
+    'delivery'
+    'payment'
+    'complete'
+  ]
+  checkoutCompleted: (->
+    @get('checkoutSteps').indexOf(@get('state'))
+  ).property('state')
 
   didCreate: ->
     if @get('token') is null
@@ -141,7 +145,8 @@ App.Order = DS.Model.extend
       self.set('created', true)
       self.save()
 
-  updateAddresses: ->
+  updateAddresses: (alertOnFailure)->
+    self = this
     $.ajax "api/checkouts/#{@get('number')}",
       type: "PUT"
       datatype: 'json'
@@ -150,9 +155,16 @@ App.Order = DS.Model.extend
         order:
           @serializeAddresses()
       success: ->
-        debugger
-      error: ->
-        debugger
+        self.set 'isDirty', no
+      error: (xhr, error, status)->
+        if alertOnFailure
+          message = ["#{xhr.responseJSON.error}\n"]
+          $.each xhr.responseJSON.errors, (field, errs)->
+            title = field.split('.')[1]
+            errors = errs.join(', ')
+            message.push "#{title}: #{errors}\n"
+          alert(message.join('\n'))
+
 
   updateLineItems: ->
     order_token = @get('token')
@@ -167,6 +179,16 @@ App.Order = DS.Model.extend
               order_token: order_token
             line_item:
               variant_id: line_item.get('variant_id')
+
+  completeAddresses: ->
+    $.ajax "api/checkouts/#{@get('number')}/next",
+      type: "PUT"
+      dataType: "json"
+      data:
+        order_token: @get('token')
+      success: (order)=>
+        @set 'state', order.state
+        @save()
 
   addrAttrs: (type)->
     attrs =
@@ -186,8 +208,16 @@ App.Order = DS.Model.extend
 
   serializeAddresses: ->
     payload =
-      ship_address_attributes: @get('ship_address')
-      bill_address_attributes: @get('bill_address')
+      ship_address_attributes: @getShipAddress(this)
+      bill_address_attributes: @getBillAddress(this)
+
+  getShipAddress: (order)->
+    order.addrAttrs('ship_')
+  getBillAddress: (order)->
+    if order.get('useShippingAddress')
+      return order.addrAttrs('ship_')
+    else
+      return order.addrAttrs('bill_')
 
 
 

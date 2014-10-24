@@ -18,7 +18,7 @@ div.col-main-body.bottom-border
       text-field value=model.ship_phone focus-out='acceptChanges'
   div.col-sm-4.selection-fields
     div.field
-      span.field-label address 1
+      span.field-label address
       text-field value=model.ship_address1 focus-out='acceptChanges'
     div.field
       span.field-label city
@@ -57,7 +57,7 @@ div.col-main-body.bottom-border
         text-field value=model.bill_phone focus-out='acceptChanges'
     div.col-sm-4.selection-fields
       div.field
-        span.field-label address 1
+        span.field-label address
         text-field value=model.bill_address1 focus-out='acceptChanges'
       div.field
         span.field-label city
@@ -73,4 +73,4 @@ div.col-main-body.bottom-border
           span.field-label state
           dropdown-selection list=bill_states model=model target_attr='bill_state_id'
 div.col-main-body
-  button.btn.btn-black{action "orderCreate" this} continue
+  button.btn.btn-black{action "completeCheckoutAddresses"} continue

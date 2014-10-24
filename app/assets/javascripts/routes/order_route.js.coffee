@@ -3,13 +3,17 @@ App.OrderRoute = Em.Route.extend()
 App.OrderIndexRoute = Em.Route.extend
 
   deactivate: ->
-    @modelFor('order.index').updateAddresses()
+    order = @modelFor('order.index')
+    order.updateAddresses() if order.get('isDirty')
 
   actions:
-    orderCreate: (order)->
-      # order.createOrder()
-
-
+    completeCheckoutAddresses: ->
+      self = this
+      order = @modelFor('order.index')
+      order.updateAddresses(yes).done ->
+        if order.get('checkoutCompleted') < 1
+          order.completeAddresses().done ->
+            self.transitionTo 'order.payment'
 
 App.OrderPaymentRoute = Em.Route.extend
 
