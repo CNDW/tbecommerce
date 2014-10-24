@@ -1,15 +1,25 @@
 App.DropdownSelectionComponent = Em.Component.extend
   classNames: 'dropdown-menu-container'
 
-  render: (buffer)->
-    buffer.push("<div class='dropdown-selection'></div>")
+  layout: Em.Handlebars.compile "<div class='dropdown-selection'></div>"
 
   didInsertElement: ->
-    this.$().find('.dropdown-selection').select2
+    self = this
+    @$('.dropdown-selection').select2
       data:
         results: @list
         text: 'name'
+      triggerChange: yes
       formatSelection: (item)->
         item.name
       formatResult: (item)->
         item.name
+
+    @$('.dropdown-selection').select2('val', @model.get(@target_attr))
+    @$('.dropdown-selection').on 'change', (e)->
+      self.model.set self.target_attr, e.val
+      self.model.save()
+
+  willDestroyElement: ->
+    @$('.dropdown-selection').off 'change'
+    @$('.dropdown-selection').select2 'destroy'

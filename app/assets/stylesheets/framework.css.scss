@@ -641,6 +641,7 @@ ul.top-navs {
   }
   input{
     float: right;
+    width: 200px;
   }
   textarea {
     background-color: $well-color;
@@ -660,8 +661,15 @@ ul.top-navs {
   }
 }
 
+.dropdown-menu-container{
+  display: inline-block;
+  float: right;
+  .dropdown-selection {
+    width: 200px;
+  }
+}
 .custom-features {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 .custom-features-line {

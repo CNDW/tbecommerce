@@ -25,6 +25,9 @@ App.Order = DS.Model.extend
   ship_state_name: (->
     @get('ship_state.name')
   ).property('ship_state_id')
+  ship_states_required: (->
+    @get('ship_country.states_required')
+  ).property('ship_country_id')
 
   bill_firstname: DS.attr 'string'
   bill_lastname: DS.attr 'string'
@@ -51,6 +54,9 @@ App.Order = DS.Model.extend
   bill_state_name: (->
     @get('bill_state.name')
   ).property('bill_state_id')
+  bill_states_required: (->
+    @get('bill_country.states_required')
+  ).property('bill_country_id')
 
   useShippingAddress: DS.attr 'boolean', defaultValue: no
 
@@ -172,8 +178,8 @@ App.Order = DS.Model.extend
       email: @get "#{type}email"
       phone: @get "#{type}phone"
       zipcode: @get "#{type}zipcode"
-      state_id: 29#@get "#{type}state_id"
-      country_id: 49#@get "#{type}country_id"
+      state_id: @get "#{type}state_id"
+      country_id: @get "#{type}country_id"
 
   serializeLineItems: ->
     payload = {}
