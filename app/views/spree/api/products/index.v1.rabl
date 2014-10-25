@@ -17,3 +17,9 @@ end
 child(@countries => :country) do
   extends "spree/api/countries/show"
 end
+child(@shipping_categories => :shipping_category) do
+  extends "spree/api/shipping_categories/show"
+end
+child(@shipping_methods => :shipping_method) do
+  extends "spree/api/shipping_methods/show"
+end

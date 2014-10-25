@@ -10,13 +10,34 @@ App.OrderIndexRoute = Em.Route.extend
     completeCheckoutAddresses: ->
       self = this
       order = @modelFor('order.index')
-      order.updateAddresses(yes).done ->
-        if order.get('checkoutCompleted') < 1
-          order.completeAddresses().done ->
-            self.transitionTo 'order.payment'
+      order.updateAddresses(yes).then ->
+        order.advanceState(1).then ->
+          self.transitionTo 'order.payment'
+
+App.OrderShippingRoute = Em.Route.extend
+
+  afterModel: (model, transition)->
+    unless model.get('checkoutCompleted') > 1
+      @transitionTo 'order.index', model
+
+  actions:
+    completeCheckoutShipping: ->
+      self = this
+      order = @modelFor('order.index')
+      order.updateAddresses(yes).then ->
+        order.advanceState(2).then ->
+          self.transitionTo 'order.payment'
 
 App.OrderPaymentRoute = Em.Route.extend
 
   afterModel: (model, transition)->
-    unless model.get('created')
-      @transitionTo 'order.index', model
+    unless model.get('checkoutCompleted') > 2
+      @transitionTo 'order.shipping', model
+
+  actions:
+    completeCheckoutPayment: ->
+      self = this
+      order = @modelFor('order.index')
+      order.updateAddresses(yes).then ->
+        order.advanceState(3).then ->
+          self.transitionTo 'order.payment'

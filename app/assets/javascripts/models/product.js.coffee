@@ -27,3 +27,4 @@ App.Product = DS.Model.extend
   images: DS.hasMany 'image'
   optionTypes: DS.hasMany 'option_type'
   colorTypes: DS.hasMany 'color_type'
+  shippingCategory: DS.belongsTo 'shipping_category'

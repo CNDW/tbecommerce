@@ -5,7 +5,6 @@ module Spree::Admin
       def load_data
         @available_zones = Spree::Zone.order(:name)
         @tax_categories = Spree::TaxCategory.order(:name)
-        @calculators = Spree::ShippingMethod.calculators.sort_by(&:name)
       end
   end
 end

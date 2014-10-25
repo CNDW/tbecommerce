@@ -50,7 +50,7 @@ App.ApplicationRoute = Em.Route.extend
         self.transitionTo 'cart'
 
     checkout: (order)->
-      order.set 'state', 'address'
-      order.save()
-      @transitionTo 'order', order
+      self = this
+      order.advanceState(0).then ->
+        self.transitionTo 'order', order
 

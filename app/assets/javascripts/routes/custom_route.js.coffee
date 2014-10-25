@@ -12,6 +12,7 @@ App.CustomRoute = Em.Route.extend
 
   setupController: (controller, model)->
     @_super controller, model
+    self = this
     products = @store.all('product')
     Em.RSVP.hash
       controller: controller
@@ -30,6 +31,7 @@ App.CustomRoute = Em.Route.extend
       ]
       colors: @store.all 'color_value'
       featured: products.filterBy('featured', true)
+      order: @modelFor 'cart'
     .then (data)->
       data.categories.forEach (category)->
         category.types = category.models.mapBy('product_type').uniq().map (type)->
@@ -47,6 +49,7 @@ App.CustomRoute = Em.Route.extend
       controller.set 'categories', data.categories
       controller.set 'colors', data.colors
       controller.set 'featuredItems', data.featured
+      controller.set 'order', data.order
 
   afterModel: (model, transition)->
     controller = @controllerFor('custom')

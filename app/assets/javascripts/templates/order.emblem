@@ -6,7 +6,11 @@ div.row-page-title.bottom-border.no-margin
         span addresses
       li
         span >
+      link-to 'order.shipping' model classNames='interactable upcase' tagName='li'
+        span shipping
+      li
+        span >
       link-to 'order.payment' model classNames='interactable upcase' tagName='li'
-        span shipping & payment
+        span payment
 div.row
   outlet

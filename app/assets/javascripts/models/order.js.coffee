@@ -127,7 +127,11 @@ App.Order = DS.Model.extend
           self.save()
           item.remove()
           resolve(self)
-        error: ->
+        error: (xhr)->
+          if xhr.status is 404
+            self.get('line_items').removeRecord(item)
+            self.save()
+            item.remove()
           reject(arguments)
 
 #=====================================================
@@ -147,24 +151,26 @@ App.Order = DS.Model.extend
 
   updateAddresses: (alertOnFailure)->
     self = this
-    $.ajax "api/checkouts/#{@get('number')}",
-      type: "PUT"
-      datatype: 'json'
-      data:
-        order_token: @get('token')
-        order:
-          @serializeAddresses()
-      success: ->
-        self.set 'isDirty', no
-      error: (xhr, error, status)->
-        if alertOnFailure
-          message = ["#{xhr.responseJSON.error}\n"]
-          $.each xhr.responseJSON.errors, (field, errs)->
-            title = field.split('.')[1]
-            errors = errs.join(', ')
-            message.push "#{title}: #{errors}\n"
-          alert(message.join('\n'))
-
+    return new Promise (resolve, reject)->
+      $.ajax "api/checkouts/#{self.get('number')}",
+        type: "PUT"
+        datatype: 'json'
+        data:
+          order_token: self.get('token')
+          order:
+            self.serializeAddresses()
+        success: ->
+          self.set 'isDirty', no
+          resolve(self)
+        error: (xhr, error, status)->
+          if alertOnFailure
+            message = ["#{xhr.responseJSON.error}\n"]
+            $.each xhr.responseJSON.errors, (field, errs)->
+              title = field.split('.')[1]
+              errors = errs.join(', ')
+              message.push "#{title}: #{errors}\n"
+            alert(message.join('\n'))
+          reject(self)
 
   updateLineItems: ->
     order_token = @get('token')
@@ -179,16 +185,41 @@ App.Order = DS.Model.extend
               order_token: order_token
             line_item:
               variant_id: line_item.get('variant_id')
+          success: ->
+            line_item.set('isDirty', false)
+            line_item.save()
 
-  completeAddresses: ->
-    $.ajax "api/checkouts/#{@get('number')}/next",
-      type: "PUT"
-      dataType: "json"
-      data:
-        order_token: @get('token')
-      success: (order)=>
-        @set 'state', order.state
-        @save()
+  advanceState: (targetState)->
+    self = this
+    if @get('checkoutCompleted') == (targetState - 1)
+      return new Promise (resolve, reject)->
+        $.ajax "api/checkouts/#{self.get('number')}/next",
+          type: "PUT"
+          dataType: "json"
+          data:
+            order_token: self.get('token')
+          success: (order)->
+            self.set 'state', order.state
+            self.save()
+            resolve(order)
+          error: ->
+            reject(arguments)
+    else
+      return new Promise (resolve, reject)->
+        if self.get('checkoutCompleted') >= targetState
+          resolve(self)
+        else if !self.get('state')
+          $.ajax "api/checkouts/#{self.get('number')}",
+            type: "GET"
+            dataType: "json"
+            data:
+              order_token: self.get('token')
+            success: (order)->
+              self.set 'state', order.state
+              self.save()
+              resolve(order)
+            error: ->
+              reject(arguments)
 
   addrAttrs: (type)->
     attrs =
@@ -218,14 +249,3 @@ App.Order = DS.Model.extend
       return order.addrAttrs('ship_')
     else
       return order.addrAttrs('bill_')
-
-
-
-
-
-
-
-
-
-
-

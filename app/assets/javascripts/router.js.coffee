@@ -16,4 +16,5 @@ App.Router.map ->
   @route 'cart'
   @resource 'product', path: '/product/:product_id'
   @resource 'order', path: '/order/:order_id', ->
+    @route 'shipping'
     @route 'payment'
