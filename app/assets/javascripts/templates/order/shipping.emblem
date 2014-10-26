@@ -1,0 +1,8 @@
+div.col-main-body.bottom-border
+  h4.upcase shipping
+
+div.col-main-body
+  h4.upcase current order
+  div.line-item-container
+    each lineItem in model.line_items
+      render 'line-item' lineItem

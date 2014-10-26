@@ -85,6 +85,7 @@ App.Order = DS.Model.extend
   isDirty: DS.attr 'boolean', defaultValue: no
 
   checkoutSteps: [
+    'cart'
     'address'
     'delivery'
     'payment'
@@ -124,6 +125,7 @@ App.Order = DS.Model.extend
         datatype: 'json'
         success: ->
           self.get('line_items').removeRecord(item)
+          self.set 'state', 'cart'
           self.save()
           item.remove()
           resolve(self)
@@ -203,6 +205,7 @@ App.Order = DS.Model.extend
             self.save()
             resolve(order)
           error: ->
+            debugger
             reject(arguments)
     else
       return new Promise (resolve, reject)->

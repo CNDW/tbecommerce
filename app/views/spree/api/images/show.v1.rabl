@@ -1,4 +1,5 @@
 object @image
+cache @image, expires_in: 10.minutes
 attributes :id, :position, :alt
 node("small_url") { |i| i.attachment.url("web_small") }
 node("large_url") { |i| i.attachment.url("web_large") }

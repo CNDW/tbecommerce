@@ -6,3 +6,4 @@ App.ShippingCategory = DS.Model.extend
 App.ShippingMethod = DS.Model.extend
   shippingCategory: DS.hasMany 'shipping_category'
   name: DS.attr 'string'
+  tagline: DS.attr 'string'

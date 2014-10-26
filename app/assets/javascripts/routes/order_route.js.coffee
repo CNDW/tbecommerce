@@ -1,4 +1,11 @@
-App.OrderRoute = Em.Route.extend()
+App.OrderRoute = Em.Route.extend
+
+  actions:
+    removeFromCart: (lineItem)->
+      self = this
+      order = @modelFor('order')
+      order.removeLineItem(lineItem).then ->
+        self.refresh()
 
 App.OrderIndexRoute = Em.Route.extend
 

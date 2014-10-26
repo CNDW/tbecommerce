@@ -1,5 +1,5 @@
 object @option_type
-cache [I18n.locale, root_object]
+cache @option_type, expires_in: 10.minutes
 attributes *option_type_attributes
 attributes :product_ids
 child :option_values => :option_values do

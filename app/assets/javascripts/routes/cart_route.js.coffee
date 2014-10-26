@@ -14,4 +14,4 @@ App.CartRoute = Em.Route.extend
       self = this
       order = @modelFor('cart')
       order.removeLineItem(lineItem).then ->
-        self.transitionTo 'cart'
+        self.refresh()

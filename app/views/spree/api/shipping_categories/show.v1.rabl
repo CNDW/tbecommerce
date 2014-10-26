@@ -1,3 +1,3 @@
 object @shipping_category
-cache [I18n.locale, root_object]
+cache @shipping_category, expires_in: 10.minutes
 attributes :shipping_method_ids, :name, :product_ids, :id

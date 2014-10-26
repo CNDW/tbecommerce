@@ -15,19 +15,7 @@ div.row
         span.upcase remove
 
     each lineItem in model.line_items
-      div.row-line-item.bottom-border
-        div.col-sm-7.line-item
-          div.head
-            span.capitalize custom {{lineItem.name}}
-            button.btn.btn-black edit
-          div.col-sm-3
-            render 'custom_item' lineItem.customItem
-        div.col-sm-2
-          span.capitalize 1
-        div.col-sm-2
-          span.capitalize ${{lineItem.price}}
-        div.col-sm-1
-          span.icon-x.interactable click="removeFromCart lineItem"
+      render 'line-item' lineItem
     div.row-line-item.text-medium
       div.col-sm-7.line-item
         div.checkout
