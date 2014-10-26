@@ -17,8 +17,9 @@ App.OrderIndexRoute = Em.Route.extend
     completeCheckoutAddresses: ->
       self = this
       order = @modelFor('order.index')
-      order.updateAddresses(yes).then ->
-        order.advanceState(1).then ->
+      order.updateAddresses(yes).then (responseJSON)->
+        order.updateShipments(responseJSON.shipments)
+        order.advanceState(2).then ->
           self.transitionTo 'order.payment'
 
 App.OrderShippingRoute = Em.Route.extend
@@ -32,7 +33,7 @@ App.OrderShippingRoute = Em.Route.extend
       self = this
       order = @modelFor('order.index')
       order.updateAddresses(yes).then ->
-        order.advanceState(2).then ->
+        order.advanceState(3).then ->
           self.transitionTo 'order.payment'
 
 App.OrderPaymentRoute = Em.Route.extend
@@ -46,5 +47,5 @@ App.OrderPaymentRoute = Em.Route.extend
       self = this
       order = @modelFor('order.index')
       order.updateAddresses(yes).then ->
-        order.advanceState(3).then ->
+        order.advanceState(4).then ->
           self.transitionTo 'order.payment'

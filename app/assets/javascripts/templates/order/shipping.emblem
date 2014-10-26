@@ -1,5 +1,10 @@
 div.col-main-body.bottom-border
-  h4.upcase shipping
+  div.col-sm-6
+    h4.upcase shipping method
+
+  div.col-sm-6
+    h4.upcase shipping address
+    p.capitalize {{order.ship_name}}
 
 div.col-main-body
   h4.upcase current order

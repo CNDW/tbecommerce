@@ -51,6 +51,7 @@ App.ApplicationRoute = Em.Route.extend
 
     checkout: (order)->
       self = this
-      order.advanceState(0).then ->
+      return if order.get('length') is 0
+      order.advanceState(1).then ->
         self.transitionTo 'order', order
 

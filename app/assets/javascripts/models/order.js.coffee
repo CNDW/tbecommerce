@@ -1,6 +1,9 @@
 App.Order = DS.Model.extend
   #address info
   ship_firstname: DS.attr 'string', defaultValue: null
+  ship_name: (->
+    "#{@get 'ship_firstname'} #{@get 'ship_lastname'}"
+  ).property('ship_firstname', 'ship_lastname')
   ship_lastname: DS.attr 'string', defaultValue: null
   ship_address1: DS.attr 'string', defaultValue: null
   ship_address2: DS.attr 'string', defaultValue: null
@@ -73,7 +76,7 @@ App.Order = DS.Model.extend
   ship_total: DS.attr 'number'
   included_tax_total: DS.attr 'number'
   additional_tax_total: DS.attr 'number'
-  state: DS.attr 'string', defaultValue: 'precart'
+  state: DS.attr 'string', defaultValue: 'cart'
 
   length: Em.computed.alias 'line_items.length'
   isEmpty: Em.computed.empty 'line_items'
@@ -91,6 +94,13 @@ App.Order = DS.Model.extend
     'payment'
     'complete'
   ]
+  checkoutStates:
+    cart: 0
+    address: 1
+    delivery: 2
+    payment: 3
+    complete: 4
+
   checkoutCompleted: (->
     @get('checkoutSteps').indexOf(@get('state'))
   ).property('state')
@@ -161,9 +171,9 @@ App.Order = DS.Model.extend
           order_token: self.get('token')
           order:
             self.serializeAddresses()
-        success: ->
+        success: (orderResponse)->
           self.set 'isDirty', no
-          resolve(self)
+          resolve(orderResponse, self)
         error: (xhr, error, status)->
           if alertOnFailure
             message = ["#{xhr.responseJSON.error}\n"]
@@ -223,6 +233,8 @@ App.Order = DS.Model.extend
               resolve(order)
             error: ->
               reject(arguments)
+        else
+          resolve(self)
 
   addrAttrs: (type)->
     attrs =
@@ -252,3 +264,6 @@ App.Order = DS.Model.extend
       return order.addrAttrs('ship_')
     else
       return order.addrAttrs('bill_')
+
+  updateShipments: (shipmentJSON)->
+    debugger
