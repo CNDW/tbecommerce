@@ -10,6 +10,7 @@ module Spree::Api
         invalid_resource!(@line_item)
       end
     end
+
     def destroy
       @line_item = find_line_item
       variant = Spree::Variant.find(@line_item.variant_id)

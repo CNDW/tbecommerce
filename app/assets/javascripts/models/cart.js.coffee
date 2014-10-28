@@ -1,17 +1,19 @@
 App.Cart = DS.Model.extend
   token: DS.attr 'string', defaultValue: null
   number: DS.attr 'string', defaultValue: null
-  order_id: DS.attr 'number'
-  order: (->
-    @store.getById('order', @get('order_id'))
-  ).property('order_id')
+  order: DS.belongsTo 'order', async: true
 
   hasOrder: Em.computed.notEmpty 'order_id'
   isCreated: Em.computed.notEmpty 'token'
 
+  isUpdating: no
+
   didCreate: ->
     unless @get('isCreated')
       @createOrder()
+
+  didLoad: ->
+    @fetchOrder()
 
   createOrder: ->
     return if @get 'isCreated'
@@ -29,11 +31,20 @@ App.Cart = DS.Model.extend
       self.save()
 
   fetchOrder: ->
+    return @get('order') if @get('order')
+    @updateOrder()
+
+  updateOrder: ->
     self = this
+    @set('isUpdating', no)
     $.ajax "api/orders/#{self.get('number')}",
       dataType: "json"
       data:
         order_token: self.get('token')
       success: (payload)->
         self.store.pushPayload 'order', {order: payload}
-        order = self.store.getById 'order', payload.id
+        self.set('isUpdating', no)
+        return payload
+      error: ->
+        self.set('isUpdating', no)
+        return arguments

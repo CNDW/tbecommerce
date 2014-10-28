@@ -63,16 +63,7 @@ App.Order = DS.Model.extend
   #   @get('checkoutSteps').indexOf(@get('state'))
   # ).property('state')
 
-
-
-
-
-
-
-
-
-# Old ---------------------------
-  addLineItem: (item)->
+  createLineItem: (item)->
     self = this
     return new Promise (resolve, reject)->
       $.ajax "api/orders/#{self.get('number')}/line_items",
@@ -80,15 +71,45 @@ App.Order = DS.Model.extend
         datatype: 'json'
         data:
           order_token: self.get('token')
-          line_item: variant_id: item.get('variant_id')
+          line_item:
+            variant_id: item.get('variant_id')
+            custom_item_hash: item.get('custom_item_hash')
         success: (data)->
-          self.get('line_items').addRecord(item)
-          item.set('line_item_id', data.id)
-          item.save()
-          self.save()
-          resolve(self)
+          self.store.pushPayload 'line_item',
+            line_item: data
+          self.addLineItem data.id
+          resolve(self, data)
         error: ->
           reject(arguments)
+
+  addLineItem: (line_item_id)->
+    line_item = @store.getById 'line_item', line_item_id
+    @store.update 'order',
+      id: @get 'id'
+      line_items: @get('line_items').addObject(line_item)
+
+
+    order_token = @get('token')
+    order_id = @get('order_id')
+    @get('line_items').forEach (line_item)->
+      if line_item.get('isDirty')
+        $.ajax "api/orders/#{order_id}/line_items",
+          type: "POST"
+          dataType: "json"
+          data:
+            order:
+              order_token: order_token
+            line_item:
+              variant_id: line_item.get('variant_id')
+          success: ->
+            line_item.set('isDirty', false)
+            line_item.save()
+
+
+
+
+# Old ---------------------------
+
 
   removeLineItem: (item)->
     self = this
@@ -136,22 +157,7 @@ App.Order = DS.Model.extend
             alert(message.join('\n'))
           reject(self)
 
-  updateLineItems: ->
-    order_token = @get('token')
-    order_id = @get('order_id')
-    @get('line_items').forEach (line_item)->
-      if line_item.get('isDirty')
-        $.ajax "api/orders/#{order_id}/line_items",
-          type: "POST"
-          dataType: "json"
-          data:
-            order:
-              order_token: order_token
-            line_item:
-              variant_id: line_item.get('variant_id')
-          success: ->
-            line_item.set('isDirty', false)
-            line_item.save()
+
 
   advanceState: (targetState)->
     self = this

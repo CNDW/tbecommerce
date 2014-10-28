@@ -51,13 +51,9 @@ App.ApplicationRoute = Em.Route.extend
         item.save()
         @transitionTo 'cart'
         return
-      order = @getCart()
-      record = @store.createRecord 'line_item',
-        product: item.get('product'),
-        customItem: item
-        order: order
-      order.addLineItem(record).then ->
-        record.save()
+      cart = @modelFor 'application'
+      order = @store.getById 'order', cart.get('order_id')
+      order.createLineItem(item).then ->
         item.set('inShop', false)
         item.save()
         self.transitionTo 'cart'
