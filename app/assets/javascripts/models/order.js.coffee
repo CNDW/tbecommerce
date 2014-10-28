@@ -1,114 +1,77 @@
 App.Order = DS.Model.extend
-  #address info
-  ship_firstname: DS.attr 'string', defaultValue: null
-  ship_name: (->
-    "#{@get 'ship_firstname'} #{@get 'ship_lastname'}"
-  ).property('ship_firstname', 'ship_lastname')
-  ship_lastname: DS.attr 'string', defaultValue: null
-  ship_address1: DS.attr 'string', defaultValue: null
-  ship_address2: DS.attr 'string', defaultValue: null
-  ship_email: Em.computed.alias 'email'
-  ship_email_confirm: Em.computed.alias 'email_confirm'
-  ship_city: DS.attr 'string', defaultValue: null
-  ship_zipcode: DS.attr 'string', defaultValue: null
-  ship_phone: DS.attr 'string', defaultValue: null
-  ship_state_name: DS.attr 'string', defaultValue: null
-  ship_alternative_phone: DS.attr 'string', defaultValue: null
-  ship_country_id: DS.attr 'number', defaultValue: null
-  ship_country: (->
-    @store.getById 'country', @get 'ship_country_id'
-  ).property('ship_country_id')
-  ship_country_name: (->
-    @get('ship_country.name')
-  ).property('ship_country_id')
-  ship_state_id: DS.attr 'number', defaultValue: null
-  ship_state: (->
-    @store.getById 'state', @get 'ship_state_id'
-  ).property('ship_state_id')
-  ship_state_name: (->
-    @get('ship_state.name')
-  ).property('ship_state_id')
-  ship_states_required: (->
-    @get('ship_country.states_required')
-  ).property('ship_country_id')
+  token: DS.attr 'string'
+  number: DS.attr 'string'
 
-  bill_firstname: DS.attr 'string', defaultValue: null
-  bill_lastname: DS.attr 'string', defaultValue: null
-  bill_address1: DS.attr 'string', defaultValue: null
-  bill_address2: DS.attr 'string', defaultValue: null
-  bill_email: DS.attr 'string', defaultValue: null
-  bill_email_confirm: DS.attr 'string', defaultValue: null
-  bill_city: DS.attr 'string', defaultValue: null
-  bill_zipcode: DS.attr 'string', defaultValue: null
-  bill_phone: DS.attr 'string', defaultValue: null
-  bill_state_name: DS.attr 'string', defaultValue: null
-  bill_alternative_phone: DS.attr 'string', defaultValue: null
-  bill_country_id: DS.attr 'number', defaultValue: null
-  bill_country: (->
-    @store.getById 'country', @get 'bill_country_id'
-  ).property('bill_country_id')
-  bill_country_name: (->
-    @get('bill_country.name')
-  ).property('bill_country_id')
-  bill_state_id: DS.attr 'number', defaultValue: null
-  bill_state: (->
-    @store.getById 'state', @get 'bill_state_id'
-  ).property('bill_state_id')
-  bill_state_name: (->
-    @get('bill_state.name')
-  ).property('bill_state_id')
-  bill_states_required: (->
-    @get('bill_country.states_required')
-  ).property('bill_country_id')
-
-  useShippingAddress: DS.attr 'boolean', defaultValue: no
-
-  #order info
-
-  order_id: DS.attr 'number'
-  email: DS.attr 'string', defaultValue: null
-  email_confirm: DS.attr 'string', defaultValue: null
-  special_instructions: DS.attr 'string', defaultValue: null
-  number: DS.attr 'string', defaultValue: null
-  token: DS.attr 'string', defaultValue: null
-  total: DS.attr 'number'
-  item_total: DS.attr 'number'
-  ship_total: DS.attr 'number'
-  included_tax_total: DS.attr 'number'
-  additional_tax_total: DS.attr 'number'
+  additional_tax_total: DS.attr 'string'
+  adjustment_total: DS.attr 'string'
+  bill_address: DS.belongsTo 'bill_address'
+  channel: DS.attr 'string'
+  completed_at: DS.attr 'string'
+  created_at: DS.attr 'string'
+  currency: DS.attr 'string'
+  display_additional_tax_total: DS.attr 'string'
+  display_included_tax_total: DS.attr 'string'
+  display_item_total: DS.attr 'string'
+  display_ship_total: DS.attr 'string'
+  display_tax_total: DS.attr 'string'
+  display_total: DS.attr 'string'
+  email: DS.attr 'string'
+  included_tax_total: DS.attr 'string'
+  item_total: DS.attr 'string'
+  line_items: DS.hasMany 'line_item'
+  payment_state: DS.attr 'string'
+  payment_total: DS.attr 'string'
+  # payments: []
+  # permissions: {can_update:false}
+  ship_address: DS.belongsTo 'ship_address'
+  ship_total: DS.attr 'string'
+  shipment_state: DS.attr 'string'
+  # shipments: []
+  special_instructions: DS.attr 'string'
   state: DS.attr 'string', defaultValue: 'cart'
+  tax_total: DS.attr 'string'
+  total: DS.attr 'string'
+  total_quantity: DS.attr 'number'
+  updated_at: DS.attr 'string'
+  # user_id: null
+  # adjustments: []
+  # checkout_steps: [address, delivery, complete]
 
-  length: Em.computed.alias 'line_items.length'
-  isEmpty: Em.computed.empty 'line_items'
+  # useShippingAddress: DS.attr 'boolean', defaultValue: no
 
-  created: DS.attr 'boolean', defaultValue: no
-  completed: DS.attr 'boolean', defaultValue: no
+  # #order info
 
-  line_items: DS.hasMany 'line_items'
-  isDirty: DS.attr 'boolean', defaultValue: no
+  #----- These cause ember data to bug out
+  # length: Em.computed.alias 'line_items.length'
+  # isEmpty: Em.computed.empty 'line_items'
 
-  checkoutSteps: [
-    'cart'
-    'address'
-    'delivery'
-    'payment'
-    'complete'
-  ]
-  checkoutStates:
-    cart: 0
-    address: 1
-    delivery: 2
-    payment: 3
-    complete: 4
+  # checkoutSteps: [
+  #   'cart'
+  #   'address'
+  #   'delivery'
+  #   'payment'
+  #   'complete'
+  # ]
+  # checkoutStates:
+  #   cart: 0
+  #   address: 1
+  #   delivery: 2
+  #   payment: 3
+  #   complete: 4
 
-  checkoutCompleted: (->
-    @get('checkoutSteps').indexOf(@get('state'))
-  ).property('state')
+  # checkoutCompleted: (->
+  #   @get('checkoutSteps').indexOf(@get('state'))
+  # ).property('state')
 
-  didCreate: ->
-    if @get('token') is null
-      @createOrder()
 
+
+
+
+
+
+
+
+# Old ---------------------------
   addLineItem: (item)->
     self = this
     return new Promise (resolve, reject)->
@@ -149,17 +112,6 @@ App.Order = DS.Model.extend
 #=====================================================
 # API communcation
 #=====================================================
-  createOrder: ->
-    return if @get 'created'
-    self = this
-    $.post 'api/orders', {}, (payload, status, xhr)->
-      self.eachAttribute (name, meta)->
-        if name == 'order_id'
-          self.set 'order_id', payload.id
-        else
-          self.set name, payload[name]
-      self.set('created', true)
-      self.save()
 
   updateAddresses: (alertOnFailure)->
     self = this

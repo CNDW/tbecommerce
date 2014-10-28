@@ -3,7 +3,6 @@
 #= require ember
 #= require ember-data
 #= require localstorage_adapter
-#= require ember-handlebars-svg
 #= require bootstrap/modal
 #= require bootstrap/transition
 #= require pongstagr.am
@@ -18,6 +17,7 @@
 #= require_tree ./components
 #= require_tree ./templates
 #= require_tree ./routes
+#= require_tree ./adapters
 #= require_tree ./serializers
 #= require ./router
 

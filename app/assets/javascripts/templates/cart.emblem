@@ -15,7 +15,7 @@ div.row
         span.upcase remove
 
     each lineItem in model.line_items
-      render 'line-item' lineItem
+      / render 'line-item' lineItem
     div.row-line-item.text-medium
       div.col-sm-7.line-item
         div.checkout

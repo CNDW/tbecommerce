@@ -4,6 +4,8 @@ camelize = Ember.String.camelize
 forEach = Ember.EnumerableUtils.forEach
 underscore = Ember.String.underscore
 
+App.ApplicationSerializer = DS.ActiveModelSerializer.extend()
+
 App.ProductAdapter = DS.RESTAdapter.extend
   namespace: 'api'
 App.ProductSerializer = DS.ActiveModelSerializer.extend DS.EmbeddedRecordsMixin,
@@ -31,3 +33,4 @@ App.CountrySerializer = DS.ActiveModelSerializer.extend DS.EmbeddedRecordsMixin,
 
 App.ShippingCategorySerializer = DS.ActiveModelSerializer.extend()
 App.ShippingMethodSerializer = DS.ActiveModelSerializer.extend()
+

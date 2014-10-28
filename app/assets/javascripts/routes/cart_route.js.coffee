@@ -1,13 +1,11 @@
 App.CartRoute = Em.Route.extend
   model: ->
-    orders = @store.all('order').filterBy('created', true)
-    if (orders.get('length') > 0)
-      order = orders.shiftObject()
-    else
-      order = @store.createRecord 'order',
-        state: 'cart'
-      order.save()
-    return order
+    self = this
+    cart = @modelFor 'application'
+    cart.get 'order'
+
+  setupController: ->
+    console.log 'cartrout setupController'
 
   actions:
     removeFromCart: (lineItem)->

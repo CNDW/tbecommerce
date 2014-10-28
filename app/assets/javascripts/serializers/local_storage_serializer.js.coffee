@@ -1,19 +1,14 @@
-App.CustomItemAdapter = DS.LSAdapter.extend
+App.LSAdapterMixin = Em.Mixin.create
   namespace: 'TrashBags'
+
+App.CustomItemAdapter = DS.LSAdapter.extend App.LSAdapterMixin
 App.CustomItemSerializer = DS.LSSerializer.extend()
 
-App.SelectedColorAdapter = DS.LSAdapter.extend
-  namespace: 'TrashBags'
+App.SelectedColorAdapter = DS.LSAdapter.extend App.LSAdapterMixin
 App.SelectedColorSerializer = DS.LSSerializer.extend()
 
-App.CustomOptionAdapter = DS.LSAdapter.extend
-  namespace: 'TrashBags'
+App.CustomOptionAdapter = DS.LSAdapter.extend App.LSAdapterMixin
 App.CustomOptionSerializer = DS.LSSerializer.extend()
 
-App.LineItemAdapter = DS.LSAdapter.extend
-  namespace: 'TrashBags'
-App.LineItemSerializer = DS.LSSerializer.extend()
-
-App.OrderAdapter = DS.LSAdapter.extend
-  namespace: 'TrashBags'
-App.OrderSerializer = DS.LSSerializer.extend()
+App.CartAdapter = DS.LSAdapter.extend App.LSAdapterMixin
+App.CartSerializer = DS.LSSerializer.extend()

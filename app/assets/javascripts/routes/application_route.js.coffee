@@ -1,23 +1,35 @@
 App.ApplicationRoute = Em.Route.extend
   model: ->
+    self = this
     store = @store
-    products = @store.find('product').then ->
+    model = @store.find('product').then ->
       Em.RSVP.hash
         customOptions: store.find 'custom_option'
         customItems: store.find 'custom_item'
         selectedColors: store.find 'selected_color'
-        lineItems: store.find 'line_item'
-        orders: store.find 'order'
+        carts: store.find 'cart'
+      .then (data)->
+        carts = data.carts.filterBy('isCreated', true)
+        if (carts.get('length') == 0)
+          cart = store.createRecord 'cart',
+            state: 'cart'
+          cart.save()
+        else
+          cart = carts.shiftObject()
+      , ->
+        localStorage.removeItem('TrashBags')
+        self.refresh()
 
-  getCartOrder: ->
-    orders = @store.all('order').filterBy('created', true)
-    if (orders.get('length') > 0)
-      order = orders.shiftObject()
+ #depricated
+  getCart: ->
+    carts = @store.find('cart').filterBy('created', true)
+    if (carts.get('length') > 0)
+      cart = carts.shiftObject()
     else
-      order = @store.createRecord 'order',
+      cart = @store.createRecord 'cart',
         state: 'cart'
-      order.save()
-    return order
+      cart.save()
+    return cart
 
   actions:
     openModal: (template, model)->
@@ -31,6 +43,7 @@ App.ApplicationRoute = Em.Route.extend
         outlet: 'modal'
         parentView: 'application'
 
+#todo: refactor
     addToCart: (item)->
       self = this
       if item.get 'inCart'
@@ -38,7 +51,7 @@ App.ApplicationRoute = Em.Route.extend
         item.save()
         @transitionTo 'cart'
         return
-      order = @getCartOrder()
+      order = @getCart()
       record = @store.createRecord 'line_item',
         product: item.get('product'),
         customItem: item
