@@ -8,8 +8,12 @@ App.LineItem = DS.Model.extend
 
   customItem: DS.belongsTo 'custom_item'
   order: DS.belongsTo 'order'
-  custom_item_hash: Em.computed.alias 'customItem.custom_item_hash'
+  custom_item_hash: DS.attr 'string'
 
+  didCreate: ->
+    console.log 'lineItem.didCreate'
+  didLoad: ->
+    @store.createItemByHash(@get 'custom_item_hash') unless @get('customItem')
   # state: (->
   #   return 'precart' if @get('order') is null
   #   @get('order.state')

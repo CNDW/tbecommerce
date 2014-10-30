@@ -1,7 +1,10 @@
 App.Cart = DS.Model.extend
   token: DS.attr 'string', defaultValue: null
   number: DS.attr 'string', defaultValue: null
-  order: DS.belongsTo 'order', async: true
+  order_id: DS.attr 'string'
+  order: (->
+    @store.getById 'order', @get('order_id')
+  ).property('order_id')
 
   hasOrder: Em.computed.notEmpty 'order_id'
   isCreated: Em.computed.notEmpty 'token'
@@ -12,9 +15,6 @@ App.Cart = DS.Model.extend
     unless @get('isCreated')
       @createOrder()
 
-  didLoad: ->
-    @fetchOrder()
-
   createOrder: ->
     return if @get 'isCreated'
     self = this
@@ -24,15 +24,14 @@ App.Cart = DS.Model.extend
         token: payload.token
         number: payload.number
       self.store.pushPayload 'order',
-        order:
-          id: payload.id
-          token: payload.token
-          number: payload.number
+        order: payload
       self.save()
 
   fetchOrder: ->
-    return @get('order') if @get('order')
-    @updateOrder()
+    self = this
+    return new Promise (resolve, reject)->
+      self.updateOrder().always ()->
+        resolve(self.get('order'))
 
   updateOrder: ->
     self = this
@@ -43,6 +42,7 @@ App.Cart = DS.Model.extend
         order_token: self.get('token')
       success: (payload)->
         self.store.pushPayload 'order', {order: payload}
+        self.set 'order', self.store.getById('order', payload.id)
         self.set('isUpdating', no)
         return payload
       error: ->

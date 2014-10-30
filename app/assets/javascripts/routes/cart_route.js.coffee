@@ -1,11 +1,9 @@
 App.CartRoute = Em.Route.extend
   model: ->
-    self = this
-    cart = @modelFor 'application'
-    cart.get 'order'
+    carts = @store.all('cart').filterBy('isCreated', true)
+    cart = carts.shiftObject()
+    cart.get('order')
 
-  setupController: ->
-    console.log 'cartrout setupController'
 
   actions:
     removeFromCart: (lineItem)->
@@ -13,3 +11,9 @@ App.CartRoute = Em.Route.extend
       order = @modelFor('cart')
       order.removeLineItem(lineItem).then ->
         self.refresh()
+
+    checkout: (order)->
+      self = this
+      return if order.get('total_quantity') is 0
+      order.advanceState('address').then ->
+        self.transitionTo 'order', order

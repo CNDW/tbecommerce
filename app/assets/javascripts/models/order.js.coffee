@@ -4,7 +4,7 @@ App.Order = DS.Model.extend
 
   additional_tax_total: DS.attr 'string'
   adjustment_total: DS.attr 'string'
-  bill_address: DS.belongsTo 'bill_address'
+  bill_address: DS.attr 'object'
   channel: DS.attr 'string'
   completed_at: DS.attr 'string'
   created_at: DS.attr 'string'
@@ -21,18 +21,18 @@ App.Order = DS.Model.extend
   line_items: DS.hasMany 'line_item'
   payment_state: DS.attr 'string'
   payment_total: DS.attr 'string'
-  # payments: []
-  # permissions: {can_update:false}
-  ship_address: DS.belongsTo 'ship_address'
+  ship_address: DS.attr 'object'
   ship_total: DS.attr 'string'
   shipment_state: DS.attr 'string'
-  # shipments: []
   special_instructions: DS.attr 'string'
   state: DS.attr 'string', defaultValue: 'cart'
   tax_total: DS.attr 'string'
   total: DS.attr 'string'
-  total_quantity: DS.attr 'number'
+  total_quantity: Em.computed.alias 'line_items.length'
   updated_at: DS.attr 'string'
+  # shipments: []
+  # payments: []
+  # permissions: {can_update:false}
   # user_id: null
   # adjustments: []
   # checkout_steps: [address, delivery, complete]
@@ -42,26 +42,48 @@ App.Order = DS.Model.extend
   # #order info
 
   #----- These cause ember data to bug out
-  # length: Em.computed.alias 'line_items.length'
-  # isEmpty: Em.computed.empty 'line_items'
+  isEmpty: Em.computed.empty 'line_items'
 
-  # checkoutSteps: [
-  #   'cart'
-  #   'address'
-  #   'delivery'
-  #   'payment'
-  #   'complete'
-  # ]
-  # checkoutStates:
-  #   cart: 0
-  #   address: 1
-  #   delivery: 2
-  #   payment: 3
-  #   complete: 4
+  checkoutStates: [
+    'cart'
+    'address'
+    'delivery'
+    'payment'
+    'complete'
+  ]
+  checkoutSteps:
+    cart: 0
+    address: 1
+    delivery: 2
+    payment: 3
+    complete: 4
 
-  # checkoutCompleted: (->
-  #   @get('checkoutSteps').indexOf(@get('state'))
-  # ).property('state')
+  checkoutStep: (->
+    @get('checkoutSteps')[@get('state')]
+  ).property('state')
+
+  advanceState: (targetState)->
+    targetStep = @get('checkoutSteps')[targetState]
+    currentStep = @get('checkoutStep')
+    self = this
+    return new Promise (resolve, reject)->
+      if targetStep == currentStep + 1
+        $.ajax "api/checkouts/#{self.get('number')}/next",
+          type: "PUT"
+          dataType: "json"
+          data:
+            order_token: self.get('token')
+          success: (data)->
+            self.store.pushPayload 'order',
+              order: data
+            resolve(data)
+          error: ->
+            debugger
+            reject(arguments)
+      else if targetStep > currentStep + 1
+        reject(self)
+      else
+        resolve(self)
 
   createLineItem: (item)->
     self = this
@@ -75,6 +97,7 @@ App.Order = DS.Model.extend
             variant_id: item.get('variant_id')
             custom_item_hash: item.get('custom_item_hash')
         success: (data)->
+          data.customItem = item
           self.store.pushPayload 'line_item',
             line_item: data
           self.addLineItem data.id
@@ -84,27 +107,7 @@ App.Order = DS.Model.extend
 
   addLineItem: (line_item_id)->
     line_item = @store.getById 'line_item', line_item_id
-    @store.update 'order',
-      id: @get 'id'
-      line_items: @get('line_items').addObject(line_item)
-
-
-    order_token = @get('token')
-    order_id = @get('order_id')
-    @get('line_items').forEach (line_item)->
-      if line_item.get('isDirty')
-        $.ajax "api/orders/#{order_id}/line_items",
-          type: "POST"
-          dataType: "json"
-          data:
-            order:
-              order_token: order_token
-            line_item:
-              variant_id: line_item.get('variant_id')
-          success: ->
-            line_item.set('isDirty', false)
-            line_item.save()
-
+    @get('line_items').addObject(line_item)
 
 
 
@@ -145,7 +148,6 @@ App.Order = DS.Model.extend
           order:
             self.serializeAddresses()
         success: (orderResponse)->
-          self.set 'isDirty', no
           resolve(orderResponse, self)
         error: (xhr, error, status)->
           if alertOnFailure
@@ -159,40 +161,7 @@ App.Order = DS.Model.extend
 
 
 
-  advanceState: (targetState)->
-    self = this
-    if @get('checkoutCompleted') == (targetState - 1)
-      return new Promise (resolve, reject)->
-        $.ajax "api/checkouts/#{self.get('number')}/next",
-          type: "PUT"
-          dataType: "json"
-          data:
-            order_token: self.get('token')
-          success: (order)->
-            self.set 'state', order.state
-            self.save()
-            resolve(order)
-          error: ->
-            debugger
-            reject(arguments)
-    else
-      return new Promise (resolve, reject)->
-        if self.get('checkoutCompleted') >= targetState
-          resolve(self)
-        else if !self.get('state')
-          $.ajax "api/checkouts/#{self.get('number')}",
-            type: "GET"
-            dataType: "json"
-            data:
-              order_token: self.get('token')
-            success: (order)->
-              self.set 'state', order.state
-              self.save()
-              resolve(order)
-            error: ->
-              reject(arguments)
-        else
-          resolve(self)
+
 
   addrAttrs: (type)->
     attrs =

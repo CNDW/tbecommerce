@@ -16,6 +16,8 @@ App.ApplicationRoute = Em.Route.extend
           cart.save()
         else
           cart = carts.shiftObject()
+          cart.fetchOrder().then ->
+            return cart
       , ->
         localStorage.removeItem('TrashBags')
         self.refresh()
@@ -57,10 +59,3 @@ App.ApplicationRoute = Em.Route.extend
         item.set('inShop', false)
         item.save()
         self.transitionTo 'cart'
-
-    checkout: (order)->
-      self = this
-      return if order.get('length') is 0
-      order.advanceState(1).then ->
-        self.transitionTo 'order', order
-

@@ -1,76 +1,76 @@
 div.col-main-body.bottom-border
   h4.upcase shipping address
   div.col-sm-4.selection-fields
-    div.field
-      span.field-label first name
-      text-field value=model.ship_firstname focus-out='acceptChanges'
-    div.field
-      span.field-label last name
-      text-field value=model.ship_lastname focus-out='acceptChanges'
-    div.field
-      span.field-label email
-      text-field value=model.email focus-out='acceptChanges'
-    div.field
-      span.field-label confirm email
-      text-field value=model.email_confirm focus-out='acceptChanges'
-    div.field
-      span.field-label phone
-      text-field value=model.ship_phone focus-out='acceptChanges'
-  div.col-sm-4.selection-fields
-    div.field
-      span.field-label address
-      text-field value=model.ship_address1 focus-out='acceptChanges'
-    div.field
-      span.field-label city
-      text-field value=model.ship_city focus-out='acceptChanges'
-    div.field
-      span.field-label zip
-      text-field value=model.ship_zipcode focus-out='acceptChanges'
-    div.field
-      span.field-label country
-      dropdown-selection list=countries model=model target_attr='ship_country_id'
-    if model.ship_states_required
-      div.field
-        span.field-label state
-        dropdown-selection list=ship_states model=model target_attr='ship_state_id'
+  /   div.field
+  /     span.field-label first name
+  /     text-field value=model.ship_firstname focus-out='acceptChanges'
+  /   div.field
+  /     span.field-label last name
+  /     text-field value=model.ship_lastname focus-out='acceptChanges'
+  /   div.field
+  /     span.field-label email
+  /     text-field value=model.email focus-out='acceptChanges'
+  /   div.field
+  /     span.field-label confirm email
+  /     text-field value=model.email_confirm focus-out='acceptChanges'
+  /   div.field
+  /     span.field-label phone
+  /     text-field value=model.ship_phone focus-out='acceptChanges'
+  / div.col-sm-4.selection-fields
+  /   div.field
+  /     span.field-label address
+  /     text-field value=model.ship_address1 focus-out='acceptChanges'
+  /   div.field
+  /     span.field-label city
+  /     text-field value=model.ship_city focus-out='acceptChanges'
+  /   div.field
+  /     span.field-label zip
+  /     text-field value=model.ship_zipcode focus-out='acceptChanges'
+  /   div.field
+  /     span.field-label country
+  /     dropdown-selection list=countries model=model target_attr='ship_country_id'
+  /   if model.ship_states_required
+  /     div.field
+  /       span.field-label state
+  /       dropdown-selection list=ship_states model=model target_attr='ship_state_id'
 div.col-main-body.bottom-border
   h4.upcase billing address
-  div.billing-checkbox
-    =input type="checkbox" checked=model.useShippingAddress
-    span.field-label Use my shipping address
-  unless model.useShippingAddress
-    div.col-sm-4.selection-fields
-      div.field
-        span.field-label first name
-        text-field value=model.bill_firstname focus-out='acceptChanges'
-      div.field
-        span.field-label last name
-        text-field value=model.bill_lastname focus-out='acceptChanges'
-      div.field
-        span.field-label email
-        text-field value=model.bill_email focus-out='acceptChanges'
-      div.field
-        span.field-label confirm email
-        text-field value=model.bill_email_confirm focus-out='acceptChanges'
-      div.field
-        span.field-label phone
-        text-field value=model.bill_phone focus-out='acceptChanges'
-    div.col-sm-4.selection-fields
-      div.field
-        span.field-label address
-        text-field value=model.bill_address1 focus-out='acceptChanges'
-      div.field
-        span.field-label city
-        text-field value=model.bill_city focus-out='acceptChanges'
-      div.field
-        span.field-label zip
-        text-field value=model.bill_zipcode focus-out='acceptChanges'
-      div.field
-        span.field-label country
-        dropdown-selection list=countries model=model target_attr='bill_country_id'
-      if model.bill_states_required
-        div.field
-          span.field-label state
-          dropdown-selection list=bill_states model=model target_attr='bill_state_id'
+  / div.billing-checkbox
+  /   =input type="checkbox" checked=model.useShippingAddress
+  /   span.field-label Use my shipping address
+  / unless model.useShippingAddress
+  /   div.col-sm-4.selection-fields
+  /     div.field
+  /       span.field-label first name
+  /       text-field value=model.bill_firstname focus-out='acceptChanges'
+  /     div.field
+  /       span.field-label last name
+  /       text-field value=model.bill_lastname focus-out='acceptChanges'
+  /     div.field
+  /       span.field-label email
+  /       text-field value=model.bill_email focus-out='acceptChanges'
+  /     div.field
+  /       span.field-label confirm email
+  /       text-field value=model.bill_email_confirm focus-out='acceptChanges'
+  /     div.field
+  /       span.field-label phone
+  /       text-field value=model.bill_phone focus-out='acceptChanges'
+  /   div.col-sm-4.selection-fields
+  /     div.field
+  /       span.field-label address
+  /       text-field value=model.bill_address1 focus-out='acceptChanges'
+  /     div.field
+  /       span.field-label city
+  /       text-field value=model.bill_city focus-out='acceptChanges'
+  /     div.field
+  /       span.field-label zip
+  /       text-field value=model.bill_zipcode focus-out='acceptChanges'
+  /     div.field
+  /       span.field-label country
+  /       dropdown-selection list=countries model=model target_attr='bill_country_id'
+  /     if model.bill_states_required
+  /       div.field
+  /         span.field-label state
+  /         dropdown-selection list=bill_states model=model target_attr='bill_state_id'
 div.col-main-body
   button.btn.btn-black{action "completeCheckoutAddresses"} continue

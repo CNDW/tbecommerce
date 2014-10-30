@@ -15,11 +15,11 @@ div.row
         span.upcase remove
 
     each lineItem in model.line_items
-      / render 'line-item' lineItem
+      render 'line-item' lineItem
     div.row-line-item.text-medium
       div.col-sm-7.line-item
         div.checkout
           span.upcase subtotal
-          span.price ${{subtotal}}
+          span.price {{model.display_total}}
         div.checkout
           button.btn.btn-black click="checkout model" checkout
