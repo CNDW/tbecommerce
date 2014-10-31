@@ -1,8 +1,4 @@
 App.OrderIndexController = Em.ObjectController.extend
-  updateShipping: (->
-    @get('model').save()
-  ).observes('model.useShippingAddress')
-
   countries: (->
     @store.all('country').map (country)->
       {

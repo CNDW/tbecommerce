@@ -53,6 +53,8 @@ gem 'oink'
 gem 'spree', '2.3.4'
 gem 'spree_auth_devise', :git => 'https://github.com/spree/spree_auth_devise.git', :branch => '2-3-stable'
 
+gem 'valid_email'
+
 group :development, :test do
   gem 'bullet'
 	gem 'better_errors'

@@ -18,7 +18,6 @@ App.DropdownSelectionComponent = Em.Component.extend
     @$('.dropdown-selection').select2('val', @model.get(@target_attr))
     @$('.dropdown-selection').on 'change', (e)->
       self.model.set self.target_attr, e.val
-      self.model.save()
 
   willDestroyElement: ->
     @$('.dropdown-selection').off 'change'

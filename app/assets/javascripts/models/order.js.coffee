@@ -4,7 +4,6 @@ App.Order = DS.Model.extend
 
   additional_tax_total: DS.attr 'string'
   adjustment_total: DS.attr 'string'
-  bill_address: DS.attr 'object'
   channel: DS.attr 'string'
   completed_at: DS.attr 'string'
   created_at: DS.attr 'string'
@@ -21,7 +20,6 @@ App.Order = DS.Model.extend
   line_items: DS.hasMany 'line_item'
   payment_state: DS.attr 'string'
   payment_total: DS.attr 'string'
-  ship_address: DS.attr 'object'
   ship_total: DS.attr 'string'
   shipment_state: DS.attr 'string'
   special_instructions: DS.attr 'string'
@@ -30,6 +28,41 @@ App.Order = DS.Model.extend
   total: DS.attr 'string'
   total_quantity: Em.computed.alias 'line_items.length'
   updated_at: DS.attr 'string'
+
+  ship_address: DS.attr 'object', defaultValue: address_attributes
+  bill_address: DS.attr 'object', defaultValue: address_attributes
+
+  ship_states_required: (->
+    country = @get('ship_country')
+    if country
+      country.get('states_required')
+    else
+      false
+  ).property('ship_country')
+  ship_country: (->
+    @store.getById('country', @get('ship_address.country_id'))
+  ).property('ship_address.country_id')
+  bill_states_required: (->
+    country = @get('bill_country')
+    if country
+      country.get('states_required')
+    else
+      false
+  ).property('bill_country')
+  bill_country: (->
+    @store.getById('country', @get('bill_address.country_id'))
+  ).property('bill_address.country_id')
+  address_attributes =
+    firstname: ''
+    lastname: ''
+    address1: ''
+    address2: ''
+    email: ''
+    city: ''
+    phone: ''
+    zipcode: ''
+    state_id: ''
+    country_id: ''
   # shipments: []
   # payments: []
   # permissions: {can_update:false}
@@ -37,7 +70,7 @@ App.Order = DS.Model.extend
   # adjustments: []
   # checkout_steps: [address, delivery, complete]
 
-  # useShippingAddress: DS.attr 'boolean', defaultValue: no
+  useShippingAddress: DS.attr 'boolean', defaultValue: yes
 
   # #order info
 
@@ -130,15 +163,6 @@ App.Order = DS.Model.extend
           else
             reject(arguments)
 
-# Old ---------------------------
-
-
-
-
-#=====================================================
-# API communcation
-#=====================================================
-
   updateAddresses: (alertOnFailure)->
     self = this
     return new Promise (resolve, reject)->
@@ -161,38 +185,37 @@ App.Order = DS.Model.extend
             alert(message.join('\n'))
           reject(self)
 
+  serializeAddresses: ->
+    if @get('useShippingAddress')
+      payload =
+        ship_address_attributes: @get('ship_address')
+        bill_address_attributes: @get('ship_address')
+    else
+      payload =
+        ship_address_attributes: @get('ship_address')
+        bill_address_attributes: @get('bill_address')
+    delete payload.ship_address_attributes.country
+    delete payload.ship_address_attributes.state
+    delete payload.bill_address_attributes.country
+    delete payload.bill_address_attributes.state
+    return payload
+
+# Old ---------------------------
 
 
 
 
-  addrAttrs: (type)->
-    attrs =
-      firstname: @get "#{type}firstname"
-      lastname: @get "#{type}lastname"
-      address1: @get "#{type}address1"
-      address2: @get "#{type}address2"
-      city: @get "#{type}city"
-      email: @get "#{type}email"
-      phone: @get "#{type}phone"
-      zipcode: @get "#{type}zipcode"
-      state_id: @get "#{type}state_id"
-      country_id: @get "#{type}country_id"
+#=====================================================
+# API communcation
+#=====================================================
+
 
   serializeLineItems: ->
     payload = {}
 
-  serializeAddresses: ->
-    payload =
-      ship_address_attributes: @getShipAddress(this)
-      bill_address_attributes: @getBillAddress(this)
 
-  getShipAddress: (order)->
-    order.addrAttrs('ship_')
-  getBillAddress: (order)->
-    if order.get('useShippingAddress')
-      return order.addrAttrs('ship_')
-    else
-      return order.addrAttrs('bill_')
+
 
   updateShipments: (shipmentJSON)->
     debugger
+

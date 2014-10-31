@@ -23,4 +23,6 @@ Spree::Api::ApiHelpers.option_value_attributes.concat([:description, :thumb_url,
 
 Spree::Api::ApiHelpers.option_type_attributes.concat([:description, :required, :catalogue])
 
+Spree::PermittedAttributes.address_attributes.concat([:email])
+
 Spree.user_class = "Spree::User"
