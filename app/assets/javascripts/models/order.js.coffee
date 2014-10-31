@@ -63,7 +63,8 @@ App.Order = DS.Model.extend
     zipcode: ''
     state_id: ''
     country_id: ''
-  # shipments: []
+
+  shipments: DS.hasMany 'shipment'
   # payments: []
   # permissions: {can_update:false}
   # user_id: null

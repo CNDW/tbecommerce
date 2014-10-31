@@ -5,3 +5,4 @@ App.OrderAdapter = DS.ActiveModelAdapter.extend
 App.OrderSerializer = DS.ActiveModelSerializer.extend DS.EmbeddedRecordsMixin,
   attrs:
     line_items: embedded: 'always'
+    shipments: embedded: 'always'

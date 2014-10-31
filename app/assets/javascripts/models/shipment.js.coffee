@@ -3,7 +3,7 @@ App.Shipment = DS.Model.extend
   number: DS.attr 'string'
   order_id: DS.attr 'string'
   shipped_at: DS.attr 'string'
-  shipping_methods: DS.hasMany 'shipping_method'
+  # shipping_methods: DS.hasMany 'shipping_method'
   state: DS.attr 'string'
   stock_location_name: DS.attr 'string'
   tracking: DS.attr 'string'
