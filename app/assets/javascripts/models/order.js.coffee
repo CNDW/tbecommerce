@@ -41,7 +41,6 @@ App.Order = DS.Model.extend
 
   # #order info
 
-  #----- These cause ember data to bug out
   isEmpty: Em.computed.empty 'line_items'
 
   checkoutStates: [
@@ -109,29 +108,32 @@ App.Order = DS.Model.extend
     line_item = @store.getById 'line_item', line_item_id
     @get('line_items').addObject(line_item)
 
-
+  removeLineItem: (line_item)->
+    self = this
+    custom_item = line_item.get('customItem')
+    return new Promise (resolve, reject)->
+      $.ajax "api/orders/#{self.get('number')}/line_items/#{line_item.get('id')}",
+        type: 'DELETE'
+        datatype: 'json'
+        data:
+          order_token: self.get('token')
+        success: ->
+          self.get('line_items').removeObject(line_item)
+          custom_item.set 'state', 'precart'
+          custom_item.set 'line_item', null
+          custom_item.save()
+          resolve(self)
+        error: (xhr)->
+          if xhr.status is 404
+            self.get('line_items').removeRecord(line_item)
+            resolve(self)
+          else
+            reject(arguments)
 
 # Old ---------------------------
 
 
-  removeLineItem: (item)->
-    self = this
-    return new Promise (resolve, reject)->
-      $.ajax "api/orders/#{self.get('number')}/line_items/#{item.get('line_item_id')}",
-        type: 'DELETE'
-        datatype: 'json'
-        success: ->
-          self.get('line_items').removeRecord(item)
-          self.set 'state', 'cart'
-          self.save()
-          item.remove()
-          resolve(self)
-        error: (xhr)->
-          if xhr.status is 404
-            self.get('line_items').removeRecord(item)
-            self.save()
-            item.remove()
-          reject(arguments)
+
 
 #=====================================================
 # API communcation

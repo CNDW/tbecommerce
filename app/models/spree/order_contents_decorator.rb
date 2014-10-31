@@ -10,7 +10,22 @@ module Spree
       line_item
     end
 
+    def remove(hash, quantity = 1, options = {})
+      line_item = remove_from_line_item(hash, quantity, options)
+      after_add_or_remove(line_item, options)
+    end
+
     private
+      def after_add_or_remove(line_item, options = {})
+        reload_totals
+        shipment = options[:shipment]
+        shipment.present? ? shipment.update_amounts : order.ensure_updated_shipments
+        PromotionHandler::Cart.new(order, line_item).activate
+        ItemAdjustments.new(line_item).update
+        reload_totals
+        line_item
+      end
+
       def add_to_line_item(variant, quantity, currency=nil, shipment=nil, custom_item_hash = "pvi#{variant.id}")
         line_item = grab_line_item_by_hash(custom_item_hash)
 
@@ -33,17 +48,31 @@ module Spree
         line_item
       end
 
-      def grab_line_item_by_hash(hash, raise_error = false)
-        line_item = order.find_line_item_by_hash(hash)
+      def remove_from_line_item(hash, quantity, options = {})
+        line_item = grab_line_item_by_hash(hash, true, options)
+        line_item.quantity -= quantity
+        line_item.target_shipment= options[:shipment]
 
-        if !line_item.present? && raise_error
-          raise ActiveRecord::RecordNotFound, "Line item not found for variant #{variant.sku}"
+        if line_item.quantity == 0
+          line_item.destroy
+        else
+          line_item.save!
         end
 
         line_item
       end
 
-      def grab_line_item_by_variant(variant, raise_error = false)
+      def grab_line_item_by_hash(hash, raise_error = false, options = {})
+        line_item = order.find_line_item_by_hash(hash)
+
+        if !line_item.present? && raise_error
+          raise ActiveRecord::RecordNotFound, "Line item not found for custom item hash #{hash}"
+        end
+
+        line_item
+      end
+
+      def grab_line_item_by_variant(variant, raise_error = false, options = {})
         puts "DEPRECATED:: grab_line_item_by_variant => called by #{caller_locations(1,1)[0].label}"
         line_item = order.find_line_item_by_hash("pvi#{variant.id}", raise_error)
 
