@@ -9,7 +9,8 @@ App.Shipment = DS.Model.extend
   tracking: DS.attr 'string'
   shipping_rates: DS.hasMany 'shipping_rate'
   selected_shipping_rate: DS.belongsTo 'shipping_rate'
-  manifest: DS.hasMany 'manifest'
+  manifest: DS.attr 'array'
+
   # manifest: [{quantity:1, states:{backordered:1}, variant_id:21}]
   # selected_shipping_rate: {id:32, name:dog courier, cost:0.0, selected:true, shipping_method_id:2, display_cost:$0.00}
   # shipping_rates: [{id:32, name:dog courier, cost:0.0, selected:true, shipping_method_id:2, display_cost:$0.00},…]

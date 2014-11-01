@@ -1,6 +1,7 @@
 div.col-main-body.bottom-border
   div.col-sm-6
-    h4.upcase shipping method
+    each shipment in model.shipments
+      render 'partials/shipping-form' shipment
 
   div.col-sm-6
     div.col-sm-6

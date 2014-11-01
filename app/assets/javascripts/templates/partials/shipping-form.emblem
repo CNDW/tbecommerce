@@ -1,0 +1,8 @@
+h4.upcase shipping method
+each shipping_rate in model.shipping_rates
+  div.custom-features-line
+    =input class='left' type='checkbox' checked=shipping_rate.selected
+    span.name.interactible click=''
+      =shipping_rate.name
+    span.price.right
+      =shipping_rate.display_cost
