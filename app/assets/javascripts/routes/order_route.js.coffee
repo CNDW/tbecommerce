@@ -24,7 +24,7 @@ App.OrderIndexRoute = Em.Route.extend
       order = @modelFor('order.index')
       order.updateAddresses('alert_error').then (responseJSON)->
         order.advanceState('delivery').then ->
-          self.transitionTo 'order.payment'
+          self.transitionTo 'order.shipping'
 
 App.OrderShippingRoute = Em.Route.extend
 
