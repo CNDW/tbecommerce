@@ -9,6 +9,11 @@ App.OrderRoute = Em.Route.extend
 
 App.OrderIndexRoute = Em.Route.extend
 
+  afterModel: (model)->
+    if model.get('ship_address') == null
+      model.set 'ship_address', @store.createRecord('ship_address')
+      model.set 'bill_address', @store.createRecord('bill_address')
+
   deactivate: ->
     order = @modelFor('order.index')
     order.updateAddresses() if order.get('isDirty')
