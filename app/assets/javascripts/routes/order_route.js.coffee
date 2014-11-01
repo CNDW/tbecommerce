@@ -18,7 +18,6 @@ App.OrderIndexRoute = Em.Route.extend
       self = this
       order = @modelFor('order.index')
       order.updateAddresses('alert_error').then (responseJSON)->
-        # order.updateShipments(responseJSON.shipments)
         order.advanceState('delivery').then ->
           self.transitionTo 'order.payment'
 
@@ -31,15 +30,15 @@ App.OrderShippingRoute = Em.Route.extend
   actions:
     completeCheckoutShipping: ->
       self = this
-      order = @modelFor('order.index')
-      order.updateAddresses('alert_error').then ->
-        order.advanceState(3).then ->
+      order = @modelFor('order.shipping')
+      order.updateShipments('alert_error').then ->
+        order.advanceState('payment').then ->
           self.transitionTo 'order.payment'
 
 App.OrderPaymentRoute = Em.Route.extend
 
   afterModel: (model, transition)->
-    unless model.get('checkoutCompleted') > 2
+    unless model.get('checkoutStep') > 2
       @transitionTo 'order.shipping', model
 
   actions:

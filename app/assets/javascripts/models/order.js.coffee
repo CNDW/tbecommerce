@@ -140,8 +140,7 @@ App.Order = DS.Model.extend
         datatype: 'json'
         data:
           order_token: self.get('token')
-          order:
-            self.serializeAddresses()
+          order: self.serializeAddresses()
         success: (orderResponse)->
           resolve(orderResponse, self)
         error: (xhr, error, status)->
@@ -165,6 +164,36 @@ App.Order = DS.Model.extend
         bill_address_attributes: @get('bill_address').getAttributes()
     return payload
 
+  updateShipments: (alertOnFailure)->
+    self = this
+    return new Promise (resolve, reject)->
+      $.ajax "api/checkouts/#{self.get('number')}",
+        type: "PUT"
+        datatype: 'json'
+        data:
+          order_token: self.get('token')
+          order: self.serializeShipments()
+        success: (orderResponse)->
+          resolve(orderResponse, self)
+        error: (xhr, error, status)->
+          if alertOnFailure
+            message = ["#{xhr.responseJSON.error}\n"]
+            $.each xhr.responseJSON.errors, (field, errs)->
+              title = field.split('.')[1]
+              errors = errs.join(', ')
+              message.push "#{title}: #{errors}\n"
+            alert(message.join('\n'))
+          reject(self)
+
+
+  serializeShipments: ->
+    shipments_attributes = {}
+    $.each @get('shipments.content'), (index, shipment)->
+      shipments_attributes["#{index}"] =
+        selected_shipping_rate_id: shipment.get 'selected_shipping_id'
+        id: shipment.get 'id'
+    return shipments_attributes
+
 # Old ---------------------------
 
 
@@ -181,6 +210,4 @@ App.Order = DS.Model.extend
 
 
 
-  updateShipments: (shipmentJSON)->
-    debugger
 

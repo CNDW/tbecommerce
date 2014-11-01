@@ -11,6 +11,8 @@ App.Shipment = DS.Model.extend
   selected_shipping_rate: DS.belongsTo 'shipping_rate'
   manifest: DS.attr 'array'
 
+  selected_shipping_id: Em.computed.alias 'selected_shipping_rate.id'
+
   # manifest: [{quantity:1, states:{backordered:1}, variant_id:21}]
   # selected_shipping_rate: {id:32, name:dog courier, cost:0.0, selected:true, shipping_method_id:2, display_cost:$0.00}
   # shipping_rates: [{id:32, name:dog courier, cost:0.0, selected:true, shipping_method_id:2, display_cost:$0.00},…]
