@@ -15,6 +15,10 @@ Spree::Auth::Config[:registration_step] = false
 
 Spree::Api::Config[:requires_authentication] = false
 
+Spree::Api::ApiHelpers.address_attributes.concat([:email])
+
+Spree::Api::ApiHelpers.country_attributes.concat([:states_required])
+
 Spree::Api::ApiHelpers.product_attributes.concat([:product_category, :product_subcategory, :specs])
 
 Spree::Api::ApiHelpers.property_attributes.concat([:description, :thumb_url, :medium_url, :large_url])

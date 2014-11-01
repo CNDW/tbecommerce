@@ -1,0 +1,6 @@
+h4.upcase
+  =model.address_name
+
+each line in address_attributes
+  p
+    =line

@@ -6,7 +6,7 @@ App.Country = DS.Model.extend
   iso: DS.attr 'string'
   iso_name: DS.attr 'string'
   numcode: DS.attr 'number'
-  states_required: DS.attr 'boolean'
+  states_required: DS.attr 'boolean', defaultValue: no
 
 App.State = DS.Model.extend
   country: DS.belongsTo 'country'

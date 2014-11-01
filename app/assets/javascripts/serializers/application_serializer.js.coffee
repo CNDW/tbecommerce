@@ -33,4 +33,14 @@ App.CountrySerializer = DS.ActiveModelSerializer.extend DS.EmbeddedRecordsMixin,
 
 App.ShippingCategorySerializer = DS.ActiveModelSerializer.extend()
 App.ShippingMethodSerializer = DS.ActiveModelSerializer.extend()
+App.ShippingRateSerializer = DS.ActiveModelSerializer.extend()
+App.ShipAddressSerializer = DS.ActiveModelSerializer.extend()
+App.BillAddressSerializer = DS.ActiveModelSerializer.extend DS.EmbeddedRecordsMixin,
+  attrs:
+    country: embedded: 'always'
+    state: embedded: 'always'
+App.ShipAddressSerializer = DS.ActiveModelSerializer.extend DS.EmbeddedRecordsMixin,
+  attrs:
+    country: embedded: 'always'
+    state: embedded: 'always'
 

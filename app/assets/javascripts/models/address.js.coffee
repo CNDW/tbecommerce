@@ -1,4 +1,4 @@
-App.Address = Ember.Mixin.create
+App.AddressMixin = Ember.Mixin.create
   firstname: DS.attr 'string', defaultValue: null
   lastname: DS.attr 'string', defaultValue: null
   fullname: (->
@@ -7,35 +7,37 @@ App.Address = Ember.Mixin.create
   address1: DS.attr 'string', defaultValue: null
   address2: DS.attr 'string', defaultValue: null
   email: DS.attr 'string', defaultValue: null
-  email_confirm: DS.attr 'string', defaultValue: null
   city: DS.attr 'string', defaultValue: null
   zipcode: DS.attr 'string', defaultValue: null
   phone: DS.attr 'string', defaultValue: null
   state_name: DS.attr 'string', defaultValue: null
   alternative_phone: DS.attr 'string', defaultValue: null
-  country_id: DS.attr 'number', defaultValue: null
-  country: (->
-    @store.getById 'country', @get 'country_id'
-  ).property('country_id')
-  country_name: (->
-    @get('country.name')
-  ).property('country_id')
-  state_id: DS.attr 'number', defaultValue: null
-  state: (->
-    @store.getById 'state', @get 'state_id'
-  ).property('state_id')
-  state_name: (->
-    @get('state.name')
-  ).property('state_id')
-  states_required: (->
-    @get('country.states_required')
-  ).property('country_id')
+
+  country: DS.belongsTo 'country'
+  country_name: Em.computed.alias 'country.name'
+
+  state: DS.belongsTo 'state'
+  state_abbr: Em.computed.alias 'state.abbr'
+
+  states_required: Em.computed.alias 'country.states_required'
 
   order: DS.belongsTo 'order'
 
+  getAttributes: ->
+      firstname: @get 'firstname'
+      lastname: @get 'lastname'
+      address1: @get 'address1'
+      address2: @get 'address2'
+      email: @get 'email'
+      city: @get 'city'
+      zipcode: @get 'zipcode'
+      phone: @get 'phone'
+      state_id: @get 'state.id'
+      country_id: @get 'country.id'
 
-App.ShipAddress = DS.Model.extend App.Address,
-  address_name: 'ship_address'
 
-App.BillAddress = DS.Model.extend App.Address,
-  address_name: 'bill_address'
+App.ShipAddress = DS.Model.extend App.AddressMixin,
+  address_name: 'Shipping Address'
+
+App.BillAddress = DS.Model.extend App.AddressMixin,
+  address_name: 'Billing Address'

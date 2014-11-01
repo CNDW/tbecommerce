@@ -29,49 +29,17 @@ App.Order = DS.Model.extend
   total_quantity: Em.computed.alias 'line_items.length'
   updated_at: DS.attr 'string'
 
-  ship_address: DS.attr 'object', defaultValue: address_attributes
-  bill_address: DS.attr 'object', defaultValue: address_attributes
-
-  ship_states_required: (->
-    country = @get('ship_country')
-    if country
-      country.get('states_required')
-    else
-      false
-  ).property('ship_country')
-  ship_country: (->
-    @store.getById('country', @get('ship_address.country_id'))
-  ).property('ship_address.country_id')
-  bill_states_required: (->
-    country = @get('bill_country')
-    if country
-      country.get('states_required')
-    else
-      false
-  ).property('bill_country')
-  bill_country: (->
-    @store.getById('country', @get('bill_address.country_id'))
-  ).property('bill_address.country_id')
-  address_attributes =
-    firstname: ''
-    lastname: ''
-    address1: ''
-    address2: ''
-    email: ''
-    city: ''
-    phone: ''
-    zipcode: ''
-    state_id: ''
-    country_id: ''
+  ship_address: DS.belongsTo 'ship_address'
+  bill_address: DS.belongsTo 'bill_address'
 
   shipments: DS.hasMany 'shipment'
   # payments: []
   # permissions: {can_update:false}
   # user_id: null
   # adjustments: []
-  # checkout_steps: [address, delivery, complete]
+  checkout_steps: DS.attr 'array'
 
-  useShippingAddress: DS.attr 'boolean', defaultValue: yes
+  useShippingAddress: DS.attr 'boolean', defaultValue: no
 
   # #order info
 
@@ -189,16 +157,12 @@ App.Order = DS.Model.extend
   serializeAddresses: ->
     if @get('useShippingAddress')
       payload =
-        ship_address_attributes: @get('ship_address')
-        bill_address_attributes: @get('ship_address')
+        ship_address_attributes: @get('ship_address').getAttributes()
+        bill_address_attributes: @get('ship_address').getAttributes()
     else
       payload =
-        ship_address_attributes: @get('ship_address')
-        bill_address_attributes: @get('bill_address')
-    delete payload.ship_address_attributes.country
-    delete payload.ship_address_attributes.state
-    delete payload.bill_address_attributes.country
-    delete payload.bill_address_attributes.state
+        ship_address_attributes: @get('ship_address').getAttributes()
+        bill_address_attributes: @get('bill_address').getAttributes()
     return payload
 
 # Old ---------------------------
