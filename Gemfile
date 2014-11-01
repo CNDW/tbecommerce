@@ -52,6 +52,8 @@ gem 'oink'
 
 gem 'spree', '2.3.4'
 gem 'spree_auth_devise', :git => 'https://github.com/spree/spree_auth_devise.git', :branch => '2-3-stable'
+gem 'spree_paypal_express', github: 'spree-contrib/better_spree_paypal_express', branch: '2-3-stable'
+gem 'spree_gateway', github: 'spree/spree_gateway', branch: '2-3-stable'
 
 gem 'valid_email'
 
