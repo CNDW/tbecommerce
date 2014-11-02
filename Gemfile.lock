@@ -1,13 +1,4 @@
 GIT
-  remote: git://github.com/spree-contrib/better_spree_paypal_express.git
-  revision: 2f73d1c86ebda4217a91a51d9be2172c15654fe8
-  branch: 2-3-stable
-  specs:
-    spree_paypal_express (2.0.3)
-      paypal-sdk-merchant (= 1.106.1)
-      spree_core (~> 2.3.0)
-
-GIT
   remote: git://github.com/spree/spree_gateway.git
   revision: 92bee1ab016f10696d0c8849ef57128bd563150b
   branch: 2-3-stable
@@ -221,11 +212,6 @@ GEM
       mime-types
     paranoia (2.0.2)
       activerecord (~> 4.0)
-    paypal-sdk-core (0.2.10)
-      multi_json (~> 1.0)
-      xml-simple
-    paypal-sdk-merchant (1.106.1)
-      paypal-sdk-core (~> 0.2.3)
     pg (0.17.1)
     polyamorous (1.1.0)
       activerecord (>= 3.0)
@@ -361,7 +347,6 @@ GEM
       tzinfo
     warden (1.2.3)
       rack (>= 1.0)
-    xml-simple (1.1.4)
 
 PLATFORMS
   ruby
@@ -391,7 +376,6 @@ DEPENDENCIES
   spree (= 2.3.4)
   spree_auth_devise!
   spree_gateway!
-  spree_paypal_express!
   uglifier (>= 1.3.0)
   unicorn
   valid_email

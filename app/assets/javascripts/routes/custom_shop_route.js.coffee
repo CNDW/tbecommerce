@@ -6,6 +6,8 @@ App.CustomShopRoute = Em.Route.extend
     if Em.empty(items)
       item = store.createRecord 'custom_item',
         inShop: true
+        shop_state: 'new'
+      item.save()
       model = item
     else
       model = items.get('firstObject')

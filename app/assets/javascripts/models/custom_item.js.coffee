@@ -17,6 +17,13 @@ App.CustomItem = DS.Model.extend
     'extras'
     'complete'
   ]
+  shop_steps:
+    'new': 0
+    'colors': 1
+    'options': 2
+    'extras': 3
+    'complete': 4
+
 
   noProduct: Em.computed.empty 'product_id'
   noSelectedColors: Em.computed.empty 'selectedColors'
