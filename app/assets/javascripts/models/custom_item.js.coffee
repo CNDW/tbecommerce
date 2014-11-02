@@ -9,6 +9,14 @@ App.CustomItem = DS.Model.extend
     return 'precart' if @get('lineItem') == null
     return @get('lineItem.state')
   ).property('lineItem')
+  shop_state: DS.attr 'string', defaultValue: 'new'
+  shop_states: [
+    'new'
+    'colors'
+    'options'
+    'extras'
+    'complete'
+  ]
 
   noProduct: Em.computed.empty 'product_id'
   noSelectedColors: Em.computed.empty 'selectedColors'
