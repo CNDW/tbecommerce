@@ -33,11 +33,14 @@ App.Order = DS.Model.extend
   bill_address: DS.belongsTo 'bill_address'
 
   shipments: DS.hasMany 'shipment'
-  # payments: []
+  payments: DS.hasMany 'payment'
+
+  permissions: DS.attr 'object'
   # permissions: {can_update:false}
   # user_id: null
   # adjustments: []
   checkout_steps: DS.attr 'array'
+  payment_methods: DS.hasMany 'payment_method'
 
   useShippingAddress: DS.attr 'boolean', defaultValue: no
 
@@ -50,6 +53,7 @@ App.Order = DS.Model.extend
     'address'
     'delivery'
     'payment'
+    'confirm'
     'complete'
   ]
   checkoutSteps:
@@ -57,7 +61,8 @@ App.Order = DS.Model.extend
     address: 1
     delivery: 2
     payment: 3
-    complete: 4
+    confirm: 4
+    complete: 5
 
   checkoutStep: (->
     @get('checkoutSteps')[@get('state')]
@@ -194,6 +199,18 @@ App.Order = DS.Model.extend
         id: shipment.get 'id'
     return shipments_attributes
 
+  getPaymentAttributes: ->
+    self = this
+    return new Promise (resolve, reject)->
+      $.ajax "api/orders/#{self.get('number')}/payments/new",
+        type: "GET"
+        datatype: 'json'
+        data:
+          order_token: self.get('token')
+        success: (payload)->
+          resolve(payload)
+        error: ->
+          debugger
 # Old ---------------------------
 
 

@@ -45,6 +45,7 @@ App.OrderPaymentRoute = Em.Route.extend
   afterModel: (model, transition)->
     unless model.get('checkoutStep') > 2
       @transitionTo 'order.shipping', model
+    model.getPaymentAttributes()
 
   actions:
     completeCheckoutPayment: ->

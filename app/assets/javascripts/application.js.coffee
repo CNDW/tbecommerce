@@ -6,6 +6,7 @@
 #= require bootstrap/modal
 #= require bootstrap/transition
 #= require pongstagr.am
+#= require spree/frontend/spree_gateway
 #= require select2
 #= require_self
 #= require ./store
