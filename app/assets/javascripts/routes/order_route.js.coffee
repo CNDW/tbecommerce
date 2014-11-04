@@ -47,6 +47,16 @@ App.OrderPaymentRoute = Em.Route.extend
       @transitionTo 'order.shipping', model
     model.getPaymentAttributes()
 
+  setupController: (controller, model)->
+    @store.find('card').then (data)=>
+      controller.set 'model', model
+      controller.set 'cards', data
+      if Em.empty(data)
+        card = @store.createRecord 'card'
+        controller.set 'currentCard', card
+      else
+        controller.set 'currentCard', data.get('firstObject')
+
   actions:
     completeCheckoutPayment: ->
       self = this

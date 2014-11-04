@@ -12,3 +12,6 @@ App.CustomOptionSerializer = DS.LSSerializer.extend()
 
 App.CartAdapter = DS.LSAdapter.extend App.LSAdapterMixin
 App.CartSerializer = DS.LSSerializer.extend()
+
+App.CardAdapter = DS.LSAdapter.extend App.LSAdapterMixin
+App.CardSerializer = DS.LSSerializer.extend()

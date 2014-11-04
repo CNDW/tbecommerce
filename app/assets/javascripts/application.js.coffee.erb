@@ -6,7 +6,7 @@
 #= require bootstrap/modal
 #= require bootstrap/transition
 #= require pongstagr.am
-#= require spree/frontend/spree_gateway
+#= require stripe
 #= require select2
 #= require_self
 #= require ./store
@@ -35,3 +35,5 @@ Ember.RSVP.configure 'onerror', (error)->
 	if (error instanceof Error)
 		Ember.Logger.assert(false, error)
 		Ember.Logger.error(error.stack)
+
+Stripe.setPublishableKey "<%= Spree::PaymentMethod.find_by_type('Spree::Gateway::StripeGateway').preferences[:publishable_key] %>"
