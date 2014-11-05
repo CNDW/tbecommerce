@@ -1,7 +1,25 @@
-div.col-main-body.bottom-border
-  div.col-sm-4
-    each payment_method in model.payment_methods
-      h4
-        =payment_method.name
-  div.col-sm-6.selection-fields
-    render 'card' currentCard
+div.col-main-body
+  div.row-line-item.bottom-border.text-medium
+    div.col-sm-4
+      each payment_method in model.payment_methods
+        h4
+          =payment_method.name
+    div.col-sm-6.selection-fields
+      render 'card' currentCard
+
+  div.row-line-item.bottom-border.text-medium
+    h4.upcase order summary
+
+  each line_item in model.line_items
+    render 'line-item' line_item
+
+  div.row-line-item.bottom-border.text-medium
+    div.checkout
+      span.upcase shipping
+      span.price {{model.display_ship_total}}
+    div.checkout
+      span.upcase total
+      span.price {{model.display_total}}
+
+  div.row-line-item.text-medium
+    button.btn.btn-black.left click='submitOrder currentCard model' place order

@@ -58,9 +58,7 @@ App.OrderPaymentRoute = Em.Route.extend
         controller.set 'currentCard', data.get('firstObject')
 
   actions:
-    completeCheckoutPayment: ->
-      self = this
-      order = @modelFor('order.index')
-      order.updateAddresses(yes).then ->
-        order.advanceState(4).then ->
-          self.transitionTo 'order.payment'
+    submitOrder: (card, order)->
+      card.createToken(order).then ->
+        debugger
+

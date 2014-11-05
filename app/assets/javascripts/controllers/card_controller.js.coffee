@@ -40,3 +40,7 @@ App.CardController = Em.ObjectController.extend
     year = (new Date()).getFullYear()
     years = (year + num for num in [0..14])
   ).property()
+
+  actions:
+    submitCardInfo: (card)->
+      card.createToken()
