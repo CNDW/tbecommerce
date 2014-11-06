@@ -23,6 +23,10 @@ App.AddressMixin = Ember.Mixin.create
 
   order: DS.belongsTo 'order'
 
+  clearState: (->
+    @set('state', null)
+  ).observes('country')
+
   getAttributes: ->
       firstname: @get 'firstname'
       lastname: @get 'lastname'

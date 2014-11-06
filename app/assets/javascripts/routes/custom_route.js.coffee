@@ -52,6 +52,8 @@ App.CustomRoute = Em.Route.extend
 
 
   actions:
+    error: ->
+      @transitionTo('custom_shop')
     setCustomProduct: (product)->
       customItem = @modelFor('custom')
       customItem.set('product_id', product.get('id'))

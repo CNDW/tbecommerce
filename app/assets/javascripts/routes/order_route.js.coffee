@@ -1,6 +1,8 @@
 App.OrderRoute = Em.Route.extend
 
   actions:
+    error: ->
+      @transitionTo 'cart'
     removeFromCart: (lineItem)->
       self = this
       order = @modelFor('order')
@@ -45,7 +47,6 @@ App.OrderPaymentRoute = Em.Route.extend
   afterModel: (model, transition)->
     unless model.get('checkoutStep') > 2
       @transitionTo 'order.shipping', model
-    model.getPaymentAttributes()
 
   setupController: (controller, model)->
     @store.find('card').then (data)=>
@@ -60,5 +61,7 @@ App.OrderPaymentRoute = Em.Route.extend
   actions:
     submitOrder: (card, order)->
       card.createToken(order).then ->
-        debugger
+        order.createPayment(order.get('payment_methods.firstObject.id'), card).then ->
+          order.purchaseOrder(card).then ->
+            debugger
 

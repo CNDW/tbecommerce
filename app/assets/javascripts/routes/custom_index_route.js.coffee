@@ -1,5 +1,3 @@
-App.CustomItemRoute = Em.Route.extend
-  afterModel: (model)->
-    debugger
+App.CustomItemRoute = Em.Route.extend()
 
 App.CustomIndexRoute = App.CustomItemRoute.extend()

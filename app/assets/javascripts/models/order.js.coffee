@@ -34,6 +34,10 @@ App.Order = DS.Model.extend
 
   shipments: DS.hasMany 'shipment'
   payments: DS.hasMany 'payment'
+  payment_id: (->
+    @get('payments.firstObject.id')
+  ).property('payments.@each')
+  orderHasPayment: Em.computed.notEmpty('payments')
 
   permissions: DS.attr 'object'
   # permissions: {can_update:false}
@@ -211,6 +215,44 @@ App.Order = DS.Model.extend
           resolve(payload)
         error: ->
           debugger
+
+  createPayment: (payment_method_id, card)->
+    self = this
+    return new Promise (resolve, reject)->
+      $.ajax "api/orders/#{self.get('number')}/payments",
+        type: "POST"
+        datatype: 'json'
+        data:
+          order_token: self.get('token')
+          payment:
+            payment_method_id: payment_method_id
+            amount: Number(self.get('total'))
+            creditcard: card.get('number')
+        success: (payload)->
+          payload.order_id = self.get('id')
+          self.store.pushPayload 'payment',
+            payment: payload
+          resolve(payload)
+        error: ->
+          reject(arguments)
+          debugger
+
+  purchaseOrder: (card)->
+    self = this
+    return new Promise (resolve, reject)->
+      $.ajax "api/orders/#{self.get('number')}/payments/#{self.get('payment_id')}/purchase",
+        type: "PUT"
+        datatype: 'json'
+        data:
+          order_token: self.get('token')
+          creditcard: card.get('token')
+          money: self.get('total')
+        success: (payload)->
+          debugger
+          resolve()
+        error: ->
+          debugger
+          reject(arguments)
 # Old ---------------------------
 
 
