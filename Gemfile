@@ -60,6 +60,9 @@ group :development, :test do
   gem 'bullet'
 	gem 'better_errors'
 	gem 'binding_of_caller'
+  gem 'pry'
+  gem 'pry-rescue'
+  gem 'pry-stack_explorer'
 end
 
 group :production do

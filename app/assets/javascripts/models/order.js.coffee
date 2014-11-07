@@ -218,16 +218,24 @@ App.Order = DS.Model.extend
 
   createPayment: (payment_method_id, card)->
     self = this
+    payment_source = {}
+    payment_source[payment_method_id] =
+      number: card.get('token')
+      month: card.get('exp_month')
+      year: card.get('exp_year')
+      verification_value: card.get('cvc')
+      name: card.get('name')
     return new Promise (resolve, reject)->
-      $.ajax "api/orders/#{self.get('number')}/payments",
-        type: "POST"
+      $.ajax "api/checkouts/#{self.get('number')}",
+        type: "PUT"
         datatype: 'json'
         data:
           order_token: self.get('token')
-          payment:
-            payment_method_id: payment_method_id
-            amount: Number(self.get('total'))
-            creditcard: card.get('number')
+          order:
+            payments_attributes:[
+              payment_method_id: payment_method_id
+            ]
+          payment_source: payment_source
         success: (payload)->
           payload.order_id = self.get('id')
           self.store.pushPayload 'payment',

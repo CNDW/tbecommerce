@@ -62,6 +62,5 @@ App.OrderPaymentRoute = Em.Route.extend
     submitOrder: (card, order)->
       card.createToken(order).then ->
         order.createPayment(order.get('payment_methods.firstObject.id'), card).then ->
-          order.purchaseOrder(card).then ->
-            debugger
+          debugger
 

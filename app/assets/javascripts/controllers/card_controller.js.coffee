@@ -1,40 +1,40 @@
 App.CardController = Em.ObjectController.extend
   months: [
       name: 'January'
-      val: '01'
+      val: 1
     ,
       name: 'February'
-      val: '02'
+      val: 2
     ,
       name: 'March'
-      val: '03'
+      val: 3
     ,
       name: 'April'
-      val: '04'
+      val: 4
     ,
       name: 'May'
-      val: '05'
+      val: 5
     ,
       name: 'June'
-      val: '06'
+      val: 6
     ,
       name: 'July'
-      val: '07'
+      val: 7
     ,
       name: 'August'
-      val: '08'
+      val: 8
     ,
       name: 'September'
-      val: '09'
+      val: 9
     ,
       name: 'October'
-      val: '10'
+      val: 10
     ,
       name: 'November'
-      val: '11'
+      val: 11
     ,
       name: 'December'
-      val: '12'
+      val: 12
   ]
   years: (->
     year = (new Date()).getFullYear()
