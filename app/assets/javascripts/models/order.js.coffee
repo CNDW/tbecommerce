@@ -57,7 +57,6 @@ App.Order = DS.Model.extend
     'address'
     'delivery'
     'payment'
-    'confirm'
     'complete'
   ]
   checkoutSteps:
@@ -65,8 +64,7 @@ App.Order = DS.Model.extend
     address: 1
     delivery: 2
     payment: 3
-    confirm: 4
-    complete: 5
+    complete: 4
 
   checkoutStep: (->
     @get('checkoutSteps')[@get('state')]
@@ -222,8 +220,7 @@ App.Order = DS.Model.extend
       return resolve() if self.get('state') is 'complete'
       payment_source = {}
       payment_source[payment_method_id] =
-        temporary_credit_card: card.get('token')
-        name: card.get('name')
+        gateway_payment_profile_id: card.get('token')
       $.ajax "api/checkouts/#{self.get('number')}",
         type: "PUT"
         dataType: 'json'

@@ -7,10 +7,6 @@ module Spree
       find_line_item_by_hash(hash).present?
     end
 
-    def confirmation_required?
-      false
-    end
-
     def quantity_of(hash)
       line_item = find_line_item_by_hash(hash)
       line_item ? line_item.quantity : 0
@@ -27,5 +23,10 @@ module Spree
       find_line_item_by_hash("pvi#{variant.id}")
     end
 
+    #not planning to ever store credit card information on server
+    # This works around it
+    def temporary_credit_card
+      true
+    end
   end
 end

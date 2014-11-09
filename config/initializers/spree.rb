@@ -9,6 +9,8 @@ Spree.config do |config|
   # Example:
   # Uncomment to override the default site name.
   # config.site_name = "Spree Demo Site"
+  # config.auto_capture = true
+  config.always_include_confirm_step = false
 end
 
 Spree::Auth::Config[:registration_step] = false
