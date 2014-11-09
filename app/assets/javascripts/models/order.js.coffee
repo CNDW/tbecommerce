@@ -218,10 +218,12 @@ App.Order = DS.Model.extend
 
   createPayment: (payment_method_id, card)->
     self = this
-    payment_source = {}
-    payment_source[payment_method_id] =
-      card: card.get('token')
     return new Promise (resolve, reject)->
+      return resolve() if self.get('state') is 'complete'
+      payment_source = {}
+      payment_source[payment_method_id] =
+        temporary_credit_card: card.get('token')
+        name: card.get('name')
       $.ajax "api/checkouts/#{self.get('number')}",
         type: "PUT"
         dataType: 'json'
@@ -234,15 +236,34 @@ App.Order = DS.Model.extend
             ]
           payment_source: payment_source
         success: (payload)->
-          $.each payload.payments, (payment, payments)->
+          $.each payload.payments, (index, payment)->
             payment.order_id = self.get('id')
-          self.store.pushPayload 'payment',
-            payment: payload.payments
+          self.store.pushPayload 'order',
+            order: payload
           resolve(payload)
         error: ->
           reject(arguments)
           debugger
 
+  completePayment: ->
+    self = this
+    return new Promise (resolve, reject)->
+      return resolve() if self.get('state') is not 'complete'
+      $.ajax "api/checkouts/#{self.get('number')}",
+        type: 'PUT'
+        dataType: 'json'
+        contentType: 'application/json'
+        data: JSON.stringify
+          order_token: self.get 'token'
+        success: (payload)->
+          self.store.pushPayload 'order',
+            order: payload
+          resolve(payload)
+        error: ->
+          reject(arguments)
+          debugger
+
+  # Not using, possible remove
   purchaseOrder: (card)->
     self = this
     return new Promise (resolve, reject)->

@@ -7,6 +7,10 @@ module Spree
       find_line_item_by_hash(hash).present?
     end
 
+    def confirmation_required?
+      false
+    end
+
     def quantity_of(hash)
       line_item = find_line_item_by_hash(hash)
       line_item ? line_item.quantity : 0

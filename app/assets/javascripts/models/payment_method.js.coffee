@@ -8,7 +8,7 @@ App.Payment = DS.Model.extend
   source_id: DS.attr 'string'
   amount: DS.attr 'string'
   display_amount: DS.attr 'string'
-  payment_method: DS.belongsTo 'payment_method'
+  payment_method: DS.belongsTo 'payment_method', async: true
   response_code: DS.attr 'string'
   state: DS.attr 'string'
   avs_response: DS.attr 'string'
