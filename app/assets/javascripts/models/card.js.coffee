@@ -1,7 +1,7 @@
 App.Card = DS.Model.extend
   number: DS.attr 'string'
-  exp_month: DS.attr 'string'
-  exp_year: DS.attr 'string'
+  exp_month: DS.attr 'number'
+  exp_year: DS.attr 'number'
   cvc: DS.attr 'string'
 
   object: DS.attr 'string'

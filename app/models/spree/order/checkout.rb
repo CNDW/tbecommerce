@@ -303,7 +303,6 @@ module Spree
           #
           def update_params_payment_source
             if @updating_params[:payment_source].present?
-              binding.pry
               source_params = @updating_params.delete(:payment_source)[@updating_params[:order][:payments_attributes].first[:payment_method_id].to_s]
 
               if source_params

@@ -220,26 +220,24 @@ App.Order = DS.Model.extend
     self = this
     payment_source = {}
     payment_source[payment_method_id] =
-      number: card.get('token')
-      month: card.get('exp_month')
-      year: card.get('exp_year')
-      verification_value: card.get('cvc')
-      name: card.get('name')
+      card: card.get('token')
     return new Promise (resolve, reject)->
       $.ajax "api/checkouts/#{self.get('number')}",
         type: "PUT"
-        datatype: 'json'
-        data:
+        dataType: 'json'
+        contentType: 'application/json'
+        data: JSON.stringify
           order_token: self.get('token')
           order:
-            payments_attributes:[
+            payments_attributes: [
               payment_method_id: payment_method_id
             ]
           payment_source: payment_source
         success: (payload)->
-          payload.order_id = self.get('id')
+          $.each payload.payments, (payment, payments)->
+            payment.order_id = self.get('id')
           self.store.pushPayload 'payment',
-            payment: payload
+            payment: payload.payments
           resolve(payload)
         error: ->
           reject(arguments)
