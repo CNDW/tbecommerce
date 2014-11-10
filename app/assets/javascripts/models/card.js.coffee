@@ -9,7 +9,7 @@ App.Card = DS.Model.extend
   funding: DS.attr 'string'
   token: DS.attr 'string', defaultValue: null
   hasToken: Em.computed.notEmpty 'token'
-  used: DS.attr 'boolean'
+  used: DS.attr 'boolean', defaultValue: false
 
   created: DS.attr 'number', defaultValue: null
   livemode: DS.attr 'boolean'

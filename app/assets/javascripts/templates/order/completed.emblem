@@ -1,0 +1,10 @@
+div.col-main-body.bottom-border
+  div.col-sm-6.right-border
+    each line_item in model.line_items
+      render 'line-item' line_item
+    div.row-line-item.text-medium
+      div.col-sm-7.line-item
+        div.checkout
+          span.upcase total
+          span.price {{model.display_total}}
+  div.col-sm-6

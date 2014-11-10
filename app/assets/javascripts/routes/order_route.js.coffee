@@ -1,3 +1,9 @@
+App.CompletedOrderMixin = Em.Mixin.create
+  completedReroute: (order)->
+    if order.get('checkoutStep') > 3
+      console.log order.get('checkoutStep')
+      this.transitionTo 'order.completed', order
+
 App.OrderRoute = Em.Route.extend
 
   actions:
@@ -9,9 +15,10 @@ App.OrderRoute = Em.Route.extend
       order.removeLineItem(lineItem).then ->
         self.refresh()
 
-App.OrderIndexRoute = Em.Route.extend
+App.OrderIndexRoute = Em.Route.extend App.CompletedOrderMixin,
 
   afterModel: (model)->
+    @completedReroute(model)
     if model.get('ship_address') == null
       model.set 'ship_address', @store.createRecord('ship_address')
       model.set 'bill_address', @store.createRecord('bill_address')
@@ -28,9 +35,10 @@ App.OrderIndexRoute = Em.Route.extend
         order.advanceState('delivery').then ->
           self.transitionTo 'order.shipping'
 
-App.OrderShippingRoute = Em.Route.extend
+App.OrderShippingRoute = Em.Route.extend App.CompletedOrderMixin,
 
   afterModel: (model, transition)->
+    @completedReroute(model)
     unless model.get('checkoutStep') > 1
       @transitionTo 'order.index', model
 
@@ -42,26 +50,39 @@ App.OrderShippingRoute = Em.Route.extend
         order.advanceState('payment').then ->
           self.transitionTo 'order.payment'
 
-App.OrderPaymentRoute = Em.Route.extend
+App.OrderPaymentRoute = Em.Route.extend App.CompletedOrderMixin,
 
   afterModel: (model, transition)->
+    @completedReroute(model)
     unless model.get('checkoutStep') > 2
       @transitionTo 'order.shipping', model
 
   setupController: (controller, model)->
     @store.find('card').then (data)=>
       controller.set 'model', model
-      controller.set 'cards', data
-      if Em.empty(data)
+      unused_cards = data.filterBy('used', false)
+      controller.set 'cards', unused_cards
+      if Em.empty(unused_cards)
         card = @store.createRecord 'card'
         controller.set 'currentCard', card
       else
-        controller.set 'currentCard', data.get('firstObject')
+        controller.set 'currentCard', unused_cards.get('firstObject')
 
   actions:
     submitOrder: (card, order)->
+      self = this
       card.createToken(order).then ->
         order.createPayment(order.get('payment_methods.firstObject.id'), card).then ->
           order.completePayment().then ->
-            debugger
+            card.set 'used', true
+            card.save()
+            self.transitionTo 'order.completed', order
+
+App.OrderCompletedRoute = Em.Route.extend
+
+  afterModel: (model, transition)->
+    unless model.get('checkoutStep') > 3
+      @transitionTo 'order.payment', model
+    cart = @modelFor('application')
+    cart.resetCart()
 

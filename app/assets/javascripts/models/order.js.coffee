@@ -51,20 +51,27 @@ App.Order = DS.Model.extend
   # #order info
 
   isEmpty: Em.computed.empty 'line_items'
+  isComplete: (->
+    @get('checkoutStep') > 3
+  ).property('checkoutStep')
 
   checkoutStates: [
     'cart'
     'address'
     'delivery'
     'payment'
+    'confirm'
     'complete'
+    'resumed'
   ]
   checkoutSteps:
     cart: 0
     address: 1
     delivery: 2
     payment: 3
-    complete: 4
+    confirm: 4
+    complete: 5
+    resumed: 6
 
   checkoutStep: (->
     @get('checkoutSteps')[@get('state')]

@@ -14,6 +14,9 @@ App.LineItem = DS.Model.extend
     console.log 'lineItem.didCreate'
   didLoad: ->
     @store.createItemByHash(@get 'custom_item_hash') unless @get('customItem')
+
+  order_isComplete: Em.computed.alias 'order.isComplete'
+
   # state: (->
   #   return 'precart' if @get('order') is null
   #   @get('order.state')

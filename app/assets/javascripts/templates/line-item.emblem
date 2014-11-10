@@ -2,7 +2,8 @@ div.row-line-item.bottom-border
   div.col-sm-7.line-item
     div.head
       span.capitalize {{model.name}}
-      button.btn.btn-black edit
+      unless model.order_isComplete
+        button.btn.btn-black edit
     div.col-sm-3
       render 'custom_item' model.customItem
   div.col-sm-2
@@ -10,4 +11,5 @@ div.row-line-item.bottom-border
   div.col-sm-2
     span.capitalize ${{model.total}}
   div.col-sm-1
-    span.icon-x.interactable click="removeFromCart model"
+    unless model.order_isComplete
+      span.icon-x.interactable click="removeFromCart model"

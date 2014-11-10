@@ -22,3 +22,4 @@ App.Router.map ->
   @resource 'order', path: '/order/:order_id', ->
     @route 'shipping'
     @route 'payment'
+    @route 'completed'

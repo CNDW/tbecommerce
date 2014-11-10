@@ -1,9 +1,7 @@
 App.CartRoute = Em.Route.extend
   model: ->
     carts = @store.all('cart').filterBy('isCreated', true)
-    cart = carts.shiftObject()
-    cart.get('order')
-
+    carts.get('firstObject.order')
 
   actions:
     removeFromCart: (lineItem)->

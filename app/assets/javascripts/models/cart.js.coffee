@@ -11,6 +11,12 @@ App.Cart = DS.Model.extend
 
   isUpdating: no
 
+  resetCart: ->
+    self = this
+    @set 'token', null
+    @createOrder()
+
+
   didCreate: ->
     unless @get('isCreated')
       @createOrder()
@@ -18,14 +24,23 @@ App.Cart = DS.Model.extend
   createOrder: ->
     return if @get 'isCreated'
     self = this
-    $.post 'api/orders', {}, (payload, status, xhr)->
-      self.setProperties
-        order_id: payload.id
-        token: payload.token
-        number: payload.number
-      self.store.pushPayload 'order',
-        order: payload
-      self.save()
+    return new Promise (resolve, reject)->
+      $.ajax 'api/orders',
+      type: 'POST'
+      dataType: 'json'
+      success: (payload, status, xhr)->
+        self.setProperties
+          order_id: payload.id
+          token: payload.token
+          number: payload.number
+        self.store.pushPayload 'order',
+          order: payload
+        order = self.store.getById 'order', self.get('order_id')
+        self.set 'order', order
+        self.save()
+        resolve(self)
+      error: ->
+        reject(arguments)
 
   fetchOrder: ->
     self = this
