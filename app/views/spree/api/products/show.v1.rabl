@@ -7,3 +7,7 @@ node(:display_price) { |p| p.display_price.to_s }
 child :images => :images do
   extends "spree/api/images/show"
 end
+
+child :product_mocks => :product_mocks do
+  extends "spree/api/product_mocks/show"
+end

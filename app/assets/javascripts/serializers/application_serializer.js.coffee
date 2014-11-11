@@ -11,6 +11,7 @@ App.ProductAdapter = DS.RESTAdapter.extend
 App.ProductSerializer = DS.ActiveModelSerializer.extend DS.EmbeddedRecordsMixin,
   attrs:
     images: embedded: 'always'
+    product_mocks: embedded: 'always'
 
 App.OptionTypeSerializer = DS.ActiveModelSerializer.extend DS.EmbeddedRecordsMixin,
   attrs:

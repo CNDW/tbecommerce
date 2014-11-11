@@ -1,0 +1,15 @@
+<div data-hook="admin_product_mock_form_fields">
+  <%= f.hidden_field :product_id, value: @product.id %>
+  <div class="four columns alpha">
+    <div data-hook="file" class="field">
+      <%= f.label :product_mock_svg, Spree.t(:filename) %><br>
+      <%= f.file_field :product_mock_svg %>
+    </div>
+  </div>
+  <div data-hook="name" class="field omega five columns">
+    <%= f.label :name, Spree.t(:name) %><br>
+    <%= f.text_field :name, class: 'fullwidth' %>
+  </div>
+</div>
+
+<div class="clear"></div>

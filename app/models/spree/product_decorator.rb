@@ -2,6 +2,7 @@ module Spree
 	Product.class_eval do
     has_many :product_color_types, dependent: :destroy, inverse_of: :product
     has_many :color_types, through: :product_color_types
+    has_many :product_mocks, dependent: :destroy
 
     attr_accessor :product_values_hash
 
@@ -12,5 +13,5 @@ module Spree
     def master_variant_id
       self.master.id
     end
-	end
+  end
 end

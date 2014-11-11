@@ -15,6 +15,9 @@
       <%= content_tag :li, :class => ('active' if current == 'Images') do %>
         <%= link_to_with_icon 'picture-o', Spree.t(:images), admin_product_images_url(@product) %>
       <% end if can?(:admin, Spree::Image) %>
+      <%= content_tag :li, :class => ('active' if current == 'Product_Mocks') do %>
+        <%= link_to_with_icon 'cube', Spree.t(:mocks), admin_product_product_mocks_url(@product) %>
+      <% end if can?(:admin, Spree::ProductMock) %>
       <%= content_tag :li, :class => ('active' if current == 'Variants') do %>
         <%= link_to_with_icon 'th-large', Spree.t(:variants),  admin_product_variants_url(@product) %>
       <% end if can?(:admin, Spree::Variant) %>

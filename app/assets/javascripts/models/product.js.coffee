@@ -28,3 +28,4 @@ App.Product = DS.Model.extend
   optionTypes: DS.hasMany 'option_type'
   colorTypes: DS.hasMany 'color_type'
   shippingCategory: DS.belongsTo 'shipping_category'
+  product_mocks: DS.hasMany 'product_mock'

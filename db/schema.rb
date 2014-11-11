@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141031103901) do
+ActiveRecord::Schema.define(version: 20141111114050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -426,6 +426,21 @@ ActiveRecord::Schema.define(version: 20141031103901) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "spree_product_mocks", force: true do |t|
+    t.string   "name"
+    t.string   "presentation"
+    t.integer  "position",                      default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "product_id"
+    t.string   "product_mock_svg_file_name"
+    t.string   "product_mock_svg_content_type"
+    t.integer  "product_mock_svg_file_size"
+    t.datetime "product_mock_svg_updated_at"
+  end
+
+  add_index "spree_product_mocks", ["product_id", "id"], name: "index_product_id_on_product_mock_and_product_mock_id", using: :btree
 
   create_table "spree_product_option_types", force: true do |t|
     t.integer  "position"

@@ -21,7 +21,7 @@ module Spree::Api
     end
 
     def product_includes
-      [ :properties, :option_types, :color_types, :taxons, master: variants_associations ]
+      [ :properties, :option_types, :color_types, :taxons, :product_mocks, master: variants_associations ]
     end
 
     def variants_associations
