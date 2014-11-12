@@ -59,6 +59,9 @@ App.CustomItem = DS.Model.extend
   product: (->
     @store.getById('product', @get('product_id')) if @get 'product_id'
   ).property('product_id')
+  product_mocks: (->
+    @get('product.product_mocks')
+  ).property('product_id')
 
   properties: (->
     @get 'product.properties'
@@ -99,7 +102,7 @@ App.CustomItem = DS.Model.extend
     @store.all 'color_value'
   ).property()
   patterns: Em.computed.map 'availableColors', (color)->
-    {url: color.get('small_url'), name: "#{color.get('name')}-pattern"}
+    "<pattern id='#{color.get('name')}-pattern' patternUnits='userSpaceOnUse' style='overflow:visible;' width='200px' height='200px'> <image xlink:href=#{color.get('small_url')} x='0' y='0' width='200px' height='200px' /> </pattern>"
 
   removeLineItem: ->
     @set('lineItem', null)

@@ -5,7 +5,7 @@ div.row-line-item.bottom-border
       unless model.order_isComplete
         button.btn.btn-black edit
     div.col-sm-3
-      render 'custom_item' model.customItem
+      render 'custom-item' model.customItem
   div.col-sm-2
     span.capitalize {{model.quantity}}
   div.col-sm-2
