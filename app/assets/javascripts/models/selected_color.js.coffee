@@ -8,6 +8,10 @@ App.SelectedColor = DS.Model.extend
 
   isSelected: Em.computed.notEmpty 'colorValue_id'
 
+  line_color: (->
+    @get('colorType.line_color')
+  ).property('colorType_id')
+
   #- Design pattern for DS.hasOne pointing to resources not saved in localStorage
   colorType_id: DS.attr 'number', defaultValue: null
   colorType: (->

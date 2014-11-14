@@ -14,6 +14,13 @@
       <%= f.error_message_on :presentation %>
     <% end %>
   </div>
+  <div class="alpha sixteen columns">
+    <%= f.field_container :line_color do %>
+      <%= f.label :line_color, 'Is a line color' %> <br />
+      <%= f.check_box :line_color %>
+      <%= f.error_message_on :line_color %>
+    <% end %>
+  </div>
 
 </div>
 

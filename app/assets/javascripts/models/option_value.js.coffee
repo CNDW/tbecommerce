@@ -1,4 +1,4 @@
-App.ProductOptionValue = DS.Model.extend
+App.ProductValueMixin = Em.Mixin.create
   name: DS.attr 'string'
   price: DS.attr 'number', {defaultValue: 0}
   description: DS.attr 'string'
@@ -8,6 +8,6 @@ App.ProductOptionValue = DS.Model.extend
   large_url: DS.attr 'string'
   presentation: DS.attr 'string'
 
-App.OptionValue = App.ProductOptionValue.extend()
+App.OptionValue = DS.Model.extend App.ProductValueMixin
 
-App.ColorValue = App.ProductOptionValue.extend()
+App.ColorValue = DS.Model.extend App.ProductValueMixin

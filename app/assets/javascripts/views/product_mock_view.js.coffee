@@ -10,7 +10,10 @@ App.ActiveMockView = Em.View.extend
   renderColors: ->
     colors = @get('controller.model.selectedColors')
     colors.forEach (color)->
-      @$(".#{color.get('selector')}").css('fill', "url(##{color.get('name')}-pattern)")
+      if color.get('line_color')
+        @$(".#{color.get('selector')}").css('stroke', "url(##{color.get('name')}-pattern)")
+      else
+        @$(".#{color.get('selector')}").css('fill', "url(##{color.get('name')}-pattern)")
     , this
 
   setPatterns: ->
