@@ -48,8 +48,6 @@ App.CustomRoute = Em.Route.extend
     else
       controller.set 'selectedColors', model.get('selectedColors')
       controller.set 'options', model.get('customOptions')
-      controller.setFills()
-
 
   actions:
     error: ->
@@ -68,6 +66,5 @@ App.CustomRoute = Em.Route.extend
     customItem = @modelFor('custom')
     @controller.set 'selectedColors', customItem.get('selectedColors')
     @controller.set 'options', customItem.get('customOptions')
-    @controller.setFills()
 
 

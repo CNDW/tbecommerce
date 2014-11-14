@@ -1,6 +1,6 @@
 div.col-sm-11.custom-field-section
   toggle-menu classNames='custom-selection-header'
-    if model.isUnselected
+    unless isSelected
       span.custom-selection-icon.empty
     else
       img.custom-selection-icon{bind-attr src=model.swatch}

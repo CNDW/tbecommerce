@@ -1,4 +1,4 @@
-App.CustomItemController = Em.ObjectController.extend
+App.CustomItemController = Em.ObjectController.extend Ember.Evented,
   needs: ['custom']
   featuredItems: Em.computed.alias 'controllers.custom.featuredItems'
 
@@ -20,4 +20,8 @@ App.CustomItemController = Em.ObjectController.extend
   active_mock: (->
     @get('mocks.firstObject')
   ).property('mocks')
+
+  renderColors: (->
+    Em.run.scheduleOnce 'afterRender', this, this.trigger, 'colorsDidChange'
+  ).observes('model.selectedColors.@each.colorValue_id')
     # ".primary{fill:url(#red-pattern)}"

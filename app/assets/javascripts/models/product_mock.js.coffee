@@ -6,17 +6,18 @@ App.ProductMock = DS.Model.extend
 
   svg_data: DS.attr 'string'
 
-  raw_svg: (->
+  getSvg: ->
     svg_data = @get('svg_data')
-    return svg_data if svg_data != undefined
     self = this
     new Promise (resolve, reject)->
-      $.ajax
-        dataType: 'text'
-        url: self.get('svg_url')
-        success: (data)->
-          self.set 'svg_data', data
-          resolve(data)
-        error: ->
-          reject()
-  ).property()
+      if svg_data != undefined
+        resolve(svg_data)
+      else
+        $.ajax
+          dataType: 'text'
+          url: self.get('svg_url')
+          success: (data)->
+            self.set 'svg_data', data
+            resolve(data)
+          error: ->
+            reject(arguments)

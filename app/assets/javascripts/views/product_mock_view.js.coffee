@@ -2,8 +2,10 @@ App.ActiveMockView = Em.View.extend
   layout: Em.Handlebars.compile "<div class='active-mock'> </div>"
   didInsertElement: ->
     @insertSVG()
-    @setPatterns()
-    @renderColors()
+    @get('controller').on('colorsDidChange', this, this.renderColors)
+
+  willClearRender: ->
+    @get('controller').on('colorsDidChange', this, this.renderColors)
 
   renderColors: ->
     colors = @get('controller.model.selectedColors')
@@ -16,5 +18,9 @@ App.ActiveMockView = Em.View.extend
     @$('defs').html(patterns)
 
   insertSVG: ->
-    svg = @get('controller.model.svg_data')
-    @$('.active-mock').html(svg)
+    self = this
+    mock = @get('controller.active_mock')
+    mock.getSvg().then (svg)->
+      self.$('.active-mock').html(svg)
+      self.setPatterns()
+      self.renderColors()

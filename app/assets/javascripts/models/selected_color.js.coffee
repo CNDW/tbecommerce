@@ -5,11 +5,8 @@ App.SelectedColor = DS.Model.extend
   selector: DS.attr 'string'
   colors: Em.computed.alias 'colorType.colorValues'
   customItem: DS.belongsTo 'custom_item'
-  selected: (->
-    @get('colorValue_id') != null
-  ).property('colorValue_id')
 
-  isUnselected: Em.computed.empty 'colorValue_id'
+  isSelected: Em.computed.notEmpty 'colorValue_id'
 
   #- Design pattern for DS.hasOne pointing to resources not saved in localStorage
   colorType_id: DS.attr 'number', defaultValue: null
@@ -31,4 +28,3 @@ App.SelectedColor = DS.Model.extend
     @set 'swatch', colorValue.get('small_url')
     @set 'selector', @get('colorType.selector')
     @save()
-

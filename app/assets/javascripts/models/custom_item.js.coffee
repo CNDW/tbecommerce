@@ -46,10 +46,10 @@ App.CustomItem = DS.Model.extend
     color_length = selectedColors.get 'length'
     if (color_length > 0)
       selectedColors.forEach (color)->
-        color_length -= 1 if color.get('selected')
+        color_length -= 1 if color.get('isSelected')
       step += 1 if color_length is 0
     return step
-  ).property('product_id', 'selectedColors.@each.selected')
+  ).property('product_id', 'selectedColors.@each.isSelected')
 
   basePrice: (->
     @recalculatePrice()

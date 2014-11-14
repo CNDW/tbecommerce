@@ -13,17 +13,6 @@ App.CustomController = Em.ObjectController.extend
   isStepTwo: Em.computed.equal 'builderStep', 2
   isStepThree: Em.computed.equal 'builderStep', 3
   isStepFour: Em.computed.equal 'builderStep', 4
-  fills: Em.A()
-
-  setFills: ()->
-    fills = @get('selectedColors').map (color)->
-      if not color.get('isUnselected')
-        name = color.get 'name'
-        selector = color.get 'selector'
-        x = ".#{selector}{fill:url(##{name}-pattern)}"
-      else
-        ""
-    @set 'fills', fills
 
   actions:
     transitionStep: (targetStep)->
@@ -35,7 +24,6 @@ App.CustomController = Em.ObjectController.extend
 
     selectColor: (color, selection)->
       selection.setColor(color)
-      @setFills()
       return false
 
     clickOption: (selection)->
