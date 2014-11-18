@@ -1,3 +1,1 @@
-App.CustomItemRoute = Em.Route.extend()
-
-App.CustomIndexRoute = App.CustomItemRoute.extend()
+App.CustomIndexRoute = Em.Route.extend()

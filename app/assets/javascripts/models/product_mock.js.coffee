@@ -9,7 +9,7 @@ App.ProductMock = DS.Model.extend
   getSvg: ->
     svg_data = @get('svg_data')
     self = this
-    new Promise (resolve, reject)->
+    new Em.RSVP.Promise (resolve, reject)->
       if svg_data != undefined
         resolve(svg_data)
       else

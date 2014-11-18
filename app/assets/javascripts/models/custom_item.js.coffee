@@ -24,7 +24,6 @@ App.CustomItem = DS.Model.extend
     'extras': 3
     'complete': 4
 
-
   noProduct: Em.computed.empty 'product_id'
   noSelectedColors: Em.computed.empty 'selectedColors'
   colorOptions: Em.computed.alias 'product.colorTypes'
@@ -122,6 +121,7 @@ App.CustomItem = DS.Model.extend
     @populateOptionRelationship(product)
 
   reloadRelationships: ->
+    console.log('reloadRelationships')
     self = this
     [@get('selectedColors'), @get('customOptions')].forEach (relationship)->
       items = relationship.content.toArray()

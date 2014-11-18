@@ -8,7 +8,6 @@
     serializeHasMany: function(record, json, relationship) {
       var key = relationship.key;
       var payloadKey = this.keyForRelationship ? this.keyForRelationship(key, "hasMany") : key;
-
       var relationshipType = record.constructor.determineRelationshipType(relationship);
 
       if (relationshipType === 'manyToNone' ||
@@ -97,7 +96,6 @@
     /**
       This is the main entry point into finding records. The first parameter to
       this method is the model's name as a string.
-
       @method find
       @param {DS.Model} type
       @param {Object|String|Integer|null} id

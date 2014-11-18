@@ -27,7 +27,7 @@ App.Card = DS.Model.extend
 
   createToken: (order)->
     self = this
-    return new Promise (resolve, reject)->
+    return new Em.RSVP.Promise (resolve, reject)->
       if self.get 'hasToken'
         resolve()
       else
@@ -72,7 +72,7 @@ App.Card = DS.Model.extend
 
   validateCardAttrs: ->
     self = this
-    return new Promise (resolve, reject)->
+    return new Em.RSVP.Promise (resolve, reject)->
       validCard = Stripe.card.validateCardNumber(self.get('number'))
       validCVC = Stripe.card.validateCVC(self.get('cvc'))
       if (validCard && validCVC)

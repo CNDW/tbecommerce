@@ -81,7 +81,7 @@ App.Order = DS.Model.extend
     targetStep = @get('checkoutSteps')[targetState]
     currentStep = @get('checkoutStep')
     self = this
-    return new Promise (resolve, reject)->
+    return new Em.RSVP.Promise (resolve, reject)->
       if targetStep == currentStep + 1
         $.ajax "api/checkouts/#{self.get('number')}/next",
           type: "PUT"
@@ -102,7 +102,7 @@ App.Order = DS.Model.extend
 
   createLineItem: (item)->
     self = this
-    return new Promise (resolve, reject)->
+    return new Em.RSVP.Promise (resolve, reject)->
       $.ajax "api/orders/#{self.get('number')}/line_items",
         type: "POST"
         datatype: 'json'
@@ -127,7 +127,7 @@ App.Order = DS.Model.extend
   removeLineItem: (line_item)->
     self = this
     custom_item = line_item.get('customItem')
-    return new Promise (resolve, reject)->
+    return new Em.RSVP.Promise (resolve, reject)->
       $.ajax "api/orders/#{self.get('number')}/line_items/#{line_item.get('id')}",
         type: 'DELETE'
         datatype: 'json'
@@ -148,7 +148,7 @@ App.Order = DS.Model.extend
 
   updateAddresses: (alertOnFailure)->
     self = this
-    return new Promise (resolve, reject)->
+    return new Em.RSVP.Promise (resolve, reject)->
       $.ajax "api/checkouts/#{self.get('number')}",
         type: "PUT"
         datatype: 'json'
@@ -180,7 +180,7 @@ App.Order = DS.Model.extend
 
   updateShipments: (alertOnFailure)->
     self = this
-    return new Promise (resolve, reject)->
+    return new Em.RSVP.Promise (resolve, reject)->
       $.ajax "api/checkouts/#{self.get('number')}",
         type: "PUT"
         datatype: 'json'
@@ -210,7 +210,7 @@ App.Order = DS.Model.extend
 
   getPaymentAttributes: ->
     self = this
-    return new Promise (resolve, reject)->
+    return new Em.RSVP.Promise (resolve, reject)->
       $.ajax "api/orders/#{self.get('number')}/payments/new",
         type: "GET"
         datatype: 'json'
@@ -223,7 +223,7 @@ App.Order = DS.Model.extend
 
   createPayment: (payment_method_id, card)->
     self = this
-    return new Promise (resolve, reject)->
+    return new Em.RSVP.Promise (resolve, reject)->
       return resolve() if self.get('state') is 'complete'
       payment_source = {}
       payment_source[payment_method_id] =
@@ -251,7 +251,7 @@ App.Order = DS.Model.extend
 
   completePayment: ->
     self = this
-    return new Promise (resolve, reject)->
+    return new Em.RSVP.Promise (resolve, reject)->
       return resolve() if self.get('state') is not 'complete'
       $.ajax "api/checkouts/#{self.get('number')}",
         type: 'PUT'
@@ -270,7 +270,7 @@ App.Order = DS.Model.extend
   # Not using, possible remove
   purchaseOrder: (card)->
     self = this
-    return new Promise (resolve, reject)->
+    return new Em.RSVP.Promise (resolve, reject)->
       $.ajax "api/orders/#{self.get('number')}/payments/#{self.get('payment_id')}/purchase",
         type: "PUT"
         datatype: 'json'

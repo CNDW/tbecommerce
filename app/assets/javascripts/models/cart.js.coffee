@@ -24,7 +24,7 @@ App.Cart = DS.Model.extend
   createOrder: ->
     return if @get 'isCreated'
     self = this
-    return new Promise (resolve, reject)->
+    return new Em.RSVP.Promise (resolve, reject)->
       $.ajax 'api/orders',
       type: 'POST'
       dataType: 'json'
@@ -44,7 +44,7 @@ App.Cart = DS.Model.extend
 
   fetchOrder: ->
     self = this
-    return new Promise (resolve, reject)->
+    return new Em.RSVP.Promise (resolve, reject)->
       self.updateOrder().always ()->
         resolve(self.get('order'))
 
