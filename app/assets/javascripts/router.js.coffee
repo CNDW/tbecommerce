@@ -12,7 +12,7 @@ App.Router.map ->
   @route 'bag'
   @route 'custom_shop'
   @resource 'custom', path: '/custom/:custom_item_id', ->
-    @route 'items'
+    @route 'product', path: '/item'
     @route 'colors'
     @route 'features'
     @route 'extras'

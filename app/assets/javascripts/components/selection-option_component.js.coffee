@@ -2,7 +2,7 @@ App.SelectionOptionComponent = Em.Component.extend
   classNames: 'selection-option'
   classNameBindings: 'isSelected:active'
   isSelected: (->
-    unless (@get('custom_item.noProduct'))
+    if (@get('custom_item.hasProduct'))
       return (@get('custom_item.product_id').toString() is @get('item.id').toString())
     else
       return no

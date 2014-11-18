@@ -11,11 +11,4 @@ div.custom-shop-navbar
         a Extras
 
 div.row
-  if isStepOne
-    partial 'custom/index'
-  if isStepTwo
-    partial 'custom/colors'
-  if isStepThree
-    partial 'custom/features'
-  if isStepFour
-    partial 'custom/extras'
+  outlet

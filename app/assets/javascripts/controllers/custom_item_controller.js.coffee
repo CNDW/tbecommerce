@@ -24,4 +24,9 @@ App.CustomItemController = Em.ObjectController.extend Ember.Evented,
   renderColors: (->
     Em.run.scheduleOnce 'afterRender', this, this.trigger, 'colorsDidChange'
   ).observes('model.selectedColors.@each.colorValue_id')
+
+  renderMock: (->
+    console.log('renderMock')
+    Em.run.scheduleOnce 'actions', this, @trigger, 'productDidChange'
+  ).observes('model.product_mocks')
     # ".primary{fill:url(#red-pattern)}"

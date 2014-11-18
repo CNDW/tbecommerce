@@ -1,4 +1,4 @@
-unless noProduct
+if hasProduct
   view 'active_mock'
 
 else

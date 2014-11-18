@@ -24,7 +24,7 @@ App.CustomItem = DS.Model.extend
     'extras': 3
     'complete': 4
 
-  noProduct: Em.computed.empty 'product_id'
+  hasProduct: Em.computed.notEmpty 'product_id'
   noSelectedColors: Em.computed.empty 'selectedColors'
   colorOptions: Em.computed.alias 'product.colorTypes'
 
@@ -40,7 +40,7 @@ App.CustomItem = DS.Model.extend
 
   completedStep: (->
     step = 0
-    step += 1 unless @get('noProduct')
+    step += 1 if @get('hasProduct')
     selectedColors = @get 'selectedColors'
     color_length = selectedColors.get 'length'
     if (color_length > 0)
@@ -127,8 +127,8 @@ App.CustomItem = DS.Model.extend
       items = relationship.content.toArray()
       items.forEach (record)->
         relationship.removeRecord(record)
-        record.unloadRecord()
         record.destroy()
+        record.unloadRecord()
       relationship.save()
     @save()
     @loadOptions()

@@ -1,0 +1,1 @@
+App.CustomColorsRoute = Em.Route.extend()

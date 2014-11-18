@@ -1,7 +1,6 @@
 App.CompletedOrderMixin = Em.Mixin.create
   completedReroute: (order)->
     if order.get('checkoutStep') > 3
-      console.log order.get('checkoutStep')
       this.transitionTo 'order.completed', order
 
 App.OrderRoute = Em.Route.extend
