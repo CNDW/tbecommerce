@@ -7,7 +7,14 @@ App.CustomController = Em.ObjectController.extend
   featuredItems: Em.computed 'products', ->
     @get('products').filterBy 'featured', true
 
-  selectedColors: Em.computed.alias 'model.selectedColors'
+  mocks: Em.computed.alias 'model.product_mocks'
+
+  mock_index: 0
+
+  active_mock: (->
+    @get('mocks').objectAt(@get('mock_index'))
+  ).property('mocks', 'mock_index')
+
 
   builderStep: 1
   isStepOne: Em.computed.equal 'builderStep', 1

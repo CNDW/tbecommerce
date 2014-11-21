@@ -1,7 +1,7 @@
 module Spree::Admin
   class ProductMocksController < ResourceController
     before_action :load_data
-
+    before_action :update_positions, only: [:update]
     # create.before :set_viewable
     # update.before :set_viewable
 

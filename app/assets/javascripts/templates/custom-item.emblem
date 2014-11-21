@@ -1,5 +1,14 @@
 if hasProduct
-  view 'active_mock'
+  if hasManyMocks
+    div.col-xs-2
+      each mock in mocks
+        div.col-xs-12.no-padding.interactable click='setActiveMock mock'
+          product-mock custom_item=model mock=mock
+    div.col-xs-10
+      product-mock custom_item=model mock=active_mock
+  else
+    div.col-xs-12
+      product-mock custom_item=model mock=active_mock
 
 else
   partial 'custom-index'

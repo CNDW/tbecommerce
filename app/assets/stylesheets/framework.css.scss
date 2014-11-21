@@ -189,6 +189,9 @@ html, body {
   &.active, &:hover, &:active, &:focus {
     background-color: $line-color-light;
   }
+  .product-mock:hover {
+    margin: -5px;
+  }
 }
 /*============================================
 Parallax

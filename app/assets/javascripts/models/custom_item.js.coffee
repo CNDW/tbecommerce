@@ -131,6 +131,7 @@ App.CustomItem = DS.Model.extend
     @loadOptions()
 
   populateColorRelationship: (product)->
+    console.log 'populateColorRelationship'
     self = this
     selectedColors = @get('selectedColors')
     colorTypes = product.get('colorTypes')

@@ -7,7 +7,6 @@ App.ApplicationRoute = Em.Route.extend
         customItems: store.find 'custom_item'
         carts: store.find 'cart'
       .then (data)->
-        debugger
         carts = data.carts.filterBy('isCreated', true)
         if (carts.get('length') == 0)
           cart = store.createRecord 'cart',
@@ -18,7 +17,6 @@ App.ApplicationRoute = Em.Route.extend
           cart.fetchOrder().then ->
             return cart
       , ->
-        debugger
         localStorage.removeItem('TrashBagsCustomItem')
         localStorage.removeItem('TrashBagsCard')
         localStorage.removeItem('TrashBagsCart')

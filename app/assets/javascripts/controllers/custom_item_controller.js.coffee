@@ -17,16 +17,18 @@ App.CustomItemController = Em.ObjectController.extend Ember.Evented,
 
   mocks: Em.computed.alias 'model.product_mocks'
 
+  hasManyMocks: Em.computed.gt 'mocks.length', 1
+
+  mock_index: 0
+
   active_mock: (->
-    @get('mocks.firstObject')
-  ).property('mocks')
+    @get('mocks').findBy('position', @get('mock_index'))
+  ).property('mock_index', 'mocks.firstObject')
 
-  renderColors: (->
-    Em.run.scheduleOnce 'afterRender', this, this.trigger, 'colorsDidChange'
-  ).observes('model.selectedColors.@each.colorValue_id')
+  setupMocks: (->
+    @set 'mock_index', 0
+  ).observes('mocks')
 
-  renderMock: (->
-    console.log('renderMock')
-    Em.run.scheduleOnce 'actions', this, @trigger, 'productDidChange'
-  ).observes('model.product_mocks')
-    # ".primary{fill:url(#red-pattern)}"
+  actions:
+    setActiveMock: (mock)->
+      @set('mock_index', mock.get('position'))
