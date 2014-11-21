@@ -127,9 +127,6 @@ App.CustomItem = DS.Model.extend
       items = relationship.content.toArray()
       items.forEach (record)->
         relationship.removeRecord(record)
-        record.destroy()
-        record.unloadRecord()
-      relationship.save()
     @save()
     @loadOptions()
 
@@ -138,11 +135,10 @@ App.CustomItem = DS.Model.extend
     selectedColors = @get('selectedColors')
     colorTypes = product.get('colorTypes')
     colorTypes.forEach (colorType)->
-      record = self.store.createRecord 'selectedColor',
+      record = self.store.createRecord 'selected_color',
         colorType_id: colorType.get 'id'
         customItem: self
       selectedColors.addRecord(record)
-      record.save()
     @save()
 
   populateOptionRelationship: (product)->
@@ -156,5 +152,4 @@ App.CustomItem = DS.Model.extend
           customItem: self
           price: optionValue.get 'price'
         customOptions.addRecord(record)
-        record.save()
     @save()

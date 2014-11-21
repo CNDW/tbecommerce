@@ -8,8 +8,9 @@ App.CustomOption = DS.Model.extend
   presentation: Em.computed.alias 'optionValue.presentation'
 
   saveOnChange: (->
-    @get('customItem').recalculatePrice()
-    @save()
+    custom_item = @get('customItem')
+    custom_item.recalculatePrice()
+    custom_item.save()
   ).observes('selected')
 
   optionValue_id: DS.attr 'number'

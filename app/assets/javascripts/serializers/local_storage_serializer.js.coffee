@@ -1,17 +1,18 @@
-App.LSAdapterMixin = Em.Mixin.create
-  namespace: 'TrashBags'
+App.CustomItemAdapter = DS.LSAdapter.extend
+  namespace: 'TrashBagsCustomItem'
+App.CustomItemSerializer = DS.LSSerializer.extend DS.EmbeddedRecordsMixin,
+  attrs:
+    selectedColors: embedded: 'always'
+    customOptions: embedded: 'always'
 
-App.CustomItemAdapter = DS.LSAdapter.extend App.LSAdapterMixin
-App.CustomItemSerializer = DS.LSSerializer.extend()
+App.SelectedColorAdapter = DS.LSAdapter.extend()
 
-App.SelectedColorAdapter = DS.LSAdapter.extend App.LSAdapterMixin
-App.SelectedColorSerializer = DS.LSSerializer.extend()
+App.CustomOptionAdapter = DS.LSAdapter.extend()
 
-App.CustomOptionAdapter = DS.LSAdapter.extend App.LSAdapterMixin
-App.CustomOptionSerializer = DS.LSSerializer.extend()
-
-App.CartAdapter = DS.LSAdapter.extend App.LSAdapterMixin
+App.CartAdapter = DS.LSAdapter.extend
+  namespace: 'TrashBagsCart'
 App.CartSerializer = DS.LSSerializer.extend()
 
-App.CardAdapter = DS.LSAdapter.extend App.LSAdapterMixin
+App.CardAdapter = DS.LSAdapter.extend
+  namespace: 'TrashBagsCard'
 App.CardSerializer = DS.LSSerializer.extend()

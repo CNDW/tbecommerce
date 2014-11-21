@@ -7,19 +7,13 @@ App.CustomController = Em.ObjectController.extend
   featuredItems: Em.computed 'products', ->
     @get('products').filterBy 'featured', true
 
-
   selectedColors: Em.computed.alias 'model.selectedColors'
 
-
-  colors: Em.A()
-  options: Em.computed.alias 'model.customOptions'
   builderStep: 1
   isStepOne: Em.computed.equal 'builderStep', 1
   isStepTwo: Em.computed.equal 'builderStep', 2
   isStepThree: Em.computed.equal 'builderStep', 3
   isStepFour: Em.computed.equal 'builderStep', 4
-
-
 
   actions:
     transitionStep: (targetStep)->
@@ -27,12 +21,4 @@ App.CustomController = Em.ObjectController.extend
         return
       console.log "tansitionStep: #{targetStep}"
       @set 'builderStep', targetStep
-      return false
-
-    selectColor: (color, selection)->
-      selection.setColor(color)
-      return false
-
-    clickOption: (selection)->
-      selection.toggleProperty('selected')
       return false

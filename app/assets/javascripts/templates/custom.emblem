@@ -1,13 +1,13 @@
 div.custom-shop-navbar
   div.col-sm-10.col-sm-offset-1
     ul.custom-shop-navs
-      li class=isStepOne:active click="transitionStep 1"
+      link-to 'custom.product' model tagName='li'
         a Item
-      li class=isStepTwo:active click="transitionStep 2"
-        a Colors & Fit
-      li class=isStepThree:active click="transitionStep 3"
+      link-to 'custom.colors' model tagName='li'
+        a Colors
+      link-to 'custom.features' model tagName='li'
         a Features
-      li class=isStepFour:active click="transitionStep 4"
+      link-to 'custom.extras' model tagName='li'
         a Extras
 
 div.row

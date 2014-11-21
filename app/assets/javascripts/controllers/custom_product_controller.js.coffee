@@ -19,3 +19,8 @@ App.CustomProductController = Em.ObjectController.extend
           sum + add
         , 0) / items.length)
       .sortBy 'average_price'
+
+  # actions:
+  #   clickOption: (selection)->
+  #     selection.toggleProperty('selected')
+  #     return false

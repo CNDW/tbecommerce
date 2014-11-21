@@ -31,4 +31,4 @@ App.SelectedColor = DS.Model.extend
     @set 'name', colorValue.get('name')
     @set 'swatch', colorValue.get('small_url')
     @set 'selector', @get('colorType.selector')
-    @save()
+    @get('customItem').save()

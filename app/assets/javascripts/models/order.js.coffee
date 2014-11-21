@@ -284,20 +284,3 @@ App.Order = DS.Model.extend
         error: ->
           debugger
           reject(arguments)
-# Old ---------------------------
-
-
-
-
-#=====================================================
-# API communcation
-#=====================================================
-
-
-  serializeLineItems: ->
-    payload = {}
-
-
-
-
-

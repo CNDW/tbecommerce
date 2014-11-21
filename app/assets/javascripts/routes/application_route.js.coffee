@@ -4,11 +4,10 @@ App.ApplicationRoute = Em.Route.extend
     store = @store
     model = @store.find('product').then ->
       Em.RSVP.hash
-        customOptions: store.find 'custom_option'
         customItems: store.find 'custom_item'
-        selectedColors: store.find 'selected_color'
         carts: store.find 'cart'
       .then (data)->
+        debugger
         carts = data.carts.filterBy('isCreated', true)
         if (carts.get('length') == 0)
           cart = store.createRecord 'cart',
@@ -19,7 +18,10 @@ App.ApplicationRoute = Em.Route.extend
           cart.fetchOrder().then ->
             return cart
       , ->
-        localStorage.removeItem('TrashBags')
+        debugger
+        localStorage.removeItem('TrashBagsCustomItem')
+        localStorage.removeItem('TrashBagsCard')
+        localStorage.removeItem('TrashBagsCart')
         self.refresh()
 
  #depricated
