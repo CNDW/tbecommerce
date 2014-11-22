@@ -1,17 +1,18 @@
 module Spree::Admin
   class ProductMocksController < ResourceController
     before_action :load_data
-    before_action :update_positions, only: [:update]
     # create.before :set_viewable
     # update.before :set_viewable
 
     private
 
       def location_after_destroy
+        @product.update_mock_positions()
         admin_product_product_mocks_url(@product)
       end
 
       def location_after_save
+        @product.update_mock_positions()
         admin_product_product_mocks_url(@product)
       end
 

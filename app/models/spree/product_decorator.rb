@@ -13,5 +13,13 @@ module Spree
     def master_variant_id
       self.master.id
     end
+
+    def update_mock_positions
+      index = 0
+      self.product_mocks.order(:position).each do |mock|
+        mock.update_attributes(:position => index)
+        index = index + 1
+      end
+    end
   end
 end
