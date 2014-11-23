@@ -96,13 +96,6 @@ App.CustomItem = DS.Model.extend
       "i#{option.get('optionValue_id')}"
     "ov#{segment.join('')}"
 
-  #- Properties for mapping SVG data
-  availableColors: (->
-    @store.all 'color_value'
-  ).property()
-  patterns: Em.computed.map 'availableColors', (color)->
-    "<pattern id='#{color.get('name')}-pattern' patternUnits='userSpaceOnUse' style='overflow:visible;' width='200px' height='200px'> <image xlink:href=#{color.get('small_url')} x='0' y='0' width='200px' height='200px' /> </pattern>"
-
   removeLineItem: ->
     @set('lineItem', null)
     @save()

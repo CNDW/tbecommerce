@@ -28,7 +28,6 @@ App.ProductMockComponent = Em.Component.extend
     mock = @get('mock')
     mock.getSvg().then (svg)->
       self.$('.product-mock').html(svg)
-      self.setPatterns()
       self.colorChange()
 
   productChange: (->
