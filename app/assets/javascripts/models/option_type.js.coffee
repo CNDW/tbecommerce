@@ -1,7 +1,7 @@
 App.ProductOptionMixin = Em.Mixin.create
   name: DS.attr 'string'
   presentation: DS.attr 'string'
-  position: DS.attr 'number'
+  position: DS.attr 'number', defaultValue: 0
 
 App.OptionType = DS.Model.extend App.ProductOptionMixin,
   optionValues: DS.hasMany 'option_value'

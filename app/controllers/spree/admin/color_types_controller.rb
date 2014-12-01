@@ -4,21 +4,6 @@ module Spree
 
       update.before :update_color_values
 
-      def update_values_positions
-        params[:positions].each do |id, index|
-          ColorValue.where(:id => id).update_all(:position => index)
-        end
-
-        respond_to do |format|
-          format.html { redirect_to admin_product_variants_url(params[:product_id]) }
-          format.js { render :text => 'Ok' }
-        end
-      end
-
-        # if params[:product][:option_type_ids].present?
-        #   params[:product][:option_type_ids] = params[:product][:option_type_ids].split(',')
-        # end
-
       protected
 
         def location_after_save

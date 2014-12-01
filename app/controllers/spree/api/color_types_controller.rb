@@ -29,6 +29,7 @@ module Spree
       end
 
       def update
+        authorize! :update, Spree::ColorType
         @color_type = Spree::ColorType.accessible_by(current_ability, :update).find(params[:id])
         if @color_type.update_attributes(color_type_params)
           render :show
@@ -38,6 +39,7 @@ module Spree
       end
 
       def destroy
+        authorize! :destroy, Spree::ColorType
         @color_type = Spree::ColorType.accessible_by(current_ability, :destroy).find(params[:id])
         @color_type.destroy
         render :text => nil, :status => 204

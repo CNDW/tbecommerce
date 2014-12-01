@@ -13,5 +13,5 @@ div.col-sm-11.custom-field-section
       else
         div.selection-header {{model.name}}
       div.color-swatch-field
-        each color in model.colors
+        each color in colors
           color-swatch action='selectColor' image=color.thumb_url color=color selection=model

@@ -7,6 +7,8 @@ App.CustomOption = DS.Model.extend
   price: DS.attr 'number'
   presentation: Em.computed.alias 'optionValue.presentation'
 
+  position: DS.attr 'number', defaultValue: 0
+
   saveOnChange: (->
     custom_item = @get('customItem')
     custom_item.recalculatePrice()

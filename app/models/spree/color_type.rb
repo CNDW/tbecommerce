@@ -4,6 +4,9 @@ module Spree
     has_many :color_values, through: :color_type_color_values
     has_many :product_color_types, dependent: :destroy, inverse_of: :color_type
     has_many :products, through: :product_color_types
+
+    has_many :line_item_color_types, dependent: :destroy, inverse_of: :color_type
+    has_many :line_items, through: :line_item_color_types
     # has_and_belongs_to_many :prototypes, join_table: 'spree_color_types_prototypes'
 
     validates :name, :presentation, :selector, presence: true

@@ -85,10 +85,13 @@ Spree::Core::Engine.routes.draw do
     resources :color_types do
       collection do
         post :update_positions
-        post :update_values_positions
       end
     end
-    resources :color_values
+    resources :color_values do
+      collection do
+        post :update_positions
+      end
+    end
     resources :products do
       resources :product_mocks do
         collection do

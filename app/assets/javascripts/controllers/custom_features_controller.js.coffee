@@ -1,2 +1,3 @@
 App.CustomFeaturesController = Em.ObjectController.extend
-  options: Em.computed.alias 'model.customOptions'
+  options: Em.computed.sort 'model.customOptions', (a, b)->
+    a.get('position') - b.get('position')

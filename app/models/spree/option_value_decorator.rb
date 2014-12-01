@@ -1,5 +1,8 @@
 module Spree
   OptionValue.class_eval do
+    has_many :line_item_option_values, dependent: :destroy, inverse_of: :line_item
+    has_many :line_items, through: :line_item_option_values
+
     has_attached_file :option_image,
       styles: { web_large: '1274x980>',
       web_medium: '637x490>',

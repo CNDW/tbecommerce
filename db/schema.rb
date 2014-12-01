@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141114112543) do
+ActiveRecord::Schema.define(version: 20141130140620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -221,6 +221,22 @@ ActiveRecord::Schema.define(version: 20141114112543) do
   add_index "spree_inventory_units", ["return_authorization_id"], name: "index_spree_inventory_units_on_return_authorization_id", using: :btree
   add_index "spree_inventory_units", ["shipment_id"], name: "index_inventory_units_on_shipment_id", using: :btree
   add_index "spree_inventory_units", ["variant_id"], name: "index_inventory_units_on_variant_id", using: :btree
+
+  create_table "spree_line_item_color_types", force: true do |t|
+    t.integer  "color_type_id"
+    t.integer  "line_item_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "spree_line_item_color_types", ["color_type_id", "line_item_id"], name: "index_line_item_color_types_on_color_type_id_and_line_item_id", using: :btree
+
+  create_table "spree_line_item_option_values", force: true do |t|
+    t.integer "option_value_id"
+    t.integer "line_item_id"
+  end
+
+  add_index "spree_line_item_option_values", ["line_item_id", "option_value_id"], name: "index_line_item_option_values_on_option_value_and_line_item_ids", using: :btree
 
   create_table "spree_line_items", force: true do |t|
     t.integer  "variant_id"

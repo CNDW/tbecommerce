@@ -29,6 +29,7 @@ module Spree
       end
 
       def update
+        authorize! :update, Spree::ColorValue
         @color_value = Spree::ColorValue.accessible_by(current_ability, :update).find(params[:id])
         if @color_value.update_attributes(color_value_params)
           render :show
@@ -38,6 +39,7 @@ module Spree
       end
 
       def destroy
+        authorize! :destroy, Spree::ColorValue
         @color_value = Spree::ColorValue.accessible_by(current_ability, :destroy).find(params[:id])
         @color_value.destroy
         render :text => nil, :status => 204

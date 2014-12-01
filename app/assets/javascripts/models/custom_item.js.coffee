@@ -145,5 +145,6 @@ App.CustomItem = DS.Model.extend
           selected: no
           customItem: self
           price: optionValue.get 'price'
+          position: optionType.get('position') + optionValue.get('position')
         customOptions.addRecord(record)
     @save()
