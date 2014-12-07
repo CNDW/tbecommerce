@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141130140620) do
+ActiveRecord::Schema.define(version: 20141207130939) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -227,6 +227,7 @@ ActiveRecord::Schema.define(version: 20141130140620) do
     t.integer  "line_item_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "position"
   end
 
   add_index "spree_line_item_color_types", ["color_type_id", "line_item_id"], name: "index_line_item_color_types_on_color_type_id_and_line_item_id", using: :btree
@@ -234,6 +235,7 @@ ActiveRecord::Schema.define(version: 20141130140620) do
   create_table "spree_line_item_option_values", force: true do |t|
     t.integer "option_value_id"
     t.integer "line_item_id"
+    t.integer "position"
   end
 
   add_index "spree_line_item_option_values", ["line_item_id", "option_value_id"], name: "index_line_item_option_values_on_option_value_and_line_item_ids", using: :btree
@@ -254,6 +256,7 @@ ActiveRecord::Schema.define(version: 20141130140620) do
     t.decimal  "included_tax_total",   precision: 10, scale: 2, default: 0.0, null: false
     t.decimal  "pre_tax_amount",       precision: 8,  scale: 2, default: 0.0
     t.string   "custom_item_hash"
+    t.decimal  "option_total",         precision: 10, scale: 2, default: 0.0
   end
 
   add_index "spree_line_items", ["custom_item_hash"], name: "index_custom_item_hash_online_items", using: :btree

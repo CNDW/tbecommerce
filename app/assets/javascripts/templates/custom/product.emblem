@@ -14,8 +14,7 @@ div.col-main-body
                   selection-option item=item action='setCustomProduct' custom_item=this
                     span {{item.name}}
   div.col-sm-7.centered
-    div.col-sm-12
-      render 'custom-item' model
+    render 'custom-item' model
 
 if hasProduct
   partial 'custom/description'
