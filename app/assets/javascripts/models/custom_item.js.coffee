@@ -1,5 +1,8 @@
 App.CustomItem = DS.Model.extend
-  name: DS.attr 'string', defaultValue: 'custom item'
+  name: Em.computed 'product_id', ->
+    return 'Custom Item' unless @get 'product_id'
+    @get 'product.name'
+
   inShop: DS.attr 'boolean', defaultValue: false
   inCart: Em.computed.equal 'state', 'cart'
 
@@ -9,6 +12,7 @@ App.CustomItem = DS.Model.extend
     return 'precart' if @get('lineItem') == null
     return @get('lineItem.state')
   ).property('lineItem')
+
   shop_state: DS.attr 'string', defaultValue: 'new'
   shop_states: [
     'new'
@@ -51,8 +55,8 @@ App.CustomItem = DS.Model.extend
   ).property('product_id', 'selectedColors.@each.isSelected')
 
   basePrice: (->
-    @recalculatePrice()
-  ).observes('product_id').on('init')
+    Em.run.scheduleOnce 'actions', this, @recalculatePrice
+  ).observes('product_id', 'customOptions.@each.selected')
 
   product_id: DS.attr 'number', defaultValue: null
   product: (->
@@ -107,14 +111,14 @@ App.CustomItem = DS.Model.extend
     selected.forEach (option)->
       base += option.get 'price'
     @set 'price', base
+    @save()
 
-  loadOptions: ()->
+  loadOptions: ->
     product = @get 'product'
     @populateColorRelationship(product)
     @populateOptionRelationship(product)
 
   reloadRelationships: ->
-    console.log('reloadRelationships')
     self = this
     [@get('selectedColors'), @get('customOptions')].forEach (relationship)->
       items = relationship.content.toArray()
@@ -124,7 +128,6 @@ App.CustomItem = DS.Model.extend
     @loadOptions()
 
   populateColorRelationship: (product)->
-    console.log 'populateColorRelationship'
     self = this
     selectedColors = @get('selectedColors')
     colorTypes = product.get('colorTypes')

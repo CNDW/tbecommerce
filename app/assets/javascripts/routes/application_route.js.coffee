@@ -17,6 +17,7 @@ App.ApplicationRoute = Em.Route.extend
           cart.fetchOrder().then ->
             return cart
       , ->
+        debugger
         localStorage.removeItem('TrashBagsCustomItem')
         localStorage.removeItem('TrashBagsCard')
         localStorage.removeItem('TrashBagsCart')

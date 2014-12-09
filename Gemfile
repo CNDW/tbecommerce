@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.6'
+gem 'rails', '4.1.8'
 
 # Use postgresql as the database for Active Record
 gem 'pg'
@@ -29,7 +29,7 @@ gem 'select2-rails', '3.5.9.1'
 # Use Ember.js for frontend javascript
 gem 'ember-rails'
 gem 'ember-source', '1.8.1'
-gem 'ember-data-source', '1.0.0.beta.11'
+gem 'ember-data-source', '1.0.0.beta.12'
 
 # Use emblem for javascript templates
 gem 'emblem-rails'
@@ -50,9 +50,9 @@ end
 gem 'posix-spawn'
 gem 'oink'
 
-gem 'spree', '2.3.4'
-gem 'spree_auth_devise', :git => 'https://github.com/spree/spree_auth_devise.git', :branch => '2-3-stable'
-gem 'spree_gateway', github: 'spree/spree_gateway', branch: '2-3-stable'
+gem 'spree', github: 'spree/spree', branch: '2-4-stable'
+gem 'spree_auth_devise', :github => 'spree/spree_auth_devise', :branch => '2-4-stable'
+gem 'spree_gateway', github: 'spree/spree_gateway', branch: '2-4-stable'
 
 gem 'valid_email'
 

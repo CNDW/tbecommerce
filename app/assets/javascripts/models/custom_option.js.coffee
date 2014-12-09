@@ -9,12 +9,6 @@ App.CustomOption = DS.Model.extend
 
   position: DS.attr 'number', defaultValue: 0
 
-  saveOnChange: (->
-    custom_item = @get('customItem')
-    custom_item.recalculatePrice()
-    custom_item.save()
-  ).observes('selected')
-
   optionValue_id: DS.attr 'number'
   optionValue: (->
     if @get 'optionValue_id'

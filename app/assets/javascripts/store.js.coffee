@@ -16,6 +16,4 @@ App.ArrayTransform = DS.Transform.extend
     return Em.A(value) if Em.isArray(value)
     return Em.A()
 
-App.ApplicationStore = DS.Store.extend
-  createItemByHash: (hash)->
-    debugger
+App.ApplicationStore = DS.Store.extend()
