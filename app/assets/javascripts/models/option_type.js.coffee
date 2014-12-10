@@ -11,6 +11,7 @@ App.OptionType = DS.Model.extend App.ProductOptionMixin,
   thumb_url: DS.attr 'string'
   medium_url: DS.attr 'string'
   large_url: DS.attr 'string'
+  products: DS.hasMany 'product'
 
 App.ColorType = DS.Model.extend App.ProductOptionMixin,
   selector: DS.attr 'string'

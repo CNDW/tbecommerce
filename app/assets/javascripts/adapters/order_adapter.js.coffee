@@ -19,3 +19,11 @@ App.ShipmentSerializer = DS.ActiveModelSerializer.extend DS.EmbeddedRecordsMixin
 App.PaymentSerializer = DS.ActiveModelSerializer.extend DS.EmbeddedRecordsMixin,
   attrs:
     payment_methods: embedded: 'always'
+
+App.LineItemAdapter = DS.ActiveModelAdapter.extend
+  #dirty hack to prevent ember from sending ajax requests, line
+  #  item data is being pushed from the order via backdoor ajax
+  #  calls.
+  find: ->
+    return new Em.RSVP.Promise (resolve, reject)->
+      Ember.run(null, reject, {})

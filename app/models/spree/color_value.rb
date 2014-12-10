@@ -3,6 +3,8 @@ module Spree
     has_many :color_type_color_values, dependent: :destroy, inverse_of: :color_value
     has_many :color_type, through: :color_type_color_values
 
+    has_many :variant_colors, dependent: :destroy
+
     has_and_belongs_to_many :variants, join_table: 'spree_color_values_variants', class_name: "Spree::Variant"
 
     validates :name, :presentation, presence: true

@@ -14,6 +14,14 @@ module Spree
       self.master.id
     end
 
+    def option_values
+      self.option_types.map {|type| type.option_values.map {|value| value} }.flatten
+    end
+
+    def option_value_ids
+      self.option_types.map {|type| type.option_values.map {|value| value.id} }.flatten
+    end
+
     def update_mock_positions
       index = 0
       self.product_mocks.order(:position).each do |mock|

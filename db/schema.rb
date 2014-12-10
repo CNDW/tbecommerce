@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141209102594) do
+ActiveRecord::Schema.define(version: 20141209115104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1094,6 +1094,16 @@ ActiveRecord::Schema.define(version: 20141209102594) do
   add_index "spree_users", ["deleted_at"], name: "index_spree_users_on_deleted_at", using: :btree
   add_index "spree_users", ["email"], name: "email_idx_unique", unique: true, using: :btree
   add_index "spree_users", ["spree_api_key"], name: "index_spree_users_on_spree_api_key", using: :btree
+
+  create_table "spree_variant_colors", force: true do |t|
+    t.integer "variant_id"
+    t.integer "color_type_id"
+    t.integer "color_value_id"
+  end
+
+  add_index "spree_variant_colors", ["color_type_id"], name: "index_spree_variant_colors_on_color_type_id", using: :btree
+  add_index "spree_variant_colors", ["color_value_id"], name: "index_spree_variant_colors_on_color_value_id", using: :btree
+  add_index "spree_variant_colors", ["variant_id"], name: "index_spree_variant_colors_on_variant_id", using: :btree
 
   create_table "spree_variants", force: true do |t|
     t.string   "sku",                                        default: "",    null: false

@@ -34,7 +34,7 @@ App.CustomItem = DS.Model.extend
 
   selectedColors: DS.hasMany 'selected_color'
   customOptions: DS.hasMany 'custom_option'
-  lineItem: DS.belongsTo 'line_item'
+  lineItem: DS.belongsTo 'line_item', async: true
 
   price: DS.attr 'number'
 
@@ -96,7 +96,7 @@ App.CustomItem = DS.Model.extend
     "ct#{segment.join('')}"
 
   getOptionSegment: ->
-    segment = @get('customOptions').map (option)->
+    segment = @get('customOptions').filterBy('selected', true).map (option)->
       "i#{option.get('optionValue_id')}"
     "ov#{segment.join('')}"
 

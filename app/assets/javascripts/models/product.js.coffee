@@ -16,6 +16,9 @@ App.Product = DS.Model.extend
     @get 'product_subcategory'
   ).property()
   tagline: DS.attr 'string'
+  meta_description: DS.attr 'string'
+  meta_keywords: DS.attr 'string'
+  taxon_ids: DS.attr 'string'
 
   catalogue_image: (->
     content = @get('images').content

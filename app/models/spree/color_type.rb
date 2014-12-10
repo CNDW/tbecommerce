@@ -7,7 +7,8 @@ module Spree
 
     has_many :line_item_color_types, dependent: :destroy, inverse_of: :color_type
     has_many :line_items, through: :line_item_color_types
-    # has_and_belongs_to_many :prototypes, join_table: 'spree_color_types_prototypes'
+
+    has_many :variant_colors, dependent: :destroy
 
     validates :name, :presentation, :selector, presence: true
     default_scope -> { order("#{self.table_name}.position") }

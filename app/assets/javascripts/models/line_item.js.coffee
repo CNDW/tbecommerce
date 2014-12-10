@@ -6,14 +6,14 @@ App.LineItem = DS.Model.extend
   display_total: DS.attr 'string'
   variant_id: DS.attr 'number'
 
-  customItem: DS.belongsTo 'custom_item'
+  customItem: DS.belongsTo 'custom_item', async: true
   order: DS.belongsTo 'order'
   custom_item_hash: DS.attr 'string'
 
   didCreate: ->
     console.log 'lineItem.didCreate'
   didLoad: ->
-    @store.createItemByHash(@get 'custom_item_hash') unless @get('customItem')
+    @store.createItemByHash(@get 'custom_item_hash') unless true#@get('customItem')
 
   order_isComplete: Em.computed.alias 'order.isComplete'
 

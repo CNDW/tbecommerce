@@ -9,6 +9,7 @@ App.ProductValueMixin = Em.Mixin.create
   presentation: DS.attr 'string'
   position: DS.attr 'number', defaultValue: 0
 
-App.OptionValue = DS.Model.extend App.ProductValueMixin
+App.OptionValue = DS.Model.extend App.ProductValueMixin,
+  option_type_id: DS.attr 'string'
 
 App.ColorValue = DS.Model.extend App.ProductValueMixin

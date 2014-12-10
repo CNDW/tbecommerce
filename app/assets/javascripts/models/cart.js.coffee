@@ -16,10 +16,12 @@ App.Cart = DS.Model.extend
     @set 'token', null
     @createOrder()
 
-
   didCreate: ->
     unless @get('isCreated')
       @createOrder()
+
+  didLoad: ->
+    @get('order') if @get('order_id')
 
   createOrder: ->
     return if @get 'isCreated'
