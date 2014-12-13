@@ -1,81 +1,18 @@
-div.stock-row
-  div.col-main-body.stock-section
-    h3 bags in stock
-    link-to 'instockitem' tagName='div' classNames='col-sm-4 stock-tile'
-      div.tile-img
-        img.img-responsive src="<%= asset_path('trans1.png') %>" alt="loading..."
-      div.tile-info
-        h4 bag name
-        p this is a small bag description, with color and extra options included
-        div.stock-price
-          span.price $260
-          button.btn.btn-black add to cart
-    link-to 'instockitem' tagName='div' classNames='col-sm-4 stock-tile'
-      div.tile-img
-        img.img-responsive src="<%= asset_path('trans1.png') %>" alt="loading..."
-      div.tile-info
-        h4 bag name
-        p this is a small bag description, with color and extra options included
-        div.stock-price
-          span.price $260
-          button.btn.btn-black add to cart
-    link-to 'instockitem' tagName='div' classNames='col-sm-4 stock-tile'
-      div.tile-img
-        img.img-responsive src="<%= asset_path('trans1.png') %>" alt="loading..."
-      div.tile-info
-        h4 bag name
-        p this is a small bag description, with color and extra options included
-        div.stock-price
-          span.price $260
-          button.btn.btn-black add to cart
-    link-to 'instockitem' tagName='div' classNames='col-sm-4 stock-tile'
-      div.tile-img
-        img.img-responsive src="<%= asset_path('trans1.png') %>" alt="loading..."
-      div.tile-info
-        h4 bag name
-        p this is a small bag description, with color and extra options included
-        div.stock-price
-          span.price $260
-          button.btn.btn-black add to cart
-    link-to 'instockitem' tagName='div' classNames='col-sm-4 stock-tile'
-      div.tile-img
-        img.img-responsive src="<%= asset_path('trans1.png') %>" alt="loading..."
-      div.tile-info
-        h4 bag name
-        p this is a small bag description, with color and extra options included
-        div.stock-price
-          span.price $260
-          button.btn.btn-black add to cart
-    link-to 'instockitem' tagName='div' classNames='col-sm-4 stock-tile'
-      div.tile-img
-        img.img-responsive src="<%= asset_path('trans1.png') %>" alt="loading..."
-      div.tile-info
-        h4 bag name
-        p this is a small bag description, with color and extra options included
-        div.stock-price
-          span.price $260
-          button.btn.btn-black add to cart
-div.stock-row
-  div.col-main-body.stock-section
-    h3 accessories in stock
-    link-to 'instockitem' tagName='div' classNames='col-sm-4 stock-tile'
-      div.tile-img
-        img.img-responsive src="<%= asset_path('trans1.png') %>" alt="loading..."
-      div.tile-info
-        h4 bag name
-        p this is a small bag description, with color and extra options included
-        div.stock-price
-          span.price $260
-          button.btn.btn-black add to cart
-    link-to 'instockitem' tagName='div' classNames='col-sm-4 stock-tile'
-      div.tile-img
-        img.img-responsive src="<%= asset_path('trans1.png') %>" alt="loading..."
-      div.tile-info
-        h4 bag name
-        p this is a small bag description, with color and extra options included
-        div.stock-price
-          span.price $260
-          button.btn.btn-black add to cart
+each collection in instock_collections
+  div.stock-row
+    div.col-main-body.stock-section
+      h3 {{collection.name}} in stock
+      each item in collection.items
+        link-to 'instockitem' item tagName='div' classNames='col-sm-4 stock-tile'
+          div.tile-img
+            img.img-responsive{bind-attr src='item.catalogue_image'}  alt="loading..."
+          div.tile-info
+            h4 {{item.name}}
+            p {{item.instock_description}}
+            div.stock-price
+              span.price {{item.display_price}}
+              button.btn.btn-black add to cart
+
 div.stock-row
   div.col-main-body.stock-section
     div.pages

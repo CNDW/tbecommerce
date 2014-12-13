@@ -20,5 +20,7 @@ App.Variant = DS.Model.extend
   product: DS.belongsTo 'product'
   variant_colors: DS.attr 'object'
 
-  type: Em.computed.alias 'product', 'product_type'
-  category: Em.computed.alias 'product', 'product_category'
+
+  catalogue_image: Em.computed.alias 'product.catalogue_image'
+  type: Em.computed.alias 'product.product_type'
+  category: Em.computed.alias 'product.product_category'
