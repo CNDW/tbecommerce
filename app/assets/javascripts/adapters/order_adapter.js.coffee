@@ -27,3 +27,6 @@ App.LineItemAdapter = DS.ActiveModelAdapter.extend
   find: ->
     return new Em.RSVP.Promise (resolve, reject)->
       Ember.run(null, reject, {})
+
+App.VariantAdapter = DS.ActiveModelAdapter.extend
+  namespace: 'api'

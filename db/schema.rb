@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141209115104) do
+ActiveRecord::Schema.define(version: 20141213145529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1106,21 +1106,22 @@ ActiveRecord::Schema.define(version: 20141209115104) do
   add_index "spree_variant_colors", ["variant_id"], name: "index_spree_variant_colors_on_variant_id", using: :btree
 
   create_table "spree_variants", force: true do |t|
-    t.string   "sku",                                        default: "",    null: false
-    t.decimal  "weight",            precision: 8,  scale: 2, default: 0.0
-    t.decimal  "height",            precision: 8,  scale: 2
-    t.decimal  "width",             precision: 8,  scale: 2
-    t.decimal  "depth",             precision: 8,  scale: 2
+    t.string   "sku",                                          default: "",    null: false
+    t.decimal  "weight",              precision: 8,  scale: 2, default: 0.0
+    t.decimal  "height",              precision: 8,  scale: 2
+    t.decimal  "width",               precision: 8,  scale: 2
+    t.decimal  "depth",               precision: 8,  scale: 2
     t.datetime "deleted_at"
-    t.boolean  "is_master",                                  default: false
+    t.boolean  "is_master",                                    default: false
     t.integer  "product_id"
-    t.decimal  "cost_price",        precision: 10, scale: 2
+    t.decimal  "cost_price",          precision: 10, scale: 2
     t.integer  "position"
     t.string   "cost_currency"
-    t.boolean  "track_inventory",                            default: true
+    t.boolean  "track_inventory",                              default: true
     t.integer  "tax_category_id"
     t.datetime "updated_at"
-    t.integer  "stock_items_count",                          default: 0,     null: false
+    t.integer  "stock_items_count",                            default: 0,     null: false
+    t.string   "instock_description",                          default: ""
   end
 
   add_index "spree_variants", ["deleted_at"], name: "index_spree_variants_on_deleted_at", using: :btree

@@ -15,11 +15,11 @@ module Spree
     end
 
     def option_values
-      self.option_types.map {|type| type.option_values.map {|value| value} }.flatten
+      self.option_types.includes(:option_values).map {|type| type.option_values.map {|value| value} }.flatten
     end
 
     def option_value_ids
-      self.option_types.map {|type| type.option_values.map {|value| value.id} }.flatten
+      self.option_types.includes(:option_values).map {|type| type.option_values.map {|value| value.id} }.flatten
     end
 
     def update_mock_positions
