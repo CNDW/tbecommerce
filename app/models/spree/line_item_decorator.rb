@@ -6,7 +6,8 @@ module Spree
     has_many :option_values, through: :line_item_option_values
     before_save :deserialize_hash, unless: :skip_callbacks
     def deserialize_hash
-      segments = self.custom_item_hash.split('e')
+      custom_item_hash = self.custom_item_hash || ''
+      segments = custom_item_hash.split('e')
       segments.each do |segment|
         if segment.include?('ov')
           self.option_value_ids = segment.split('i').drop(1)
