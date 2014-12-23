@@ -2,7 +2,7 @@ App.Router = Ember.Router.extend()
 
 App.Router.map ->
   @route 'application'
-  @route 'blog'
+  # @route 'blog'
   @route 'gallery'
   @route 'about'
   @resource 'catalogue', ->
@@ -16,8 +16,9 @@ App.Router.map ->
     @route 'colors'
     @route 'features'
     @route 'extras'
-  @route 'instock'
-  @route 'instockitem'
+  @resource 'instock', ->
+    @route 'index', path: '/'
+    @route 'item', path: ':variant_id'
   @route 'cart'
   @resource 'product', path: '/product/:product_id'
   @resource 'order', path: '/order/:order_id', ->

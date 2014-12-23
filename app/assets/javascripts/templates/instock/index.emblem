@@ -1,0 +1,23 @@
+each collection in instock_collections
+  div.stock-row
+    div.col-main-body.stock-section
+      h3 {{collection.name}} in stock
+      each item in collection.items
+        div.col-sm-4.stock-tile
+          link-to 'instock.item' item tagName='div' classNames='tile-img'
+            img.img-responsive{bind-attr src='item.catalogue_image'}  alt="loading..."
+          div.tile-info
+            link-to 'instock.item' item tagName='div'
+              h4 {{item.name}}
+              p {{item.instock_description}}
+            div.stock-price
+              span.price {{item.display_total_price}}
+              button.btn.btn-black click='addToCart item' add to cart
+
+div.stock-row
+  div.col-main-body.stock-section
+    div.stock-link
+      span That's what we have in stock. visit the
+      link-to 'custom_shop' tagName='button' classNames='btn btn-black'
+        |custom shop
+      span for more options

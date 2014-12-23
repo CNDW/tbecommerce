@@ -1,4 +1,5 @@
 App.CustomItem = DS.Model.extend
+  isCustomItem: true
   name: Em.computed 'product_id', ->
     return 'Custom Item' unless @get 'product_id'
     @get 'product.name'

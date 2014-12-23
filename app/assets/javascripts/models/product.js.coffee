@@ -19,12 +19,12 @@ App.Product = DS.Model.extend
   meta_description: DS.attr 'string'
   meta_keywords: DS.attr 'string'
   taxon_ids: DS.attr 'string'
+  in_catalogue: DS.attr 'boolean'
+  in_custom_shop: DS.attr 'boolean'
 
-  catalogue_image: (->
-    content = @get('images').content
-    return '' if content.length is 0
-    content[0].get('medium_url')
-  ).property('images')
+  catalogue_image: Em.computed 'images', ->
+    return '' if @get('images.length') is 0
+    return @get 'images.firstObject.medium_url'
 
   properties: DS.hasMany 'property'
   images: DS.hasMany 'image'

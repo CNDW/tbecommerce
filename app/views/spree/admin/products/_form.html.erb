@@ -154,6 +154,16 @@
       <%= f.error_message_on :featured %>
       <%= f.check_box :featured %>
     <% end %>
+    <%= f.field_container :in_catalogue do %>
+      <%= f.label :in_catalogue, Spree.t(:in_catalogue) %>
+      <%= f.error_message_on :in_catalogue %>
+      <%= f.check_box :in_catalogue %>
+    <% end %>
+    <%= f.field_container :in_custom_shop do %>
+      <%= f.label :in_custom_shop, Spree.t(:in_custom_shop) %>
+      <%= f.error_message_on :in_custom_shop %>
+      <%= f.check_box :in_custom_shop %>
+    <% end %>
   </div>
 
   <div class="twelve columns alpha omega">

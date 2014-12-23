@@ -20,6 +20,6 @@ div.row
       div.col-sm-7.line-item
         div.checkout
           span.upcase subtotal
-          span.price {{model.display_total}}
+          span.price {{display_total}}
         div.checkout
           button.btn.btn-black click="checkout model" checkout

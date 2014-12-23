@@ -48,6 +48,7 @@ App.ApplicationRoute = Em.Route.extend
 
 #todo: refactor
     addToCart: (item)->
+      event.preventDefault()
       self = this
       if item.get 'inCart'
         item.set('inShop', false)
@@ -57,6 +58,10 @@ App.ApplicationRoute = Em.Route.extend
       cart = @modelFor 'application'
       order = @store.getById 'order', cart.get('order_id')
       order.createLineItem(item).then ->
-        item.set('inShop', false)
-        item.save()
+        if item.isCustomItem
+          item.set('inShop', false)
+          item.save()
         self.transitionTo 'cart'
+      , (xhr)->
+        unless item.isCustomItem and not xhr.responseJSON.errors.quantity
+          alert 'The item you tried to add to cart is no longer in stock'

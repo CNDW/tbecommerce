@@ -30,3 +30,7 @@ App.LineItemAdapter = DS.ActiveModelAdapter.extend
 
 App.VariantAdapter = DS.ActiveModelAdapter.extend
   namespace: 'api'
+
+App.VariantSerializer = DS.ActiveModelSerializer.extend DS.EmbeddedRecordsMixin,
+  attrs:
+    images: embedded: 'always'

@@ -112,13 +112,16 @@ App.Order = DS.Model.extend
             variant_id: item.get('variant_id')
             custom_item_hash: item.get('custom_item_hash')
         success: (data)->
-          data.customItem = item
+          if item.isCustomItem
+            data.customItem = item
+          else
+            data.variant = item
           self.store.pushPayload 'line_item',
             line_item: data
           self.addLineItem data.id
           resolve(self, data)
-        error: ->
-          reject(arguments)
+        error: (xhr)->
+          reject(xhr)
 
   addLineItem: (line_item_id)->
     line_item = @store.getById 'line_item', line_item_id
@@ -135,16 +138,17 @@ App.Order = DS.Model.extend
           order_token: self.get('token')
         success: ->
           self.get('line_items').removeObject(line_item)
-          custom_item.set 'state', 'precart'
-          custom_item.set 'line_item', null
-          custom_item.save()
+          unless custom_item.content is null
+            custom_item.set 'state', 'precart'
+            custom_item.set 'line_item', null
+            custom_item.content.save()
           resolve(self)
         error: (xhr)->
           if xhr.status is 404
             self.get('line_items').removeRecord(line_item)
             resolve(self)
           else
-            reject(arguments)
+            reject(xhr)
 
   updateAddresses: (alertOnFailure)->
     self = this
