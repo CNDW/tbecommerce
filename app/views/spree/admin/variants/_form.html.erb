@@ -23,6 +23,11 @@
       <%= f.collection_select(:tax_category_id, @tax_categories, :id, :name, { :include_blank => Spree.t('match_choices.none') }, { :class => 'select2 fullwidth' }) %>
     </div>
 
+    <div class="field" data-hook="sku">
+      <%= f.label :sku, Spree.t(:sku) %>
+      <%= f.text_field :sku, :class => 'fullwidth' %>
+    </div>
+
     <div class="field" data-hook="instock_description">
       <%= f.label :instock_description, Spree.t(:description) %>
       <%= f.text_field :instock_description, :class => 'fullwidth' %>
