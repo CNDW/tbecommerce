@@ -15,7 +15,7 @@ App.Router.map ->
     @route 'product', path: '/item'
     @route 'colors'
     @route 'features'
-    @route 'extras'
+    # @route 'extras'
   @resource 'instock', ->
     @route 'index', path: '/'
     @route 'item', path: ':variant_id'

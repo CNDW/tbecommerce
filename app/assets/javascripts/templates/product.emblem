@@ -7,8 +7,10 @@ div.row
       div.description-column
         h3.upcase {{model.name}}
         p {{model.description}}
-        button.btn.btn-black custom order
-        button.btn.btn-black in stock
+        link-to 'custom_shop' tagName='button' classNames='btn btn-black'
+          |custom order
+        link-to 'instock.index' tagName='button' classNames='btn btn-black'
+          |in stock
   div.catalogue-item-section
     div.item-detail-col
       div.detail-column

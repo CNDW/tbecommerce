@@ -17,7 +17,6 @@ each collection in instock_collections
 div.stock-row
   div.col-main-body.stock-section
     div.stock-link
-      span That's what we have in stock. visit the
+      span All In Stock Items will ship within 3 business days, for other options please visit the
       link-to 'custom_shop' tagName='button' classNames='btn btn-black'
         |custom shop
-      span for more options

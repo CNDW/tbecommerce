@@ -1,2 +1,2 @@
 each property in model
-  li.capitalize.interactable click="openModal 'property' property" {{property.name}}
+  li.capitalize {{property.name}}

@@ -28,6 +28,10 @@ App.LineItemAdapter = DS.ActiveModelAdapter.extend
     return new Em.RSVP.Promise (resolve, reject)->
       Ember.run(null, reject, {})
 
+App.LineItemSerializer = DS.ActiveModelSerializer.extend DS.EmbeddedRecordsMixin,
+  attrs:
+    variant: embedded: 'always'
+
 App.VariantAdapter = DS.ActiveModelAdapter.extend
   namespace: 'api'
 

@@ -7,8 +7,6 @@ div.custom-shop-navbar
         a Colors
       link-to 'custom.features' model tagName='li'
         a Features
-      link-to 'custom.extras' model tagName='li'
-        a Extras
 
 div.row
   outlet

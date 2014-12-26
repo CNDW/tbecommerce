@@ -6,5 +6,6 @@ App.InstockIndexController = Em.ArrayController.extend
     Em.Object.create
       name: Em.String.pluralize(type)
       items: this.get('model').filter (model)->
-        model.get('category') is type
+        model.get('category') is type and model.get('is_master') is false
+      .sortBy('price')
 
