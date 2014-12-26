@@ -190,7 +190,8 @@ App.Order = DS.Model.extend
         datatype: 'json'
         data:
           order_token: self.get('token')
-          order: self.serializeShipments()
+          order:
+            shipments_attributes: self.serializeShipments()
         success: (orderResponse)->
           resolve(orderResponse, self)
         error: (xhr, error, status)->
