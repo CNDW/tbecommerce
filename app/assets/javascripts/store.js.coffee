@@ -17,3 +17,6 @@ App.ArrayTransform = DS.Transform.extend
     return Em.A()
 
 App.ApplicationStore = DS.Store.extend()
+
+EventBus = Em.Object.extend Em.Evented
+App.EventBus = EventBus.create()

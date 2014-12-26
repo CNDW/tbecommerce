@@ -159,8 +159,10 @@ App.Order = DS.Model.extend
         data:
           order_token: self.get('token')
           order: self.serializeAddresses()
-        success: (orderResponse)->
-          resolve(orderResponse, self)
+        success: (payload)->
+          self.store.pushPayload 'order',
+            order: payload
+          resolve(payload, self)
         error: (xhr, error, status)->
           if alertOnFailure
             message = ["#{xhr.responseJSON.error}\n"]
@@ -192,8 +194,10 @@ App.Order = DS.Model.extend
           order_token: self.get('token')
           order:
             shipments_attributes: self.serializeShipments()
-        success: (orderResponse)->
-          resolve(orderResponse, self)
+        success: (payload)->
+          self.store.pushPayload 'order',
+            order: payload
+          resolve(payload, self)
         error: (xhr, error, status)->
           if alertOnFailure
             message = ["#{xhr.responseJSON.error}\n"]
