@@ -5,6 +5,9 @@ App.ToggleMenuComponent = Em.Component.extend Em.Evented,
   didInsertElement: ->
     App.EventBus.on 'collapseMenus', this, @collapseMenu
 
+  willDestroyElement: ->
+    App.EventBus.off 'collapseMenus', this, @collapseMenu
+
   collapseMenu: ->
     @set 'isShowing', false
   click: ->
