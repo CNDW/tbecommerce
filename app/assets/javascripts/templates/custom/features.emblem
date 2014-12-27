@@ -10,13 +10,13 @@ div.col-main-body
             span.icon-info.right.interactable click="openModal 'property' option"
       div.custom-selection-field
         div.selection-fields
-          textarea placeholder='Notes...'
+          =textarea value=model.order_notes placeholder='Order notes, please include information on height, build, gender for sizing purposes'
 
     div.col-sm-11.custom-field-footer
       div.footer-info
         span.capitalize {{name}}
         span.price ${{price}}
-      button.btn.btn-black click="addToCart model" add to cart & see extras    >
+      button.btn.btn-black click="addToCart model" add to cart  >
 
   div.col-sm-7.centered
     render 'custom-item' model

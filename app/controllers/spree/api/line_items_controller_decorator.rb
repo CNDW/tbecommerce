@@ -7,7 +7,8 @@ module Spree::Api
         params[:line_item][:quantity] || 1,
         nil,
         nil,
-        params[:line_item][:custom_item_hash]
+        params[:line_item][:custom_item_hash],
+        params[:line_item][:order_notes]
       )
 
       if @line_item.errors.empty?

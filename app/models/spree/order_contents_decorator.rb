@@ -1,7 +1,7 @@
 module Spree
   OrderContents.class_eval do
-    def add(variant, quantity = 1, currency = nil, shipment = nil, custom_item_hash = "pvi#{variant.id}")
-      line_item = add_to_line_item(variant, quantity, currency, shipment, custom_item_hash)
+    def add(variant, quantity = 1, currency = nil, shipment = nil, custom_item_hash = "pvi#{variant.id}", order_notes = nil)
+      line_item = add_to_line_item(variant, quantity, currency, shipment, custom_item_hash, order_notes)
       reload_totals
       shipment.present? ? shipment.update_amounts : order.ensure_updated_shipments
       PromotionHandler::Cart.new(order, line_item).activate
@@ -26,7 +26,7 @@ module Spree
         line_item
       end
 
-      def add_to_line_item(variant, quantity, currency=nil, shipment=nil, custom_item_hash = "pvi#{variant.id}")
+      def add_to_line_item(variant, quantity, currency=nil, shipment=nil, custom_item_hash = "pvi#{variant.id}", order_notes = nil)
         line_item = grab_line_item_by_hash(custom_item_hash)
 
         if line_item
@@ -34,7 +34,7 @@ module Spree
           line_item.quantity += quantity.to_i
           line_item.currency = currency unless currency.nil?
         else
-          line_item = order.line_items.new(quantity: quantity, variant: variant, custom_item_hash: custom_item_hash)
+          line_item = order.line_items.new(quantity: quantity, variant: variant, custom_item_hash: custom_item_hash, order_notes: order_notes)
           line_item.target_shipment = shipment
           if currency
             line_item.currency = currency

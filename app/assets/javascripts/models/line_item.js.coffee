@@ -9,6 +9,7 @@ App.LineItem = DS.Model.extend
   order: DS.belongsTo 'order'
   custom_item_hash: DS.attr 'string'
   variant: DS.belongsTo 'variant'
+  order_notes: DS.attr 'string'
 
   is_custom: Em.computed.alias 'variant.is_master'
 

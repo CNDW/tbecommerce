@@ -1,8 +1,7 @@
 object @line_item
 cache [I18n.locale, root_object]
 attributes *line_item_attributes
-attributes :custom_item_hash
-attributes :option_total
+attributes :custom_item_hash, :option_total, :order_notes
 node(:single_display_amount) { |li| li.single_display_amount.to_s }
 node(:display_amount) { |li| li.display_amount.to_s }
 node(:total) { |li| li.total }

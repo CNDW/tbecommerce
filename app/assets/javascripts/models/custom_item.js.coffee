@@ -6,13 +6,13 @@ App.CustomItem = DS.Model.extend
 
   inShop: DS.attr 'boolean', defaultValue: false
   inCart: Em.computed.equal 'state', 'cart'
+  order_notes: DS.attr 'string'
 
   variant_id: Em.computed.alias 'product.master_variant_id'
 
-  state: (->
+  state: Em.computed 'lineItem', ->
     return 'precart' if @get('lineItem') == null
     return @get('lineItem.state')
-  ).property('lineItem')
 
   shop_state: DS.attr 'string', defaultValue: 'new'
   shop_states: [
@@ -39,11 +39,10 @@ App.CustomItem = DS.Model.extend
 
   price: DS.attr 'number'
 
-  isComplete: (->
+  isComplete: Em.computed 'completedStep', ->
     @get('completedStep') > 1
-  ).property('completedStep')
 
-  completedStep: (->
+  completedStep: Em.computed 'product_id', 'slectedColors.@each.isSelected', ->
     step = 0
     step += 1 if @get('hasProduct')
     selectedColors = @get 'selectedColors'
@@ -53,31 +52,27 @@ App.CustomItem = DS.Model.extend
         color_length -= 1 if color.get('isSelected')
       step += 1 if color_length is 0
     return step
-  ).property('product_id', 'selectedColors.@each.isSelected')
 
   basePrice: (->
     Em.run.scheduleOnce 'actions', this, @recalculatePrice
   ).observes('product_id', 'customOptions.@each.selected')
 
   product_id: DS.attr 'number', defaultValue: null
-  product: (->
+
+  product: Em.computed 'product_id', ->
     @store.getById('product', @get('product_id')) if @get 'product_id'
-  ).property('product_id')
-  product_mocks: (->
+
+  product_mocks: Em.computed 'product_id', ->
     @get('product.product_mocks')
-  ).property('product_id')
 
-  properties: (->
+  properties: Em.computed 'product_id', ->
     @get 'product.properties'
-  ).property('product_id')
 
-  description: (->
+  description: Em.computed 'product_id', ->
     @get 'product.description'
-  ).property('product_id')
 
-  specs: (->
+  specs: Em.computed 'product_id', ->
     @get 'product.specs'
-  ).property('product_id')
 
   #-Serialization for the custom number ID
   custom_item_hash: (->

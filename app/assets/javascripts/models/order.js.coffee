@@ -111,6 +111,7 @@ App.Order = DS.Model.extend
           line_item:
             variant_id: item.get('variant_id')
             custom_item_hash: item.get('custom_item_hash')
+            order_notes: item.get('order_notes') or null
         success: (data)->
           if item.isCustomItem
             data.customItem = item
