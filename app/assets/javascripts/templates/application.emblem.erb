@@ -1,9 +1,9 @@
 outlet modal
 div.header.row
-  div.logo.col-sm-2.col-sm-offset-2
+  div.logo.col-sm-2.col-md-offset-2
     link-to 'index' tagName='div'
       img src="<%= asset_path('logo.png') %>"
-  ul.top-navs.col-sm-7
+  ul.top-navs.col-sm-8.col-md-7
     li
       a.top-nav{bind-attr class="catalogueActive:active"} click='toggleCatalogue'
         |catalogue

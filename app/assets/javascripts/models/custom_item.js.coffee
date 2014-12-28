@@ -6,7 +6,7 @@ App.CustomItem = DS.Model.extend
 
   inShop: DS.attr 'boolean', defaultValue: false
   inCart: Em.computed.equal 'state', 'cart'
-  order_notes: DS.attr 'string'
+  order_notes: DS.attr 'string', defaultValue: null
 
   variant_id: Em.computed.alias 'product.master_variant_id'
 
@@ -117,9 +117,7 @@ App.CustomItem = DS.Model.extend
   reloadRelationships: ->
     self = this
     [@get('selectedColors'), @get('customOptions')].forEach (relationship)->
-      items = relationship.content.toArray()
-      items.forEach (record)->
-        relationship.removeRecord(record)
+      relationship.clear()
     @save()
     @loadOptions()
 
@@ -131,7 +129,7 @@ App.CustomItem = DS.Model.extend
       record = self.store.createRecord 'selected_color',
         colorType_id: colorType.get 'id'
         customItem: self
-      selectedColors.addRecord(record)
+      selectedColors.addObject(record)
     @save()
 
   populateOptionRelationship: (product)->
@@ -145,5 +143,5 @@ App.CustomItem = DS.Model.extend
           customItem: self
           price: optionValue.get 'price'
           position: optionType.get('position') + optionValue.get('position')
-        customOptions.addRecord(record)
+        customOptions.addObject(record)
     @save()

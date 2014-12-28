@@ -29,7 +29,7 @@ gem 'select2-rails', '3.5.9.1'
 # Use Ember.js for frontend javascript
 gem 'ember-rails'
 gem 'ember-source', '1.8.1'
-gem 'ember-data-source', '1.0.0.beta.12'
+gem 'ember-data-source', '1.0.0.beta.14'
 
 # Use emblem for javascript templates
 gem 'emblem-rails'

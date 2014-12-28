@@ -1,4 +1,4 @@
-div.col-sm-4.selection-fields
+div.col-sm-6.col-md-4.selection-fields
   div.field
     span.field-label first name
     text-field value=model.firstname focus-out='acceptChanges'
@@ -14,7 +14,7 @@ div.col-sm-4.selection-fields
   div.field
     span.field-label address 2
     text-field value=model.address2 focus-out='acceptChanges'
-div.col-sm-4.selection-fields
+div.col-sm-6.col-md-4.selection-fields
   div.field
     span.field-label phone
     text-field value=model.phone focus-out='acceptChanges'

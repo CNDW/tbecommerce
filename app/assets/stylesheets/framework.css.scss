@@ -253,7 +253,7 @@ Parallax
     .transition-img {
       background: asset-url('home/box-bag.png') no-repeat;
       background-size: cover;
-      margin-top: -140px;
+      margin-top: -200px;
       float: right;
     }
   }
@@ -272,7 +272,7 @@ Parallax
       width: 320px;
       background: asset-url('home/black-bag.png') no-repeat;
       background-size: cover;
-      margin-top: -111px;
+      margin-top: -140px;
       float: right;
     }
   }
@@ -741,7 +741,9 @@ ul.top-navs {
 //--------------------------------------------
 // About
 //--------------------------------------------
-
+.about-row {
+  margin-bottom: 70px;
+}
 
 .contact-header {
   margin-top: 10px;
@@ -756,6 +758,9 @@ ul.top-navs {
 }
 .about-banner {
   @extend .about-images;
+  &:first-of-type {
+    margin-top: 0;
+  }
   img {
     width: 100%;
   }

@@ -5,3 +5,6 @@ App.Image = DS.Model.extend
   small_url: DS.attr 'string'
   medium_url: DS.attr 'string'
   large_url: DS.attr 'string'
+
+  product: DS.belongsTo 'product'
+  variant: DS.belongsTo 'variant'
