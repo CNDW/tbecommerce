@@ -3,22 +3,22 @@ div.row
     div.col-lg-8.col-lg-offset-2.index-slide.slide-1
   div.col-lg-12.index-transition.transition-1
     h3
-      |made by hand in minneapolis, minnesota
+      span made by hand in minneapolis, minnesota
   div.col-lg-12.index-slide.slide-2
 
   div.col-lg-12.index-transition.transition-2
     h3
-      |carries even the most obscenely large cargo
+      span carries even the most obscenely large cargo
       span.transition-img
   div.col-lg-12.index-slide.slide-3
 
   div.col-lg-12.index-transition.transition-3
     h3
       span.transition-img
-      |fully customizable from top to bottom
+      span fully customizable from top to bottom
   div.col-lg-12.index-slide.slide-4
 
   div.col-lg-12.index-transition.transition-4
     h3
-      |every stitch is gauranteed for life
+      span every stitch is gauranteed for life
       span.transition-img

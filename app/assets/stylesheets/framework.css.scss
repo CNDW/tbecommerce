@@ -206,19 +206,19 @@ Parallax
   padding: 0;
   overflow: hidden;
   &.slide-1 {
-    background: asset-url('andy1.jpg') 50% 50% no-repeat fixed;
+    background: asset-url('home/home_1.jpg') 50% 50% no-repeat fixed;
     background-size: cover;
   }
   &.slide-2 {
-    background: asset-url('andy2.png') 50% 50% no-repeat fixed;
+    background: asset-url('home/home_2.jpg') 50% 50% no-repeat fixed;
     background-size: cover;
   }
   &.slide-3 {
-    background: asset-url('andy3.png') 50% 50% no-repeat fixed;
+    background: asset-url('home/home_3.jpg') 50% 50% no-repeat fixed;
     background-size: cover;
   }
   &.slide-4 {
-    background: asset-url('andy4.png') 50% 50% no-repeat fixed;
+    background: asset-url('home/home_4.jpg') 50% 50% no-repeat fixed;
     background-size: cover;
   }
 }
@@ -239,7 +239,6 @@ Parallax
   .transition-img {
     height: 300px;
     width: 300px;
-    position: absolute;
     display: inline-block;
   }
   &.transition-1 {
@@ -251,38 +250,30 @@ Parallax
     }
   }
   &.transition-2 {
-    h3 {
-      margin-left: -300px;
-    }
     .transition-img {
-      background: asset-url('trans1.png') no-repeat;
+      background: asset-url('home/box-bag.png') no-repeat;
       background-size: cover;
-      top: -140px;
+      margin-top: -140px;
+      float: right;
     }
   }
   &.transition-3 {
-    h3 {
-      margin-right: -300px;
-      width: 100%;
-    }
     .transition-img {
-      background: asset-url('trans2.png') no-repeat;
+      background: asset-url('home/mexico-city-bag.png') no-repeat;
       background-size: cover;
-      top: -183px;
-      margin-left: -340px;
+      float: left;
+      margin-top: -200px;
+      width: 348px;
     }
   }
   &.transition-4 {
-    h3 {
-      margin-left: -300px;
-    }
     .transition-img {
       height: 240px;
       width: 320px;
-      background: asset-url('trans3.png') no-repeat;
+      background: asset-url('home/black-bag.png') no-repeat;
       background-size: cover;
-      top: -111px;
-      margin-left: 30px;
+      margin-top: -111px;
+      float: right;
     }
   }
 }
@@ -502,6 +493,9 @@ ul.top-navs {
   background-color: white;
   h4 {
     text-transform: uppercase;
+  }
+  p {
+    min-height: 57px;
   }
 }
 
@@ -760,13 +754,10 @@ ul.top-navs {
   margin-top: 20px;
   margin-bottom: 20px;
 }
-
-.about-crew {
+.about-banner {
+  @extend .about-images;
   img {
-    padding-left: 4px;
-    &:first-of-type {
-      margin-left: -4px;
-    }
+    width: 100%;
   }
 }
 .about-crew-header {
@@ -860,6 +851,7 @@ ul.top-navs {
   float: none;
   text-transform: uppercase;
   span {
+    cursor: pointer;
     margin-right: 40px;
   }
 }
