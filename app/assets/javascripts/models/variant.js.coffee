@@ -1,4 +1,5 @@
 App.Variant = DS.Model.extend
+  isVariant: yes
   name: DS.attr 'string'
   sku: DS.attr 'string'
   price: DS.attr 'string'
@@ -14,6 +15,11 @@ App.Variant = DS.Model.extend
   display_price: DS.attr 'string'
   total_on_hand: DS.attr 'number'
   options_text: DS.attr 'string'
+  total_in_cart: DS.attr 'number', defaultValue: 0
+
+  total_not_in_cart: Em.computed 'total_in_cart', 'total_on_hand', ->
+    @get('total_on_hand') - @get('total_in_cart')
+  isUnavailable: Em.computed.lt 'total_not_in_cart', 1
 
   images: DS.hasMany 'image'
   option_values: DS.hasMany 'option_value'

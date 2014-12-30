@@ -13,8 +13,8 @@ App.LineItem = DS.Model.extend
 
   is_custom: Em.computed.alias 'variant.is_master'
 
-  didCreate: ->
-    console.log 'lineItem.didCreate'
+  didLoad: ->
+    @get('variant').set('total_in_cart', @get('quantity')) if @get('variant')
 
   order_isComplete: Em.computed.alias 'order.isComplete'
 

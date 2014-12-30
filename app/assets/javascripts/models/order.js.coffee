@@ -136,6 +136,8 @@ App.Order = DS.Model.extend
         data:
           order_token: self.get('token')
         success: ->
+          if line_item.get('variant')
+            line_item.get('variant').incrementProperty('total_in_cart', -line_item.get('quantity'))
           self.get('line_items').removeObject(line_item)
           unless custom_item.content is null
             custom_item.set 'state', 'precart'
