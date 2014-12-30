@@ -859,6 +859,11 @@ ul.top-navs {
     cursor: pointer;
     margin-right: 40px;
   }
+  li a {
+   &:hover {
+    background-color: transparent;
+   }
+  }
 }
 span.trash-icon {
   background: asset-url("trashicon.png") transparent no-repeat 50% 50%;
@@ -868,28 +873,28 @@ span.trash-icon {
   position: relative;
   top: 14px;
 }
-span.twitter-icon {
+a.twitter-icon {
   background: asset-url("twittericon.png") transparent no-repeat 50% 50%;
   display: inline-block;
-  height: 35px;
+  height: 80px;
   width: 35px;
   position: relative;
   top: 10px;
   margin-right: 20px;
 }
-span.facebook-icon {
+a.facebook-icon {
   background: asset-url("facebookicon.png") transparent no-repeat 50% 50%;
   display: inline-block;
-  height: 35px;
+  height: 80px;
   width: 35px;
   position: relative;
   top: 10px;
   margin-right: 20px;
 }
-span.instagram-icon {
+a.instagram-icon {
   background: asset-url("instagramicon.png") transparent no-repeat 50% 50%;
   display: inline-block;
-  height: 35px;
+  height: 80px;
   width: 35px;
   position: relative;
   top: 10px;

@@ -7,7 +7,9 @@ div.col-main-body
       div.footer-info
         span.capitalize {{name}}
         span.price ${{price}}
-      button.btn.btn-black continue to features    >
+      if hasProductAndColors
+        link-to 'custom.features' model tagName='button' classNames='btn btn-black'
+          |continue to features >
 
   div.col-sm-7.centered
     render 'custom-item' model

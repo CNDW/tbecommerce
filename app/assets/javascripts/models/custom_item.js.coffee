@@ -30,6 +30,14 @@ App.CustomItem = DS.Model.extend
     'complete': 4
 
   hasProduct: Em.computed.notEmpty 'product_id'
+  hasColors: Em.computed 'selectedColors.@each.isSelected', ->
+    selectedColors = @get 'selectedColors'
+    color_length = selectedColors.get 'length'
+    if (color_length > 0)
+      selectedColors.forEach (color)->
+        color_length -= 1 if color.get('isSelected')
+    return color_length is 0
+
   noSelectedColors: Em.computed.empty 'selectedColors'
   colorOptions: Em.computed.alias 'product.colorTypes'
 
@@ -42,15 +50,10 @@ App.CustomItem = DS.Model.extend
   isComplete: Em.computed 'completedStep', ->
     @get('completedStep') > 1
 
-  completedStep: Em.computed 'product_id', 'slectedColors.@each.isSelected', ->
+  completedStep: Em.computed 'product_id', 'selectedColors.@each.isSelected', ->
     step = 0
     step += 1 if @get('hasProduct')
-    selectedColors = @get 'selectedColors'
-    color_length = selectedColors.get 'length'
-    if (color_length > 0)
-      selectedColors.forEach (color)->
-        color_length -= 1 if color.get('isSelected')
-      step += 1 if color_length is 0
+    step += 1 if @get('hasColors')
     return step
 
   basePrice: (->

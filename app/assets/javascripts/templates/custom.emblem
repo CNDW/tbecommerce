@@ -3,10 +3,12 @@ div.custom-shop-navbar
     ul.custom-shop-navs
       link-to 'custom.product' model tagName='li'
         a Item
-      link-to 'custom.colors' model tagName='li'
-        a Colors
-      link-to 'custom.features' model tagName='li'
-        a Features
+      if hasProduct
+        link-to 'custom.colors' model tagName='li'
+          a Colors
+      if hasProductAndColors
+        link-to 'custom.features' model tagName='li'
+          a Features
 
 div.row
   outlet

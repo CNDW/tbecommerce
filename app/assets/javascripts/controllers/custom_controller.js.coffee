@@ -1,6 +1,8 @@
 App.CustomController = Em.ObjectController.extend
   product: Em.computed.alias 'model.product'
   hasProduct: Em.computed.alias 'model.hasProduct'
+  hasProductAndColors: Em.computed 'model.hasProduct', 'model.hasColors', ->
+    @get('hasProduct') and @get('hasColors')
   price: Em.computed.alias 'model.price'
   products: Em.computed ->
     @store.all('product').filter (product)->
