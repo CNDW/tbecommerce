@@ -230,8 +230,9 @@ App.Order = DS.Model.extend
         error: ->
           debugger
 
-  createPayment: (payment_method_id, card)->
+  createPayment: (payment_method, card)->
     self = this
+    payment_method_id = payment_method.get('id')
     return new Em.RSVP.Promise (resolve, reject)->
       return resolve() if self.get('state') is 'complete'
       payment_source = {}

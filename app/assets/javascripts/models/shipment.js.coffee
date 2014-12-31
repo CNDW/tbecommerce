@@ -18,5 +18,6 @@ App.Shipment = DS.Model.extend
   # selected_shipping_rate: {id:32, name:dog courier, cost:0.0, selected:true, shipping_method_id:2, display_cost:$0.00}
   # shipping_rates: [{id:32, name:dog courier, cost:0.0, selected:true, shipping_method_id:2, display_cost:$0.00},…]
 
-  line_items: Em.computed.filter 'order.line_items', (item, index)->
-    @get('manifest').mapBy('custom_item_hash').contains(item.get('custom_item_hash'))
+  line_items: Em.computed 'order.line_items', 'manifest', ->
+    @get('order.line_items').filter (item, index)->
+      @get('manifest').mapBy('custom_item_hash').contains(item.get('custom_item_hash'))
