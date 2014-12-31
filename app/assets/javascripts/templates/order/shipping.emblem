@@ -1,8 +1,6 @@
 div.col-main-body.bottom-border
-  div.col-sm-4
-  div.col-sm-2.right-border
 
-  div.col-sm-6
+  div.col-sm-8.col-sm-offset-2
     div.col-sm-6
       render 'address' model.ship_address
     div.col-sm-6

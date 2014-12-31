@@ -1,4 +1,4 @@
-div.col-sm-4
+div.col-sm-4.right-border
   h4.upcase Shipment
   each shipping_rate in model.shipping_rates
     div.custom-features-line
@@ -7,7 +7,7 @@ div.col-sm-4
         =shipping_rate.name
       span.price.right
         =shipping_rate.display_cost
-div.col-sm-8.right-border
+div.col-sm-8
   h4.upcase Manifest
   each item in model.line_items
     div.custom-features-line

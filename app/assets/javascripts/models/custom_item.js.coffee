@@ -8,7 +8,7 @@ App.CustomItem = DS.Model.extend
   inCart: Em.computed.equal 'state', 'cart'
   order_notes: DS.attr 'string', defaultValue: null
 
-  variant_id: Em.computed.alias 'product.master_variant_id'
+  variant_id: Em.computed.alias 'product.id'
 
   state: Em.computed 'lineItem', ->
     return 'precart' if @get('lineItem') == null
