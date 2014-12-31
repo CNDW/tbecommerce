@@ -12,7 +12,7 @@ Spree.config do |config|
   # config.auto_capture = true
   config.always_include_confirm_step = false
 end
-
+Rails.application.config.spree.stock_splitters = []
 Spree::Auth::Config[:registration_step] = false
 
 Spree::Api::Config[:requires_authentication] = false

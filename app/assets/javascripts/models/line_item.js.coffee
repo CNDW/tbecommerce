@@ -11,6 +11,10 @@ App.LineItem = DS.Model.extend
   variant: DS.belongsTo 'variant'
   order_notes: DS.attr 'string'
 
+  variant_id: Em.computed ->
+    return @get('variant.id') if @get('variant')
+    @get('customItem.variant_id')
+
   is_custom: Em.computed.alias 'variant.is_master'
 
   didLoad: ->
@@ -31,7 +35,9 @@ App.LineItem = DS.Model.extend
   #   !@get('inOrder') and @get('isComplete')
   # ).property('inOrder', 'isComplete')
 
-  name: Em.computed.alias 'customItem.name'
+  name: Em.computed ->
+    return "Custom #{@get('customItem.name')}" if @get('customItem.name')
+    "#{@get('variant.name')}, #{@get('variant.instock_description')}"
 
   remove: ->
     @get('customItem').removeLineItem()

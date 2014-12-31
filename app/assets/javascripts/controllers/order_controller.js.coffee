@@ -7,3 +7,5 @@ App.OrderIndexController = Em.ObjectController.extend
 App.OrderPaymentController = Em.ObjectController.extend
   cards: Em.A()
   currentCard: ''
+
+App.OrderShippingController = Em.ObjectController.extend()

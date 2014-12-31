@@ -1,8 +1,0 @@
-h4.upcase shipping method
-each shipping_rate in model.shipping_rates
-  div.custom-features-line
-    radio-button classNames='left' name='shipping-rate-radio' value=shipping_rate checked=model.selected_shipping_rate
-    span.name.interactible
-      =shipping_rate.name
-    span.price.right
-      =shipping_rate.display_cost

@@ -5,4 +5,4 @@ App.CartController = Em.Controller.extend
     , 0
 
   display_total: Em.computed 'total', ->
-    '$'+(@get('total').toFixed(2))
+    '$'+(Number(@get('total')).toFixed(2))
