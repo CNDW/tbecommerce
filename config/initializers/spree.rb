@@ -32,3 +32,5 @@ Spree::Api::ApiHelpers.option_type_attributes.concat([:description, :required, :
 Spree::PermittedAttributes.address_attributes.concat([:email])
 
 Spree.user_class = "Spree::User"
+
+Spree::Variant.where('is_master', true).update_all(track_inventory: false)
