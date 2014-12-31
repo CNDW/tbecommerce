@@ -209,10 +209,9 @@ App.Order = DS.Model.extend
             alert(message.join('\n'))
           reject(self)
 
-
   serializeShipments: ->
     shipments_attributes = {}
-    $.each @get('shipments.content'), (index, shipment)->
+    $.each @get('shipments.currentState'), (index, shipment)->
       shipments_attributes["#{index}"] =
         selected_shipping_rate_id: shipment.get 'selected_shipping_id'
         id: shipment.get 'id'

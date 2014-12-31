@@ -1,4 +1,5 @@
 div.col-main-body.bottom-border
+  h1 Order Complete!
   div.col-sm-6.right-border
     each line_item in model.line_items
       render 'line-item' line_item

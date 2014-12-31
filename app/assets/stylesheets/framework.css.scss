@@ -630,7 +630,14 @@ ul.top-navs {
 .selection-fields {
   margin: 10px 0 20px 0;
   .field {
-    height: 30px;
+    height: 40px;
+    .field-inputs {
+      width: 200px;
+      float: right;
+      select:first-of-type {
+        margin-right: 20px;
+      }
+    }
   }
   .field-label {
     color: $text-medium;

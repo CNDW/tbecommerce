@@ -61,20 +61,20 @@ App.OrderPaymentRoute = Em.Route.extend App.CompletedOrderMixin,
       controller.set 'model', model
       unused_cards = data.filterBy('used', false)
       controller.set 'cards', unused_cards
-      if Em.empty(unused_cards)
-        card = @store.createRecord 'card'
-        controller.set 'currentCard', card
-      else
-        controller.set 'currentCard', unused_cards.get('firstObject')
+      # if Em.empty(unused_cards)
+      card = @store.createRecord 'card'
+      controller.set 'currentCard', card
+      # else
+      #   controller.set 'currentCard', unused_cards.get('firstObject')
 
   actions:
     submitOrder: (card, order)->
       self = this
       card.createToken(order).then ->
-        order.createPayment(order.get('payment_methods.firstObject.id'), card).then ->
+        order.createPayment(order.get('payment_methods').findBy('method_type', 'stripe'), card).then ->
           order.completePayment().then ->
             card.set 'used', true
-            card.save()
+            # card.save()
             self.transitionTo 'order.completed', order
 
 App.OrderCompletedRoute = Em.Route.extend

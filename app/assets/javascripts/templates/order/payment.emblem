@@ -1,9 +1,6 @@
 div.col-main-body
   div.row-line-item.bottom-border.text-medium
     div.col-sm-4
-      each payment_method in model.payment_methods
-        h4
-          =payment_method.name
     div.col-sm-6.selection-fields
       render 'card' currentCard
 
