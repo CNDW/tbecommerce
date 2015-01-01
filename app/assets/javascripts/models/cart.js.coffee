@@ -63,5 +63,6 @@ App.Cart = DS.Model.extend
         self.set('isUpdating', no)
         return payload
       error: ->
+        self.createOrder()
         self.set('isUpdating', no)
         return arguments
