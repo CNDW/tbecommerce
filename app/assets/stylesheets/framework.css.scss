@@ -632,7 +632,7 @@ ul.top-navs {
   .field {
     height: 40px;
     .field-inputs {
-      width: 200px;
+      min-width: 200px;
       float: right;
       select:first-of-type {
         margin-right: 20px;
