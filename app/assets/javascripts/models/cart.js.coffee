@@ -62,4 +62,3 @@ App.Cart = DS.Model.extend
         error: ->
           self.createOrder().then ->
             resolve()
-          return arguments
