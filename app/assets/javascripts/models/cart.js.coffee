@@ -9,7 +9,8 @@ App.Cart = DS.Model.extend
   hasOrder: Em.computed.notEmpty 'order_id'
   isCreated: Em.computed.notEmpty 'token'
 
-  isUpdating: no
+  getOrder: ->
+
 
   resetCart: ->
     self = this
@@ -47,22 +48,21 @@ App.Cart = DS.Model.extend
   fetchOrder: ->
     self = this
     return new Em.RSVP.Promise (resolve, reject)->
-      self.updateOrder().always ()->
+      self.updateOrder().then ()->
         resolve(self.get('order'))
 
   updateOrder: ->
     self = this
-    @set('isUpdating', no)
-    $.ajax "api/orders/#{self.get('number')}",
-      dataType: "json"
-      data:
-        order_token: self.get('token')
-      success: (payload)->
-        self.store.pushPayload 'order', {order: payload}
-        self.set 'order', self.store.getById('order', payload.id)
-        self.set('isUpdating', no)
-        return payload
-      error: ->
-        self.createOrder()
-        self.set('isUpdating', no)
-        return arguments
+    return new Em.RSVP.Promise (resolve, reject)->
+      $.ajax "api/orders/#{self.get('number')}",
+        dataType: "json"
+        data:
+          order_token: self.get('token')
+        success: (payload)->
+          self.store.pushPayload 'order', {order: payload}
+          self.set 'order', self.store.getById('order', payload.id)
+          resolve(payload)
+        error: ->
+          self.createOrder().then ->
+            resolve()
+          return arguments

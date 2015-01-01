@@ -56,7 +56,7 @@ App.ApplicationRoute = Em.Route.extend
         @transitionTo 'cart'
         return
       cart = @modelFor 'application'
-      order = @store.getById 'order', cart.get('order_id')
+      order = cart.getOrder()
       order.createLineItem(item).then ->
         if item.isCustomItem
           item.set('inShop', false)
