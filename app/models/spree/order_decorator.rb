@@ -28,5 +28,9 @@ module Spree
     def temporary_credit_card
       true
     end
+    #don't mail
+    def deliver_order_confirmation_email
+      true
+    end
   end
 end
