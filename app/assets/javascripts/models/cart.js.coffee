@@ -9,9 +9,6 @@ App.Cart = DS.Model.extend
   hasOrder: Em.computed.notEmpty 'order_id'
   isCreated: Em.computed.notEmpty 'token'
 
-  getOrder: ->
-
-
   resetCart: ->
     self = this
     @set 'token', null
