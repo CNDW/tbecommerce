@@ -17,5 +17,8 @@
         <% end %>
       </defs>
     </svg>
+    <script>
+      Stripe.setPublishableKey("<%= Spree::PaymentMethod.find_by_type('Spree::Gateway::StripeGateway').preferences[:publishable_key] %>");
+    </script>
   </body>
 </html>
