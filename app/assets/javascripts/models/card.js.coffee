@@ -79,3 +79,7 @@ App.Card = DS.Model.extend
         resolve(validCard)
       else
         reject('Invalid Card')
+
+  clearData: ->
+    @set 'token', null
+    @set 'number', ''

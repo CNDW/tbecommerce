@@ -227,8 +227,9 @@ App.Order = DS.Model.extend
           order_token: self.get('token')
         success: (payload)->
           resolve(payload)
-        error: ->
-          debugger
+        error: (xhr)->
+          alert xhr.responseJSON.errors.base.join('\n')
+          reject(xhr)
 
   createPayment: (payment_method, card)->
     self = this
@@ -255,9 +256,10 @@ App.Order = DS.Model.extend
           self.store.pushPayload 'order',
             order: payload
           resolve(payload)
-        error: ->
-          reject(arguments)
-          debugger
+        error: (xhr)->
+          alert xhr.responseJSON.errors.base.join('\n')
+          card.clearData()
+          reject(xhr)
 
   completePayment: ->
     self = this
@@ -273,24 +275,7 @@ App.Order = DS.Model.extend
           self.store.pushPayload 'order',
             order: payload
           resolve(payload)
-        error: ->
-          reject(arguments)
-          debugger
+        error: (xhr)->
+          alert xhr.responseJSON.errors.base.join('\n')
+          reject(xhr)
 
-  # Not using, possible remove
-  purchaseOrder: (card)->
-    self = this
-    return new Em.RSVP.Promise (resolve, reject)->
-      $.ajax "api/orders/#{self.get('number')}/payments/#{self.get('payment_id')}/purchase",
-        type: "PUT"
-        datatype: 'json'
-        data:
-          order_token: self.get('token')
-          creditcard: card.get('token')
-          money: self.get('total')
-        success: (payload)->
-          debugger
-          resolve()
-        error: ->
-          debugger
-          reject(arguments)

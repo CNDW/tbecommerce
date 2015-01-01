@@ -1,5 +1,5 @@
 div.col-main-body
-  div.row-line-item.bottom-border.text-medium
+  div.row-line-item.text-medium
     div.col-sm-4
     div.col-sm-6.selection-fields
       render 'card' currentCard

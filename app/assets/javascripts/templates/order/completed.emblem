@@ -9,3 +9,5 @@ div.col-main-body.bottom-border
           span.upcase total
           span.price {{model.display_total}}
   div.col-sm-6
+    h3 Delivery
+    partial 'partials/turnaround'
