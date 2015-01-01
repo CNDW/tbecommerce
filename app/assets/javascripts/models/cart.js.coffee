@@ -21,8 +21,8 @@ App.Cart = DS.Model.extend
   didLoad: ->
     @get('order') if @get('order_id')
 
-  createOrder: ->
-    return if @get 'isCreated'
+  createOrder: (force)->
+    return if (@get('isCreated') and !force)
     self = this
     return new Em.RSVP.Promise (resolve, reject)->
       $.ajax 'api/orders',
@@ -60,5 +60,5 @@ App.Cart = DS.Model.extend
           self.set 'order', self.store.getById('order', payload.id)
           resolve(payload)
         error: ->
-          self.createOrder().then ->
+          self.createOrder(true).then ->
             resolve()
