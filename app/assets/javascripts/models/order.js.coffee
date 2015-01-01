@@ -92,9 +92,9 @@ App.Order = DS.Model.extend
             self.store.pushPayload 'order',
               order: data
             resolve(data)
-          error: ->
-            debugger
-            reject(arguments)
+          error: (error, type, name)->
+            alert(error.responseText)
+            reject(error, type, name)
       else if targetStep > currentStep + 1
         reject(self)
       else

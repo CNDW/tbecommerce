@@ -57,11 +57,11 @@ App.Variant = DS.Model.extend
     "pvi#{@get('variant_id')}"
 
   getColorSegment: ->
-    segment = @get('variant_colors').map (selection)->
+    segment = @get('variant_colors').sortBy('color_type_id').map (selection)->
       "i#{selection.color_type_id}s#{selection.color_value_id}"
     "ct#{segment.join('')}"
 
   getOptionSegment: ->
-    segment = @get('option_values').map (option)->
+    segment = @get('option_values').sortBy('id').map (option)->
       "i#{option.get('id')}"
     "ov#{segment.join('')}"

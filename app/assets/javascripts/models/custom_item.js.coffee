@@ -90,12 +90,12 @@ App.CustomItem = DS.Model.extend
     "pvi#{@get('variant_id')}"
 
   getColorSegment: ->
-    segment = @get('selectedColors').map (selection)->
+    segment = @get('selectedColors').sortBy('colorType_id').map (selection)->
       "i#{selection.get('colorType_id')}s#{selection.get('colorValue_id')}"
     "ct#{segment.join('')}"
 
   getOptionSegment: ->
-    segment = @get('customOptions').filterBy('selected', true).map (option)->
+    segment = @get('customOptions').filterBy('selected', true).sortBy('optionValue_id').map (option)->
       "i#{option.get('optionValue_id')}"
     "ov#{segment.join('')}"
 
