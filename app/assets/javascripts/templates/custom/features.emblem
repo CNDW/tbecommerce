@@ -10,7 +10,7 @@ div.col-main-body
             span.icon-info.right.interactable click="openModal 'property' option"
       div.custom-selection-field
         div.selection-fields
-          =textarea value=model.order_notes placeholder='Order notes, please include information on height, build, gender for sizing purposes'
+          =textarea value=model.order_notes placeholder='Order notes, please include information on height and build for sizing purposes if applicable'
 
     div.col-sm-11.custom-field-footer
       div.footer-info
