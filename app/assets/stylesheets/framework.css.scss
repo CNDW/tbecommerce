@@ -691,6 +691,7 @@ ul.top-navs {
 }
 
 .custom-item-display {
+  @extend .col-sm-7;
   max-height: 400px;
 }
 
@@ -721,6 +722,12 @@ ul.top-navs {
     margin: 0;
     height: 44px;
     width: 44px;
+  }
+}
+
+.product-mock {
+  svg {
+    max-height: 400px
   }
 }
 //--------------------------------------------
