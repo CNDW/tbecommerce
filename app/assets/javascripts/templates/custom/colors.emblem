@@ -11,7 +11,7 @@ div.col-main-body
         link-to 'custom.features' model tagName='button' classNames='btn btn-black'
           |continue to features >
 
-  div.col-sm-7.centered
+  div.col-sm-7.centered.custom-item-display
     render 'custom-item' model
 
 partial 'custom/description'
