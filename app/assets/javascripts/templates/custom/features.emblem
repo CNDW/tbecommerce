@@ -18,7 +18,7 @@ div.col-main-body
         span.price ${{price}}
       button.btn.btn-black click="addToCart model" add to cart  >
 
-  div.col-sm-7.centered.custom-item-display
+  div.col-sm-7.centered
     render 'custom-item' model
 
 partial 'custom/description'
