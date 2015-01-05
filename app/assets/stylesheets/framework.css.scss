@@ -725,8 +725,8 @@ ul.top-navs {
     max-height: 400px;
   }
 }
-.mock-thumb
-  @extends .col-sm-12;
+.mock-thumb {
+  @extend .col-sm-12;
   padding: 0;
   .product-mock {
     svg {
