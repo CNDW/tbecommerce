@@ -722,7 +722,16 @@ ul.top-navs {
 
 .product-mock {
   svg {
-    max-height: 400px
+    max-height: 400px;
+  }
+}
+.mock-thumb
+  @extends .col-sm-12;
+  padding: 0;
+  .product-mock {
+    svg {
+      max-height: 100px;
+    }
   }
 }
 //--------------------------------------------

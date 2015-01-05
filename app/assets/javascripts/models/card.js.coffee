@@ -43,7 +43,7 @@ App.Card = DS.Model.extend
             address_city: order.get 'bill_address.city'
             address_state: order.get 'bill_address.state_abbr'
             address_zip: order.get 'bill_address.zipcode'
-            address_country: order.get 'bill_address.country_name '
+            address_country: order.get 'bill_address.country_name'
           , (status, response)->
             if response.error
               alert response.error.message

@@ -2,7 +2,7 @@ if hasProduct
   if hasManyMocks
     div.col-sm-2
       each mock in mocks
-        div.col-sm-12.no-padding.interactable click='setActiveMock mock'
+        div.mock-thumb.interactable click='setActiveMock mock'
           product-mock custom_item=model mock=mock
     div.col-sm-10
       product-mock custom_item=model mock=active_mock
