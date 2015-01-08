@@ -48,7 +48,6 @@ App.ApplicationRoute = Em.Route.extend
 
 #todo: refactor
     addToCart: (item)->
-      event.preventDefault()
       self = this
       if item.get 'inCart'
         item.set('inShop', false)
