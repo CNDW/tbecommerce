@@ -1,5 +1,8 @@
 module Spree
   Order.class_eval do
+
+    before_save :update_order_email
+
     def require_email
       false
     end
@@ -28,13 +31,19 @@ module Spree
     def temporary_credit_card
       true
     end
-    #don't mail
-    # def deliver_order_confirmation_email
-    #   true
-    # end
+
+    # don't mail
+    def deliver_order_confirmation_email
+      true
+    end
 
     def link_by_email
       self.email = user.email if self.user
     end
+
+    def update_order_email
+      self.email = self.bill_address.email if self.bill_address and self.email == nil
+    end
+
   end
 end
