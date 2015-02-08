@@ -29,8 +29,12 @@ module Spree
       true
     end
     #don't mail
-    def deliver_order_confirmation_email
-      true
+    # def deliver_order_confirmation_email
+    #   true
+    # end
+
+    def link_by_email
+      self.email = user.email if self.user
     end
   end
 end
