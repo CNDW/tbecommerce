@@ -7,8 +7,6 @@ module Spree
 
     before_save :deserialize_hash, unless: :skip_callbacks
 
-
-
     def has_notes
       self.order_notes != nil
     end
@@ -65,16 +63,9 @@ module Spree
       @skip_callbacks = false
     end
 
-    def option_amount
-      adjustments.custom_option.map do |option|
-        option.amount
-      end.compact.sum
-    end
-
     private
       def skip_callbacks
         @skip_callbacks ||= false
       end
-
   end
 end

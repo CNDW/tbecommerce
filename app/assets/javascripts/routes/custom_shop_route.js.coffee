@@ -3,7 +3,7 @@ App.CustomShopRoute = Em.Route.extend
     store = @store
     model = {}
     items = store.all('custom_item').filterBy('inShop', true);
-    if Em.isEmpty(items)
+    if Em.empty(items)
       item = store.createRecord 'custom_item',
         inShop: true
         shop_state: 'new'

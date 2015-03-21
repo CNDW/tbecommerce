@@ -96,7 +96,7 @@ App.Order = DS.Model.extend
             alert(error.responseText)
             reject(error, type, name)
       else if targetStep > currentStep + 1
-        reject()
+        reject(self)
       else
         resolve(self)
 
@@ -172,7 +172,7 @@ App.Order = DS.Model.extend
               errors = errs.join(', ')
               message.push "#{title}: #{errors}\n"
             alert(message.join('\n'))
-          reject()
+          reject(self)
 
   serializeAddresses: ->
     if @get('useShippingAddress')
@@ -207,7 +207,7 @@ App.Order = DS.Model.extend
               errors = errs.join(', ')
               message.push "#{title}: #{errors}\n"
             alert(message.join('\n'))
-          reject()
+          reject(self)
 
   serializeShipments: ->
     shipments_attributes = {}
