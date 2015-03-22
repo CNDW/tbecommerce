@@ -1,5 +1,0 @@
-div.catalogue-item-image
-  img src=activeSlide.large_url
-div.catalogue-item-thumbs
-  each thumbnails
-    carousel-thumbnail classNames='thumb' mini_url=mini_url index=index activeIndex=activeIndex action='setSlide'

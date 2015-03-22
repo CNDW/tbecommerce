@@ -1,0 +1,1 @@
+App.PropertyController = Em.ObjectController.extend()

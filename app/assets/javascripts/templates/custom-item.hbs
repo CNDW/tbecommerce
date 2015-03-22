@@ -1,0 +1,20 @@
+{{#if hasProduct}}
+  {{#if hasManyMocks}}
+    <div class="col-sm-2">
+      {{#each mock in mocks}}
+        <div {{action "setActiveMock" mock on="click"}} class="mock-thumb interactable">
+          {{product-mock custom_item=model mock=mock}}
+        </div>
+      {{/each}}
+    </div>
+    <div class="col-sm-10">
+      {{product-mock custom_item=model mock=active_mock}}
+    </div>
+  {{else}}
+    <div class="col-sm-12">
+      {{product-mock custom_item=model mock=active_mock}}
+    </div>
+  {{/if}}
+{{else}}
+  {{partial "custom-index"}}
+{{/if}}

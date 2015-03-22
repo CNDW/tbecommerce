@@ -1,3 +1,0 @@
-p
-  b ${{model.price}}
-p.gray {{model.specs}}

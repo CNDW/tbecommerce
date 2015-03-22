@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="catalogue-item-section">
+    <div class="catalogue-item-carousel">
+      {{render "carousel" model.images}}
+    </div>
+    <div class="catalogue-item-description">
+      <div class="description-column">
+        <h3 class="upcase">
+          {{model.name}}
+        </h3>
+        <p>
+          {{model.description}}
+        </p>
+        {{#link-to "custom_shop" tagName="button" classNames="btn btn-black"}}
+          custom order
+        {{/link-to}}
+        {{#link-to "instock.index" tagName="button" classNames="btn btn-black"}}
+          in stock
+        {{/link-to}}
+      </div>
+    </div>
+  </div>
+  <div class="catalogue-item-section">
+    <div class="item-detail-col">
+      <div class="detail-column">
+        {{partial "product/specs"}}
+      </div>
+    </div>
+    <div class="item-detail-col">
+      {{#toggle-menu classNames="custom-selection-header"}}
+        <span class="custom-selection-title">
+          standards
+        </span>
+        <span class="toggle-menu-icon right">
+        </span>
+      {{/toggle-menu}}
+      <div class="section-content">
+        <ul>
+          {{render "properties" model.properties}}
+        </ul>
+      </div>
+    </div>
+    <div class="item-detail-col">
+      {{#toggle-menu classNames="custom-selection-header"}}
+        <span class="custom-selection-title">
+          customization options
+        </span>
+        <span class="toggle-menu-icon right">
+        </span>
+      {{/toggle-menu}}
+      <div class="section-content">
+        <ul>
+          {{#each optionType in model.optionTypes}}
+            {{render "properties" optionType.optionValues}}
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

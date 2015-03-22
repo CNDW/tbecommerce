@@ -6,6 +6,7 @@ App.CustomOption = DS.Model.extend
   description: Em.computed.alias 'optionValue.description'
   price: DS.attr 'number'
   presentation: Em.computed.alias 'optionValue.presentation'
+  large_url: Em.computed.alias 'optionValue.large_url'
 
   position: DS.attr 'number', defaultValue: 0
 

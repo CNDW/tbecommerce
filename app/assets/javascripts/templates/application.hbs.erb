@@ -1,0 +1,98 @@
+{{outlet 'modal'}}
+<div class="header row">
+  <div class="logo col-sm-2 col-md-offset-2">
+    {{#link-to "index" tagName="div"}}
+      <img src="<%= asset_path('logo.png') %>" />
+    {{/link-to}}
+  </div>
+  <ul class="top-navs col-sm-8 col-md-7">
+    <li>
+      <a {{bind-attr class=":top-nav catalogueActive:active"}} {{action "toggleCatalogue" on="click"}}>catalogue</a>
+      <ul class="catalogue-nav">
+        {{#link-to "catalogue.bags" tagName="li"}}
+          <span {{action "deactivateCatalogue" on="click"}}>bags</span>
+        {{/link-to}}
+        {{#link-to "catalogue.apparel" tagName="li"}}
+          <span {{action "deactivateCatalogue" on="click"}}>apparel</span>
+        {{/link-to}}
+        {{#link-to "catalogue.utility" tagName="li"}}
+          <span {{action "deactivateCatalogue" on="click"}}>utility</span>
+        {{/link-to}}
+      </ul>
+    </li>
+    <li>
+      {{#link-to "instock" classNames="top-nav"}}
+        <span {{action "deactivateCatalogue" on="click"}}>in stock</span>
+      {{/link-to}}
+    </li>
+    <li>
+      {{#link-to "custom_shop" classNames="top-nav"}}
+        <span {{action "deactivateCatalogue" on="click"}}>custom shop</span>
+      {{/link-to}}
+    </li>
+    <li>
+      {{#link-to "gallery" classNames="top-nav"}}
+        <span {{action "deactivateCatalogue" on="click"}}>gallery</span>
+      {{/link-to}}
+    </li>
+    <li>
+      {{#link-to "about" classNames="top-nav"}}
+        <span {{action "deactivateCatalogue" on="click"}}>about</span>
+      {{/link-to}}
+    </li>
+    <li>
+      {{#link-to "cart"}}
+        {{#unless cartOrder.isEmpty}}
+          <span class="shopping-cart-counter">{{cartOrder.length}}</span>
+          <span class="glyphicon glyphicon-shopping-cart"/>
+        {{else}}
+          <span class="glyphicon glyphicon-shopping-cart empty"/>
+        {{/unless}}
+      {{/link-to}}
+    </li>
+  </ul>
+</div>
+{{outlet}}
+<div class="footer row">
+  <ul class="bottom-navs">
+    <li>
+      {{#link-to "index" tagName="div"}}
+        <span class="trash-icon"/>
+      {{/link-to}}
+    </li>
+    <li>
+      {{#link-to "catalogue.bags" tagName="div"}}
+        <span>catalogue</span>
+      {{/link-to}}
+    </li>
+    <li>
+      {{#link-to "instock" tagName="div"}}
+        <span>in stock</span>
+      {{/link-to}}
+    </li>
+    <li>
+      {{#link-to "custom_shop" tagName="div"}}
+        <span>custom shop</span>
+      {{/link-to}}
+    </li>
+    <li>
+      {{#link-to "gallery" tagName="div"}}
+        <span>gallery</span>
+      {{/link-to}}
+    </li>
+    <li>
+      {{#link-to "about" tagName="div"}}
+        <span>about</span>
+      {{/link-to}}
+    </li>
+    <li>
+      <a href="https://twitter.com/trashbags" class="twitter-icon"></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/TrashMessengerBags" class="facebook-icon"></a>
+    </li>
+    <li>
+      <a href="http://instagram.com/trashmessengerbags/" class="instagram-icon"></a>
+    </li>
+  </ul>
+</div>

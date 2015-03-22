@@ -1,5 +1,5 @@
 App.ProductMockComponent = Em.Component.extend
-  layout: Em.Handlebars.compile "<div class='product-mock'> </div>"
+  layout: Em.HTMLBars.compile "<div class='product-mock'> </div>"
 
   didInsertElement: ->
     Em.run.scheduleOnce 'afterRender', this, @insertSVG

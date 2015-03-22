@@ -1,0 +1,43 @@
+<div class="col-main-body">
+  <div class="item-detail-col">
+    {{#toggle-menu classNames="custom-selection-header"}}
+      <span class="custom-selection-title">
+        specs
+      </span>
+      <span class="toggle-menu-icon right">
+      </span>
+    {{/toggle-menu}}
+    <div class="section-content">
+      {{partial "product/specs"}}
+      <p>
+        {{model.description}}
+      </p>
+    </div>
+  </div>
+  <div class="item-detail-col">
+    {{#toggle-menu classNames="custom-selection-header"}}
+      <span class="custom-selection-title">
+        turnaround
+      </span>
+      <span class="toggle-menu-icon right">
+      </span>
+    {{/toggle-menu}}
+    <div class="section-content">
+      {{partial "partials/turnaround"}}
+    </div>
+  </div>
+  <div class="item-detail-col">
+    {{#toggle-menu classNames="custom-selection-header"}}
+      <span class="custom-selection-title">
+        standards
+      </span>
+      <span class="toggle-menu-icon right">
+      </span>
+    {{/toggle-menu}}
+    <div class="section-content">
+      <ul>
+        {{render "properties" model.properties}}
+      </ul>
+    </div>
+  </div>
+</div>

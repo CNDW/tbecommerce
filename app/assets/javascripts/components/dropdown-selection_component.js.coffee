@@ -1,7 +1,7 @@
 App.DropdownSelectionComponent = Em.Component.extend
   classNames: 'dropdown-menu-container'
 
-  layout: Em.Handlebars.compile "<div class='dropdown-selection'></div>"
+  layout: Em.HTMLBars.compile "<div class='dropdown-selection'></div>"
 
   didInsertElement: ->
     self = this

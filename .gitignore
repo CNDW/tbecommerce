@@ -25,3 +25,6 @@
 /config/secret_token.rb
 
 script.rb
+
+# Rubymine config
+/.idea

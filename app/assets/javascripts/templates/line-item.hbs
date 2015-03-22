@@ -1,0 +1,33 @@
+<div class="row-line-item bottom-border">
+  <div class="col-sm-7 line-item">
+    <div class="head">
+      <span class="capitalize">
+        {{name}}
+      </span>
+    </div>
+    <div class="col-sm-3">
+      {{#if model.is_custom}}
+        {{render "custom-item" model.customItem}}
+      {{else}}
+        <img {{bind-attr src="item_image"}} alt="loading..." class="img-responsive" />
+      {{/if}}
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <span class="capitalize">
+      {{model.quantity}}
+    </span>
+  </div>
+  <div class="col-sm-2">
+    <span class="capitalize">
+      $
+      {{model.total}}
+    </span>
+  </div>
+  <div class="col-sm-1">
+    {{#unless model.order_isComplete}}
+      <span {{action "removeFromCart" model on="click"}} class="icon-x interactable">
+      </span>
+    {{/unless}}
+  </div>
+</div>

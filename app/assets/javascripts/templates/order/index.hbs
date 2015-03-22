@@ -1,0 +1,25 @@
+<div class="col-main-body bottom-border">
+  <h4 class="upcase">
+    shipping address
+  </h4>
+  {{render "address-form" model.ship_address}}
+</div>
+<div class="col-main-body bottom-border">
+  <h4 class="upcase">
+    billing address
+  </h4>
+  <div class="billing-checkbox">
+    {{input type="checkbox" checked=model.useShippingAddress}}
+    <span class="field-label">
+      Use my shipping address
+    </span>
+  </div>
+  {{#unless model.useShippingAddress}}
+    {{render "address-form" model.bill_address}}
+  {{/unless}}
+</div>
+<div class="col-main-body">
+  <button {{action "completeCheckoutAddresses"}} class="btn btn-black">
+    continue
+  </button>
+</div>

@@ -1,2 +1,0 @@
-each property in model
-  li.capitalize {{property.name}}

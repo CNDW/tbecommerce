@@ -1,0 +1,45 @@
+<div class="col-main-body">
+  <div class="col-sm-5">
+    <div class="col-sm-11 no-padding">
+      <div class="custom-features">
+        {{#each option in options}}
+          <div class="custom-features-line">
+            <span {{action "clickOption" option on="click"}} class="name interactable">
+              {{option.name}}
+            </span>
+            {{input class="right" type="checkbox" checked=option.selected}}
+            <span class="price right">
+              $
+              {{option.price}}
+            </span>
+            <span {{action "openModal" "property" option on="click"}} class="icon-info right interactable">
+            </span>
+          </div>
+        {{/each}}
+      </div>
+      <div class="custom-selection-field">
+        <div class="selection-fields">
+          {{textarea value=model.order_notes placeholder="Order notes: Please include your height and build for backpack orders for sizing-- this way if you are 5'0 or 6'8 we can make your bag to fit you perfectly. Also please include notes on custom art, if applicable, or just say 'sup to the bag crew. Thanks!"}}
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-11 custom-field-footer">
+      <div class="footer-info">
+        <span class="capitalize">
+          {{name}}
+        </span>
+        <span class="price">
+          $
+          {{price}}
+        </span>
+      </div>
+      <button {{action "addToCart" model on="click"}} class="btn btn-black">
+        add to cart
+      </button>
+    </div>
+  </div>
+  <div class="col-sm-7 centered">
+    {{render "custom-item" model}}
+  </div>
+</div>
+{{partial "custom/description"}}

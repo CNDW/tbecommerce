@@ -1,0 +1,39 @@
+<div class="col-main-body">
+  <div class="col-sm-5">
+    {{#each category in categories}}
+      <div class="col-sm-11 custom-field-section">
+        {{#toggle-menu classNames="custom-selection-header"}}
+          <span class="custom-selection-title">
+            {{category.name}}
+          </span>
+          <span class="toggle-menu-icon right">
+          </span>
+        {{/toggle-menu}}
+        <div class="section-content">
+          {{#each type in category.types}}
+            <div class="custom-selection-field">
+              <div class="selection-category">
+                <span class="category-title">
+                  {{type.name}}
+                </span>
+                {{#each item in type.items}}
+                  {{#selection-option item=item action="setCustomProduct" custom_item=this}}
+                    <span>
+                      {{item.name}}
+                    </span>
+                  {{/selection-option}}
+                {{/each}}
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    {{/each}}
+  </div>
+  <div class="col-sm-7 centered">
+    {{render "custom-item" model}}
+  </div>
+</div>
+{{#if hasProduct}}
+  {{partial "custom/description"}}
+{{/if}}

@@ -1,0 +1,47 @@
+{{#each collection in instock_collections}}
+  <div class="stock-row">
+    <div class="col-main-body stock-section">
+      <h3>
+        {{collection.name}}
+         in stock
+      </h3>
+      {{#each item in collection.items}}
+        <div class="col-sm-4 stock-tile">
+          {{#link-to "instock.item" item tagName="div" classNames="tile-img"}}
+            <img {{bind-attr src="item.catalogue_image"}} alt="loading..." class="img-responsive" />
+          {{/link-to}}
+          <div class="tile-info">
+            {{#link-to "instock.item" item tagName="div"}}
+              <h4>
+                {{item.name}}
+              </h4>
+              <p>
+                {{item.instock_description}}
+              </p>
+            {{/link-to}}
+            <div class="stock-price">
+              <span class="price">
+                {{item.display_total_price}}
+              </span>
+              <button {{action "addToCart" item on="click"}} class="btn btn-black">
+                add to cart
+              </button>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+{{/each}}
+<div class="stock-row">
+  <div class="col-main-body stock-section">
+    <div class="stock-link">
+      <span>
+        All In Stock Items will ship within 3 business days, for other options please visit the
+      </span>
+      {{#link-to "custom_shop" tagName="button" classNames="btn btn-black"}}
+        custom shop
+      {{/link-to}}
+    </div>
+  </div>
+</div>

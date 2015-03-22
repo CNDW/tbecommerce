@@ -39,6 +39,7 @@ App.ApplicationRoute = Em.Route.extend
       @render template,
         into: 'application'
         outlet: 'modal'
+        controller: template
         model: model
 
     closeModal: ->

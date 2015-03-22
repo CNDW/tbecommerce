@@ -1,0 +1,26 @@
+<div class="stock-row">
+  <div class="col-main-body stock-item">
+    <div class="col-sm-8 stock-images">
+      {{render "carousel" model.images}}
+    </div>
+    <div class="col-sm-4 stock-item-details">
+      <h3>
+        {{model.product_name}}
+      </h3>
+      <p>
+        {{model.instock_description}}
+      </p>
+      <h3>
+        {{model.display_total_price}}
+      </h3>
+      {{#unless isUnavailable}}
+        <button {{action "addToCart" model on="click"}} class="btn btn-black">
+          add to cart
+        </button>
+      {{/unless}}
+      {{#link-to "product" model.product tagname="button" classNames="btn btn-black"}}
+        view in catalogue
+      {{/link-to}}
+    </div>
+  </div>
+</div>

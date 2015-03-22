@@ -1,0 +1,55 @@
+<div class="row-page-title bottom-border">
+  <div class="col-main-body no-margin">
+    <div class="page-title">
+      <span class="upcase">
+        shopping cart
+      </span>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-main-body">
+    <div class="row-line-item bottom-border text-medium">
+      <div class="col-sm-7">
+        <span class="upcase">
+          item
+        </span>
+      </div>
+      <div class="col-sm-2">
+        <span class="upcase">
+          quantity
+        </span>
+      </div>
+      <div class="col-sm-2">
+        <span class="upcase">
+          price
+        </span>
+      </div>
+      <div class="col-sm-1">
+        <span class="upcase">
+          remove
+        </span>
+      </div>
+    </div>
+    {{#each lineItem in model.line_items}}
+      {{render "line-item" lineItem}}
+    {{/each}}
+    <div class="row-line-item text-medium">
+      <div class="col-sm-7 line-item">
+        <div class="checkout">
+          <span class="upcase">
+            subtotal
+          </span>
+          <span class="price">
+            {{display_total}}
+          </span>
+        </div>
+        <div class="checkout">
+          <button {{action "checkout" model on="click"}} class="btn btn-black">
+            checkout
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
