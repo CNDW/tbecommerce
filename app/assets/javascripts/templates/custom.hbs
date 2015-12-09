@@ -2,22 +2,16 @@
   <div class="col-sm-10 col-sm-offset-1">
     <ul class="custom-shop-navs">
       {{#link-to "custom.product" model tagName="li"}}
-        <a>
-          Item
-        </a>
+        <a>Item</a>
       {{/link-to}}
       {{#if hasProduct}}
         {{#link-to "custom.colors" model tagName="li"}}
-          <a>
-            Colors
-          </a>
+          <a>Colors</a>
         {{/link-to}}
       {{/if}}
       {{#if hasProductAndColors}}
         {{#link-to "custom.features" model tagName="li"}}
-          <a>
-            Features
-          </a>
+          <a>Features</a>
         {{/link-to}}
       {{/if}}
     </ul>

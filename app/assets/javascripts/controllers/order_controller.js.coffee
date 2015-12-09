@@ -1,11 +1,11 @@
-App.OrderIndexController = Em.ObjectController.extend
+App.OrderIndexController = Em.Controller.extend
 
   actions:
     acceptChanges: ->
       @get('model')
 
-App.OrderPaymentController = Em.ObjectController.extend
+App.OrderPaymentController = Em.Controller.extend
   cards: Em.A()
   currentCard: ''
 
-App.OrderShippingController = Em.ObjectController.extend()
+App.OrderShippingController = Em.Controller.extend()

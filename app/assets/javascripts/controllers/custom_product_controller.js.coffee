@@ -1,4 +1,4 @@
-App.CustomProductController = Em.ObjectController.extend
+App.CustomProductController = Em.Controller.extend
   needs: ['custom']
   products: Em.computed.alias 'controllers.custom.products'
 
@@ -19,8 +19,3 @@ App.CustomProductController = Em.ObjectController.extend
           sum + add
         , 0) / items.length)
       .sortBy 'average_price'
-
-  # actions:
-  #   clickOption: (selection)->
-  #     selection.toggleProperty('selected')
-  #     return false

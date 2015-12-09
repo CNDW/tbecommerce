@@ -1,4 +1,4 @@
-App.AddressController = Em.ObjectController.extend
+App.AddressController = Em.Controller.extend
   name: (->
     "#{@get 'model.fullname'}"
   ).property('model.fullname')

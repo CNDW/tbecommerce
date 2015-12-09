@@ -1,20 +1,11 @@
 <div class="outlet-head-1">
-  <span class="capitalize">
-    featured items
-  </span>
+  <span class="capitalize">featured items</span>
 </div>
 {{#each featuredItem in featuredItems}}
   <div {{action "setCustomProduct" featuredItem on="click"}} class="item-tile col-sm-6">
     <img {{bind-attr src="featuredItem.catalogue_image"}} class="img-responsive" />
-    <h3 class="capitalize">
-      {{featuredItem.name}}
-    </h3>
-    <span class="price">
-      $
-      {{featuredItem.price}}
-    </span>
-    <span class="gray capitalize">
-      {{featuredItem.tagline}}
-    </span>
+    <h3 class="capitalize">{{featuredItem.name}}</h3>
+    <span class="price">${{featuredItem.price}}</span>
+    <span class="gray capitalize">{{featuredItem.tagline}}</span>
   </div>
 {{/each}}

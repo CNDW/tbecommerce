@@ -1,5 +1,5 @@
-App.CatalogueIndexController = Em.ArrayController.extend
-  types: (->
+App.CatalogueIndexController = Em.Controller.extend
+  types: Em.computed 'model', ->
     unsorted = @get('model').mapBy('product_type').uniq().map (item)->
       items = @get(item).sortBy 'price'
       total = 0
@@ -9,7 +9,7 @@ App.CatalogueIndexController = Em.ArrayController.extend
       {name: item, items: items, averagePrice: average}
     , this
     unsorted.sortBy 'averagePrice'
-  ).property('model')
+
   category: 'catalogue'
 
 

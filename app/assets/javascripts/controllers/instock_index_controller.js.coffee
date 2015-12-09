@@ -1,4 +1,4 @@
-App.InstockIndexController = Em.ArrayController.extend
+App.InstockIndexController = Em.Controller.extend
   types: Em.computed 'model', ->
     @get('model').mapBy('product.product_category').uniq()
 
@@ -26,5 +26,5 @@ App.InstockIndexController = Em.ArrayController.extend
       model.get('category') is 'apparel' and model.get('is_master') is false and model.get('total_not_in_cart') > 0
     .sortBy('price')
 
-App.InstockItemController = Em.ObjectController.extend
+App.InstockItemController = Em.Controller.extend
   isUnavailable: Em.computed.alias 'model.isUnavailable'

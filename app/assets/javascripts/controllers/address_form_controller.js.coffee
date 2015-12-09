@@ -1,4 +1,4 @@
-App.AddressFormController = Em.ObjectController.extend
+App.AddressFormController = Em.Controller.extend
   countries: (->
     @store.all('country').map (country)->
       {

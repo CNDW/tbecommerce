@@ -1,8 +1,11 @@
-App.CustomController = Em.ObjectController.extend
+App.CustomController = Em.Controller.extend
   product: Em.computed.alias 'model.product'
   hasProduct: Em.computed.alias 'model.hasProduct'
-  hasProductAndColors: Em.computed 'model.hasProduct', 'model.hasColors', ->
-    @get('hasProduct') and @get('hasColors')
+
+  hasColors: Em.computed.alias 'model.hasColors'
+
+  hasProductAndColors: Em.computed.and 'hasProduct', 'hasColors'
+
   price: Em.computed.alias 'model.price'
   products: Em.computed ->
     @store.all('product').filter (product)->
@@ -14,8 +17,5 @@ App.CustomController = Em.ObjectController.extend
 
   mock_index: 0
 
-  active_mock: (->
+  active_mock: Em.computed 'mocks', 'mock_index', ->
     @get('mocks').objectAt(@get('mock_index'))
-  ).property('mocks', 'mock_index')
-
-  builderStep: 1

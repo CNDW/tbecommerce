@@ -1,27 +1,19 @@
 <div class="col-sm-11 custom-field-section">
   {{#toggle-menu classNames="custom-selection-header"}}
     {{#unless isSelected}}
-      <span class="custom-selection-icon empty">
-      </span>
+      <span class="custom-selection-icon empty"></span>
     {{else}}
       <img {{bind-attr src=model.swatch}} class="custom-selection-icon" />
     {{/unless}}
-    <span class="custom-selection-title">
-      {{model.title}}
-    </span>
-    <span class="toggle-menu-icon right">
-    </span>
+    <span class="custom-selection-title">{{model.title}}</span>
+    <span class="toggle-menu-icon right"></span>
   {{/toggle-menu}}
   <div class="section-content">
     <div class="custom-selection-field">
       {{#if model.isUnselected}}
-        <div class="selection-header">
-          select a color
-        </div>
+        <div class="selection-header">select a color</div>
       {{else}}
-        <div class="selection-header">
-          {{model.name}}
-        </div>
+        <div class="selection-header">{{model.name}}</div>
       {{/if}}
       <div class="color-swatch-field">
         {{#each color in colors}}

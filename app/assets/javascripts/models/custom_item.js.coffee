@@ -56,9 +56,8 @@ App.CustomItem = DS.Model.extend
     step += 1 if @get('hasColors')
     return step
 
-  basePrice: (->
+  basePrice: Em.observer 'product_id', 'customOptions.@each.selected', ->
     Em.run.scheduleOnce 'actions', this, @recalculatePrice
-  ).observes('product_id', 'customOptions.@each.selected')
 
   product_id: DS.attr 'number', defaultValue: null
 

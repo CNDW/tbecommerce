@@ -1,4 +1,4 @@
-App.ShipmentController = Em.ObjectController.extend
+App.ShipmentController = Em.Controller.extend
   needs: ['order']
   radio_name: Em.computed ->
     "shipment-radio-#{@get('model.id')}"

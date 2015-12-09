@@ -47,6 +47,15 @@ App.ApplicationRoute = Em.Route.extend
         outlet: 'modal'
         parentView: 'application'
 
+    customBuilderWithProduct: (product)->
+      item = @store.createRecord 'custom_item',
+        inShop: true
+        shop_state: 'colors'
+      item.set('product_id', product.get('id'))
+      item.reloadRelationships()
+      item.save()
+      @transitionTo 'custom', item
+
 #todo: refactor
     addToCart: (item)->
       self = this
@@ -63,5 +72,5 @@ App.ApplicationRoute = Em.Route.extend
           item.save()
         self.transitionTo 'cart'
       , (xhr)->
-        unless item.isCustomItem and not xhr.responseJSON.errors.quantity
+        unless item.isCustomItem and not (xhr.responseJSON.errors && xhr.responseJSON.errors.quantity)
           alert 'The item you tried to add to cart is no longer in stock'

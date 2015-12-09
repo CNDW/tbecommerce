@@ -495,7 +495,8 @@ ul.top-navs {
     text-transform: uppercase;
   }
   p {
-    min-height: 57px;
+    height: 60px;
+    overflow-y: auto;
   }
 }
 
@@ -504,7 +505,7 @@ ul.top-navs {
   margin-left: -10px;
   padding-left: 10px;
   height: 33px;
-  width: 173px;
+  width: 176px;
   .price {
     margin-right: 10px;
     font-size: 14px;
@@ -538,7 +539,7 @@ ul.top-navs {
   padding-left: 0;
   margin-bottom: 0;
   li {
-    background-color: $line-color-light;
+    background-color: $line-color;
     cursor: pointer;
     border-top: $border-line;
     display: inline-block;

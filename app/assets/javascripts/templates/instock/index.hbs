@@ -1,10 +1,7 @@
 {{#each collection in instock_collections}}
   <div class="stock-row">
     <div class="col-main-body stock-section">
-      <h3>
-        {{collection.name}}
-         in stock
-      </h3>
+      <h3>{{collection.name}} in stock</h3>
       {{#each item in collection.items}}
         <div class="col-sm-4 stock-tile">
           {{#link-to "instock.item" item tagName="div" classNames="tile-img"}}
@@ -12,20 +9,12 @@
           {{/link-to}}
           <div class="tile-info">
             {{#link-to "instock.item" item tagName="div"}}
-              <h4>
-                {{item.name}}
-              </h4>
-              <p>
-                {{item.instock_description}}
-              </p>
+              <h4>{{item.name}}</h4>
+              <p>{{item.instock_description}}</p>
             {{/link-to}}
             <div class="stock-price">
-              <span class="price">
-                {{item.display_total_price}}
-              </span>
-              <button {{action "addToCart" item on="click"}} class="btn btn-black">
-                add to cart
-              </button>
+              <span class="price">{{item.display_total_price}}</span>
+              <button {{action "addToCart" item on="click"}} class="btn btn-black">add to cart</button>
             </div>
           </div>
         </div>

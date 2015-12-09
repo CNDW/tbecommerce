@@ -8,10 +8,7 @@
               {{option.name}}
             </span>
             {{input class="right" type="checkbox" checked=option.selected}}
-            <span class="price right">
-              $
-              {{option.price}}
-            </span>
+            <span class="price right">${{option.price}}</span>
             <span {{action "openModal" "property" option on="click"}} class="icon-info right interactable">
             </span>
           </div>
@@ -28,10 +25,7 @@
         <span class="capitalize">
           {{name}}
         </span>
-        <span class="price">
-          $
-          {{price}}
-        </span>
+        <span class="price">${{price}}</span>
       </div>
       <button {{action "addToCart" model on="click"}} class="btn btn-black">
         add to cart

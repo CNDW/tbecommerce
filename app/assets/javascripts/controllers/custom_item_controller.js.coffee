@@ -1,4 +1,4 @@
-App.CustomItemController = Em.ObjectController.extend Ember.Evented,
+App.CustomItemController = Em.Controller.extend Ember.Evented,
   needs: ['custom']
   featuredItems: Em.computed.alias 'controllers.custom.featuredItems'
 
@@ -6,6 +6,8 @@ App.CustomItemController = Em.ObjectController.extend Ember.Evented,
     a.get('position') - b.get('position')
 
   hasManyMocks: Em.computed.gt 'mocks.length', 1
+
+  hasProduct: Em.computed.alias 'model.hasProduct'
 
   mock_index: 0
 

@@ -1,24 +1,16 @@
-<h4 class="upcase">
-  Credit card payment
-</h4>
+<h4 class="upcase">Credit card payment</h4>
 <div class="field">
-  <span class="field-label">
-    card number
-  </span>
+  <span class="field-label">card number</span>
   {{text-field value=model.number}}
 </div>
 <div class="field">
-  <span class="field-label">
-    expiration
-  </span>
+  <span class="field-label">expiration</span>
   <span class="field-inputs">
     {{view "select" content=months optionValuePath="content.val" optionLabelPath="content.name" value=model.exp_month}}
     {{view "select" content=years value=model.exp_year}}
   </span>
 </div>
 <div class="field">
-  <span class="field-label">
-    security code
-  </span>
+  <span class="field-label">security code</span>
   {{text-field value=model.cvc}}
 </div>

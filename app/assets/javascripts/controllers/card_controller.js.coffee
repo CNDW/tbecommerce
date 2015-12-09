@@ -1,4 +1,4 @@
-App.CardController = Em.ObjectController.extend
+App.CardController = Em.Controller.extend
   months: [
       name: 'January'
       val: 1

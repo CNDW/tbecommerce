@@ -5,13 +5,8 @@
     {{/each}}
     <div class="col-sm-11 custom-field-footer">
       <div class="footer-info">
-        <span class="capitalize">
-          {{name}}
-        </span>
-        <span class="price">
-          $
-          {{price}}
-        </span>
+        <span class="capitalize">{{name}}</span>
+        <span class="price">${{price}}</span>
       </div>
       {{#if hasProductAndColors}}
         {{#link-to "custom.features" model tagName="button" classNames="btn btn-black"}}

@@ -1,4 +1,4 @@
-App.CustomColorsController = Em.ObjectController.extend App.CustomItemControllerMixin,
+App.CustomColorsController = Em.Controller.extend App.CustomItemControllerMixin,
   needs: ['custom']
   hasProductAndColors: Em.computed.alias 'controllers.custom.hasProductAndColors'
   color_types: Em.computed.sort 'model.selectedColors', (a, b)->

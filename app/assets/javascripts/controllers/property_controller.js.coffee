@@ -1,1 +1,1 @@
-App.PropertyController = Em.ObjectController.extend()
+App.PropertyController = Em.Controller.extend()

@@ -5,15 +5,9 @@
     </div>
     <div class="catalogue-item-description">
       <div class="description-column">
-        <h3 class="upcase">
-          {{model.name}}
-        </h3>
-        <p>
-          {{model.description}}
-        </p>
-        {{#link-to "custom_shop" tagName="button" classNames="btn btn-black"}}
-          custom order
-        {{/link-to}}
+        <h3 class="upcase">{{model.name}}</h3>
+        <p>{{model.description}}</p>
+        <button {{action 'customBuilderWithProduct' model}} class='btn btn-black'>custom order</button>
         {{#link-to "instock.index" tagName="button" classNames="btn btn-black"}}
           in stock
         {{/link-to}}
@@ -28,11 +22,8 @@
     </div>
     <div class="item-detail-col">
       {{#toggle-menu classNames="custom-selection-header"}}
-        <span class="custom-selection-title">
-          standards
-        </span>
-        <span class="toggle-menu-icon right">
-        </span>
+        <span class="custom-selection-title">standards</span>
+        <span class="toggle-menu-icon right"></span>
       {{/toggle-menu}}
       <div class="section-content">
         <ul>
@@ -42,11 +33,8 @@
     </div>
     <div class="item-detail-col">
       {{#toggle-menu classNames="custom-selection-header"}}
-        <span class="custom-selection-title">
-          customization options
-        </span>
-        <span class="toggle-menu-icon right">
-        </span>
+        <span class="custom-selection-title">customization options</span>
+        <span class="toggle-menu-icon right"></span>
       {{/toggle-menu}}
       <div class="section-content">
         <ul>
