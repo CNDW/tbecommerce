@@ -28,3 +28,5 @@ script.rb
 
 # Rubymine config
 /.idea
+
+.DS_Store

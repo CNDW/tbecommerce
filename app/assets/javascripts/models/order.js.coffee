@@ -110,8 +110,9 @@ App.Order = DS.Model.extend
           order_token: self.get('token')
           line_item:
             variant_id: item.get('variant_id')
-            custom_item_hash: item.get('custom_item_hash')
-            order_notes: item.get('order_notes')
+            options:
+              custom_item_hash: item.get('custom_item_hash')
+              order_notes: item.get('order_notes')
         success: (data)->
           if item.isCustomItem
             data.customItem = item

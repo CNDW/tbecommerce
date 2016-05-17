@@ -7,8 +7,6 @@ module Spree
 
     before_save :deserialize_hash, unless: :skip_callbacks
 
-
-
     def has_notes
       self.order_notes != nil
     end

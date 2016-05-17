@@ -47,9 +47,9 @@ end
 gem 'posix-spawn'
 gem 'oink'
 
-gem 'spree', github: 'spree/spree', branch: 'v2.4.7'
-gem 'spree_auth_devise', :github => 'spree/spree_auth_devise', :branch => '2-4-stable'
-gem 'spree_gateway', github: 'spree/spree_gateway', branch: '2-4-stable'
+gem 'spree', github: 'spree/spree', ref: '080da35cf4be4d2d8c4e930c612bd9ee25a7509b'
+gem 'spree_auth_devise', github: 'spree/spree_auth_devise', ref: '9d51f3d65a1ae6bd5aa1a48b649a1c57e52107a5'
+gem 'spree_gateway', github: 'spree/spree_gateway', ref: '003416462d5a6e2321a2ab1d2804d53d032e11b7'
 
 gem 'valid_email'
 
