@@ -1,13 +1,13 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.9'
+gem 'rails', '~> 4.2.6'
 
 # Use postgresql as the database for Active Record
 gem 'pg'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.2'
+gem 'sass-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -23,7 +23,7 @@ gem 'capistrano-rails', '~> 1.1.1'
 gem 'capistrano-rvm'
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '~> 3.1.2'
+gem 'jquery-rails', '~> 4.1'
 gem 'select2-rails', '3.5.9.1'
 
 # Use Ember.js for frontend javascript
@@ -47,9 +47,9 @@ end
 gem 'posix-spawn'
 gem 'oink'
 
-gem 'spree', github: 'spree/spree', ref: '080da35cf4be4d2d8c4e930c612bd9ee25a7509b'
-gem 'spree_auth_devise', github: 'spree/spree_auth_devise', ref: '9d51f3d65a1ae6bd5aa1a48b649a1c57e52107a5'
-gem 'spree_gateway', github: 'spree/spree_gateway', ref: '003416462d5a6e2321a2ab1d2804d53d032e11b7'
+gem 'spree', github: 'spree/spree', branch: '3-0-stable'
+gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '3-0-stable'
+gem 'spree_gateway', github: 'spree/spree_gateway', branch: '3-0-stable'
 
 gem 'valid_email'
 
