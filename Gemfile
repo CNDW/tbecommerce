@@ -28,8 +28,8 @@ gem 'select2-rails', '3.5.9.1'
 
 # Use Ember.js for frontend javascript
 gem 'ember-rails'
-gem 'ember-source', '1.11.3'
-gem 'ember-data-source', '1.0.0.beta.16'
+gem 'ember-source', '2.5.1'
+gem 'ember-data-source', '2.5.3'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'

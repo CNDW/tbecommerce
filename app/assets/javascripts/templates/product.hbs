@@ -38,7 +38,7 @@
       {{/toggle-menu}}
       <div class="section-content">
         <ul>
-          {{#each optionType in model.optionTypes}}
+          {{#each model.optionTypes as |optionType|}}
             {{render "properties" optionType.optionValues}}
           {{/each}}
         </ul>

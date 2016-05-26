@@ -21,7 +21,7 @@
         <span class="upcase">remove</span>
       </div>
     </div>
-    {{#each lineItem in model.line_items}}
+    {{#each model.line_items as |lineItem|}}
       {{render "line-item" lineItem}}
     {{/each}}
     <div class="row-line-item text-medium">

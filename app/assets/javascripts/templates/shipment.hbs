@@ -1,6 +1,6 @@
 <div class="col-sm-4 right-border">
   <h4 class="upcase">Shipment</h4>
-  {{#each shipping_rate in model.shipping_rates}}
+  {{#each model.shipping_rates as |shipping_rate|}}
     <div class="custom-features-line">
       {{radio-button name=radio_name classNames="left" value=shipping_rate checked=model.selected_shipping_rate}}
       <span class="name interactible">{{shipping_rate.name}}</span>
@@ -10,7 +10,7 @@
 </div>
 <div class="col-sm-8">
   <h4 class="upcase">Manifest</h4>
-  {{#each item in line_items}}
+  {{#each line_items as |item|}}
     <div class="custom-features-line">
       <span class="name">{{item.name}}</span>
       <span class="right">Quantity: {{item.quantity}}</span>

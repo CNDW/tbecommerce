@@ -124,7 +124,7 @@ App.Order = DS.Model.extend
           reject(xhr)
 
   addLineItem: (line_item_id)->
-    line_item = @store.getById 'line_item', line_item_id
+    line_item = @store.findRecord 'line_item', line_item_id
     @get('line_items').addObject(line_item)
 
   removeLineItem: (line_item)->

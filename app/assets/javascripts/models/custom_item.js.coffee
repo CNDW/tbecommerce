@@ -62,7 +62,7 @@ App.CustomItem = DS.Model.extend
   product_id: DS.attr 'number', defaultValue: null
 
   product: Em.computed 'product_id', ->
-    @store.getById('product', @get('product_id')) if @get 'product_id'
+    @store.findRecord('product', @get('product_id')) if @get 'product_id'
 
   product_mocks: Em.computed 'product_id', ->
     @get('product.product_mocks')

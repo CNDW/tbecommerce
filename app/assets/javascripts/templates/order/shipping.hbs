@@ -9,7 +9,7 @@
   </div>
 </div>
 <div class="col-main-body">
-  {{#each shipment in model.shipments}}
+  {{#each model.shipments as |shipment|}}
     {{render "shipment" shipment}}
   {{/each}}
 </div>

@@ -2,7 +2,7 @@
   <img {{bind-attr src="activeSlide.large_url"}} />
 </div>
 <div class="catalogue-item-thumbs">
-  {{#each thumbnails}}
-    {{carousel-thumbnail classNames="thumb" mini_url=mini_url index=index activeIndex=activeIndex action="setSlide"}}
+  {{#each thumbnails as |thumbnail|}}
+    {{carousel-thumbnail classNames="thumb" mini_url=thumbnail.mini_url index=thumbnail.index activeIndex=thumbnail.activeIndex action="setSlide"}}
   {{/each}}
 </div>

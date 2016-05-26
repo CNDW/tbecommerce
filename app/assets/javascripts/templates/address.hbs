@@ -1,4 +1,4 @@
 <h4 class="upcase">{{model.address_name}}</h4>
-{{#each line in address_attributes}}
+{{#each address_attributes as |line|}}
   <p>{{line}}</p>
 {{/each}}

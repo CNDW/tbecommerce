@@ -2,7 +2,7 @@
   <div class="col-sm-5">
     <div class="col-sm-11 no-padding">
       <div class="custom-features">
-        {{#each option in options}}
+        {{#each options as |option|}}
           <div class="custom-features-line">
             <span {{action "clickOption" option on="click"}} class="name interactable">
               {{option.name}}

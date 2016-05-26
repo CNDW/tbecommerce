@@ -1,7 +1,7 @@
 <div class="outlet-head-1">
   <span class="capitalize">featured items</span>
 </div>
-{{#each featuredItem in featuredItems}}
+{{#each featuredItems as |featuredItem|}}
   <div {{action "setCustomProduct" featuredItem on="click"}} class="item-tile col-sm-6">
     <img {{bind-attr src="featuredItem.catalogue_image"}} class="img-responsive" />
     <h3 class="capitalize">{{featuredItem.name}}</h3>

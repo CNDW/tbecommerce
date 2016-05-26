@@ -1,6 +1,6 @@
 App.CartRoute = Em.Route.extend
   model: ->
-    carts = @store.all('cart').filterBy('isCreated', true)
+    carts = @store.peekAll('cart').filterBy('isCreated', true)
     carts.get('firstObject.order')
 
   actions:

@@ -1,3 +1,3 @@
-App.TextFieldView = Em.TextField.extend()
+# App.TextFieldView = Em.TextField.extend()
 
-Em.Handlebars.helper 'text-field', App.TextFieldView
+# Em.Handlebars.helper 'text-field', App.TextFieldView

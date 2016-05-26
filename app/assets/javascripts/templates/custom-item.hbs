@@ -1,7 +1,7 @@
 {{#if hasProduct}}
   {{#if hasManyMocks}}
     <div class="col-sm-2">
-      {{#each mock in mocks}}
+      {{#each mocks as |mock|}}
         <div {{action "setActiveMock" mock on="click"}} class="mock-thumb interactable">
           {{product-mock custom_item=model mock=mock}}
         </div>

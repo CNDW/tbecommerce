@@ -1,3 +1,3 @@
-App.CustomFeaturesView = Em.View.extend
-  willDestroyElement: ->
-    @get('controller').saveModel()
+# App.CustomFeaturesView = Em.View.extend
+#   willDestroyElement: ->
+#     @get('controller').saveModel()

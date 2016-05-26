@@ -9,7 +9,7 @@
   <div class="row-line-item bottom-border text-medium">
     <h4 class="upcase">order summary</h4>
   </div>
-  {{#each line_item in model.line_items}}
+  {{#each model.line_items as |line_item|}}
     {{render "line-item" line_item}}
   {{/each}}
   <div class="row-line-item bottom-border text-medium">

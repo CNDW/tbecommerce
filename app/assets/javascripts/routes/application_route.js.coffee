@@ -2,10 +2,10 @@ App.ApplicationRoute = Em.Route.extend
   model: ->
     self = this
     store = @store
-    model = @store.find('product').then ->
+    model = @store.findAll('product').then ->
       Em.RSVP.hash
-        customItems: store.find 'custom_item'
-        carts: store.find 'cart'
+        customItems: store.findAll 'custom_item'
+        carts: store.findAll 'cart'
       .then (data)->
         carts = data.carts.filterBy('isCreated', true)
         if (carts.get('length') == 0)
@@ -25,7 +25,7 @@ App.ApplicationRoute = Em.Route.extend
 
  #depricated
   getCart: ->
-    carts = @store.find('cart').filterBy('created', true)
+    carts = @store.findAll('cart').filterBy('created', true)
     if (carts.get('length') > 0)
       cart = carts.shiftObject()
     else

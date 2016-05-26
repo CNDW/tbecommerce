@@ -1,7 +1,7 @@
 <div class="col-main-body bottom-border">
   <h1>Order Complete!</h1>
   <div class="col-sm-6 right-border">
-    {{#each line_item in model.line_items}}
+    {{#each model.line_items as |line_item|}}
       {{render "line-item" line_item}}
     {{/each}}
     <div class="row-line-item text-medium">

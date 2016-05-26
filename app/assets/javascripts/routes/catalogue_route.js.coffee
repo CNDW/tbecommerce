@@ -1,10 +1,10 @@
 App.CatalogueRoute = Em.Route.extend
   model: ->
-    @store.find 'product'
+    @store.peekAll 'product'
 
 App.CatalogueIndexRoute = Em.Route.extend
   model: ->
-    @store.find 'product'
+    @store.peekAll 'product'
   setupController: (controller, model)->
     controller.set 'model', model
     model.mapBy('product_type').uniq().forEach (item)->

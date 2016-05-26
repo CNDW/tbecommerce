@@ -18,12 +18,12 @@ App.SelectedColor = DS.Model.extend
   colorType_id: DS.attr 'number', defaultValue: null
   colorType: Em.computed 'colorType_id', ->
     if @get 'colorType_id'
-      @store.getById 'color_type', @get 'colorType_id'
+      @store.findRecord 'color_type', @get 'colorType_id'
 
   colorValue_id: DS.attr 'number', defaultValue: null
   colorValue: Em.computed 'colorType_id', ->
     if @get 'colorValue_id'
-      @store.getById 'color_value', @get 'colorValue_id'
+      @store.findRecord 'color_value', @get 'colorValue_id'
 
   #- Helper methods
   setColor: (colorValue)->

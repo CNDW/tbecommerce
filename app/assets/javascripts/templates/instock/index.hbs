@@ -1,11 +1,11 @@
-{{#each collection in instock_collections}}
+{{#each instock_collections as |collection|}}
   <div class="stock-row">
     <div class="col-main-body stock-section">
       <h3>{{collection.name}} in stock</h3>
-      {{#each item in collection.items}}
+      {{#each collection.items as |item|}}
         <div class="col-sm-4 stock-tile">
           {{#link-to "instock.item" item tagName="div" classNames="tile-img"}}
-            <img {{bind-attr src="item.catalogue_image"}} alt="loading..." class="img-responsive" />
+            <img src="{{item.catalogue_image}}" alt="loading..." class="img-responsive" />
           {{/link-to}}
           <div class="tile-info">
             {{#link-to "instock.item" item tagName="div"}}

@@ -3,7 +3,7 @@ App.Cart = DS.Model.extend
   number: DS.attr 'string', defaultValue: null
   order_id: DS.attr 'string'
   order: (->
-    @store.getById 'order', @get('order_id')
+    @store.findRecord 'order', @get('order_id')
   ).property('order_id')
 
   hasOrder: Em.computed.notEmpty 'order_id'
@@ -35,7 +35,7 @@ App.Cart = DS.Model.extend
           number: payload.number
         self.store.pushPayload 'order',
           order: payload
-        order = self.store.getById 'order', self.get('order_id')
+        order = self.store.findRecord 'order', self.get('order_id')
         self.set 'order', order
         self.save()
         resolve(self)
@@ -57,7 +57,7 @@ App.Cart = DS.Model.extend
           order_token: self.get('token')
         success: (payload)->
           self.store.pushPayload 'order', {order: payload}
-          self.set 'order', self.store.getById('order', payload.id)
+          self.set 'order', self.store.findRecord('order', payload.id)
           resolve(payload)
         error: ->
           self.createOrder(true).then ->

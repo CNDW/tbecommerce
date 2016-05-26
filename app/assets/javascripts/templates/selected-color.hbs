@@ -16,7 +16,7 @@
         <div class="selection-header">{{model.name}}</div>
       {{/if}}
       <div class="color-swatch-field">
-        {{#each color in colors}}
+        {{#each colors as |color|}}
           {{color-swatch action="selectColor" image=color.thumb_url color=color selection=model}}
         {{/each}}
       </div>

@@ -1,98 +1,28 @@
 /*global Ember*/
 /*global DS*/
-(function () {
-  'use strict';
-
-  DS.LSSerializer = DS.JSONSerializer.extend({
-
-    serializeHasMany: function(snapshot, json, relationship) {
-      var key = relationship.key;
-      var payloadKey = this.keyForRelationship ? this.keyForRelationship(key, "hasMany") : key;
-      var relationshipType = snapshot.type.determineRelationshipType(relationship);
-
-      if (relationshipType === 'manyToNone' ||
-          relationshipType === 'manyToMany' ||
-          relationshipType === 'manyToOne') {
-        json[payloadKey] = snapshot.hasMany(key).mapBy('id');
-        // TODO support for polymorphic manyToNone and manyToMany relationships
-      }
-    },
-
-    /**
-     * Extracts whatever was returned from the adapter.
-     *
-     * If the adapter returns relationships in an embedded way, such as follows:
-     *
-     * ```js
-     * {
-     *   "id": 1,
-     *   "title": "Rails Rambo",
-     *
-     *   "_embedded": {
-     *     "comment": [{
-     *       "id": 1,
-     *       "comment_title": "FIRST"
-     *     }, {
-     *       "id": 2,
-     *       "comment_title": "Rails is unagi"
-     *     }]
-     *   }
-     * }
-     *
-     * this method will create separated JSON for each resource and then push
-     * them individually to the Store.
-     *
-     * In the end, only the main resource will remain, containing the ids of its
-     * relationships. Given the relations are already in the Store, we will
-     * return a JSON with the main resource alone. The Store will sort out the
-     * associations by itself.
-     *
-     * @method extractSingle
-     * @private
-     * @param {DS.Store} store the returned store
-     * @param {DS.Model} type the type/model
-     * @param {Object} payload returned JSON
-     */
-    extractSingle: function(store, type, payload) {
-      if (payload && payload._embedded) {
-        for (var relation in payload._embedded) {
-          var relType = type.typeForRelationship(relation);
-          var typeName = relType.typeKey,
-              embeddedPayload = payload._embedded[relation];
-
-          if (embeddedPayload) {
-            if (Ember.isArray(embeddedPayload)) {
-              store.pushMany(typeName, embeddedPayload);
-            } else {
-              store.push(typeName, embeddedPayload);
-            }
-          }
-        }
-
-        delete payload._embedded;
-      }
-
-      return this.normalize(type, payload);
-    },
-
-    /**
-     * This is exactly the same as extractSingle, but used in an array.
-     *
-     * @method extractSingle
-     * @private
-     * @param {DS.Store} store the returned store
-     * @param {DS.Model} type the type/model
-     * @param {Array} payload returned JSONs
-     */
-    extractArray: function(store, type, payload) {
-      return payload.map(function(json) {
-        return this.extractSingle(store, type, json);
-      }, this);
-    }
-
-  });
+(function() {
+  var DEFAULT_NAMESPACE = 'DS.LSAdapter';
 
   DS.LSAdapter = DS.Adapter.extend(Ember.Evented, {
+    /**
+     * This governs if promises will be resolved immeadiatly for `findAll`
+     * requests or if they will wait for the store requests to finish. This matches
+     * the ember < 2.0 behavior.
+     * [deprecation id: ds.adapter.should-reload-all-default-behavior]
+     */
+    shouldReloadAll: function(/* modelClass, snapshotArray */) {
+      return true;
+    },
+
+    /**
+     * Conforms to ember <2.0 behavior, in order to remove deprecation.
+     * Probably safe to remove if running on ember 2.0
+     * [deprecation id: ds.model.relationship-changing-to-asynchrounous-by-default]
+     */
+    shouldBackgroundReloadRecord: function(){
+      return false;
+    },
+
     /**
       This is the main entry point into finding records. The first parameter to
       this method is the model's name as a string.
@@ -101,7 +31,7 @@
       @param {DS.Model} type
       @param {Object|String|Integer|null} id
       */
-    find: function(store, type, id, opts) {
+    findRecord: function(store, type, id, opts) {
       var allowRecursive = true;
       var namespace = this._namespaceForType(type);
       var record = Ember.A(namespace.records[id]);
@@ -119,13 +49,11 @@
       }
 
       if (!record || !record.hasOwnProperty('id')) {
-        return Ember.RSVP.reject(new Error("Couldn't find record of"
-                                           + " type '" + type.typeKey
-                                           + "' for the id '" + id + "'."));
+        return Ember.RSVP.reject(new Error("Couldn't find record of" + " type '" + type.modelName + "' for the id '" + id + "'."));
       }
 
       if (allowRecursive) {
-        return this.loadRelationships(type, record);
+        return this.loadRelationships(store, type, record);
       } else {
         return Ember.RSVP.resolve(record);
       }
@@ -133,9 +61,8 @@
 
     findMany: function (store, type, ids, opts) {
       var namespace = this._namespaceForType(type);
-      var adapter = this,
-          allowRecursive = true,
-          results = [], record;
+      var allowRecursive = true,
+        results = Ember.A([]), record;
 
       /**
        * In the case where there are relationships, this method is called again
@@ -152,14 +79,13 @@
       for (var i = 0; i < ids.length; i++) {
         record = namespace.records[ids[i]];
         if (!record || !record.hasOwnProperty('id')) {
-          return Ember.RSVP.reject(new Error("Couldn't find record of type '" + type.typeKey
-                                             + "' for the id '" + ids[i] + "'."));
+          return Ember.RSVP.reject(new Error("Couldn't find record of type '" + type.modelName + "' for the id '" + ids[i] + "'."));
         }
         results.push(Ember.copy(record));
       }
 
       if (results.get('length') && allowRecursive) {
-        return this.loadRelationshipsForMany(type, results);
+        return this.loadRelationshipsForMany(store, type, results);
       } else {
         return Ember.RSVP.resolve(results);
       }
@@ -179,22 +105,22 @@
     //  match records with "complete: true" and the name "foo" or "bar"
     //
     //    { complete: true, name: /foo|bar/ }
-    findQuery: function (store, type, query, recordArray) {
+    query: function (store, type, query /*recordArray*/) {
       var namespace = this._namespaceForType(type);
-      var results = this.query(namespace.records, query);
+      var results = this._query(namespace.records, query);
 
       if (results.get('length')) {
-        return this.loadRelationshipsForMany(type, results);
+        return this.loadRelationshipsForMany(store, type, results);
       } else {
         return Ember.RSVP.reject();
       }
     },
 
-    query: function (records, query) {
-      var results = [], record;
+    _query: function (records, query) {
+      var results = Ember.A([]), record;
 
       function recordMatchesQuery(record) {
-        return Ember.keys(query).every(function(property) {
+        return Object.keys(query).every(function(property) {
           var test = query[property];
           if (Object.prototype.toString.call(test) === '[object RegExp]') {
             return test.test(record[property]);
@@ -215,7 +141,7 @@
 
     findAll: function (store, type) {
       var namespace = this._namespaceForType(type),
-          results = [];
+        results = Ember.A([]);
 
       for (var id in namespace.records) {
         results.push(Ember.copy(namespace.records[id]));
@@ -225,7 +151,7 @@
 
     createRecord: function (store, type, snapshot) {
       var namespaceRecords = this._namespaceForType(type);
-      var serializer = store.serializerFor(type.typeKey);
+      var serializer = store.serializerFor(type.modelName);
       var recordHash = serializer.serialize(snapshot, {includeId: true});
 
       namespaceRecords.records[recordHash.id] = recordHash;
@@ -237,7 +163,7 @@
     updateRecord: function (store, type, snapshot) {
       var namespaceRecords = this._namespaceForType(type);
       var id = snapshot.id;
-      var serializer = store.serializerFor(type.typeKey);
+      var serializer = store.serializerFor(type.modelName);
 
       namespaceRecords.records[id] = serializer.serialize(snapshot, {includeId: true});
 
@@ -262,7 +188,7 @@
     // private
 
     adapterNamespace: function () {
-      return this.get('namespace') || 'DS.LSAdapter';
+      return this.get('namespace') || DEFAULT_NAMESPACE;
     },
 
     loadData: function () {
@@ -288,8 +214,8 @@
       } catch (e) {
         storage = this._enableInMemoryStorage(e);
       }
-
-      return this._localStorage = storage;
+      this._localStorage = storage;
+      return this._localStorage;
     },
 
     _enableInMemoryStorage: function(reason) {
@@ -318,7 +244,7 @@
     },
 
     modelNamespace: function(type) {
-      return type.url || type.typeKey;
+      return type.url || type.modelName;
     },
 
 
@@ -364,12 +290,9 @@
      * @param {DS.Model} type
      * @param {Object} record
      */
-    loadRelationships: function(type, record) {
+    loadRelationships: function(store, type, record) {
       var adapter = this,
-          resultJSON = {},
-          typeKey = type.typeKey,
-          relationshipNames, relationships,
-          relationshipPromises = [];
+        relationshipNames, relationships;
 
       /**
        * Create a chain of promises, so the relationships are
@@ -380,14 +303,13 @@
 
       relationshipNames = Ember.get(type, 'relationshipNames');
       relationships = relationshipNames.belongsTo
-        .concat(relationshipNames.hasMany);
+      .concat(relationshipNames.hasMany);
 
       relationships.forEach(function(relationName) {
-        var relationModel = type.typeForRelationship(relationName);
+        var relationModel = type.typeForRelationship(relationName,store);
         var relationEmbeddedId = record[relationName];
         var relationProp  = adapter.relationshipProperties(type, relationName);
         var relationType  = relationProp.kind;
-        var foreignAdapter = type.store.adapterFor(relationModel);
 
         var opts = {allowRecursive: false};
 
@@ -405,21 +327,21 @@
          * In this case, cart belongsTo customer and its id is present in the
          * main payload. We find each of these records and add them to _embedded.
          */
-        if (relationEmbeddedId && foreignAdapter === adapter)
-        {
-          recordPromise = recordPromise.then(function(recordPayload) {
-            var promise;
-            if (relationType === 'belongsTo' || relationType === 'hasOne') {
-              promise = adapter.find(null, relationModel, relationEmbeddedId, opts);
-            } else if (relationType == 'hasMany') {
-              promise = adapter.findMany(null, relationModel, relationEmbeddedId, opts);
-            }
+        if (relationEmbeddedId && LSAdapter.prototype.isPrototypeOf(adapter))
+          {
+            recordPromise = recordPromise.then(function(recordPayload) {
+              var promise;
+              if (relationType === 'belongsTo' || relationType === 'hasOne') {
+                promise = adapter.findRecord(null, relationModel, relationEmbeddedId, opts);
+              } else if (relationType === 'hasMany') {
+                promise = adapter.findMany(null, relationModel, relationEmbeddedId, opts);
+              }
 
-            return promise.then(function(relationRecord) {
-              return adapter.addEmbeddedPayload(recordPayload, relationName, relationRecord);
+              return promise.then(function(relationRecord) {
+                return adapter.addEmbeddedPayload(recordPayload, relationName, relationRecord);
+              });
             });
-          });
-        }
+          }
       });
 
       return recordPromise;
@@ -465,15 +387,15 @@
      */
     addEmbeddedPayload: function(payload, relationshipName, relationshipRecord) {
       var objectHasId = (relationshipRecord && relationshipRecord.id);
-      var arrayHasIds = (relationshipRecord.length && relationshipRecord.everyBy("id"));
+      var arrayHasIds = (relationshipRecord.length && relationshipRecord.isEvery("id"));
       var isValidRelationship = (objectHasId || arrayHasIds);
 
       if (isValidRelationship) {
-        if (!payload['_embedded']) {
-          payload['_embedded'] = {};
+        if (!payload._embedded) {
+          payload._embedded = {};
         }
 
-        payload['_embedded'][relationshipName] = relationshipRecord;
+        payload._embedded[relationshipName] = relationshipRecord;
         if (relationshipRecord.length) {
           payload[relationshipName] = relationshipRecord.mapBy('id');
         } else {
@@ -503,9 +425,9 @@
      * @param {DS.Model} type
      * @param {Object} recordsArray
      */
-    loadRelationshipsForMany: function(type, recordsArray) {
+    loadRelationshipsForMany: function(store, type, recordsArray) {
       var adapter = this,
-          promise = Ember.RSVP.resolve([]);
+        promise = Ember.RSVP.resolve(Ember.A([]));
 
       /**
        * Create a chain of promises, so the records are loaded sequentially.
@@ -513,11 +435,11 @@
        */
       recordsArray.forEach(function(record) {
         promise = promise.then(function(records) {
-          return adapter.loadRelationships(type, record)
-            .then(function(loadedRecord) {
-              records.push(loadedRecord);
-              return records;
-            });
+          return adapter.loadRelationships(store, type, record)
+          .then(function(loadedRecord) {
+            records.push(loadedRecord);
+            return records;
+          });
         });
       });
 
@@ -541,4 +463,114 @@
       }
     }
   });
+
+  DS.LSSerializer = DS.JSONSerializer.extend({
+    /**
+     * Invokes the new serializer API.
+     * This should be removed in 2.0
+     */
+    isNewSerializerAPI: true,
+
+    serializeHasMany: function(snapshot, json, relationship) {
+      var key = relationship.key;
+      var payloadKey = this.keyForRelationship ? this.keyForRelationship(key, "hasMany") : key;
+      var relationshipType = snapshot.type.determineRelationshipType(relationship, this.store);
+
+      if (relationshipType === 'manyToNone' ||
+          relationshipType === 'manyToMany' ||
+            relationshipType === 'manyToOne') {
+        json[payloadKey] = snapshot.hasMany(key, { ids: true });
+      // TODO support for polymorphic manyToNone and manyToMany relationships
+      }
+    },
+
+    /**
+     * Extracts whatever was returned from the adapter.
+     *
+     * If the adapter returns relationships in an embedded way, such as follows:
+     *
+     * ```js
+     * {
+     *   "id": 1,
+     *   "title": "Rails Rambo",
+     *
+     *   "_embedded": {
+     *     "comment": [{
+     *       "id": 1,
+     *       "comment_title": "FIRST"
+     *     }, {
+     *       "id": 2,
+     *       "comment_title": "Rails is unagi"
+     *     }]
+     *   }
+     * }
+     *
+     * this method will create separated JSON for each resource and then combine
+     * the data and the embed payload into the JSON.Api spec for included objects
+     * returning a single object.
+     *
+     * @method extractSingle
+     * @private
+     * @param {DS.Store} store the returned store
+     * @param {DS.Model} type the type/model
+     * @param {Object} payload returned JSON
+     */
+    normalizeSingleResponse: function(store, type, payload) {
+      var included = Ember.A([]);
+      if (payload && payload._embedded) {
+        var forEachFunc = (record) => {
+          included.pushObject(this.normalize(relType,record).data);
+        };
+
+        for (var relation in payload._embedded) {
+          var relType = type.typeForRelationship(relation,store);
+            var embeddedPayload = payload._embedded[relation];
+
+          if (embeddedPayload) {
+            if (Ember.typeOf(embeddedPayload) === 'array') {
+              embeddedPayload.forEach(forEachFunc);
+            } else {
+              included.pushObject(this.normalize(relType, embeddedPayload).data);
+            }
+          }
+        }
+
+        delete payload._embedded;
+      }
+
+      var normalPayload = this.normalize(type, payload);
+      if(included.length > 0){
+        normalPayload.included = included;
+      }
+      return normalPayload;
+    },
+
+    /**
+     * This is exactly the same as extractSingle, but used in an array.
+     *
+     * @method extractSingle
+     * @private
+     * @param {DS.Store} store the returned store
+     * @param {DS.Model} type the type/model
+     * @param {Array} payload returned JSONs
+     */
+    normalizeArrayResponse: function(store, type, payload) {
+      var response = { data: Ember.A([]), included: Ember.A([]) };
+      payload.forEach((json) => {
+        var normalized = this.normalizeSingleResponse(store, type, json);
+        response.data.pushObject(normalized.data);
+
+        if(normalized.included){
+          normalized.included.forEach(function(included){
+            if(!response.included.contains(included.id)){
+              response.included.addObject(included);
+            }
+          });
+        }
+      });
+
+      return response;
+    }
+  });
 }());
+
