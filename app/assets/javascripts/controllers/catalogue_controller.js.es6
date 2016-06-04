@@ -5,7 +5,7 @@ var CatalogueMixin = Em.Mixin.create({
       let items = this.get('model').filterBy('productType', type).sortBy('price');
       let total = 0;
       items.forEach((item) => {
-        total += item.get('price')
+        total += item.get('price');
       });
       let average = total / items.get('length');
       return {type: type, items, averagePrice: average};

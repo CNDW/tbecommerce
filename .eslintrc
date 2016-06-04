@@ -5,6 +5,12 @@
     "browser": true,
     "node": true
   },
+  "globals": {
+    "Em": true,
+    "DS": true,
+    "App": true,
+    "$": true
+  },
   "rules": {
     "no-unused-vars": [2, {"vars": "all", "args": "none"}],
     "no-console": 0,
@@ -12,6 +18,7 @@
     "brace-style": [2, "1tbs", { "allowSingleLine": true }],
     "no-spaced-func": 2,
     "space-before-function-paren": [2, "never"],
+    "space-before-blocks": [2, "always"],
     "arrow-parens": [2, "always"],
     "arrow-spacing": [2, {"before": true, "after": true}]
   }

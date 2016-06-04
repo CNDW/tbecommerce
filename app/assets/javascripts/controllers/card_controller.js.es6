@@ -1,3 +1,4 @@
+/* global App, Em */
 App.CardController = Em.Controller.extend({
   months: [{
       name: 'January',
@@ -48,8 +49,8 @@ App.CardController = Em.Controller.extend({
       val: 12
     }
   ],
-  years: Ember.computed(function() {
-    var num, year, years;
+  years: Em.computed(function() {
+    var num, year;
 
     year = (new Date()).getFullYear();
 

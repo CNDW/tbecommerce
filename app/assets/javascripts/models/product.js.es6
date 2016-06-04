@@ -1,3 +1,4 @@
+/* global App, DS, Em */
 App.Product = DS.Model.extend({
   name: DS.attr('string'),
   description: DS.attr('string'),
@@ -9,8 +10,8 @@ App.Product = DS.Model.extend({
   slug: DS.attr('string'),
   displayPrice: DS.attr('string'),
   masterVariantId: DS.attr('number'),
-  category: Ember.computed.alias('productCategory'),
-  productType: Ember.computed.alias('productSubcategory'),
+  category: Em.computed.alias('productCategory'),
+  productType: Em.computed.alias('productSubcategory'),
   tagline: DS.attr('string'),
   metaDescription: DS.attr('string'),
   metaKeywords: DS.attr('string'),
