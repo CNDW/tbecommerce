@@ -14,12 +14,12 @@ var CatalogueMixin = Em.Mixin.create({
   model() {
     let category = this.get('productCategory');
     return this.store.peekAll('product').filter((product) => {
-      let x = product.get('productCategory')
+      let x = product.get('productCategory');
       return x === category && product.get('inCatalogue');
     });
   },
 
-  renderTemplate(controller){
+  renderTemplate(controller) {
     return this.render('catalogue/index', {controller});
   }
 });

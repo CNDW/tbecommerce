@@ -1,4 +1,3 @@
-
 var CatalogueMixin = Em.Mixin.create({
   types: Em.computed('model.[]', function() {
     let unsorted = this.get('model').mapBy('productType').uniq().map((type) => {

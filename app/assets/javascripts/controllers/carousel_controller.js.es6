@@ -53,7 +53,7 @@ App.CarouselController = Em.Controller.extend({
   },
 
   actions: {
-    setSlide(newIndex){
+    setSlide(newIndex) {
       this.stopCycle();
       this.set('slideIndex', newIndex);
       return this.cycleCarousel();

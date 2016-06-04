@@ -1,11 +1,12 @@
 App.CartController = Em.Controller.extend({
-  total: Em.computed('model.line_items.@each.total', function() {
-    if (!this.get('model.line_items')) { return 0; }
-    return this.get('model.line_items').reduce((prev, item)=> prev + Number(item.get('total'))
-    , 0);
+  total: Em.computed('model.lineItems.@each.total', function() {
+    if (!this.get('model.lineItems')) { return 0; }
+    return this.get('model.lineItems').reduce((prev, item) => {
+      return prev + Number(item.get('total'));
+    }, 0);
   }),
 
-  display_total: Em.computed('total', function() {
+  displayTotal: Em.computed('total', function() {
     return `$${Number(this.get('total')).toFixed(2)}`;
   })
 });

@@ -1,4 +1,5 @@
 App.CustomController = Em.Controller.extend({
+  store: Em.inject.service('store'),
   product: Em.computed.alias('model.product'),
   hasProduct: Em.computed.alias('model.hasProduct'),
 
@@ -7,18 +8,22 @@ App.CustomController = Em.Controller.extend({
   hasProductAndColors: Em.computed.and('hasProduct', 'hasColors'),
 
   price: Em.computed.alias('model.price'),
+
   products: Em.computed(function() {
-    return this.store.all('product').filter(product=> product.get('in_custom_shop'));
+    return this.get('store').peekAll('product').filter((product) => {
+      product.get('inCustomShop');
+    });
   }),
+
   featuredItems: Em.computed('products', function() {
     return this.get('products').filterBy('featured', true);
   }),
 
-  mocks: Em.computed.alias('model.product_mocks'),
+  mocks: Em.computed.alias('model.productMocks'),
 
-  mock_index: 0,
+  mockIndex: 0,
 
-  active_mock: Em.computed('mocks', 'mock_index', function() {
-    return this.get('mocks').objectAt(this.get('mock_index'));
+  activeMock: Em.computed('mocks', 'mockIndex', function() {
+    return this.get('mocks').objectAt(this.get('mockIndex'));
   })
 });

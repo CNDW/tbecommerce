@@ -1,5 +1,7 @@
 App.CustomFeaturesController = Em.Controller.extend({
-  options: Em.computed.sort('model.customOptions', (a, b)=> a.get('position') - b.get('position')),
+  options: Em.computed.sort('model.customOptions', (a, b) => {
+    return a.get('position') - b.get('position')
+  }),
 
   price: Em.computed.alias('model.price'),
 
@@ -8,9 +10,8 @@ App.CustomFeaturesController = Em.Controller.extend({
   },
 
   actions: {
-    clickOption(option){
+    clickOption(option) {
       option.toggleProperty('selected');
-      return false;
     }
   }
 });

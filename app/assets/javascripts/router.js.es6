@@ -1,4 +1,4 @@
-App.Router = Ember.Router.extend();
+App.Router = Em.Router.extend();
 
 App.Router.map(function() {
   this.route('gallery');

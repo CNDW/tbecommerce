@@ -1,11 +1,16 @@
 App.ShipmentController = Em.Controller.extend({
-  needs: ['order'],
-  radio_name: Em.computed(function() {
+  orderController: Em.inject.controller('order'),
+  radioName: Em.computed(function() {
     return `shipment-radio-${this.get('model.id')}`;
   }),
-  order: Em.computed.alias('controllers.order.model'),
-  line_items: Em.computed(function() {
+  order: Em.computed.alias('orderController.model'),
+  lineItems: Em.computed(function() {
     let manifest = this.get('model.manifest');
-    return this.get('order.line_items').filter((item, index)=> manifest.mapBy('custom_item_hash').contains(item.get('custom_item_hash')));
+    return this.get('order.lineItems')
+      .filter((item, index) => {
+        return manifest
+          .mapBy('customItemHash')
+          .contains(item.get('customItemHash'));
+      });
   })
 });

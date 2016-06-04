@@ -1,4 +1,4 @@
 App.LineItemController = Em.Controller.extend({
-  item_image: Em.computed.alias('model.variant.catalogue_image'),
+  itemImage: Em.computed.alias('model.variant.catalogueImage'),
   name: Em.computed.alias('model.variant.name')
 });

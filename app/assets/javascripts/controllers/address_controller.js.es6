@@ -1,26 +1,31 @@
 App.AddressController = Em.Controller.extend({
-  name: (function() {
+  name: Em.computed('model.fullname', function() {
     return `${this.get('model.fullname')}`;
-  }).property('model.fullname'),
-  street_address: (function() {
+  }),
+
+  streetAddress: Em.computed('model.address1', 'model.address2', function() {
     return `${this.get('model.address1')}\n${this.get('model.address2')}`;
-  }).property('model.address1', 'model.address2'),
-  city: (function() {
-    if (this.get('states_required')) {
-      return `${this.get('model.city')}, ${this.get('model.state_abbr')} ${this.get('model.zipcode')}`;
+  }),
+
+  city: Em.computed('model.city', 'model.stateAbbr', 'model.zipcode', 'model.statesRequired', function() {
+    if (this.get('statesRequired')) {
+      return `${this.get('model.city')}, ${this.get('model.stateAbbr')} ${this.get('model.zipcode')}`;
     } else {
       return `${this.get('model.city')}, ${this.get('model.zipcode')}`;
     }
-  }).property('model.city', 'model.state_abbr', 'model.zipcode', 'model.states_required'),
-  country: (function() {
-    return `${this.get('model.country_name')}`;
-  }).property('model.country_name'),
-  email: (function() {
-    return `${this.get('model.email')}`;
-  }).property('model.email'),
-  phone: (function() {
-    return `${this.get('model.phone')}`;
-  }).property('model.phone'),
+  }),
 
-  address_attributes: Em.computed.collect('name', 'street_address', 'city', 'country', 'email', 'phone')
+  country: Em.computed('model.countryName', function() {
+    return `${this.get('model.countryName')}`;
+  }),
+
+  email: Em.computed('model.email', function() {
+    return `${this.get('model.email')}`;
+  }),
+
+  phone: Em.computed('model.phone', function() {
+    return `${this.get('model.phone')}`;
+  }),
+
+  addressAttributes: Em.computed.collect('name', 'streetAddress', 'city', 'country', 'email', 'phone')
 });

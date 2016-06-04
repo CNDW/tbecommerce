@@ -23,7 +23,7 @@ App.Variant = DS.Model.extend({
   isUnavailable: Em.computed.lt('totalNotInCart', 1),
 
   images: DS.hasMany('image'),
-  optionValues: DS.hasMany('optionValue'),
+  optionValues: DS.hasMany('option-value'),
   product: DS.belongsTo('product'),
   variantColors: DS.attr('array'),
 
@@ -38,13 +38,15 @@ App.Variant = DS.Model.extend({
 
   variantId: Em.computed.alias('id'),
 
-  totalPrice: Em.computed(function(){
+  totalPrice: Em.computed(function() {
     let base = Number(this.get('price'));
-    this.get('optionValues').forEach(val=> base = base + Number(val.get('price')));
+    this.get('optionValues').forEach((val) => {
+      base = base + Number(val.get('price'));
+    });
     return base;
   }),
 
-  displayTotalPrice: Em.computed(function(){
+  displayTotalPrice: Em.computed(function() {
     return `$${this.get('totalPrice')}`;
   }),
 
@@ -61,12 +63,16 @@ App.Variant = DS.Model.extend({
   },
 
   getColorSegment() {
-    let segment = this.get('variantColors').sortBy('colorTypeId').map(selection=> `i${selection.colorTypeId}s${selection.colorValueId}`);
+    let segment = this.get('variantColors').sortBy('colorTypeId').map((selection) => {
+      return `i${selection.colorTypeId}s${selection.colorValueId}`
+    });
     return `ct${segment.join('')}`;
   },
 
   getOptionSegment() {
-    let segment = this.get('optionValues').sortBy('id').map(option=> `i${option.get('id')}`);
+    let segment = this.get('optionValues').sortBy('id').map((option) => {
+      return `i${option.get('id')}`;
+    });
     return `ov${segment.join('')}`;
   }
 });

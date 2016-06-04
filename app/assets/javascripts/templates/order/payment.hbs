@@ -9,20 +9,20 @@
   <div class="row-line-item bottom-border text-medium">
     <h4 class="upcase">order summary</h4>
   </div>
-  {{#each model.line_items as |line_item|}}
-    {{render "line-item" line_item}}
+  {{#each model.lineItems as |lineItem|}}
+    {{render "line-item" lineItem}}
   {{/each}}
   <div class="row-line-item bottom-border text-medium">
     <div class="checkout">
       <span class="upcase">shipping</span>
-      <span class="price">{{model.display_ship_total}}</span>
+      <span class="price">{{model.displayShipTotal}}</span>
     </div>
     <div class="checkout">
       <span class="upcase">total</span>
-      <span class="price">{{model.display_total}}</span>
+      <span class="price">{{model.displayTotal}}</span>
     </div>
   </div>
   <div class="row-line-item text-medium">
-    <button {{action "submitOrder" currentCard model on="click"}} class="btn btn-black left">place order</button>
+    <button {{action "submitOrder" currentCard model}} class="btn btn-black left">place order</button>
   </div>
 </div>

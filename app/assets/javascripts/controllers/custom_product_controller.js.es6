@@ -1,6 +1,6 @@
 App.CustomProductController = Em.Controller.extend({
-  needs: ['custom'],
-  products: Em.computed.alias('controllers.custom.products'),
+  customController: Em.inject.controller('custom'),
+  products: Em.computed.alias('customController.products'),
 
   categoryList: Em.computed('products', function() {
     return this.get('products').mapBy('category').uniq();
@@ -16,12 +16,11 @@ App.CustomProductController = Em.Controller.extend({
         return {
           name: type,
           items: items.sortBy('price'),
-          average_price: (items.mapBy('price').reduce((sum, add) => {
+          averagePrice: (items.mapBy('price').reduce((sum, add) => {
             sum + add;
           }, 0) / items.length)
         };
-      })
-      .sortBy('average_price')
+      }).sortBy('averagePrice')
     };
   })
 });

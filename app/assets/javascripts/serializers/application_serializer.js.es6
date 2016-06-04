@@ -1,9 +1,9 @@
-let { decamelize } = Ember.String;
-let { capitalize } = Ember.String;
-let { camelize } = Ember.String;
-let { forEach } = Ember.Enumerable.mixins;
-let { underscore } = Ember.String;
-let inflector = new Ember.Inflector();
+// let { decamelize } = Em.String;
+// let { capitalize } = Em.String;
+let { camelize } = Em.String;
+// let { forEach } = Em.Enumerable.mixins;
+let { underscore } = Em.String;
+let inflector = new Em.Inflector();
 
 let BaseSerializer = DS.RESTSerializer.extend({
   keyForAttribute(key, method) {
