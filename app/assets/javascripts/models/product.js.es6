@@ -28,5 +28,6 @@ App.Product = DS.Model.extend({
   optionTypes: DS.hasMany('option-type'),
   colorTypes: DS.hasMany('color-type'),
   shippingCategory: DS.belongsTo('shipping-category'),
-  productMocks: DS.hasMany('product-mock')
+  productMocks: DS.hasMany('product-mock'),
+  variants: DS.hasMany('variants')
 });

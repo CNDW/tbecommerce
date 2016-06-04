@@ -1,20 +1,20 @@
-{{#each instock_collections as |collection|}}
+{{#each instockCollections as |collection|}}
   <div class="stock-row">
     <div class="col-main-body stock-section">
       <h3>{{collection.name}} in stock</h3>
       {{#each collection.items as |item|}}
         <div class="col-sm-4 stock-tile">
           {{#link-to "instock.item" item tagName="div" classNames="tile-img"}}
-            <img src="{{item.catalogue_image}}" alt="loading..." class="img-responsive" />
+            <img src="{{item.catalogueImage}}" alt="loading..." class="img-responsive" />
           {{/link-to}}
           <div class="tile-info">
             {{#link-to "instock.item" item tagName="div"}}
               <h4>{{item.name}}</h4>
-              <p>{{item.instock_description}}</p>
+              <p>{{item.instockDescription}}</p>
             {{/link-to}}
             <div class="stock-price">
-              <span class="price">{{item.display_total_price}}</span>
-              <button {{action "addToCart" item on="click"}} class="btn btn-black">add to cart</button>
+              <span class="price">{{item.displayTotalPrice}}</span>
+              <button {{action "addToCart" item}} class="btn btn-black">add to cart</button>
             </div>
           </div>
         </div>

@@ -38,6 +38,14 @@ App.ProductSerializer = BaseSerializer.extend(DS.EmbeddedRecordsMixin, {
     productMocks: { embedded: 'always' }
   }
 });
+App.VariantAdapter = DS.RESTAdapter.extend({
+  namespace: 'api'
+});
+App.VariantSerializer = BaseSerializer.extend(DS.EmbeddedRecordsMixin, {
+  attrs: {
+    images: { embedded: 'always' }
+  }
+});
 
 App.OptionTypeSerializer = BaseSerializer.extend(DS.EmbeddedRecordsMixin, {
   attrs: {

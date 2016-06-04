@@ -31,10 +31,3 @@ App.LineItemAdapter = DS.RESTAdapter.extend
 App.LineItemSerializer = DS.RESTSerializer.extend DS.EmbeddedRecordsMixin,
   attrs:
     variant: embedded: 'always'
-
-App.VariantAdapter = DS.RESTAdapter.extend
-  namespace: 'api'
-
-App.VariantSerializer = DS.RESTSerializer.extend DS.EmbeddedRecordsMixin,
-  attrs:
-    images: embedded: 'always'
