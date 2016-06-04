@@ -2,7 +2,7 @@
 var CatalogueMixin = Em.Mixin.create({
   types: Em.computed('model.[]', function() {
     let unsorted = this.get('model').mapBy('productType').uniq().map((type) => {
-      let items = this.get('model').filterBy('productType', type);
+      let items = this.get('model').filterBy('productType', type).sortBy('price');
       let total = 0;
       items.forEach((item) => {
         total += item.get('price')
