@@ -1,7 +1,7 @@
 App.Card = DS.Model.extend
   number: DS.attr 'string'
-  exp_month: DS.attr 'number'
-  exp_year: DS.attr 'number'
+  expMonth: DS.attr 'number'
+  expYear: DS.attr 'number'
   cvc: DS.attr 'string'
 
   object: DS.attr 'string'
@@ -16,12 +16,12 @@ App.Card = DS.Model.extend
   type: DS.attr 'string'
 
   name: DS.attr 'string'
-  address_line1: DS.attr 'string'
-  address_line2: DS.attr 'string'
-  address_city: DS.attr 'string'
-  address_state: DS.attr 'string'
-  address_zip: DS.attr 'string'
-  address_country: DS.attr 'string'
+  addressLine1: DS.attr 'string'
+  addressLine2: DS.attr 'string'
+  addressCity: DS.attr 'string'
+  addressState: DS.attr 'string'
+  addressZip: DS.attr 'string'
+  addressCountry: DS.attr 'string'
 
   isCreated: Em.computed.notEmpty 'created'
 
@@ -35,15 +35,15 @@ App.Card = DS.Model.extend
           Stripe.card.createToken
             number: self.get 'number'
             cvc: self.get 'cvc'
-            exp_month: self.get 'exp_month'
-            exp_year: self.get 'exp_year'
-            name: order.get 'bill_address.fullname'
-            address_line1: order.get 'bill_address.address1'
-            address_line2: order.get 'bill_address.address2'
-            address_city: order.get 'bill_address.city'
-            address_state: order.get 'bill_address.state_abbr'
-            address_zip: order.get 'bill_address.zipcode'
-            address_country: order.get 'bill_address.country_name'
+            exp_month: self.get 'expMonth'
+            exp_year: self.get 'expYear'
+            name: order.get 'billAddress.fullname'
+            address_line1: order.get 'billAddress.address1'
+            address_line2: order.get 'billAddress.address2'
+            address_city: order.get 'billAddress.city'
+            address_state: order.get 'billAddress.state_abbr'
+            address_zip: order.get 'billAddress.zipcode'
+            address_country: order.get 'billAddress.countryName'
           , (status, response)->
             if response.error
               alert response.error.message

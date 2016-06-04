@@ -12,7 +12,7 @@
       <div class="catalogue-tiles col-sm-12 no-padding">
         {{#each type.items as |item|}}
           {{#link-to "product" item tagName="div" classNames="item-tile col-sm-3"}}
-            <img src="{{item.catalogue_image}}" alt="loading..." class="img-responsive" />
+            <img src="{{item.catalogueImage}}" alt="loading..." class="img-responsive" />
             <h3 class="capitalize">{{item.name}}</h3>
             <span class="price">${{item.price}}</span>
             <span class="gray capitalize">{{item.tagline}}</span>

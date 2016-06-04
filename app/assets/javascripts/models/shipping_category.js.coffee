@@ -4,7 +4,7 @@ App.ShippingCategory = DS.Model.extend
   name: DS.attr 'string'
 
 App.ShippingMethod = DS.Model.extend
-  shippingCategory: DS.hasMany 'shipping_category'
+  shippingCategory: DS.hasMany 'shippingCategory'
   name: DS.attr 'string'
   tagline: DS.attr 'string'
-  tax_category_id: DS.attr 'string'
+  taxCategoryId: DS.attr 'string'

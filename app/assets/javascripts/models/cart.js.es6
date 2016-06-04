@@ -35,9 +35,9 @@ App.Cart = DS.Model.extend(App.RequestableMixin, {
       this.save();
 
       return store.peekRecord('order', payload.id);
-    }).catch(() => {
+    }, () => {
       return this.createOrder()
-    })
+    });
   },
 
   createOrder() {

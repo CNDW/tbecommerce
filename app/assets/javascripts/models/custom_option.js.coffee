@@ -1,17 +1,16 @@
 App.CustomOption = DS.Model.extend
   selected: DS.attr 'boolean'
-  customItem: DS.belongsTo 'custom_item'
+  customItem: DS.belongsTo 'customItem'
 
   name: Em.computed.alias 'optionValue.name'
   description: Em.computed.alias 'optionValue.description'
   price: DS.attr 'number'
   presentation: Em.computed.alias 'optionValue.presentation'
-  large_url: Em.computed.alias 'optionValue.large_url'
+  largeUrl: Em.computed.alias 'optionValue.largeUrl'
 
   position: DS.attr 'number', defaultValue: 0
 
-  optionValue_id: DS.attr 'number'
-  optionValue: (->
-    if @get 'optionValue_id'
-      @store.findRecord 'option_value', @get 'optionValue_id'
-  ).property('optionValue_id')
+  optionValueId: DS.attr 'number'
+  optionValue: Em.computed 'optionValueId', ->
+    if @get 'optionValueId'
+      @store.findRecord 'optionValue', @get 'optionValueId'

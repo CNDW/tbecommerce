@@ -1,14 +1,14 @@
 App.CustomItem = DS.Model.extend
   isCustomItem: true
-  name: Em.computed 'product_id', ->
-    return 'Custom Item' unless @get 'product_id'
+  name: Em.computed 'productId', ->
+    return 'Custom Item' unless @get 'productId'
     @get 'product.name'
 
   inShop: DS.attr 'boolean', defaultValue: false
   inCart: Em.computed.equal 'state', 'cart'
-  order_notes: DS.attr 'string', defaultValue: null
+  orderNotes: DS.attr 'string', defaultValue: null
 
-  variant_id: Em.computed.alias 'product.master_variant_id'
+  variantId: Em.computed.alias 'product.masterVariantId'
 
   state: Em.computed 'lineItem', ->
     return 'precart' if @get('lineItem') == null
@@ -29,73 +29,73 @@ App.CustomItem = DS.Model.extend
     'extras': 3
     'complete': 4
 
-  hasProduct: Em.computed.notEmpty 'product_id'
+  hasProduct: Em.computed.notEmpty 'productId'
   hasColors: Em.computed 'selectedColors.@each.isSelected', ->
     selectedColors = @get 'selectedColors'
-    color_length = selectedColors.get 'length'
-    if (color_length > 0)
+    colorLength = selectedColors.get 'length'
+    if (colorLength > 0)
       selectedColors.forEach (color)->
-        color_length -= 1 if color.get('isSelected')
-    return color_length is 0
+        colorLength -= 1 if color.get('isSelected')
+    return colorLength is 0
 
   noSelectedColors: Em.computed.empty 'selectedColors'
   colorOptions: Em.computed.alias 'product.colorTypes'
 
-  selectedColors: DS.hasMany 'selected_color'
-  customOptions: DS.hasMany 'custom_option'
-  lineItem: DS.belongsTo 'line_item', async: true
+  selectedColors: DS.hasMany 'selectedColor'
+  customOptions: DS.hasMany 'customOption'
+  lineItem: DS.belongsTo 'lineItem', async: true
 
   price: DS.attr 'number'
 
   isComplete: Em.computed 'completedStep', ->
     @get('completedStep') > 1
 
-  completedStep: Em.computed 'product_id', 'selectedColors.@each.isSelected', ->
+  completedStep: Em.computed 'productId', 'selectedColors.@each.isSelected', ->
     step = 0
     step += 1 if @get('hasProduct')
     step += 1 if @get('hasColors')
     return step
 
-  basePrice: Em.observer 'product_id', 'customOptions.@each.selected', ->
+  basePrice: Em.observer 'productId', 'customOptions.@each.selected', ->
     Em.run.scheduleOnce 'actions', this, @recalculatePrice
 
-  product_id: DS.attr 'number', defaultValue: null
+  productId: DS.attr 'number', defaultValue: null
 
-  product: Em.computed 'product_id', ->
-    @store.findRecord('product', @get('product_id')) if @get 'product_id'
+  product: Em.computed 'productId', ->
+    @store.findRecord('product', @get('productId')) if @get 'productId'
 
-  product_mocks: Em.computed 'product_id', ->
+  product_mocks: Em.computed 'productId', ->
     @get('product.product_mocks')
 
-  properties: Em.computed 'product_id', ->
+  properties: Em.computed 'productId', ->
     @get 'product.properties'
 
-  description: Em.computed 'product_id', ->
+  description: Em.computed 'productId', ->
     @get 'product.description'
 
-  specs: Em.computed 'product_id', ->
+  specs: Em.computed 'productId', ->
     @get 'product.specs'
 
   #-Serialization for the custom number ID
-  custom_item_hash: (->
+  customItem_hash: (->
     [
       @getCustomSegment()
       @getColorSegment()
       @getOptionSegment()
     ].join('e')
-  ).property('product_id', 'selectedColors.@each.colorValue_id', 'customOptions.@each.optionValue_id')
+  ).property('productId', 'selectedColors.@each.colorValueId', 'customOptions.@each.optionValueId')
 
   getCustomSegment: ->
-    "pvi#{@get('variant_id')}"
+    "pvi#{@get('variantId')}"
 
   getColorSegment: ->
-    segment = @get('selectedColors').sortBy('colorType_id').map (selection)->
-      "i#{selection.get('colorType_id')}s#{selection.get('colorValue_id')}"
+    segment = @get('selectedColors').sortBy('colorTypeId').map (selection)->
+      "i#{selection.get('colorTypeId')}s#{selection.get('colorValueId')}"
     "ct#{segment.join('')}"
 
   getOptionSegment: ->
-    segment = @get('customOptions').filterBy('selected', true).sortBy('optionValue_id').map (option)->
-      "i#{option.get('optionValue_id')}"
+    segment = @get('customOptions').filterBy('selected', true).sortBy('optionValueId').map (option)->
+      "i#{option.get('optionValueId')}"
     "ov#{segment.join('')}"
 
   removeLineItem: ->
@@ -128,8 +128,8 @@ App.CustomItem = DS.Model.extend
     selectedColors = @get('selectedColors')
     colorTypes = product.get('colorTypes')
     colorTypes.forEach (colorType)->
-      record = self.store.createRecord 'selected_color',
-        colorType_id: colorType.get 'id'
+      record = self.store.createRecord 'selectedColor',
+        colorTypeId: colorType.get 'id'
         customItem: self
       selectedColors.addObject(record)
     @save()
@@ -139,8 +139,8 @@ App.CustomItem = DS.Model.extend
     customOptions = this.get('customOptions')
     product.get('optionTypes').forEach (optionType)->
       optionType.get('optionValues').forEach (optionValue)->
-        record = self.store.createRecord 'custom_option',
-          optionValue_id: optionValue.get 'id'
+        record = self.store.createRecord 'customOption',
+          optionValueId: optionValue.get 'id'
           selected: no
           customItem: self
           price: optionValue.get 'price'

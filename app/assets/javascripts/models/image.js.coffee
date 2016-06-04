@@ -1,10 +1,10 @@
 App.Image = DS.Model.extend
   position: DS.attr 'number'
   alt: DS.attr 'string'
-  thumb_url: DS.attr 'string'
-  small_url: DS.attr 'string'
-  medium_url: DS.attr 'string'
-  large_url: DS.attr 'string'
+  thumbUrl: DS.attr 'string'
+  smallUrl: DS.attr 'string'
+  mediumUrl: DS.attr 'string'
+  largeUrl: DS.attr 'string'
 
   product: DS.belongsTo 'product'
   variant: DS.belongsTo 'variant'

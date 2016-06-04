@@ -7,37 +7,37 @@
   </div>
   <ul class="top-navs col-sm-8 col-md-7">
     <li>
-      <a {{bind-attr class=":top-nav catalogueActive:active"}} {{action "toggleCatalogue" on="click"}}>catalogue</a>
+      <a class="top-nav {{if catalogueActive 'active'}}" {{action "toggleCatalogue"}}>catalogue</a>
       <ul class="catalogue-nav">
         {{#link-to "catalogue.bags" tagName="li"}}
-          <span {{action "deactivateCatalogue" on="click"}}>bags</span>
+          <span {{action "deactivateCatalogue"}}>bags</span>
         {{/link-to}}
         {{#link-to "catalogue.apparel" tagName="li"}}
-          <span {{action "deactivateCatalogue" on="click"}}>apparel</span>
+          <span {{action "deactivateCatalogue"}}>apparel</span>
         {{/link-to}}
         {{#link-to "catalogue.utility" tagName="li"}}
-          <span {{action "deactivateCatalogue" on="click"}}>utility</span>
+          <span {{action "deactivateCatalogue"}}>utility</span>
         {{/link-to}}
       </ul>
     </li>
     <li>
       {{#link-to "instock" classNames="top-nav"}}
-        <span {{action "deactivateCatalogue" on="click"}}>in stock</span>
+        <span {{action "deactivateCatalogue"}}>in stock</span>
       {{/link-to}}
     </li>
     <li>
-      {{#link-to "custom_shop" classNames="top-nav"}}
-        <span {{action "deactivateCatalogue" on="click"}}>custom shop</span>
+      {{#link-to "custom-shop" classNames="top-nav"}}
+        <span {{action "deactivateCatalogue"}}>custom shop</span>
       {{/link-to}}
     </li>
     <li>
       {{#link-to "gallery" classNames="top-nav"}}
-        <span {{action "deactivateCatalogue" on="click"}}>gallery</span>
+        <span {{action "deactivateCatalogue"}}>gallery</span>
       {{/link-to}}
     </li>
     <li>
       {{#link-to "about" classNames="top-nav"}}
-        <span {{action "deactivateCatalogue" on="click"}}>about</span>
+        <span {{action "deactivateCatalogue"}}>about</span>
       {{/link-to}}
     </li>
     <li>
@@ -71,7 +71,7 @@
       {{/link-to}}
     </li>
     <li>
-      {{#link-to "custom_shop" tagName="div"}}
+      {{#link-to "custom-shop" tagName="div"}}
         <span>custom shop</span>
       {{/link-to}}
     </li>

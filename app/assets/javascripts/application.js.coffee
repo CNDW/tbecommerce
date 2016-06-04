@@ -12,6 +12,7 @@
 #= require_self
 #= require ./store
 #= require_tree ./mixins
+#= require_tree ./services
 #= require_tree ./models
 #= require_tree ./controllers
 #= require_tree ./views
@@ -36,3 +37,7 @@ Ember.RSVP.configure 'onerror', (error)->
 	if (error instanceof Error)
 		Ember.Logger.assert(false, error)
 		Ember.Logger.error(error.stack)
+
+App.CONSTANTS = {
+  CART: 'Trashbags:cart'
+}

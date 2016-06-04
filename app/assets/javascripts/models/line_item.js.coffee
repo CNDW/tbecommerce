@@ -1,26 +1,26 @@
 App.LineItem = DS.Model.extend
   quantity: DS.attr 'number'
   price: DS.attr 'string'
-  single_display_ammount: DS.attr 'string'
+  singleDisplayAmmount: DS.attr 'string'
   total: DS.attr 'string'
-  display_total: DS.attr 'string'
+  displayTotal: DS.attr 'string'
 
-  customItem: DS.belongsTo 'custom_item', async: true
+  customItem: DS.belongsTo 'customItem', async: true
   order: DS.belongsTo 'order'
-  custom_item_hash: DS.attr 'string'
+  customItemHash: DS.attr 'string'
   variant: DS.belongsTo 'variant'
-  order_notes: DS.attr 'string'
+  orderNotes: DS.attr 'string'
 
-  variant_id: Em.computed ->
+  variantId: Em.computed ->
     return @get('variant.id') if @get('variant')
-    @get('customItem.variant_id')
+    @get('customItem.variantId')
 
-  is_custom: Em.computed.alias 'variant.is_master'
+  isCustom: Em.computed.alias 'variant.isMaster'
 
   didLoad: ->
-    @get('variant').set('total_in_cart', @get('quantity')) if @get('variant')
+    @get('variant').set('totalInCart', @get('quantity')) if @get('variant')
 
-  order_isComplete: Em.computed.alias 'order.isComplete'
+  orderIsComplete: Em.computed.alias 'order.isComplete'
 
   # state: (->
   #   return 'precart' if @get('order') is null
@@ -35,9 +35,9 @@ App.LineItem = DS.Model.extend
   #   !@get('inOrder') and @get('isComplete')
   # ).property('inOrder', 'isComplete')
 
-  name: Em.computed ->
+  name: Em.computed 'customItem.name', 'variant.name', 'variant.instockDescription', ->
     return "Custom #{@get('customItem.name')}" if @get('customItem.name')
-    "#{@get('variant.name')}, #{@get('variant.instock_description')}"
+    "#{@get('variant.name')}, #{@get('variant.instockDescription')}"
 
   remove: ->
     @get('customItem').removeLineItem()

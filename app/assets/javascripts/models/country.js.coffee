@@ -4,9 +4,9 @@ App.Country = DS.Model.extend
   name: DS.attr 'string'
   iso3: DS.attr 'string'
   iso: DS.attr 'string'
-  iso_name: DS.attr 'string'
+  isoName: DS.attr 'string'
   numcode: DS.attr 'number'
-  states_required: DS.attr 'boolean'
+  statesRequired: DS.attr 'boolean'
 
 App.State = DS.Model.extend
   country: DS.belongsTo 'country'

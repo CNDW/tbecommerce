@@ -2,58 +2,56 @@ App.Order = DS.Model.extend
   token: DS.attr 'string'
   number: DS.attr 'string'
 
-  additional_tax_total: DS.attr 'string'
-  adjustment_total: DS.attr 'string'
+  additionalTaxTotal: DS.attr 'string'
+  adjustmentTotal: DS.attr 'string'
   channel: DS.attr 'string'
-  completed_at: DS.attr 'string'
-  created_at: DS.attr 'string'
+  completedAt: DS.attr 'string'
+  createdAt: DS.attr 'string'
   currency: DS.attr 'string'
-  display_additional_tax_total: DS.attr 'string'
-  display_included_tax_total: DS.attr 'string'
-  display_item_total: DS.attr 'string'
-  display_ship_total: DS.attr 'string'
-  display_tax_total: DS.attr 'string'
-  display_total: DS.attr 'string'
+  displayAdditionalTaxTotal: DS.attr 'string'
+  displayIncludedTaxTotal: DS.attr 'string'
+  displayItemTotal: DS.attr 'string'
+  displayShipTotal: DS.attr 'string'
+  displayTaxTotal: DS.attr 'string'
+  displayTotal: DS.attr 'string'
   email: DS.attr 'string'
-  included_tax_total: DS.attr 'string'
-  item_total: DS.attr 'string'
-  line_items: DS.hasMany 'line_item'
-  payment_state: DS.attr 'string'
-  payment_total: DS.attr 'string'
-  ship_total: DS.attr 'string'
-  shipment_state: DS.attr 'string'
-  special_instructions: DS.attr 'string'
+  includedTaxTotal: DS.attr 'string'
+  itemTotal: DS.attr 'string'
+  lineItems: DS.hasMany 'lineItem'
+  paymentState: DS.attr 'string'
+  paymentTotal: DS.attr 'string'
+  shipTotal: DS.attr 'string'
+  shipmentState: DS.attr 'string'
+  specialInstructions: DS.attr 'string'
   state: DS.attr 'string', defaultValue: 'cart'
-  tax_total: DS.attr 'string'
+  taxTotal: DS.attr 'string'
   total: DS.attr 'string'
-  total_quantity: Em.computed.alias 'line_items.length'
-  updated_at: DS.attr 'string'
+  totalQuantity: Em.computed.alias 'lineItems.length'
+  updatedAt: DS.attr 'string'
 
-  ship_address: DS.belongsTo 'ship_address'
-  bill_address: DS.belongsTo 'bill_address'
+  shipAddress: DS.belongsTo 'shipAddress'
+  billAddress: DS.belongsTo 'billAddress'
 
   shipments: DS.hasMany 'shipment'
   payments: DS.hasMany 'payment'
-  payment_id: (->
+  paymentId: Em.computed 'payments.[]', ->
     @get('payments.firstObject.id')
-  ).property('payments.@each')
   orderHasPayment: Em.computed.notEmpty('payments')
 
   permissions: DS.attr 'object'
   # permissions: {can_update:false}
-  # user_id: null
+  # userId: null
   # adjustments: []
-  checkout_steps: DS.attr 'array'
-  payment_methods: DS.hasMany 'payment_method'
+  checkoutSteps: DS.attr 'array'
+  paymentMethods: DS.hasMany 'paymentMethod'
 
   useShippingAddress: DS.attr 'boolean', defaultValue: no
 
   # #order info
 
-  isEmpty: Em.computed.empty 'line_items'
-  isComplete: (->
+  isEmpty: Em.computed.empty 'lineItems'
+  isComplete: Em.computed 'checkoutStep', ->
     @get('checkoutStep') > 3
-  ).property('checkoutStep')
 
   checkoutStates: [
     'cart'
@@ -73,9 +71,8 @@ App.Order = DS.Model.extend
     complete: 5
     resumed: 6
 
-  checkoutStep: (->
+  checkoutStep: Em.computed 'state', ->
     @get('checkoutSteps')[@get('state')]
-  ).property('state')
 
   advanceState: (targetState)->
     targetStep = @get('checkoutSteps')[targetState]
@@ -109,45 +106,45 @@ App.Order = DS.Model.extend
         data:
           order_token: self.get('token')
           line_item:
-            variant_id: item.get('variant_id')
+            variant_id: item.get('variantId')
             options:
-              custom_item_hash: item.get('custom_item_hash')
-              order_notes: item.get('order_notes')
+              custom_item_hash: item.get('customItemHash')
+              order_notes: item.get('orderNotes')
         success: (data)->
           if item.isCustomItem
             data.customItem = item
-          self.store.pushPayload 'line_item',
+          self.store.pushPayload 'lineItem',
             line_item: data
           self.addLineItem data.id
           resolve(self, data)
         error: (xhr)->
           reject(xhr)
 
-  addLineItem: (line_item_id)->
-    line_item = @store.findRecord 'line_item', line_item_id
-    @get('line_items').addObject(line_item)
+  addLineItem: (lineItemId)->
+    lineItem = @store.findRecord 'lineItem', lineItemId
+    @get('lineItems').addObject(lineItem)
 
-  removeLineItem: (line_item)->
+  removeLineItem: (lineItem)->
     self = this
-    custom_item = line_item.get('customItem')
+    customItem = lineItem.get('customItem')
     return new Em.RSVP.Promise (resolve, reject)->
-      $.ajax "api/orders/#{self.get('number')}/line_items/#{line_item.get('id')}",
+      $.ajax "api/orders/#{self.get('number')}/line_items/#{lineItem.get('id')}",
         type: 'DELETE'
         datatype: 'json'
         data:
           order_token: self.get('token')
         success: ->
-          if line_item.get('variant')
-            line_item.get('variant').incrementProperty('total_in_cart', -line_item.get('quantity'))
-          self.get('line_items').removeObject(line_item)
-          unless custom_item.content is null
-            custom_item.set 'state', 'precart'
-            custom_item.set 'line_item', null
-            custom_item.content.save()
+          if lineItem.get('variant')
+            lineItem.get('variant').incrementProperty('totalInCart', -lineItem.get('quantity'))
+          self.get('lineItems').removeObject(lineItem)
+          unless customItem.content is null
+            customItem.set 'state', 'precart'
+            customItem.set 'lineItem', null
+            customItem.content.save()
           resolve(self)
         error: (xhr)->
           if xhr.status is 404
-            self.get('line_items').removeRecord(line_item)
+            self.get('lineItems').removeRecord(lineItem)
             resolve(self)
           else
             reject(xhr)
@@ -178,12 +175,12 @@ App.Order = DS.Model.extend
   serializeAddresses: ->
     if @get('useShippingAddress')
       payload =
-        ship_address_attributes: @get('ship_address').getAttributes()
-        bill_address_attributes: @get('ship_address').getAttributes()
+        ship_address_attributes: @get('shipAddress').getAttributes()
+        bill_address_attributes: @get('shipAddress').getAttributes()
     else
       payload =
-        ship_address_attributes: @get('ship_address').getAttributes()
-        bill_address_attributes: @get('bill_address').getAttributes()
+        ship_address_attributes: @get('shipAddress').getAttributes()
+        bill_address_attributes: @get('billAddress').getAttributes()
     return payload
 
   updateShipments: (alertOnFailure)->
@@ -211,12 +208,12 @@ App.Order = DS.Model.extend
           reject()
 
   serializeShipments: ->
-    shipments_attributes = {}
+    payload = {}
     $.each @get('shipments.currentState'), (index, shipment)->
-      shipments_attributes["#{index}"] =
-        selected_shipping_rate_id: shipment.get 'selected_shipping_id'
+      payload["#{index}"] =
+        selected_shipping_rate_id: shipment.get 'selectedShippingId'
         id: shipment.get 'id'
-    return shipments_attributes
+    return payload
 
   getPaymentAttributes: ->
     self = this
@@ -232,13 +229,13 @@ App.Order = DS.Model.extend
           alert xhr.responseJSON.errors.base.join('\n')
           reject(xhr)
 
-  createPayment: (payment_method, card)->
+  createPayment: (paymentMethod, card)->
     self = this
-    payment_method_id = payment_method.get('id')
+    paymentMethodId = paymentMethod.get('id')
     return new Em.RSVP.Promise (resolve, reject)->
       return resolve() if self.get('state') is 'complete'
-      payment_source = {}
-      payment_source[payment_method_id] =
+      paymentSource = {}
+      paymentSource[paymentMethodId] =
         gateway_payment_profile_id: card.get('token')
       $.ajax "api/checkouts/#{self.get('number')}",
         type: "PUT"
@@ -248,12 +245,12 @@ App.Order = DS.Model.extend
           order_token: self.get('token')
           order:
             payments_attributes: [
-              payment_method_id: payment_method_id
+              payment_method_id: paymentMethodId
             ]
-          payment_source: payment_source
+          payment_source: paymentSource
         success: (payload)->
           $.each payload.payments, (index, payment)->
-            payment.order_id = self.get('id')
+            payment.orderId = self.get('id')
           self.store.pushPayload 'order',
             order: payload
           resolve(payload)

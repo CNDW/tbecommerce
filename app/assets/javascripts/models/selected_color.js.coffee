@@ -4,31 +4,31 @@ App.SelectedColor = DS.Model.extend
   swatch: DS.attr 'string'
   selector: DS.attr 'string'
   colors: Em.computed.alias 'colorType.colorValues'
-  customItem: DS.belongsTo 'custom_item'
+  customItem: DS.belongsTo 'customItem'
 
-  isSelected: Em.computed.notEmpty 'colorValue_id'
+  isSelected: Em.computed.notEmpty 'colorValueId'
 
-  position: Em.computed 'colorType_id', ->
+  position: Em.computed 'colorTypeId', ->
     @get 'colorType.position'
 
-  line_color: Em.computed 'colorType_id', ->
-    @get 'colorType.line_color'
+  lineColor: Em.computed 'colorTypeId', ->
+    @get 'colorType.lineColor'
 
   #- Design pattern for DS.hasOne pointing to resources not saved in localStorage
-  colorType_id: DS.attr 'number', defaultValue: null
-  colorType: Em.computed 'colorType_id', ->
-    if @get 'colorType_id'
-      @store.findRecord 'color_type', @get 'colorType_id'
+  colorTypeId: DS.attr 'number', defaultValue: null
+  colorType: Em.computed 'colorTypeId', ->
+    if @get 'colorTypeId'
+      @store.findRecord 'colorType', @get 'colorTypeId'
 
-  colorValue_id: DS.attr 'number', defaultValue: null
-  colorValue: Em.computed 'colorType_id', ->
-    if @get 'colorValue_id'
-      @store.findRecord 'color_value', @get 'colorValue_id'
+  colorValueId: DS.attr 'number', defaultValue: null
+  colorValue: Em.computed 'colorTypeId', ->
+    if @get 'colorValueId'
+      @store.findRecord 'colorValue', @get 'colorValueId'
 
   #- Helper methods
   setColor: (colorValue)->
-    @set 'colorValue_id', colorValue.get('id')
+    @set 'colorValueId', colorValue.get('id')
     @set 'name', colorValue.get('name')
-    @set 'swatch', colorValue.get('small_url')
+    @set 'swatch', colorValue.get('smallUrl')
     @set 'selector', @get('colorType.selector')
     @get('customItem').save()
