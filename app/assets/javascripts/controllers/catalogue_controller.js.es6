@@ -7,13 +7,19 @@ var CatalogueMixin = Em.Mixin.create({
         total += item.get('price');
       });
       let average = total / items.get('length');
-      return {type: type, items, averagePrice: average};
+      return {name: type, items, averagePrice: average};
     });
     return unsorted.sortBy('averagePrice');
   })
 });
 
 App.CatalogueIndexController = Em.Controller.extend(CatalogueMixin);
-App.CatalogueBagsController = Em.Controller.extend(CatalogueMixin);
-App.CatalogueUtilityController = Em.Controller.extend(CatalogueMixin);
-App.CatalogueApparelController = Em.Controller.extend(CatalogueMixin);
+App.CatalogueBagsController = Em.Controller.extend(CatalogueMixin, {
+  category: 'Bags'
+});
+App.CatalogueUtilityController = Em.Controller.extend(CatalogueMixin, {
+  category: 'Utility'
+});
+App.CatalogueApparelController = Em.Controller.extend(CatalogueMixin, {
+  category: 'Apparel'
+});

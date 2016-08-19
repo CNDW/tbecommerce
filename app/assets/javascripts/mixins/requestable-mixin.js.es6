@@ -1,4 +1,4 @@
-var Promise = Ember.RSVP.Promise;
+var Promise = Em.RSVP.Promise;
 
 function request(options={}) {
   return new Promise((resolve, reject) => {
@@ -16,7 +16,7 @@ function request(options={}) {
   });
 }
 
-function hashOptions(options){
+function hashOptions(options) {
   var hash = $.extend(true, {
     url: "/",
     type: options.method || "GET",
@@ -31,4 +31,4 @@ function hashOptions(options){
   return hash;
 }
 
-App.RequestableMixin = Ember.Mixin.create({ request });
+App.RequestableMixin = Em.Mixin.create({ request });

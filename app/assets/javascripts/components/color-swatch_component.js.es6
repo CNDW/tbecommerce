@@ -2,11 +2,12 @@ App.ColorSwatchComponent = Em.Component.extend({
   classNameBindings: ['isSelected:active'],
   classNames: 'color-swatch',
   layout: Em.HTMLBars.compile("<img class='img-responsive' src={{image}}/>{{yield}}"),
+  image: Em.computed.alias('model.thumbUrl'),
   isSelected: Em.computed('selection.colorValueId', function() {
-    return this.get('selection.colorValueId') === this.get('color.id');
+    return this.get('selection.colorValueId') === this.get('model.id');
   }),
 
   click() {
-    return this.sendAction('action', this.get('color'), this.get('selection'));
+    this.get('selectColor')(this.get('model'));
   }
 });

@@ -1,7 +1,7 @@
 App.ProductMockComponent = Em.Component.extend({
   layout: Em.HTMLBars.compile("<div class='product-mock'></div>"),
 
-  didInsertElement() {
+  didReceiveAttrs() {
     return Em.run.scheduleOnce('afterRender', this, this.insertSVG);
   },
 

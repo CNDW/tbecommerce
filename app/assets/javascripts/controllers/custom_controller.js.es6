@@ -11,7 +11,7 @@ App.CustomController = Em.Controller.extend({
 
   products: Em.computed(function() {
     return this.get('store').peekAll('product').filter((product) => {
-      product.get('inCustomShop');
+      return product.get('inCustomShop');
     });
   }),
 

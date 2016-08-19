@@ -3,7 +3,7 @@
 let { camelize } = Em.String;
 // let { forEach } = Em.Enumerable.mixins;
 let { underscore } = Em.String;
-let inflector = new Em.Inflector();
+let inflector = new Em.Inflector(Em.Inflector.defaultRules);
 
 let BaseSerializer = DS.RESTSerializer.extend({
   keyForAttribute(key, method) {

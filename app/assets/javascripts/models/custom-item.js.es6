@@ -70,7 +70,9 @@ App.CustomItem = DS.Model.extend({
   productId: DS.attr('number', {defaultValue: null}),
 
   product: Em.computed('productId', function() {
-    if (this.get('productId')) { return this.store.findRecord('product', this.get('productId')); }
+    if (this.get('productId')) {
+      return this.store.peekRecord('product', this.get('productId'));
+    }
   }),
 
   productMocks: Em.computed('productId', function() {

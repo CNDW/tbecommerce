@@ -1,7 +1,7 @@
 <div class="col-main-body">
   <div class="col-sm-5">
-    {{#each colorTypes as |selection|}}
-      {{render "selected-color" selection}}
+    {{#each colorTypes as |colorType|}}
+      {{color-selector model=colorType classNames="col-sm-11 custom-field-section"}}
     {{/each}}
     <div class="col-sm-11 custom-field-footer">
       <div class="footer-info">

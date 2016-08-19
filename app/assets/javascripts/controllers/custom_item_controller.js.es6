@@ -2,7 +2,7 @@ App.CustomItemController = Em.Controller.extend(Em.Evented, {
   needs: ['custom'],
   featuredItems: Em.computed.alias('controllers.custom.featuredItems'),
 
-  mocks: Em.computed.sort('model.product_mocks', (a, b) => {
+  mocks: Em.computed.sort('model.productMocks', (a, b) => {
     return a.get('position') - b.get('position');
   }),
 
