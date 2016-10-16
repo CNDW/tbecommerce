@@ -37,6 +37,8 @@ App.SelectedColor = DS.Model.extend({
     this.set('name', colorValue.get('name'));
     this.set('swatch', colorValue.get('smallUrl'));
     this.set('selector', this.get('colorType.selector'));
-    return this.get('customItem').save();
+    return this.get('customItem').then((item) => {
+      item.save();
+    });
   }
 });

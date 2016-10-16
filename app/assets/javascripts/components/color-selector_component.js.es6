@@ -7,7 +7,7 @@ App.ColorSelectorComponent = Em.Component.extend({
 
   actions: {
     selectColor(color) {
-      this.get('model').selectColor(color);
+      this.get('model').setColor(color);
     }
   }
 });

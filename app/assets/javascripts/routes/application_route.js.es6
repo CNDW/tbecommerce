@@ -7,6 +7,9 @@ App.ApplicationRoute = Em.Route.extend({
         customItems: store.findAll('custom-item')
       });
     }).then((data) => {
+      data.customItems.forEach((item) => {
+        item.validateDataIntegrity();
+      });
       // let carts = data.carts.filterBy('isCreated', true);
       // if (carts.get('length') === 0) {
       //   var cart = store.createRecord('cart',
@@ -17,7 +20,6 @@ App.ApplicationRoute = Em.Route.extend({
       //   return cart.fetchOrder().then(() => cart);
       // }
     }).catch(() => {
-      // debugger
       localStorage.removeItem('TrashBagsCustomItem');
       localStorage.removeItem('TrashBagsCard');
       localStorage.removeItem('TrashBagsCart');

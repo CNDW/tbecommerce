@@ -139,6 +139,16 @@ App.CustomItem = DS.Model.extend({
     return this.save();
   },
 
+  validateDataIntegrity() {
+    // let isValid = this.get('selectedColors').reduce((result, color) => {
+    //   return color.get('colorTypeId') !== null ? result : false;
+    // }, true);
+
+    // if (!isValid) {
+    //   this.reloadRelationships();
+    // }
+  },
+
   loadOptions() {
     let product = this.get('product');
     this.populateColorRelationship(product);

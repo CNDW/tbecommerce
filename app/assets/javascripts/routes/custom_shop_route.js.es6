@@ -13,6 +13,7 @@ App.CustomShopRoute = Em.Route.extend({
       return items.get('firstObject');
     }
   },
+
   afterModel(model, transition) {
     return this.transitionTo('custom', model);
   }

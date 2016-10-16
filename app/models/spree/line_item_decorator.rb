@@ -30,7 +30,10 @@ module Spree
         end
 
         if id_seg[0] != nil
-          result['valuename'] = color_values.find(id_seg[0].split('s')[1].to_i).name
+          id = id_seg[0].split('s')[1].to_i
+          if id > 0
+            result['valuename'] = color_values.find(id).name
+          end
         end
         result
       end
