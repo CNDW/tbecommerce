@@ -64,8 +64,11 @@ App.ApplicationRoute = Em.Route.extend({
         this.transitionTo('cart');
         return;
       }
-      let cart = this.modelFor('application');
-      let order = cart.get('order');
+      let cart = this.get('cart');
+      let orderPromise = cart.getOrder();
+      orderPromise.then((cart) => {
+        debugger
+      });
       return order.createLineItem(item).then(function() {
         if (item.isCustomItem) {
           item.set('inShop', false);

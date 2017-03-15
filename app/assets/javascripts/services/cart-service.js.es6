@@ -15,7 +15,7 @@ App.CartService = Em.Service.extend(App.RequestableMixin, {
       this.set('cartId', localStorage.getItem(CART));
     } catch (err) {}
 
-    this.getCart();
+    this.getOrder();
   },
 
   persistCartId: Em.observer('cartId', function() {
@@ -24,7 +24,7 @@ App.CartService = Em.Service.extend(App.RequestableMixin, {
     } catch (err) {}
   }),
 
-  getCart() {
+  getOrder() {
     let store = this.get('store');
     return new Promise((resolve, reject) => {
       if (this.get('cartId')) {
