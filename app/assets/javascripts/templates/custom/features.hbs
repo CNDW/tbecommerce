@@ -4,19 +4,19 @@
       <div class="custom-features">
         {{#each options as |option|}}
           <div class="custom-features-line">
-            <span {{action "clickOption" option on="click"}} class="name interactable">
+            <span {{action "clickOption" option}} class="name interactable">
               {{option.name}}
             </span>
             {{input class="right" type="checkbox" checked=option.selected}}
             <span class="price right">${{option.price}}</span>
-            <span {{action "openModal" "property" option on="click"}} class="icon-info right interactable">
+            <span {{action "openModal" "property" option}} class="icon-info right interactable">
             </span>
           </div>
         {{/each}}
       </div>
       <div class="custom-selection-field">
         <div class="selection-fields">
-          {{textarea value=model.order_notes placeholder="Order notes: Please include your height and build for backpack orders for sizing-- this way if you are 5'0 or 6'8 we can make your bag to fit you perfectly. Also please include notes on custom art, if applicable, or just say 'sup to the bag crew. Thanks!"}}
+          {{textarea value=model.orderNotes placeholder="Order notes: Please include your height and build for backpack orders for sizing-- this way if you are 5'0 or 6'8 we can make your bag to fit you perfectly. Also please include notes on custom art, if applicable, or just say 'sup to the bag crew. Thanks!"}}
         </div>
       </div>
     </div>
@@ -27,7 +27,7 @@
         </span>
         <span class="price">${{price}}</span>
       </div>
-      <button {{action "addToCart" model on="click"}} class="btn btn-black">
+      <button {{action "addToCart" model}} class="btn btn-black">
         add to cart
       </button>
     </div>

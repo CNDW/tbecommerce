@@ -1,10 +1,10 @@
 <div class="col-main-body bottom-border">
   <div class="col-sm-8 col-sm-offset-2">
     <div class="col-sm-6">
-      {{render "address" model.ship_address}}
+      {{render "address" model.shipAddress}}
     </div>
     <div class="col-sm-6">
-      {{render "address" model.bill_address}}
+      {{render "address" model.billAddress}}
     </div>
   </div>
 </div>
@@ -14,7 +14,7 @@
   {{/each}}
 </div>
 <div class="col-main-body">
-  <button {{action "completeCheckoutShipping" on="click"}} class="btn btn-black">
+  <button {{action "completeCheckoutShipping"}} class="btn btn-black">
     continue
   </button>
 </div>

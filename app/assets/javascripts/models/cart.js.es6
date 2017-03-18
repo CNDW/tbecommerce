@@ -3,20 +3,19 @@ App.Cart = DS.Model.extend(App.RequestableMixin, {
   number: DS.attr('string', {defaultValue: null}),
   orderId: DS.attr('string', {defaultValue: null}),
 
-  // order: (function() {
-  //   return this.store.findRecord('order', this.get('order_id'));
-  // }).property('order_id'),
+  order: Em.computed('orderId', function() {
+    return this.store.peekRecord('order', this.get('orderId'));
+  }),
 
   getOrder() {
     let store = this.get('store');
-    return new Promise((resolve, reject) => {
+    return new Em.RSVP.Promise((resolve, reject) => {
       let order = store.peekRecord('order', this.get('orderId'));
       resolve(order || this.fetchOrder());
     });
   },
 
   resetCart() {
-    let self = this;
     this.set('token', null);
     return this.createOrder();
   },
@@ -28,16 +27,16 @@ App.Cart = DS.Model.extend(App.RequestableMixin, {
     }).then((payload) => {
       store.pushPayload('order', {order: payload});
       this.setProperties({
-        orderId: orderId,
+        orderId: payload.order_id,
         token: payload.token,
         number: payload.number
       });
       this.save();
 
       return store.peekRecord('order', payload.id);
-    }).catch(() => {
-      return this.createOrder()
-    })
+    }, () => {
+      return this.createOrder();
+    });
   },
 
   createOrder() {
@@ -49,7 +48,7 @@ App.Cart = DS.Model.extend(App.RequestableMixin, {
       store.pushPayload('order', {order: payload});
 
       this.setProperties({
-        orderId: orderId,
+        orderId: payload.order_id,
         token: payload.token,
         number: payload.number
       });

@@ -1,8 +1,8 @@
 <div class="catalogue-item-image">
-  <img {{bind-attr src="activeSlide.large_url"}} />
+  <img src='{{activeSlide.largeUrl}}' />
 </div>
 <div class="catalogue-item-thumbs">
   {{#each thumbnails as |thumbnail|}}
-    {{carousel-thumbnail classNames="thumb" mini_url=thumbnail.mini_url index=thumbnail.index activeIndex=thumbnail.activeIndex action="setSlide"}}
+    {{carousel-thumbnail classNames="thumb" miniUrl=thumbnail.miniUrl index=thumbnail.index activeIndex=thumbnail.activeIndex action="setSlide"}}
   {{/each}}
 </div>

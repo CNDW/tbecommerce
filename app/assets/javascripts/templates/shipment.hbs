@@ -1,16 +1,16 @@
 <div class="col-sm-4 right-border">
   <h4 class="upcase">Shipment</h4>
-  {{#each model.shipping_rates as |shipping_rate|}}
+  {{#each model.shippingRates as |shippingRate|}}
     <div class="custom-features-line">
-      {{radio-button name=radio_name classNames="left" value=shipping_rate checked=model.selected_shipping_rate}}
-      <span class="name interactible">{{shipping_rate.name}}</span>
-      <span class="price right">{{shipping_rate.display_cost}}</span>
+      {{radio-button name=radioName classNames="left" value=shippingRate checked=model.selectedShippingRate}}
+      <span class="name interactible">{{shippingRate.name}}</span>
+      <span class="price right">{{shippingRate.displayCost}}</span>
     </div>
   {{/each}}
 </div>
 <div class="col-sm-8">
   <h4 class="upcase">Manifest</h4>
-  {{#each line_items as |item|}}
+  {{#each lineItems as |item|}}
     <div class="custom-features-line">
       <span class="name">{{item.name}}</span>
       <span class="right">Quantity: {{item.quantity}}</span>

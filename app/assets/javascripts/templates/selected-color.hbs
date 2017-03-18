@@ -3,7 +3,7 @@
     {{#unless isSelected}}
       <span class="custom-selection-icon empty"></span>
     {{else}}
-      <img {{bind-attr src=model.swatch}} class="custom-selection-icon" />
+      <img src={{model.swatch}} class="custom-selection-icon" />
     {{/unless}}
     <span class="custom-selection-title">{{model.title}}</span>
     <span class="toggle-menu-icon right"></span>
@@ -17,7 +17,7 @@
       {{/if}}
       <div class="color-swatch-field">
         {{#each colors as |color|}}
-          {{color-swatch action="selectColor" image=color.thumb_url color=color selection=model}}
+          {{color-swatch action="selectColor" image=color.thumbUrl color=color selection=model}}
         {{/each}}
       </div>
     </div>

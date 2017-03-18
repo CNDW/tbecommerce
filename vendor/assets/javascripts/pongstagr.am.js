@@ -157,20 +157,20 @@
             modal += '  </div>'
             modal += '</div>'
 
-          options.data.comments_count !== 0 ?
-            $.each(options.data.comments_data, function(a, b){
-              modal += '<div class="media">'
-              modal += '  <a href="https://instagram.com/'+ b.from.username +'" class="media-object thumbnail pull-left">'
-              modal += '    <img src="'+ b.from.profile_picture +'" width="'+ options.dflt.picture_size +'" height="'+ options.dflt.picture_size +'">'
-              modal += '  </a>'
-              modal += '  <div class="modal-body">'
-              modal += '      <h5 class="media-heading">'
-              modal += '        <a href="https://instagram.com/'+ b.from.username +'">'+ b.from.username +'</a>'
-              modal += '      </h5>'
-              modal += '      <p>'+ b.text +'</p>'
-              modal += '  </div>'
-              modal += '</div>'
-            }) : ""
+          // options.data.comments_count !== 0 ?
+          //   $.each(options.data.comments_data, function(a, b){
+          //     modal += '<div class="media">'
+          //     modal += '  <a href="https://instagram.com/'+ b.from.username +'" class="media-object thumbnail pull-left">'
+          //     modal += '    <img src="'+ b.from.profile_picture +'" width="'+ options.dflt.picture_size +'" height="'+ options.dflt.picture_size +'">'
+          //     modal += '  </a>'
+          //     modal += '  <div class="modal-body">'
+          //     modal += '      <h5 class="media-heading">'
+          //     modal += '        <a href="https://instagram.com/'+ b.from.username +'">'+ b.from.username +'</a>'
+          //     modal += '      </h5>'
+          //     modal += '      <p>'+ b.text +'</p>'
+          //     modal += '  </div>'
+          //     modal += '</div>'
+          //   }) : ""
 
             modal += '        </div>'
             modal += '      </div>'

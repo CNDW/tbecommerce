@@ -712,6 +712,9 @@ ul.top-navs {
   height: 36px;
   width: 36px;
   margin: 4px;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
   float: left;
   background-color: green;
   &.active {

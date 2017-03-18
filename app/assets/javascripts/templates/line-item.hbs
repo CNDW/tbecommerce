@@ -4,10 +4,10 @@
       <span class="capitalize">{{name}}</span>
     </div>
     <div class="col-sm-3">
-      {{#if model.is_custom}}
+      {{#if model.isCustom}}
         {{render "custom-item" model.customItem}}
       {{else}}
-        <img {{bind-attr src="item_image"}} alt="loading..." class="img-responsive" />
+        <img src="{{itemImage}}" alt="loading..." class="img-responsive" />
       {{/if}}
     </div>
   </div>
@@ -18,8 +18,8 @@
     <span class="capitalize">${{model.total}}</span>
   </div>
   <div class="col-sm-1">
-    {{#unless model.order_isComplete}}
-      <span {{action "removeFromCart" model on="click"}} class="icon-x interactable"></span>
+    {{#unless model.orderIsComplete}}
+      <span {{action "removeFromCart" model}} class="icon-x interactable"></span>
     {{/unless}}
   </div>
 </div>

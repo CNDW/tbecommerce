@@ -1,0 +1,23 @@
+{{#toggle-menu classNames="custom-selection-header"}}
+  {{#if isSelected}}
+    <img src={{model.swatch}} class="custom-selection-icon" />
+  {{else}}
+    <span class="custom-selection-icon empty"></span>
+  {{/if}}
+  <span class="custom-selection-title">{{model.title}}</span>
+  <span class="toggle-menu-icon right"></span>
+{{/toggle-menu}}
+<div class="section-content">
+  <div class="custom-selection-field">
+    {{#if model.isUnselected}}
+      <div class="selection-header">select a color</div>
+    {{else}}
+      <div class="selection-header">{{model.name}}</div>
+    {{/if}}
+    <div class="color-swatch-field">
+      {{#each colors as |color|}}
+        {{color-swatch selectColor=(action "selectColor" color) model=color selection=model}}
+      {{/each}}
+    </div>
+  </div>
+</div>

@@ -30,3 +30,7 @@ script.rb
 /.idea
 
 .DS_Store
+
+# Ignore node dev tools
+/node_modules
+package.json

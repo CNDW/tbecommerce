@@ -29,7 +29,12 @@ module Spree
           seg.split('s')[0] == type.id.to_s
         end
 
-        result['valuename'] = color_values.find(id_seg[0].split('s')[1].to_i).name
+        if id_seg[0] != nil
+          id = id_seg[0].split('s')[1].to_i
+          if id > 0
+            result['valuename'] = color_values.find(id).name
+          end
+        end
         result
       end
       @color_data

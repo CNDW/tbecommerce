@@ -17,7 +17,7 @@
                   {{type.name}}
                 </span>
                 {{#each type.items as |item|}}
-                  {{#selection-option item=item action="setCustomProduct" custom_item=this}}
+                  {{#selection-option item=item action="setCustomProduct" customItem=this}}
                     <span>{{item.name}}</span>
                   {{/selection-option}}
                 {{/each}}

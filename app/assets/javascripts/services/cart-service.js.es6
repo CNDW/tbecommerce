@@ -1,7 +1,7 @@
 let { CART } = App.CONSTANTS;
 let { Promise } = Em.RSVP;
 
-App.CartService = Em.Service.create(App.RequestableMixin, {
+App.CartService = Em.Service.extend(App.RequestableMixin, {
   store: Em.inject.service('store'),
 
   cartId: null,
@@ -13,7 +13,7 @@ App.CartService = Em.Service.create(App.RequestableMixin, {
     this._super(...arguments);
     try {
       this.set('cartId', localStorage.getItem(CART));
-    } catch() {}
+    } catch (err) {}
 
     this.getCart();
   },
@@ -21,7 +21,7 @@ App.CartService = Em.Service.create(App.RequestableMixin, {
   persistCartId: Em.observer('cartId', function() {
     try {
       localStorage.setItem(CART, this.get('cartId'));
-    } catch () {}
+    } catch (err) {}
   }),
 
   getCart() {
@@ -29,7 +29,7 @@ App.CartService = Em.Service.create(App.RequestableMixin, {
     return new Promise((resolve, reject) => {
       if (this.get('cartId')) {
         store.findRecord('cart', this.get('cartId')).then((cart) => {
-          resolve(cart):
+          resolve(cart);
         }).catch(() => {
           resolve(this.createCart());
         });
@@ -47,7 +47,7 @@ App.CartService = Em.Service.create(App.RequestableMixin, {
   createCart() {
     let store = this.get('store');
 
-    let cart = store.createRecord('cart')
+    let cart = store.createRecord('cart');
 
     return cart.createOrder().then((payload) => {
       this.set('cartId', cart.get('id'));
