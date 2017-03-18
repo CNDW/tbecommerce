@@ -29,4 +29,3 @@ App.AddressController = Em.Controller.extend({
 
   addressAttributes: Em.computed.collect('name', 'streetAddress', 'city', 'country', 'email', 'phone')
 });
-// comment
