@@ -1,11 +1,14 @@
 require "rails_helper"
 
 RSpec.describe "Orders Api", :type => :request do
+  let(:product) { create(:product) }
+  let(:currency) { 'USD' }
   before(:each) do
-    @product = Spree::Product.new
+    @variant = create(:variant, :product => product)
+    product.price = 15
+    @variant.price = 10
   end
 
   it "returns an order" do
-    expect(true).to be true
   end
 end
