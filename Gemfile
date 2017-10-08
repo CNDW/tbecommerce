@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
+ruby '2.2.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.6'
+gem 'rails', '4.2.7.1'
 
 gem 'sprockets', '>= 3.0.0'
 gem 'sprockets-es6'
@@ -62,7 +63,9 @@ group :development, :test do
   gem 'bullet'
 	gem 'better_errors'
 	gem 'binding_of_caller'
-  gem 'byebug'
+  gem 'pry-byebug'
+  gem 'rspec-rails', '~> 3.6'
+  gem 'factory_girl_rails', '~> 4.5.0'
 end
 
 group :production do

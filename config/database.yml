@@ -18,9 +18,10 @@ development:
   adapter: postgresql
   encoding: unicode
   database: spree
+  host: localhost
   pool: 5
   username: spree
-  password:
+  password: password
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -47,14 +48,16 @@ test:
   adapter: postgresql
   encoding: unicode
   database: tbecommerce_test
+  host: localhost
   pool: 5
   username: rails_dev
-  password:
+  password: password
 
 production:
   adapter: postgresql
   encoding: unicode
   database: spree
+  host: localhost
   pool: 5
   username: spree
   password:
