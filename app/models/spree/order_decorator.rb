@@ -6,6 +6,7 @@ module Spree
     def require_email
       false
     end
+
     def contains?(hash)
       find_line_item_by_hash(hash).present?
     end

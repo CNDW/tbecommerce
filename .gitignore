@@ -34,3 +34,4 @@ script.rb
 # Ignore node dev tools
 /node_modules
 package.json
+.byebug_history
