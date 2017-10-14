@@ -7,7 +7,9 @@
       <div class="description-column">
         <h3 class="upcase">{{model.name}}</h3>
         <p>{{model.description}}</p>
-        <button {{action 'customBuilderWithProduct' model}} class='btn btn-black'>custom order</button>
+        {{#if model.inCustomShop}}
+          <button {{action 'customBuilderWithProduct' model}} class='btn btn-black'>custom order</button>
+        {{/if}}
         {{#link-to "instock.index" tagName="button" classNames="btn btn-black"}}
           in stock
         {{/link-to}}
