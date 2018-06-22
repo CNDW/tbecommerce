@@ -1,8 +1,2 @@
-primary #ED1C24, DC1F26
-secondary #00A550, #00A651
-buckle #FFF100, F8EC22, DBE120, FFF200
-trim #00ADEF, 00AEEF, 1EAC4B
-webbing #2E3192, 2B2977
-velcro #EC008B
-liner #FBAF3F
-stitching #3B2314, #3C2415
+## Postgresql in docker for development
+`docker run --name tbecommerce-postgresql -e POSTGRES_PASSWORD=password -e POSTGRES_USER=spree postgres:9.3`
