@@ -32,5 +32,9 @@ module Spree
       }
       expect(last_response).to be_successful
     end
+
+    it "can use a custom_item_hash to apply options to a line_item" do
+
+    end
   end
 end
