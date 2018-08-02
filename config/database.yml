@@ -19,6 +19,7 @@ development:
   encoding: unicode
   database: spree
   host: localhost
+  port: 54322
   pool: 5
   username: spree
   password: password
@@ -49,8 +50,9 @@ test:
   encoding: unicode
   database: tbecommerce_test
   host: localhost
+  port: 54322
   pool: 5
-  username: rails_dev
+  username: spree
   password: password
 
 production:
