@@ -12,19 +12,19 @@ App.InstockIndexController = Em.Controller.extend({
     });
   }),
 
-  bag: Em.computed('model.@each.totalInCart', function() {
+  bag: Em.computed('model.[].totalInCart', function() {
     return this.get('model').filter((model) => {
       return model.get('category') === 'bag' && !model.get('isMaster') && model.get('totalNotInCart') > 0;
     }).sortBy('price');
   }),
 
-  utility: Em.computed('model.@each.totalInCart', function() {
+  utility: Em.computed('model.[].totalInCart', function() {
     return this.get('model').filter((model) => {
       return model.get('category') === 'utility' && !model.get('isMaster') && model.get('totalNotInCart') > 0;
     }).sortBy('price');
   }),
 
-  apparel: Em.computed('model.@each.totalInCart', function() {
+  apparel: Em.computed('model.[].totalInCart', function() {
     return this.get('model').filter((model) => {
       return model.get('category') === 'apparel' && !model.get('isMaster') && model.get('totalNotInCart') > 0;
     }).sortBy('price');

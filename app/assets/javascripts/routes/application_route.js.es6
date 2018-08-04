@@ -1,3 +1,5 @@
+let { ORDER_TOKEN, ORDER_NUMBER } = App.CONSTANTS;
+
 App.ApplicationRoute = Em.Route.extend({
   cart: Em.inject.service('cart'),
   model() {
@@ -20,9 +22,7 @@ App.ApplicationRoute = Em.Route.extend({
       //   return cart.fetchOrder().then(() => cart);
       // }
     }).catch(() => {
-      localStorage.removeItem('TrashBagsCustomItem');
-      localStorage.removeItem('TrashBagsCard');
-      localStorage.removeItem('TrashBagsCart');
+      Object.keys(App.CONSTANTS).forEach(k => localStorage.removeItem(k));
       this.refresh();
     });
   },
@@ -65,21 +65,19 @@ App.ApplicationRoute = Em.Route.extend({
         return;
       }
       let cart = this.get('cart');
-      let orderPromise = cart.getOrder();
-      orderPromise.then((cart) => {
-        debugger
-      });
-      return order.createLineItem(item).then(function() {
-        if (item.isCustomItem) {
-          item.set('inShop', false);
-          item.save();
-        }
-        return self.transitionTo('cart');
-      }, (xhr) => {
-        let hasErrors = xhr.responseJSON && xhr.responseJSON.errors && xhr.responseJSON.errors.quantity;
-        if (!item.isCustomItem && hasErrors) {
-          alert('The item you tried to add to cart is no longer in stock');
-        }
+      return cart.getOrder().then((order) => {
+        return order.createLineItem(item).then(function() {
+          if (item.isCustomItem) {
+            item.set('inShop', false);
+            item.save();
+          }
+          return self.transitionTo('cart');
+        }, (xhr) => {
+          let hasErrors = xhr.responseJSON && xhr.responseJSON.errors && xhr.responseJSON.errors.quantity;
+          if (!item.isCustomItem && hasErrors) {
+            alert('The item you tried to add to cart is no longer in stock');
+          }
+        });
       });
     }
   }

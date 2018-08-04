@@ -42,5 +42,7 @@ Em.RSVP.configure('onerror', function(error) {
 });
 
 App.CONSTANTS = {
-  CART: 'Trashbags:cart'
+  ORDER_TOKEN: 'Trashbags:ORDER_TOKEN',
+  ORDER_NUMBER: 'Trashbags:ORDER_NUMBER',
+  CUSTOM_ITEM: 'TrashBagsCustomItem'
 };

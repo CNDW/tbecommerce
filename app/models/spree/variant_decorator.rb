@@ -6,8 +6,6 @@ module Spree
     after_save :update_variant_colors
     accepts_nested_attributes_for :variant_colors, reject_if: lambda { |pp| pp[:color_value_id].blank? }
 
-    scope :in_stock, -> { joins(:stock_items).where('spree_variants.count_on_hand > ? OR track_inventory = ?', 0, false) }
-
     def update_variant_colors
       self.variant_colors.each {|color| self.variant_colors.delete(color) unless self.variant_color_type_ids.include?(color.color_type_id)}
       self.add_variant_colors

@@ -1,5 +1,5 @@
 App.CartController = Em.Controller.extend({
-  total: Em.computed('model.lineItems.@each.total', function() {
+  total: Em.computed('model.lineItems.[].total', function() {
     if (!this.get('model.lineItems')) { return 0; }
     return this.get('model.lineItems').reduce((prev, item) => {
       return prev + Number(item.get('total'));

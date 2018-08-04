@@ -1,7 +1,8 @@
 App.CartRoute = Em.Route.extend({
+  cart: Em.service.inject('cart'),
   model() {
-    let carts = this.store.peekAll('cart').filterBy('isCreated', true);
-    return carts.get('firstObject.order');
+    let cart = this.get('cart');
+    return cart.getOrder();
   },
 
   actions: {

@@ -60,6 +60,8 @@ group :development, :test do
 	gem 'better_errors'
 	gem 'binding_of_caller'
   gem 'byebug'
+  # gem 'rspec-rails', '~> 3.6'
+  # gem 'factory_girl_rails', '~> 4.5.0'
 end
 
 group :production do
