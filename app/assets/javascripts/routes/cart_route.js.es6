@@ -1,5 +1,5 @@
 App.CartRoute = Em.Route.extend({
-  cart: Em.service.inject('cart'),
+  cart: Em.inject.service('cart'),
   model() {
     let cart = this.get('cart');
     return cart.getOrder();

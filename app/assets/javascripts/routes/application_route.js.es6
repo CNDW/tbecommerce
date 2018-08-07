@@ -6,7 +6,8 @@ App.ApplicationRoute = Em.Route.extend({
     let { store } = this;
     return store.findAll('product').then(() => {
       return Em.RSVP.hash({
-        customItems: store.findAll('custom-item')
+        customItems: store.findAll('custom-item'),
+        order: this.get('cart').getOrder()
       });
     }).then((data) => {
       data.customItems.forEach((item) => {

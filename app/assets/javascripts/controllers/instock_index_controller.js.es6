@@ -12,23 +12,15 @@ App.InstockIndexController = Em.Controller.extend({
     });
   }),
 
-  bag: Em.computed('model.[].totalInCart', function() {
-    return this.get('model').filter((model) => {
-      return model.get('category') === 'bag' && !model.get('isMaster') && model.get('totalNotInCart') > 0;
-    }).sortBy('price');
+  inventory: Em.computed('model.@each.totalInCart', function(){
+    return this.get('model')
+      .filter((model) => !model.get('isMaster') && model.get('totalNotInCart') > 0)
+      .sortBy('price');
   }),
 
-  utility: Em.computed('model.[].totalInCart', function() {
-    return this.get('model').filter((model) => {
-      return model.get('category') === 'utility' && !model.get('isMaster') && model.get('totalNotInCart') > 0;
-    }).sortBy('price');
-  }),
-
-  apparel: Em.computed('model.[].totalInCart', function() {
-    return this.get('model').filter((model) => {
-      return model.get('category') === 'apparel' && !model.get('isMaster') && model.get('totalNotInCart') > 0;
-    }).sortBy('price');
-  })
+  bag: Em.computed.filterBy('inventory', 'category', 'bag'),
+  utility: Em.computed.filterBy('inventory', 'category', 'utility'),
+  apparel: Em.computed.filterBy('inventory', 'category', 'apparel')
 });
 
 App.InstockItemController = Em.Controller.extend({

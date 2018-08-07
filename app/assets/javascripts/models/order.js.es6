@@ -118,18 +118,16 @@ App.Order = DS.Model.extend({
           order_token: self.get('token'),
           line_item: {
             variant_id: item.get('variantId'),
-            options: {
-              custom_item_hash: item.get('customItemHash'),
-              order_notes: item.get('orderNotes')
-            }
+            custom_item_hash: item.get('customItemHash'),
+            order_notes: item.get('orderNotes')
           }
         },
         success(data) {
           if (item.isCustomItem) {
             data.customItem = item;
           }
-          self.store.pushPayload('lineItem',
-            {line_item: data});
+          const store = self.get('store');
+          store.pushPayload('line-item', {line_item: data});
           self.addLineItem(data.id);
           return resolve(self, data);
         },
@@ -141,7 +139,7 @@ App.Order = DS.Model.extend({
   },
 
   addLineItem(lineItemId) {
-    let lineItem = this.store.findRecord('lineItem', lineItemId);
+    let lineItem = this.store.peekRecord('line-item', lineItemId);
     return this.get('lineItems').addObject(lineItem);
   },
 

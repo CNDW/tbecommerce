@@ -11,13 +11,6 @@ App.LineItem = DS.Model.extend({
   variant: DS.belongsTo('variant'),
   orderNotes: DS.attr('string'),
 
-  variantId: Em.computed(function() {
-    if (this.get('variant')) {
-      return this.get('variant.id');
-    }
-    return this.get('customItem.variantId');
-  }),
-
   isCustom: Em.computed.alias('variant.isMaster'),
 
   didLoad() {

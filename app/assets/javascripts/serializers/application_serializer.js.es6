@@ -90,3 +90,16 @@ App.ShipAddressSerializer = BaseSerializer.extend(DS.EmbeddedRecordsMixin, {
     state: { embedded: 'always' }
   }
 });
+App.OrderSerializer = BaseSerializer.extend(DS.EmbeddedRecordsMixin, {
+  attrs: {
+    lineItems: { embedded: 'always' },
+    shipAddress: { embedded: 'always' },
+    billAddress: { embedded: 'always' },
+    paymentMethods: { embedded: 'always' },
+  }
+});
+App.LineItemSerializer = BaseSerializer.extend(DS.EmbeddedRecordsMixin, {
+  attrs: {
+    variant: {embedded: 'always'}
+  }
+});
