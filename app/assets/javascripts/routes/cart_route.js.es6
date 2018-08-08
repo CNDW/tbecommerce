@@ -6,12 +6,6 @@ App.CartRoute = Em.Route.extend({
   },
 
   actions: {
-    removeFromCart(lineItem) {
-      let self = this;
-      let order = this.modelFor('cart');
-      return order.removeLineItem(lineItem).then(() => self.refresh());
-    },
-
     checkout(order) {
       let self = this;
       if (order.get('totalQuantity') === 0) { return; }

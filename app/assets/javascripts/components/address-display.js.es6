@@ -1,4 +1,4 @@
-App.AddressController = Em.Controller.extend({
+App.AddressDisplayComponent = Em.Component.extend({
   name: Em.computed('model.fullname', function() {
     return `${this.get('model.fullname')}`;
   }),

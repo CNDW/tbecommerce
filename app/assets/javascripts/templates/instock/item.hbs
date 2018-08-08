@@ -1,7 +1,7 @@
 <div class="stock-row">
   <div class="col-main-body stock-item">
     <div class="col-sm-8 stock-images">
-      {{render "carousel" model.images}}
+      {{image-carousel model=model.images}}
     </div>
     <div class="col-sm-4 stock-item-details">
       <h3>{{model.productName}}</h3>
@@ -17,7 +17,7 @@
     <div class="col-sm-4 stock-item-details">
       <h4>Standards</h4>
       <ul class='top-border'>
-        {{render "properties" model.product.properties}}
+        {{product-properties model=model.product.properties}}
       </ul>
     </div>
   </div>

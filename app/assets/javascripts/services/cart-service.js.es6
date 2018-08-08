@@ -1,12 +1,20 @@
 let { ORDER_TOKEN, ORDER_NUMBER } = App.CONSTANTS;
 let { Promise } = Em.RSVP;
 
+function getLocalStorageItem(item) {
+  try {
+    return localStorage.getItem(item);
+  } catch (err) {
+    return null;
+  }
+}
+
 App.CartService = Em.Service.extend(App.RequestableMixin, {
   store: Em.inject.service('store'),
 
   order: null,
-  orderNumber: null,
-  orderToken: null,
+  orderNumber: getLocalStorageItem(ORDER_NUMBER),
+  orderToken: getLocalStorageItem(ORDER_TOKEN),
 
   hasNumber: Em.computed.notEmpty('orderNumber'),
   hasToken: Em.computed.notEmpty('orderToken'),
@@ -15,14 +23,21 @@ App.CartService = Em.Service.extend(App.RequestableMixin, {
 
   init() {
     this._super(...arguments);
-    try {
-      this.setProperties({
-        orderNumber: localStorage.getItem(ORDER_NUMBER),
-        orderToken: localStorage.getItem(ORDER_TOKEN)
-      });
-    } catch (err) {}
-
     this.getOrder();
+  },
+
+  setOrder(order = null) {
+    const orderNumber = order ? order.get('number') : null
+    const orderToken = order ? order.get('token') : null
+    this.setProperties({
+      order,
+      orderNumber,
+      orderToken
+    });
+    try {
+      localStorage.setItem(ORDER_NUMBER, orderNumber);
+      localStorage.setItem(ORDER_TOKEN, orderToken);
+    } catch (err) {}
   },
 
   storeOrderFromApi(payload) {
@@ -31,26 +46,17 @@ App.CartService = Em.Service.extend(App.RequestableMixin, {
     store.pushPayload('order', {order: payload});
     const order = store.peekRecord('order', payload.id);
 
-    this.setProperties({
-      order,
-      orderNumber: order.number,
-      orderToken: order.token,
-    });
+    this.setOrder(order);
     return order;
   },
 
   resetCart() {
-    this.setProperties({
-      order: null,
-      orderNumber: null,
-      orderToken: null,
-    });
+    this.setOrder(null);
 
     return this.getOrder();
   },
 
   getOrder() {
-    console.log('')
     if (this.get('order')) {
       return Promise.resolve(this.get('order'));
     }
@@ -81,7 +87,7 @@ App.CartService = Em.Service.extend(App.RequestableMixin, {
       return this.storePromise(promise);
     }
     let store = this.get('store');
-    const url = `api/orders/${this.get('number')}?order_token=${this.get('token')}`
+    const url = `api/orders/${this.get('orderNumber')}?order_token=${this.get('orderToken')}`
     const promise = this.request({ url })
       .catch(() => this.createOrder())
       .then((payload) => this.storeOrderFromApi(payload));
@@ -94,5 +100,10 @@ App.CartService = Em.Service.extend(App.RequestableMixin, {
       url: 'api/orders',
       type: 'POST'
     });
-  }
+  },
+
+  removeFromCart(lineItem) {
+    return this.getOrder()
+      .then(order => order.removeLineItem(lineItem));
+  },
 });

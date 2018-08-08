@@ -5,7 +5,7 @@
     </div>
     <div class="col-sm-3">
       {{#if model.isCustom}}
-        {{render "custom-item" model.customItem}}
+        {{custom-item model=model.customItem}}
       {{else}}
         <img src="{{itemImage}}" alt="loading..." class="img-responsive" />
       {{/if}}
@@ -19,7 +19,7 @@
   </div>
   <div class="col-sm-1">
     {{#unless model.orderIsComplete}}
-      <span {{action "removeFromCart" model}} class="icon-x interactable"></span>
+      <span {{action "removeFromCart"}} class="icon-x interactable"></span>
     {{/unless}}
   </div>
 </div>

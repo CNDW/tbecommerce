@@ -1,6 +1,5 @@
-App.CarouselController = Em.Controller.extend({
-  init() {
-    this._super(...arguments);
+App.ImageCarouselComponent = Em.Component.extend({
+  willInsertElement() {
     this.cycleCarousel();
   },
 
@@ -11,7 +10,7 @@ App.CarouselController = Em.Controller.extend({
   slideIndex: 0,
 
   thumbnails: Em.computed('model', 'slideIndex', function() {
-    return this.model.map((item, index) => {
+    return this.get('model').map((item, index) => {
       return {
         'index': index,
         'miniUrl': item.get('thumbUrl'),
@@ -21,7 +20,7 @@ App.CarouselController = Em.Controller.extend({
   }),
 
   activeSlide: Em.computed('model', 'slideIndex', function() {
-    return this.model.objectAt(this.slideIndex);
+    return this.get('model').objectAt(this.slideIndex);
   }),
 
   nextSlide() {
@@ -48,7 +47,7 @@ App.CarouselController = Em.Controller.extend({
     return clearInterval(this.slide_show);
   },
 
-  willDestroy() {
+  willDestroyElement() {
     return clearInterval(this.slide_show);
   },
 

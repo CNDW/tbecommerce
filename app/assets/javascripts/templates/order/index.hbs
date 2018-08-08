@@ -1,6 +1,6 @@
 <div class="col-main-body bottom-border">
   <h4 class="upcase">shipping address</h4>
-  {{render "address-form" model.shipAddress}}
+  {{address-form model=model.shipAddress}}
 </div>
 <div class="col-main-body bottom-border">
   <h4 class="upcase">billing address</h4>
@@ -9,7 +9,7 @@
     <span class="field-label">Use my shipping address</span>
   </div>
   {{#unless model.useShippingAddress}}
-    {{render "address-form" model.billAddress}}
+    {{address-form model=model.billAddress}}
   {{/unless}}
 </div>
 <div class="col-main-body">

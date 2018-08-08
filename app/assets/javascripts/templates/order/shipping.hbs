@@ -1,16 +1,16 @@
 <div class="col-main-body bottom-border">
   <div class="col-sm-8 col-sm-offset-2">
     <div class="col-sm-6">
-      {{render "address" model.shipAddress}}
+      {{address-display model=model.shipAddress}}
     </div>
     <div class="col-sm-6">
-      {{render "address" model.billAddress}}
+      {{address-display model=model.billAddress}}
     </div>
   </div>
 </div>
 <div class="col-main-body">
   {{#each model.shipments as |shipment|}}
-    {{render "shipment" shipment}}
+    {{shipping-details model=shipment}}
   {{/each}}
 </div>
 <div class="col-main-body">

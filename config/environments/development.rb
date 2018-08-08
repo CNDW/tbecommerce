@@ -28,6 +28,16 @@ Tbecommerce::Application.configure do
   config.assets.debug = true
 
   config.ember.variant = :development
+  # Overriding the file served by ember-data-source because apparently it's ok
+  # to ship broken debug deploys in ember land. This issue is in the dev version only
+  # https://github.com/emberjs/data/issues/5334
+  module Ember::Data::Source
+    def self.bundled_path_for(distro)
+      puts "loading ember-data-source from hardcoded location to workaround shitty issue"
+      puts "/home/travis/.rvm/gems/ruby-2.1.0/gems/ember-data-source-2.18.3/dist/globals/ember-data.prod.js"
+      "/home/travis/.rvm/gems/ruby-2.1.0/gems/ember-data-source-2.18.3/dist/globals/ember-data.prod.js"
+    end
+  end
 
   config.after_initialize do
     Bullet.enable = true

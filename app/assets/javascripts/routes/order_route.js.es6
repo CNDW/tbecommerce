@@ -11,11 +11,6 @@ App.OrderRoute = Em.Route.extend({
   actions: {
     error() {
       return this.transitionTo('cart');
-    },
-    removeFromCart(lineItem) {
-      let self = this;
-      let order = this.modelFor('order');
-      return order.removeLineItem(lineItem).then(() => self.refresh());
     }
   }
 });

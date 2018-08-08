@@ -92,7 +92,7 @@ App.CustomItem = DS.Model.extend({
   }),
 
   //-Serialization for the custom number ID
-  customItem_hash: Em.computed('productId', 'selectedColors.@each.colorValueId', 'customOptions.@each.optionValueId', function() {
+  customItemHash: Em.computed('productId', 'selectedColors.@each.colorValueId', 'customOptions.@each.optionValueId', function() {
     return [
       this.getCustomSegment(),
       this.getColorSegment(),

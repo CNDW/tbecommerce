@@ -3,14 +3,14 @@
     <div class="col-sm-4">
     </div>
     <div class="col-sm-6 selection-fields">
-      {{render "card" currentCard}}
+      {{credit-card model=currentCard}}
     </div>
   </div>
   <div class="row-line-item bottom-border text-medium">
     <h4 class="upcase">order summary</h4>
   </div>
   {{#each model.lineItems as |lineItem|}}
-    {{render "line-item" lineItem}}
+    {{line-item model=lineItem}}
   {{/each}}
   <div class="row-line-item bottom-border text-medium">
     <div class="checkout">

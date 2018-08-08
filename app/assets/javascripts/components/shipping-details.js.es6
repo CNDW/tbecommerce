@@ -1,4 +1,4 @@
-App.ShipmentController = Em.Controller.extend({
+App.ShippingDetailsComponent = Em.Component.extend({
   orderController: Em.inject.controller('order'),
   radioName: Em.computed(function() {
     return `shipment-radio-${this.get('model.id')}`;

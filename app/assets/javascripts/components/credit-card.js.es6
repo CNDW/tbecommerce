@@ -1,5 +1,4 @@
-/* global App, Em */
-App.CardController = Em.Controller.extend({
+App.CreditCardComponent = Em.Component.extend({
   months: [
     { name: 'January', val: 1 },
     { name: 'February', val: 2 },

@@ -1,4 +1,4 @@
-App.AddressFormController = Em.Controller.extend({
+App.AddressFormComponent = Em.Component.extend({
   countries: Em.computed(function() {
     return this.store.all('country').map((country) => {
       return {

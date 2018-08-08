@@ -2,7 +2,7 @@
   <h1>Order Complete!</h1>
   <div class="col-sm-6 right-border">
     {{#each model.lineItems as |lineItem|}}
-      {{render "line-item" lineItem}}
+      {{line-item model=lineItem}}
     {{/each}}
     <div class="row-line-item text-medium">
       <div class="col-sm-7 line-item">

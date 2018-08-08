@@ -1,7 +1,7 @@
 <div class="row">
   <div class="catalogue-item-section">
     <div class="catalogue-item-carousel">
-      {{render "carousel" model.images}}
+      {{image-carousel model=model.images}}
     </div>
     <div class="catalogue-item-description">
       <div class="description-column">
@@ -29,7 +29,7 @@
       {{/toggle-menu}}
       <div class="section-content">
         <ul>
-          {{render "properties" model.properties}}
+          {{product-properties model=model.properties}}
         </ul>
       </div>
     </div>
@@ -41,7 +41,7 @@
       <div class="section-content">
         <ul>
           {{#each model.optionTypes as |optionType|}}
-            {{render "properties" optionType.optionValues}}
+            {{product-properties model=optionType.optionValues}}
           {{/each}}
         </ul>
       </div>

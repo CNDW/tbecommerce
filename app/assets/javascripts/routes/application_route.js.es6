@@ -13,15 +13,6 @@ App.ApplicationRoute = Em.Route.extend({
       data.customItems.forEach((item) => {
         item.validateDataIntegrity();
       });
-      // let carts = data.carts.filterBy('isCreated', true);
-      // if (carts.get('length') === 0) {
-      //   var cart = store.createRecord('cart',
-      //     {state: 'cart'});
-      //   return cart.save();
-      // } else {
-      //   var cart = carts.shiftObject();
-      //   return cart.fetchOrder().then(() => cart);
-      // }
     }).catch(() => {
       Object.keys(App.CONSTANTS).forEach(k => localStorage.removeItem(k));
       this.refresh();
